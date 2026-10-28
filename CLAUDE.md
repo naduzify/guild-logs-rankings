@@ -62,7 +62,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - **Pulls retenus** : taille et difficulté éligibles, et au moins 10 joueurs avec un rôle. Les raids incomplets et les splits (ex. Onyxia à 20) **comptent** ; seuls les faux logs évidents sont écartés.
 - **Tanks en Classic Era** : le rôle WCL est remplacé. Est tank tout guerrier, druide ou paladin ayant subi au moins 10 % des dégâts de mêlée du boss **ou** 10 % de ceux des adds (off-tanks) dans le pull ; un « tank » WCL qui ne passe pas la règle devient DPS.
 - **Consommables en Era** : comptés depuis le tableau Casts avec une liste de sorts en config (les compteurs WCL valent 0 en Era). Liste non exhaustive, acceptée.
-- **Enchantements** : casque, épaules (en Era à partir d'AQ40), torse, poignets, mains, jambes, pieds, armes (main gauche seulement si arme ou bouclier) et arme à distance des chasseurs. En MoP, ni casque ni arme à distance.
+- **Enchantements** : casque, épaules (en Era à partir d'AQ40), cape, torse, poignets, mains, jambes, pieds, armes (main gauche seulement si arme ou bouclier) et arme à distance des chasseurs. En MoP, ni casque ni arme à distance.
 
 ### Modèle
 - **Joueur = main + rerolls**, via un fichier de mapping manuel (`{"rerolls": {"Main": ["Reroll1", …]}}`). Un personnage non mappé est un joueur à lui seul. Les noms sont comparés après normalisation Unicode (accents).

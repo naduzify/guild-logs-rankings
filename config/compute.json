@@ -21,7 +21,7 @@
 
   "_enchants": "Enchantable slots (WCL gear slot numbers). Shoulders count in Classic Era from AQ40 only. Off hand counts only for a weapon or a shield (not a caster held-in-off-hand item), ranged only for hunters.",
   "enchants": {
-    "slots": {"head": 0, "shoulder": 2, "chest": 4, "legs": 6, "feet": 7, "wrist": 8, "hands": 9, "main_hand": 15, "off_hand": 16, "ranged": 17},
+    "slots": {"head": 0, "shoulder": 2, "chest": 4, "legs": 6, "feet": 7, "wrist": 8, "hands": 9, "back": 14, "main_hand": 15, "off_hand": 16, "ranged": 17},
     "era_shoulder_from": "2020-07-28",
     "era_shoulder_zones": ["Temple of Ahn'Qiraj", "Naxxramas"],
     "ranged_classes": ["Hunter"],

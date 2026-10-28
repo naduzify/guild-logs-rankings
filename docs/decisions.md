@@ -290,3 +290,9 @@ Suite au calcul d'essai (`docs/calcul-essai.md`).
 **Raison.** Avec la seule mêlée du boss, les off-tanks (chiens de Golemagg, adds de Garr, Lucifron, Majordomo…) passaient DPS et tiraient leur score DPS vers le bas.
 
 **Effet.** Sur les 1 201 pulls Classic du cache : plus aucun pull sans tank (13 avant). Golemagg passe surtout à 3 tanks, Garr et Lucifron à 3-5, Majordomo à 4-5 ; Magmadar, Geddon et Chromaggus restent à 1 (pas d'adds). Remplace la règle « boss seulement » de l'entrée précédente.
+
+---
+
+## 2026-10-28 — Enchantements : la cape compte
+
+**Décision.** La cape (emplacement 14) s'ajoute aux emplacements enchantables, dans toutes les extensions. Oubli dans la liste initiale.
