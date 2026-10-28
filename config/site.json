@@ -15,5 +15,37 @@
       "the-junky",
       "night-owl"
     ]
+  },
+  "player": {
+    "_doc": "Player page layout. Overview tiles come first; their stats are left out of the category sections. In each category, up to featured_per_category stats at or above featured_min_pct (or deep in flip territory) get a big card; the rest are small cards, visible_small of them shown before a 'Show more' button.",
+    "overview": [
+      {
+        "stat": "hours-played",
+        "label": "Hours raiding"
+      },
+      {
+        "stat": "boss-kills",
+        "label": "Boss kills"
+      },
+      {
+        "stat": "wipes",
+        "label": "Wipes"
+      },
+      {
+        "stat": "the-gang",
+        "label": "Raid weeks"
+      },
+      {
+        "stat": "kill-collector",
+        "label": "Unique bosses"
+      },
+      {
+        "stat": "the-undecided",
+        "label": "Characters"
+      }
+    ],
+    "featured_per_category": 3,
+    "featured_min_pct": 75,
+    "visible_small": 6
   }
 }

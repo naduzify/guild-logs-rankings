@@ -223,3 +223,17 @@ Une entrée par décision : date, décision, raison, alternatives écartées. La
 **Raison.** Design plus moderne que rétro. Les classements doivent pouvoir s'expliquer sans quitter la page, d'autant que certaines règles surprennent (base 100, percentile filtré, « lower is better »).
 
 **Écarté.** Attribut `title` du navigateur (invisible sur téléphone). Texte d'explication écrit à la main par stat (diverge des réglages).
+
+---
+
+## 2026-10-28 — Fiche joueur : aperçu puis cartes par catégorie
+
+**Décision.**
+- L'encart « Achievements » en haut de la fiche est supprimé. Le titre gagné se voit sur la carte de la stat (ruban « Earned », ou « Infamous » pour un revers, et cadre coloré).
+- La fiche commence par des tuiles d'aperçu : heures de raid, boss tués, wipes, semaines de raid, boss uniques, personnages. Trois stats génériques (`hours-played`, `boss-kills`, `wipes`, catégorie `overview`) sont ajoutées au contrat pour ça ; elles suivent les filtres comme les autres et ne sont pas des achievements.
+- Puis une section par catégorie : Common, puis le rôle principal (le plus d'heures sous les filtres d'extension et de classe), puis les autres rôles joués, s'ils ont au moins une stat avec assez de pulls.
+- Chaque stat a sa carte, dans le style des tuiles Timewalking (cadre beige fin, étiquette en capitales espacées, valeur en Oswald). Jusqu'à 3 grandes cartes par section pour les stats les plus marquantes (percentile ≥ 75, ou ≤ 25 sur une stat à revers, qui s'affiche alors sous le nom du revers) ; les autres en petites cartes, 6 visibles puis bouton « Show N more ». Réglages dans `config/site.json` → `player`.
+
+**Raison.** La fiche doit raconter le joueur d'un coup d'œil : ses chiffres de base, puis ce qui le distingue, le reste restant accessible sans encombrer le téléphone.
+
+**Écarté.** Liste de lignes par stat (illisible sur mobile, rien ne ressort). Encart séparé des titres gagnés (doublon avec les cartes).

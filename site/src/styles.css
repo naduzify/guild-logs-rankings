@@ -85,7 +85,7 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .tk { font: 600 .8rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .1em; color: var(--tan); }
 
 .sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 28px; }
-.sechead h2, .cat, .earned h2 { font: 700 1.3rem var(--f-headline); text-transform: uppercase; letter-spacing: .03em; margin: 26px 0 10px; color: var(--cream); }
+.sechead h2, .cat { font: 700 1.3rem var(--f-headline); text-transform: uppercase; letter-spacing: .03em; margin: 26px 0 10px; color: var(--cream); }
 .sechead a { color: var(--alliance); text-decoration: none; font-size: .9rem; white-space: nowrap; }
 .cat small { font: 400 .85rem var(--f-body); text-transform: none; letter-spacing: 0; color: var(--tan); }
 .cards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 36px; }
@@ -166,19 +166,56 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .tierstrip { display: flex; gap: 4px; margin-top: 14px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
 .tier { flex: none; font-size: .75rem; padding: 3px 8px; border-radius: 3px; border: 1px dashed var(--line-strong); color: var(--tan); }
 .tier.on { border: 1px solid var(--alliance); background: var(--alliance-glow); color: var(--cream); font-weight: 600; }
-.badges { display: flex; flex-wrap: wrap; gap: 6px; }
-.badge { font: 600 .95rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .05em; text-decoration: none; padding: 5px 12px; border-radius: 999px; background: var(--alliance-glow); color: var(--cream); border: 1px solid var(--alliance); }
-.badge.lo { background: var(--red-glow); border-color: var(--red); }
-.srows { list-style: none; margin: 0 0 12px; padding: 0; background: var(--navy-glass); border: 1px solid var(--line); border-radius: 6px; }
-.srow { display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border-bottom: 1px solid var(--line); }
-.srow:last-child { border-bottom: 0; }
-.srow.hi { background: var(--alliance-glow); box-shadow: inset 3px 0 var(--alliance); }
-.srow.lo { background: var(--red-glow); box-shadow: inset 3px 0 var(--red); }
-.sname a { font-weight: 600; text-decoration: none; color: var(--parchment); }
-.srow.lo .sname a { color: #ff9a9d; }
-.sval { display: flex; align-items: center; gap: 6px 14px; font-variant-numeric: tabular-nums; font-size: .88rem; flex-wrap: wrap; }
-.sval .big { font-size: 1.05rem; font-weight: 600; }
 .pct { display: inline-flex; align-items: center; gap: 6px; color: var(--tan); }
+
+/* Player page: overview tiles, then stat cards (after the Timewalking tiles: thin tan frame, spaced caps label, big Oswald value). */
+.grad { background: linear-gradient(173deg, #fff 10%, var(--parchment) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 6px 26px var(--alliance-glow)); }
+.overview { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 8px; }
+.otile, .scard { background: var(--navy-glass); border: 1px solid color-mix(in srgb, var(--tan) 45%, transparent); border-radius: 2px; text-align: center; min-width: 0; }
+.otile { display: grid; grid-template-rows: auto 1fr auto; padding: 10px 8px; }
+.olabel, .slabel { font: 600 .82rem/1.3 var(--f-subtitle); text-transform: uppercase; letter-spacing: .16em; color: var(--parchment); text-decoration: none; }
+.ovalue { font: 500 1.9rem/1.2 var(--f-headline); font-variant-numeric: tabular-nums; }
+.opct { font-size: .75rem; color: var(--tan); }
+
+.psec { margin-top: 30px; }
+.sectitle { font: 700 1.5rem/1.1 var(--f-headline); text-transform: uppercase; letter-spacing: .03em; margin: 0 0 12px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.sectitle small { font: 600 .8rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .3em; color: var(--alliance); }
+.bigcards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }
+.smallcards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.scard { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 10px; }
+.ribbonwrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.scard header { display: flex; align-items: center; justify-content: center; gap: 4px; max-width: 100%; }
+.scard .tip { margin-left: 2px; position: static; }
+.scard .tipbtn { width: 18px; height: 18px; font-size: .65rem; }
+.svalue { font: 500 1.35rem/1.25 var(--f-headline); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.ssub { font-size: .75rem; color: var(--tan); }
+.scard .sdesc { color: var(--tan); font-size: .88rem; margin: 4px 0 0; }
+.sfoot { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; margin: 6px 0 0; font-size: .78rem; color: var(--tan); }
+.scard.small .pbar { width: 44px; }
+.scard.big { padding: 22px 16px 18px; }
+.scard.big .slabel { font-size: 1rem; letter-spacing: .22em; }
+.scard.big .svalue { font-size: 2.6rem; line-height: 1.1; margin-top: 4px; }
+.scard.big .pbar { width: 120px; }
+.scard.hi { border-color: var(--alliance); background: linear-gradient(180deg, var(--alliance-glow), var(--navy-glass) 70%); box-shadow: 0 0 24px var(--alliance-glow); }
+.scard.lo { border-color: var(--red); background: linear-gradient(180deg, var(--red-glow), var(--navy-glass) 70%); }
+.scard.lo .slabel, .scard.flipside .slabel { color: #ff9a9d; }
+.scard.empty-card { opacity: .55; }
+.ribbon { position: absolute; top: 9px; right: -30px; transform: rotate(35deg); background: var(--alliance); color: #fff; font: 600 .62rem var(--f-subtitle); letter-spacing: .14em; text-transform: uppercase; padding: 2px 32px; }
+.scard.lo .ribbon { background: var(--red); }
+.more { display: block; margin: 12px auto 0; font: 600 .9rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .16em; color: var(--cream); background: transparent; border: 1px solid var(--line-strong); border-radius: 2px; padding: 9px 22px; cursor: pointer; }
+.more:hover { border-color: var(--alliance); color: #fff; }
+@media (min-width: 560px) {
+  .overview { grid-template-columns: repeat(3, 1fr); }
+  .bigcards { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .smallcards { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+}
+@media (min-width: 900px) {
+  .overview { grid-template-columns: repeat(6, 1fr); }
+}
+/* Inside a card the method tooltip covers the card itself, so it never runs off screen. */
+@media (min-width: 720px) {
+  .scard .tipbox { top: -1px; left: -1px; right: -1px; width: auto; }
+}
 
 .foot { color: var(--tan); font-size: .78rem; padding-block: 22px max(36px, env(safe-area-inset-bottom)); border-top: 1px solid var(--line); margin-top: 24px; }
 
@@ -203,8 +240,6 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
   .btn { min-height: 0; align-self: auto; }
   .board .hide-sm { display: table-cell; }
   .board th, .board td { padding: 7px 12px; }
-  .srow { flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-  .pct { min-width: 170px; }
   .tierstrip { flex-wrap: wrap; }
   .phead .rank { width: 64px; height: 64px; }
 }

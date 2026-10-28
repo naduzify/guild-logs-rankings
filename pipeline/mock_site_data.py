@@ -93,6 +93,12 @@ def cell_values(stat: dict, idx: int, rng: random.Random, player: dict, p: int, 
     noise = lambda sd: rng.gauss(trait, sd)
     agg, fmt = stat["agg"], stat["format"]
     kills = max(1, int(pulls * rng.uniform(0.4, 0.7)))
+    # Overview counts: kills and wipes must add up to the pulls of the cell.
+    if stat["id"] == "hours-played":
+        return [round(pulls * rng.uniform(3.5, 5.5) / 60, 1)]
+    if stat["id"] in ("boss-kills", "wipes"):
+        k = int(pulls * (0.4 + 0.25 * (player["_trait"][0] > 0)))
+        return [k if stat["id"] == "boss-kills" else pulls - k]
 
     if agg == "ratio":
         if fmt == "pct":
@@ -187,6 +193,7 @@ def main() -> None:
         "rank": {"max": tiers_cfg["rank"]["max"], "names": tiers_cfg["rank"]["names"]},
         "settings": {k: site_cfg[k] for k in ("title_percentile", "flip_percentile", "min_den")},
         "home": site_cfg["home"],
+        "player": {k: v for k, v in site_cfg["player"].items() if not k.startswith("_")},
         "stats": stats_cfg,
         "guild_totals": guild_totals,
     }

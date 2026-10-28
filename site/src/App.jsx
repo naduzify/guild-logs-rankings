@@ -19,7 +19,7 @@ export default function App() {
 
   const { filter } = route;
   let page;
-  if (route.page === 'player') page = <PlayerPage data={data} name={route.arg} filter={filter} />;
+  if (route.page === 'player') page = <PlayerPage key={route.arg} data={data} name={route.arg} filter={filter} />;
   else if (route.page === 'stat') page = <StatPage data={data} id={route.arg} filter={filter} />;
   else if (route.page === 'stats') page = <StatsIndex data={data} filter={filter} />;
   else page = <Home data={data} filter={filter} />;

@@ -21,6 +21,7 @@ roles          ["TANK", "DPS", "HEALER"]      (idem)
 rank           {max, names[14]}                ← config/tiers.json
 settings       {title_percentile, flip_percentile, min_den}  ← config/site.json
 home           {top_n, featured[]}             ← config/site.json
+player         {overview[], featured_per_category, featured_min_pct, visible_small}  ← config/site.json
 stats          [définitions]                   ← config/stats.json
 guild_totals   [[exp, pulls, kills, wipes, damage, seconds]]  (une ligne par extension)
 ```
@@ -61,7 +62,7 @@ Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (régl
 
 ## Champs d'une stat (`config/stats.json`)
 
-- `category` : `common`, `tank`, `healer`, `dps`. Les cellules des stats de rôle n'existent que pour ce rôle.
+- `category` : `common`, `tank`, `healer`, `dps`. Les cellules des stats de rôle n'existent que pour ce rôle. `overview` : stats génériques (heures, kills, wipes) affichées en tuiles en tête de fiche joueur, pas des achievements. `hours-played` sert aussi à déterminer le rôle principal.
 - `title`, `flip` (titre du bas du classement), `description`, `detail`, `joke` : textes du site.
 - `display` : `P` percentile, `N` nombre, `PN` les deux, `T` texte, `TN` texte et nombre.
 - `number` : pour `PN` en `ratio`, le nombre de carrière affiché (`num` ou `den`).

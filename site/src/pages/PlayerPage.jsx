@@ -1,10 +1,10 @@
+import { useState } from 'react';
 import { FilterBar, InfoTip, PctBar, RankBadge, roleLabel } from '../components.jsx';
-import { CLASS_COLORS, formatNumber, formatPct, formatValue } from '../lib/format.js';
+import { CLASS_COLORS, formatInt, formatNumber, formatPct, formatValue } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
-import { computeStat, earnedTitle, hasNumber, hasPercentile, valueIsNumber } from '../lib/stats.js';
-import { CATEGORIES } from './StatPage.jsx';
+import { computeStat, earnedTitle, hasNumber, hasPercentile, isRankable, valueIsNumber } from '../lib/stats.js';
 
-const CATEGORY_ROLE = { tank: 'TANK', healer: 'HEALER', dps: 'DPS' };
+const ROLE_CATEGORY = { TANK: 'tank', HEALER: 'healer', DPS: 'dps' };
 
 // Drop filter values the player never played, so a filter carried over from
 // another page cannot empty his card.
@@ -14,54 +14,125 @@ function restrict(filter, facets) {
   return out;
 }
 
-function StatRow({ data, stat, row, title }) {
-  const showP = hasPercentile(stat), showN = hasNumber(stat);
+// Roles the player played under the expansion/class filters, most hours first: the first one is his main role.
+function rolesByWeight(data, p, eff) {
+  const hours = new Map();
+  for (const [cp, e, c, r, h] of data.stats['hours-played'] || []) {
+    if (cp !== p || (eff.exp.size && !eff.exp.has(e)) || (eff.cls.size && !eff.cls.has(c))) continue;
+    hours.set(r, (hours.get(r) || 0) + h);
+  }
+  return [...hours.entries()].sort((a, b) => b[1] - a[1]).map(([r]) => data.meta.roles[r]);
+}
+
+// How remarkable a result is: high percentile, or low percentile on a stat that has a flip title.
+function notability(stat, row) {
+  if (!row || !isRankable(stat)) return null;
+  return stat.flip ? Math.max(row.pct, 100 - row.pct) : row.pct;
+}
+
+function cardView(data, stat, row, total) {
+  const settings = data.meta.settings;
+  const flipSide = stat.flip && row && isRankable(stat) && row.pct < 50;
+  const value = valueIsNumber(stat) ? formatNumber(stat, row.value) : formatValue(stat, row.value);
+  return {
+    label: flipSide ? stat.flip : stat.title,
+    earned: earnedTitle(stat, row, settings),
+    flipSide,
+    // `top` shows the winning label (a boss, a spell), `max` the score with its pull underneath.
+    main: stat.agg === 'top' ? row.label : value,
+    sub: stat.agg === 'top' ? formatValue(stat, row.value) + (stat.unit ? ` ${stat.unit}` : '') : row.label,
+    number: hasNumber(stat) ? formatNumber(stat, row.number) : null,
+    pct: hasPercentile(stat) ? row.pct : null,
+    pos: isRankable(stat) ? `#${row.pos} of ${total}` : null,
+    desc: flipSide ? stat.detail : stat.description,
+  };
+}
+
+function StatCard({ data, stat, row, total, big }) {
+  if (!row) {
+    return (
+      <article className="scard small empty-card">
+        <header><a className="slabel" href={href('stat', stat.id)}>{stat.title}</a><InfoTip stat={stat} meta={data.meta} /></header>
+        <div className="svalue">–</div>
+        <p className="sfoot">Not enough pulls</p>
+      </article>
+    );
+  }
+  const v = cardView(data, stat, row, total);
+  const tone = v.earned ? (v.earned.flip ? ' lo' : ' hi') : v.flipSide ? ' flipside' : '';
   return (
-    <li className={'srow' + (title ? (title.flip ? ' lo' : ' hi') : '')}>
-      <div className="sname">
-        <a href={href('stat', stat.id)}>{title ? title.name : stat.title}</a>
-        <InfoTip stat={stat} meta={data.meta} />
-        <span className="sdesc">{stat.description}</span>
-      </div>
-      {!row ? <div className="sval muted">Not enough pulls</div> : (
-        <div className="sval">
-          <span className="big">{row.label ?? (valueIsNumber(stat) ? formatNumber(stat, row.value) : formatValue(stat, row.value))}</span>
-          {row.label && <span className="muted">{formatValue(stat, row.value)}</span>}
-          {showN && <span className="muted">{formatNumber(stat, row.number)}</span>}
-          {showP && <span className="pct"><PctBar pct={row.pct} /> {formatPct(row.pct)}</span>}
-        </div>
+    <article className={'scard ' + (big ? 'big' : 'small') + tone}>
+      {v.earned && <span className="ribbonwrap"><span className="ribbon">{v.earned.flip ? 'Infamous' : 'Earned'}</span></span>}
+      <header><a className="slabel" href={href('stat', stat.id)}>{v.label}</a><InfoTip stat={stat} meta={data.meta} /></header>
+      <div className="svalue">{v.main}</div>
+      {v.sub && <div className="ssub">{v.sub}</div>}
+      {big && <p className="sdesc">{v.desc}</p>}
+      <footer className="sfoot">
+        {v.pct != null && <span className="pct"><PctBar pct={v.pct} /> {formatPct(v.pct)}</span>}
+        {big && v.pos && <span>{v.pos}</span>}
+        {big && v.number && <span>{v.number}</span>}
+      </footer>
+    </article>
+  );
+}
+
+function Section({ data, title, kicker, items, open, onToggle }) {
+  const cfg = data.meta.player;
+  const big = items
+    .filter(it => it.note != null && it.note >= cfg.featured_min_pct)
+    .sort((a, b) => b.note - a.note)
+    .slice(0, cfg.featured_per_category);
+  const bigIds = new Set(big.map(it => it.stat.id));
+  // Small cards: text results (nemesis, comfort boss…) first, then by how remarkable they are.
+  const rank = it => (it.row && it.note == null ? 101 : it.note ?? -1);
+  const small = items.filter(it => !bigIds.has(it.stat.id)).sort((a, b) => rank(b) - rank(a));
+  const shown = open ? small : small.slice(0, cfg.visible_small);
+  return (
+    <section className="psec">
+      <h2 className="sectitle">{title}{kicker && <small>{kicker}</small>}</h2>
+      {big.length > 0 && <div className="bigcards">{big.map(it => <StatCard key={it.stat.id} data={data} {...it} big />)}</div>}
+      <div className="smallcards">{shown.map(it => <StatCard key={it.stat.id} data={data} {...it} />)}</div>
+      {small.length > cfg.visible_small && (
+        <button type="button" className="more" onClick={onToggle} aria-expanded={open}>
+          {open ? 'Show fewer' : `Show ${small.length - cfg.visible_small} more`}
+        </button>
       )}
-    </li>
+    </section>
   );
 }
 
 export default function PlayerPage({ data, name, filter }) {
+  const [openSections, setOpenSections] = useState({});
   const p = data.byName.get(name);
   if (p == null) return <p className="empty">No player called “{name}”. Players need 15 reset weeks of raiding to show up.</p>;
   const pl = data.players[p];
   const { meta } = data;
   const facets = data.facets[p];
   const eff = restrict(filter, facets);
-  const roleOk = r => facets.role.has(meta.roles.indexOf(r)) && (!eff.role.size || eff.role.has(meta.roles.indexOf(r)));
+  const overviewIds = new Set(meta.player.overview.map(o => o.stat));
 
-  const sections = CATEGORIES
-    .filter(c => c.id === 'common' || roleOk(CATEGORY_ROLE[c.id]))
-    .map(c => ({
-      ...c,
-      rows: meta.stats.filter(s => s.category === c.id).map(stat => {
-        const row = computeStat(stat, data.stats[stat.id], eff, meta.settings).byPlayer.get(p);
-        return { stat, row, title: earnedTitle(stat, row, meta.settings) };
-      }),
-    }));
-  const titles = sections.flatMap(s => s.rows).filter(r => r.title);
+  const result = stat => {
+    const { byPlayer, ranked } = computeStat(stat, data.stats[stat.id] || [], eff, meta.settings);
+    const row = byPlayer.get(p);
+    return { stat, row, total: ranked.length, note: notability(stat, row) };
+  };
+  const itemsOf = category => meta.stats.filter(s => s.category === category && !overviewIds.has(s.id)).map(result);
+
+  const roleOk = r => !eff.role.size || eff.role.has(meta.roles.indexOf(r));
+  const roles = rolesByWeight(data, p, eff).filter(roleOk);
+  const sections = [{ id: 'common', title: 'Common', kicker: eff.role.size ? `as ${[...eff.role].map(r => roleLabel(meta.roles[r])).join(' / ')}` : 'all roles' }]
+    .concat(roles.map((r, i) => ({ id: ROLE_CATEGORY[r], title: roleLabel(r), kicker: i === 0 ? 'main role' : null })))
+    .map(s => ({ ...s, items: itemsOf(s.id) }))
+    .filter(s => s.items.some(it => it.row));
+
   const rankName = pl.rank ? meta.rank.names[pl.rank - 1] : null;
 
   return (
     <>
       <header className="phead">
-        <RankBadge player={pl} meta={meta} size={56} />
+        <RankBadge player={pl} meta={meta} size={64} />
         <div>
-          <h1 className="ptitle">{pl.name}</h1>
+          <h1 className="ptitle grad">{pl.name}</h1>
           {rankName && <p className="rankline">{rankName} · rank {pl.rank} · {pl.tiers.length} raid tier{pl.tiers.length > 1 ? 's' : ''}</p>}
           <p className="chars">
             {pl.chars.map(([n, c]) => (
@@ -77,25 +148,25 @@ export default function PlayerPage({ data, name, filter }) {
       </div>
       <FilterBar meta={meta} filter={eff} available={facets} onChange={f => go('player', pl.name, f)}
         note={`Percentiles compare ${pl.name} with every player under the same filters.`} />
-      {titles.length > 0 && (
-        <section className="earned">
-          <h2>Achievements</h2>
-          <div className="badges">
-            {titles.map(({ stat, title }) => (
-              <a key={stat.id} href={href('stat', stat.id, eff)} className={'badge' + (title.flip ? ' lo' : '')}>{title.name}</a>
-            ))}
-          </div>
-        </section>
-      )}
+
+      <section className="overview" aria-label="Overview">
+        {meta.player.overview.map(({ stat: id, label }) => {
+          const stat = data.statById.get(id);
+          if (!stat) return null;
+          const { row } = result(stat);
+          return (
+            <div key={id} className="otile">
+              <span className="olabel">{label}</span>
+              <span className="ovalue">{row ? formatInt(row.value) : '–'}</span>
+              <span className="opct">{row && hasPercentile(stat) ? formatPct(row.pct) : ' '}</span>
+            </div>
+          );
+        })}
+      </section>
+
       {sections.map(s => (
-        <section key={s.id}>
-          <h2 className="cat">{s.id === 'common' ? 'All roles' : s.label}
-            {s.id === 'common' && eff.role.size > 0 && <small> · as {[...eff.role].map(r => roleLabel(meta.roles[r])).join(' / ')}</small>}
-          </h2>
-          <ul className="srows">
-            {s.rows.map(r => <StatRow key={r.stat.id} data={data} {...r} />)}
-          </ul>
-        </section>
+        <Section key={s.id} data={data} title={s.title} kicker={s.kicker} items={s.items}
+          open={!!openSections[s.id]} onToggle={() => setOpenSections(o => ({ ...o, [s.id]: !o[s.id] }))} />
       ))}
     </>
   );

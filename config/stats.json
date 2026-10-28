@@ -1,6 +1,10 @@
 {
   "_doc": "Stat definitions shown on the site. Texts are site copy (English). Aggregation modes and fields: docs/site-data.md.",
   "stats": [
+    {"id": "hours-played", "category": "overview", "title": "Hours Raiding", "description": "Time spent in boss fights with Fable.", "detail": "Total duration of eligible boss pulls, kills and wipes.", "joke": "", "display": "N", "agg": "sum", "unit": "hours", "format": "int"},
+    {"id": "boss-kills", "category": "overview", "title": "Boss Kills", "description": "Bosses killed with Fable.", "detail": "Eligible boss kills attended.", "joke": "", "display": "N", "agg": "sum", "unit": "kills", "format": "int"},
+    {"id": "wipes", "category": "overview", "title": "Wipes", "description": "Wipes endured with Fable.", "detail": "Eligible boss wipes attended.", "joke": "", "display": "N", "agg": "sum", "unit": "wipes", "format": "int"},
+
     {"id": "the-gang", "category": "common", "title": "The Gang", "description": "Never misses a raid night.", "detail": "Distinct reset weeks with at least one eligible pull.", "joke": "", "display": "PN", "agg": "distinct", "unit": "weeks", "format": "int"},
     {"id": "the-undecided", "category": "common", "title": "The Undecided", "description": "Still can't pick a main.", "detail": "Distinct characters raided on.", "joke": "", "display": "N", "agg": "distinct", "unit": "characters", "format": "int"},
     {"id": "kill-collector", "category": "common", "title": "Kill Collector", "description": "Gotta kill 'em all.", "detail": "Distinct bosses killed (encounter × difficulty).", "joke": "", "display": "PN", "agg": "distinct", "unit": "bosses", "format": "int"},
