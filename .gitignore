@@ -32,3 +32,6 @@ data/cache/
 # Site : cache npm local, données générées par le pipeline
 site/.npm-cache/
 site/public/data/
+
+# Tables intermédiaires du calcul (régénérées depuis le cache)
+data/facts/

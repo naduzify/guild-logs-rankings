@@ -120,9 +120,12 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - Déploiement GitHub Pages : workflow qui lance l'export JSON depuis le Parquet commité, puis le build Vite.
 - Emplacement définitif de l'instantané du cache brut (Release GitHub par défaut).
 
-- Filtre anti-pulls parasites au calcul : seuil de joueurs plus strict que les 10 du crawl (des bosses de TK soloés en Cata sont classés en taille 25), et exclusion des combats en véhicules (Flame Leviathan).
+- Filtre anti-pulls parasites au calcul : seuil de joueurs plus strict que les 10 du crawl (des bosses de TK soloés en Cata sont classés en taille 25), et exclusion des combats en véhicules (Flame Leviathan). Le calcul d'essai propose 75 % de la taille du raid ; reste à savoir si les « Onyxia Splits » (20 à 29 joueurs) comptent (`docs/calcul-essai.md`).
+- Potions en Classic Era : `potionUse` vaut toujours 0, il faut les compter depuis Casts avec une liste de sorts en config.
+- Stats tank en Era : la détection des tanks par WCL y est peu fiable (0 à 6 tanks par pull). Les publier telles quelles, ou filtrer.
 - V2 : méthode d'estimation des PV max des cibles pour Savior / True Sniper (les PV des événements de soin sont en pourcentage, après le soin).
 
 Crawl d'essai fait le 2026-10-28 : résultats dans `docs/crawl-essai.md`.
+Calcul d'essai fait le 2026-10-28 (`pipeline/facts.py`, premier étage : table par joueur et par pull) : résultats et problèmes trouvés dans `docs/calcul-essai.md`.
 
 Quand une de ces décisions est prise, mets à jour ce fichier (voir « Synchronisation du contexte »).

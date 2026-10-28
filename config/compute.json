@@ -1,0 +1,4 @@
+{
+  "_doc": "Compute step settings (pipeline/facts.py). Lists are matched on WCL ability names.",
+  "scripted_deaths": ["Fury of Frostmourne"]
+}
