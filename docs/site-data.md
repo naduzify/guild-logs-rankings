@@ -43,7 +43,7 @@ Liste des joueurs qualifiés (15 semaines de reset). L'index dans la liste est l
   "rank": 4 }                             min(rank.max, nombre de tiers validés)
 ```
 
-Un tier est validé quand le joueur y a au moins `rank.min_weeks_per_tier` semaines de reset distinctes de présence (config/tiers.json). Le rang ne dépend pas des filtres.
+Un tier est validé quand le joueur y a au moins `rank.min_weeks_per_tier` semaines de reset distinctes de présence (config/tiers.json), ou le `min_weeks` propre au tier s'il en a un (Naxx Era : 2). Le rang ne dépend pas des filtres.
 
 ## `stats.json`
 

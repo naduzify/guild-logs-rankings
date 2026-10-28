@@ -304,7 +304,8 @@ def main() -> None:
         chars = sorted(char_pulls[pl], key=lambda ch: (ch != pl, -char_pulls[pl][ch]))
         for ch in chars:
             char_id[ch] = len(char_id)
-        tiers = sorted(t for t, w in tier_weeks[pl].items() if len(w) >= min_w)
+        # A tier may set its own min_weeks (short tiers, e.g. Naxx in Era: 5 weeks of logs before TBC).
+        tiers = sorted(t for t, w in tier_weeks[pl].items() if len(w) >= tiers_cfg["tiers"][t].get("min_weeks", min_w))
         players.append({"name": pl, "chars": [[ch, CLASSES.index(char_class[ch])] for ch in chars if ch in char_class],
                         "tiers": tiers, "rank": min(max_rank, len(tiers))})
     print(f"players: {len(weeks)} seen, {len(qualified)} qualified (15+ reset weeks)")

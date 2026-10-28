@@ -61,6 +61,7 @@
       "name": "Naxxramas",
       "short": "Naxx (Era)",
       "expansion": "era",
+      "min_weeks": 2,
       "zones": [
         "Naxxramas"
       ]

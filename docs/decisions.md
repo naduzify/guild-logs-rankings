@@ -401,3 +401,11 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 **Décision.** Hours Raiding compte, pour chaque soirée d'un personnage, le temps de son premier à son dernier pull de boss éligible (même découpage en soirées que « Hours in raid » sur l'accueil : coupure à plus de `night_gap_hours` d'écart). Le trash entre deux boss est donc compté, celui avant le premier boss non (pas dans le cache). Pour rester additif, le temps est réparti sur ses pulls : de la fin du pull précédent à la fin de celui-ci.
 
 **Raison.** La durée des seuls combats de boss ne faisait qu'environ 20 % d'une soirée (59 h contre 286 h en Era), soit ~0,7 h par semaine pour les plus assidus, loin du ressenti. Après le changement : ~2,7 à 3 h par semaine.
+
+---
+
+## 2026-10-28 — Rang PvP : seuil de 2 semaines pour Naxx Era
+
+**Décision.** Un tier peut fixer son propre seuil (`min_weeks` dans `config/tiers.json`, à la place de `rank.min_weeks_per_tier`). Naxx (Era) passe à **2 semaines de reset**.
+
+**Raison.** La guilde n'a que 5 semaines de logs de Naxx en Era avant TBC : avec 4 semaines, une seule absence suffisait à rater le tier (ex. Rassaa, 3 semaines).
