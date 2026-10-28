@@ -136,3 +136,20 @@ Une entrée par décision : date, décision, raison, alternatives écartées. La
 **Raison.** Budget API de 3000 points/heure et sortie du site visée pour le 4 novembre 2026. Les règles d'analyse sur les auras ou le détail des casts demanderaient plus de temps qu'il n'en reste.
 
 **Écarté.** Buffs / Debuffs (pas le temps d'en tirer des règles). Crawler tous les pulls « pour garder tout » : le cache ne garde donc plus les tableaux des pulls hors format, mais on peut les crawler plus tard, puisque la liste des pulls est en cache.
+
+---
+
+## 2026-10-28 — Liste des stats V1
+
+**Décision.**
+- 44 stats réparties en 4 catégories : communes (24), tank (7), healer (6), DPS (7). Liste, titres et descriptions en anglais dans `docs/stats.md`.
+- Les stats communes sont calculées par rôle et filtrées par rôle sur la fiche joueur, plutôt que déclinées dans chaque catégorie.
+- Percentile calculé sur un taux, parmi les joueurs qualifiés ; nombre en dur = total de carrière.
+- Tanks comparés à la médiane des tanks sur le même boss, sur toute l'histoire de la guilde. Healers : soins effectifs.
+- Morts scriptées exclues des stats de mort (liste en config).
+- Compléments au crawl : un tableau DamageDone sur le trash par rapport (Timekeeper / The Tourist) et, en niveau 3 ciblé, les buffs des tanks autour de leurs morts (Blamed the Healer).
+
+**Raison.** Une première liste d'environ 100 stats contenait beaucoup de doublons (présence, morts, interruptions par rôle…). Une base plus petite permet d'itérer. Les tanks sont 2 ou 3 par pull : la médiane du pull est trop fragile. Sur le kill du Lich King de l'échantillon, 25 des 28 morts viennent de Fury of Frostmourne.
+
+**Écarté pour la V1.** Not Even Close! (événements de dégâts subis des tanks avec leurs PV sur chaque kill, trop cher). Wipe Pumper, Legendary Flex, Necromancer, Bubble Wrap / Gardener, Threat Dealer, Crazy Pet Lady, Savior, True Sniper : reportées en V2.
+

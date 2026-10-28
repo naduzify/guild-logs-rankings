@@ -56,6 +56,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - **Dédoublonnage par pull** : si un même pull de boss apparaît dans plusieurs rapports à des horaires qui se chevauchent, on garde celui du rapport qui contient le plus de boss. On compare des plages horaires, jamais des dates calendaires. Le cache brut garde tout, le dédoublonnage se fait au calcul.
 - **Crawl complet** : `python -m pipeline.crawl`. Seuls les pulls éligibles (taille, difficulté, ≥ 10 joueurs ; `config/crawl.json`) sont crawlés, avec 8 tableaux : Summary, DamageDone, Healing, DamageTaken, Deaths, Interrupts, Dispels, Casts. Pas de Buffs / Debuffs. Échantillons lisibles dans `data/samples/`.
 - **Niveau de détail** : niveau 2, c'est-à-dire les tableaux agrégés par combat et par joueur (dégâts, soins, dégâts subis, morts, interruptions, dispels…). Le niveau 3 (événements bruts) n'est crawlé que pour des **stats listées à l'avance**, uniquement sur les combats concernés.
+- **Compléments au crawl pour les stats V1** (`docs/stats.md`) : un tableau DamageDone sur le trash (`killType: Trash`) par rapport, pour Timekeeper / The Tourist ; les buffs des tanks autour de leurs morts (niveau 3 ciblé), pour Blamed the Healer.
 
 ### Modèle
 - **Joueur = main + rerolls**, via un fichier de mapping manuel (`{"rerolls": {"Main": ["Reroll1", …]}}`). Un personnage non mappé est un joueur à lui seul. Les noms sont comparés après normalisation Unicode (accents).
@@ -85,6 +86,13 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - **Fiche joueur** avec filtres **TANK / DPS / HEALER**, n'affichant que les rôles réellement joués.
 - **Langue** : site **en anglais**. Les textes des titres (nom, description, blague) vivent dans la config des titres, pas en dur dans le code React.
 
+### Stats (V1, détail dans `docs/stats.md`)
+- **44 stats** : 24 communes, 7 tank, 6 healer, 7 DPS. Chacune a un titre et une description en anglais, affichée en percentile, en nombre ou les deux. Certaines ont un « revers » (titre de l'autre bout du classement).
+- Les stats **communes** sont calculées par rôle et filtrées par TANK / DPS / HEALER sur la fiche.
+- Percentile calculé sur un taux (par pull, par minute, base 100), parmi les joueurs qualifiés ; nombre = total de carrière.
+- **Tanks** comparés à la médiane des tanks sur le même boss, sur toute l'histoire de la guilde. **Healers** : soins effectifs.
+- **Morts scriptées** (ex. Fury of Frostmourne) exclues des stats de mort, liste en config.
+
 ## Règles techniques
 
 - **Secrets** : client ID / secret WCL uniquement dans `.env`, jamais dans le code. `.env` est dans `.gitignore`, fournir un `.env.example` sans valeurs. Le secret ne sert qu'au crawl et ne va jamais en CI.
@@ -95,13 +103,12 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 
 ## À décider
 
-- Liste des titres humoristiques et leurs critères exacts. Pistes de niveau 3 : Fishbait / Domino (premier mort, peut-être déjà faisable via le tableau Deaths), Sniper (soins sur cibles > 75 % PV), Savior (soins sur cibles < 10 % PV).
-- Métriques propres aux tanks, et soins effectifs ou bruts pour les healers.
+- Phrase « blague » de chaque stat, seuils précis (ex. capacité « évitable ») et listes en config (taunts, CD défensifs, morts scriptées, boss de fin, objets d'ingénierie, emplacements enchantables).
 - Seuil minimal de combats pour afficher un rôle sur la fiche d'un joueur.
 - Emplacement définitif de l'instantané du cache brut (Release GitHub par défaut).
 
 - Filtre anti-pulls parasites au calcul : seuil de joueurs plus strict que les 10 du crawl (des bosses de TK soloés en Cata sont classés en taille 25), et exclusion des combats en véhicules (Flame Leviathan).
-- Méthode d'estimation des PV max des cibles pour Savior / Sniper (les PV des événements de soin sont en pourcentage, après le soin).
+- V2 : méthode d'estimation des PV max des cibles pour Savior / True Sniper (les PV des événements de soin sont en pourcentage, après le soin).
 
 Crawl d'essai fait le 2026-10-28 : résultats dans `docs/crawl-essai.md`.
 
