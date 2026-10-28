@@ -1,4 +1,32 @@
 {
-  "_doc": "Compute step settings (pipeline/facts.py). Lists are matched on WCL ability names.",
-  "scripted_deaths": ["Fury of Frostmourne"]
+  "_doc": "Compute step settings (pipeline/facts.py). Lists are matched on WCL ability names. Decisions: docs/decisions.md.",
+  "scripted_deaths": ["Fury of Frostmourne"],
+
+  "_min_players": "Pulls with fewer players holding a role are fake logs (e.g. a 1-player Onyxia) and are dropped. Raid splits stay.",
+  "min_players": 10,
+
+  "_era_tank": "Classic Era only: WCL's tank detection is unreliable. A player is a tank when his class can tank and he took at least this share of the boss melee damage of the pull.",
+  "era_tank": {
+    "classes": ["Warrior", "Druid", "Paladin"],
+    "min_boss_melee_share": 0.10
+  },
+
+  "_era_consumables": "Classic Era only: potionUse / healthstoneUse are always 0, consumables are counted from the Casts table. Mana potions cast 'Restore Mana', protection potions cast their effect.",
+  "era_consumable_casts": [
+    "Healing Potion", "Restore Mana", "Major Healthstone", "Greater Healthstone", "Healthstone", "Master Healthstone",
+    "Demonic Rune", "Dark Rune", "Fire Protection", "Shadow Protection", "Nature Protection", "Frost Protection",
+    "Arcane Protection", "Holy Protection", "Free Action", "Invulnerability", "Restoration", "Rage", "Swiftness",
+    "Restore Energy", "Living Free Action"
+  ],
+
+  "_enchants": "Enchantable slots (WCL gear slot numbers). Shoulders count in Classic Era from AQ40 only. Off hand counts only for a weapon or a shield (not a caster held-in-off-hand item), ranged only for hunters.",
+  "enchants": {
+    "slots": {"head": 0, "shoulder": 2, "chest": 4, "legs": 6, "feet": 7, "wrist": 8, "hands": 9, "main_hand": 15, "off_hand": 16, "ranged": 17},
+    "era_shoulder_from": "2020-07-28",
+    "era_shoulder_zones": ["Temple of Ahn'Qiraj", "Naxxramas"],
+    "ranged_classes": ["Hunter"],
+    "_skip_by_expansion": "Slots without any enchant in that expansion: MoP removed head enchants, and the hunter's weapon moved to the main hand.",
+    "skip_by_expansion": {"mop": ["head", "ranged"]},
+    "off_hand_weapon_icons": ["inv_shield", "inv_sword", "inv_axe", "inv_mace", "inv_hammer", "inv_weapon", "inv_knife", "inv_dagger", "inv_spear", "inv_polearm", "inv_staff", "inv_throwingaxe", "inv_fist"]
+  }
 }

@@ -1,5 +1,11 @@
 # Calcul d'essai (2026-10-28)
 
+> **Mise à jour après décisions** (même jour) : les points 1, 2, 3, 6 et 9 sont tranchés et appliqués (voir `docs/decisions.md`). Relance sur le cache : **1 201 pulls Classic** + 288 pulls TBC à MoP venus du crawl d'essai, 50 064 lignes.
+> - Potions Era depuis Casts : plus que 56 pulls Classic sur 1 201 sans aucun consommable.
+> - 13 pulls écartés comme faux logs (moins de 10 joueurs avec un rôle).
+> - Tanks Era par pull avec la règle des 10 % : 0 (13 pulls), 1 (584), 2 (412), 3 (170), 4 (22). 1 208 « tanks » WCL repassent DPS, 429 DPS ou healers deviennent tanks. Les tanks d'adds (Garr, Golemagg, Lucifron…) deviennent DPS.
+> - Enchantements avec la liste d'emplacements : 65 % en Era, 90 à 98 % de TBC à Cata, 86 % en MoP avant d'exclure casque et distance (0/25 et 0/9 dans le sample : pas d'enchantement de tête en MoP, arme du chasseur en main droite), corrigé depuis.
+
 Premier étage du calcul : `pipeline/facts.py` transforme chaque pull en lignes `(joueur, personnage, pull, rôle)` avec les métriques brutes, applique le mapping des rerolls et calcule un score base 100 contre la médiane du rôle dans le pull (kills seulement). Il affiche des contrôles pour faire ressortir les problèmes de données.
 
 ```

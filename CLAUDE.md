@@ -58,6 +58,12 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - **Niveau de détail** : niveau 2, c'est-à-dire les tableaux agrégés par combat et par joueur (dégâts, soins, dégâts subis, morts, interruptions, dispels…). Le niveau 3 (événements bruts) n'est crawlé que pour des **stats listées à l'avance**, uniquement sur les combats concernés.
 - **Compléments au crawl pour les stats V1** (`docs/stats.md`) : un tableau DamageDone sur le trash (`killType: Trash`) par rapport, pour Timekeeper / The Tourist ; les buffs des tanks autour de leurs morts (niveau 3 ciblé), pour Blamed the Healer.
 
+### Calcul (`pipeline/facts.py`, réglages dans `config/compute.json`)
+- **Pulls retenus** : taille et difficulté éligibles, et au moins 10 joueurs avec un rôle. Les raids incomplets et les splits (ex. Onyxia à 20) **comptent** ; seuls les faux logs évidents sont écartés.
+- **Tanks en Classic Era** : le rôle WCL est remplacé. Est tank tout guerrier, druide ou paladin ayant subi au moins 10 % des dégâts de mêlée du boss dans le pull ; un « tank » WCL qui ne passe pas la règle devient DPS.
+- **Consommables en Era** : comptés depuis le tableau Casts avec une liste de sorts en config (les compteurs WCL valent 0 en Era). Liste non exhaustive, acceptée.
+- **Enchantements** : casque, épaules (en Era à partir d'AQ40), torse, poignets, mains, jambes, pieds, armes (main gauche seulement si arme ou bouclier) et arme à distance des chasseurs. En MoP, ni casque ni arme à distance.
+
 ### Modèle
 - **Joueur = main + rerolls**, via un fichier de mapping manuel (`{"rerolls": {"Main": ["Reroll1", …]}}`). Un personnage non mappé est un joueur à lui seul. Les noms sont comparés après normalisation Unicode (accents).
 - Validation au calcul : alerte si un personnage est rattaché à deux joueurs, ou si un reroll listé n'apparaît dans aucun log. Le pipeline sort la liste des personnages non mappés qui passent le seuil.
@@ -120,9 +126,8 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - Déploiement GitHub Pages : workflow qui lance l'export JSON depuis le Parquet commité, puis le build Vite.
 - Emplacement définitif de l'instantané du cache brut (Release GitHub par défaut).
 
-- Filtre anti-pulls parasites au calcul : seuil de joueurs plus strict que les 10 du crawl (des bosses de TK soloés en Cata sont classés en taille 25), et exclusion des combats en véhicules (Flame Leviathan). Le calcul d'essai propose 75 % de la taille du raid ; reste à savoir si les « Onyxia Splits » (20 à 29 joueurs) comptent (`docs/calcul-essai.md`).
-- Potions en Classic Era : `potionUse` vaut toujours 0, il faut les compter depuis Casts avec une liste de sorts en config.
-- Stats tank en Era : la détection des tanks par WCL y est peu fiable (0 à 6 tanks par pull). Les publier telles quelles, ou filtrer.
+- Exclusion des combats en véhicules (Flame Leviathan).
+- Tanks d'adds en Era : avec la règle « 10 % des mêlées du boss », ils passent DPS (Garr, Golemagg, Lucifron…) et tirent leur score DPS vers le bas. Les garder ainsi, ou les exclure des scores DPS de ces pulls.
 - V2 : méthode d'estimation des PV max des cibles pour Savior / True Sniper (les PV des événements de soin sont en pourcentage, après le soin).
 
 Crawl d'essai fait le 2026-10-28 : résultats dans `docs/crawl-essai.md`.

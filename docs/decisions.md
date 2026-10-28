@@ -250,3 +250,22 @@ Une entrée par décision : date, décision, raison, alternatives écartées. La
 **Raison.** Reprendre l'identité visuelle de la guilde sans réutiliser l'artwork du jeu (illisible en 16 px, et propriété de Microsoft). Une fiche plus aérée, qui s'ouvre sur les chiffres clés du joueur.
 
 **Écarté.** L'artwork du Discord tel quel en favicon. Info-bulle qui recouvre la carte.
+
+---
+
+## 2026-10-28 — Calcul : pulls retenus, tanks Era, consommables Era, enchantements
+
+Suite au calcul d'essai (`docs/calcul-essai.md`).
+
+**Décision.**
+- **Pulls parasites** : on garde les raids incomplets et les splits (ex. « Onyxia Splits » à 20-29 joueurs). Seuls les faux logs évidents sont écartés : moins de 10 joueurs avec un rôle (ex. un Onyxia à 1 joueur). Réglage `min_players` de `config/compute.json`.
+- **Tanks en Classic Era** : la détection de WCL est remplacée. Est tank tout guerrier, druide ou paladin ayant subi au moins 10 % des dégâts de mêlée du boss du pull. Comme le tableau DamageTaken ne croise pas capacité et source, la mêlée du boss subie par un joueur est estimée par min(dégâts « Melee » subis, dégâts subis des sources Boss). Un tank WCL qui ne passe pas la règle devient DPS.
+- **Consommables en Era** : comptés depuis le tableau Casts avec une liste de sorts en config (`era_consumable_casts`). Oublier quelques potions rares est accepté : The Junky n'est pas une stat centrale.
+- **Enchantements** : emplacements comptés = casque, épaules (en Era seulement à partir d'AQ40, soit le 2020-07-28 ou en AQ40 / Naxx), torse, poignets, mains, jambes, pieds, main droite, main gauche si c'est une arme ou un bouclier (reconnu à l'icône), arme à distance pour les chasseurs. En MoP, ni casque ni arme à distance (ces enchantements n'existent plus). Les emplacements vides (deux-mains) ne comptent pas.
+- **Dossiers du crawl d'essai** : leur liste de combats s'appelle `fights.json` au lieu de `report.json` ; même contenu, le calcul lit les deux.
+
+**Raison.** Les splits font partie de l'histoire de la guilde. En Era, WCL trouvait de 0 à 6 tanks par pull et ne comptait aucune potion. Sans liste d'emplacements, le taux d'enchantement comptait colliers, anneaux et bijoux.
+
+**Écarté.** Seuil à 75 % de la taille du raid (aurait exclu les splits). Garder le rôle tank de WCL en Era.
+
+**Conséquence à surveiller.** Les tanks d'adds en Era (Garr, Golemagg, Lucifron…) passent DPS avec la règle des 10 % et tirent leur score DPS vers le bas.
