@@ -56,7 +56,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - **Dédoublonnage par pull** : si un même pull de boss apparaît dans plusieurs rapports à des horaires qui se chevauchent, on garde celui du rapport qui contient le plus de boss. On compare des plages horaires, jamais des dates calendaires. Le cache brut garde tout, le dédoublonnage se fait au calcul.
 - **Crawl complet** : `python -m pipeline.crawl`. Seuls les pulls éligibles (taille, difficulté, ≥ 10 joueurs ; `config/crawl.json`) sont crawlés, avec 8 tableaux : Summary, DamageDone, Healing, DamageTaken, Deaths, Interrupts, Dispels, Casts. Pas de Buffs / Debuffs. Échantillons lisibles dans `data/samples/`.
 - **Niveau de détail** : niveau 2, c'est-à-dire les tableaux agrégés par combat et par joueur (dégâts, soins, dégâts subis, morts, interruptions, dispels…). Le niveau 3 (événements bruts) n'est crawlé que pour des **stats listées à l'avance**, uniquement sur les combats concernés.
-- **Compléments au crawl pour les stats V1** (`docs/stats.md`) : un tableau DamageDone sur le trash (`killType: Trash`) par rapport, pour Timekeeper / The Tourist ; les buffs des tanks autour de leurs morts (niveau 3 ciblé), pour Blamed the Healer.
+- **Compléments au crawl** : `python -m pipeline.crawl_extra`, une fois le crawl principal fini. Par pull : tirs alliés, taunts, consommables Era (le tableau Casts ne garde que 5 capacités par joueur), buffs de CD défensifs si un tank meurt. Par rapport : dégâts sur le trash, parses WCL. Listes dans `config/crawl.json` → `extras`.
 
 ### Calcul (`pipeline/facts.py`, réglages dans `config/compute.json`)
 - **Pulls retenus** : taille et difficulté éligibles, et au moins 10 joueurs avec un rôle. Les raids incomplets et les splits (ex. Onyxia à 20) **comptent** ; seuls les faux logs évidents sont écartés.
@@ -75,7 +75,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - Score = valeur du joueur / **médiane des joueurs du même rôle dans le même pull** × 100.
 - **Kills seulement** pour les scores de performance. Les **wipes** comptent pour les stats fun (morts, etc.).
 - Agrégation ensuite par raid, extension ou carrière.
-- Les parses WCL ne sont pas utilisés sur le site. Le tableau « Fable Guild Rankings » (autre projet) sert de **référence de contrôle** : paliers et boss éligibles, boss couverts par joueur, palier et rôle.
+- Les parses WCL ne servent qu'à **Parse Lord**, seul achievement classé contre le monde. Le tableau « Fable Guild Rankings » (autre projet) sert de **référence de contrôle** : paliers et boss éligibles, boss couverts par joueur, palier et rôle.
 
 ### Stack et stockage
 - **Pipeline en Python** (collecte + calcul), table de stats en **DuckDB / Parquet**.
@@ -105,7 +105,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - **Langue** : site **en anglais**. Les textes des titres (nom, description, blague) vivent dans la config des titres, pas en dur dans le code React.
 
 ### Stats (V1, détail dans `docs/stats.md`)
-- **44 stats** : 24 communes, 7 tank, 6 healer, 7 DPS. Chacune a un titre et une description en anglais, affichée en percentile, en nombre ou les deux. Certaines ont un « revers » (titre de l'autre bout du classement).
+- **45 stats** : 25 communes, 7 tank, 6 healer, 7 DPS. Chacune a un titre et une description en anglais, affichée en percentile, en nombre ou les deux. Certaines ont un « revers » (titre de l'autre bout du classement).
 - Les stats **communes** sont calculées par rôle et filtrées par TANK / DPS / HEALER sur la fiche.
 - Percentile calculé sur un taux (par pull, par minute, base 100), parmi les joueurs qualifiés ; nombre = total de carrière.
 - **Tanks** comparés à la médiane des tanks sur le même boss, sur toute l'histoire de la guilde. **Healers** : soins effectifs.

@@ -20,5 +20,49 @@
     3,
     4
   ],
-  "min_players": 10
+  "min_players": 10,
+  "_extras": "Complements to the crawl (python -m pipeline.crawl_extra), on eligible pulls already cached. The lists are WCL filters applied at crawl time: after changing one, re-fetch with --refresh. The level 2 Casts table only keeps 5 abilities per player, hence filtered Casts tables: taunts in every pull, compute.json era_consumable_casts in Era pulls. Defensive cooldowns are aura names, own and external, fetched as buff events only on pulls where a player of a compute.json tank_classes class died.",
+  "extras": {
+    "taunts": [
+      "Taunt",
+      "Growl",
+      "Hand of Reckoning",
+      "Reckoning",
+      "Righteous Defense",
+      "Dark Command",
+      "Death Grip",
+      "Provoke",
+      "Mocking Blow",
+      "Challenging Shout",
+      "Challenging Roar"
+    ],
+    "defensive_cds": [
+      "Shield Wall",
+      "Last Stand",
+      "Enraged Regeneration",
+      "Gift of Life",
+      "Barkskin",
+      "Survival Instincts",
+      "Frenzied Regeneration",
+      "Might of Ursoc",
+      "Divine Protection",
+      "Ardent Defender",
+      "Guardian of Ancient Kings",
+      "Divine Shield",
+      "Icebound Fortitude",
+      "Vampiric Blood",
+      "Anti-Magic Shell",
+      "Dancing Rune Weapon",
+      "Fortifying Brew",
+      "Dampen Harm",
+      "Diffuse Magic",
+      "Zen Meditation",
+      "Pain Suppression",
+      "Guardian Spirit",
+      "Hand of Sacrifice",
+      "Ironbark",
+      "Life Cocoon",
+      "Divine Sacrifice"
+    ]
+  }
 }

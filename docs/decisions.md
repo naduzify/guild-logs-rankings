@@ -375,3 +375,19 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 **Décision.** Dans toutes les extensions, un joueur que WCL classe tank alors que sa classe ne peut pas tanker devient DPS. Classes tank (`tank_classes` dans `config/compute.json`) : Guerrier, Druide, Paladin, Chevalier de la mort, Moine.
 
 **Raison.** Garde-fou contre les erreurs de rôle de WCL (ex. un chasseur dont le familier tient un add). Sur le cache actuel, aucun pull n'est concerné : les pulls tank de Loveling (chasseur) ont été joués sur son reroll guerrier Lovelain.
+
+---
+
+## 2026-10-28 — Compléments au crawl : taunts, tirs alliés, CD des tanks, trash, parses
+
+**Constat.** Le tableau Casts de niveau 2 ne garde que les **5 capacités les plus lancées** par joueur (aucune ligne n'en a plus sur 9 600 vérifiées). Les taunts n'y apparaissent presque jamais, et les potions Era comptées depuis ce tableau étaient sous-estimées. Les dégâts entre joueurs ne sont dans aucun tableau en cache.
+
+**Décision.** `python -m pipeline.crawl_extra`, lancé **une fois le crawl principal terminé**, sur les rapports déjà en cache (même cache, reprise possible) :
+- **par pull éligible** (`extra_<fight>.json`), une requête : DamageDone filtré joueur → joueur (The Terrorist, auto-dégâts exclus au calcul) ; Casts filtré sur les taunts (Attention Seeker) ; en Era, Casts filtré sur `era_consumable_casts` (remplace le tableau Casts pour The Junky) ; si un joueur d'une classe tank est mort, les événements de buffs des CD défensifs (Blamed the Healer : mort de tank, hors morts scriptées, avec un CD actif à l'instant de la mort, CD externes compris) ;
+- **par rapport** : DamageDone `killType: Trash` (`trash.json`, Timekeeper / The Tourist : part des dégâts de trash de la soirée, base 100 contre la médiane des DPS du rapport) ; parses WCL des kills (`rankings.json`, Parse Lord).
+- Listes en config (`config/crawl.json` → `extras` : 11 taunts, 26 CD défensifs). Ce sont des filtres WCL : après une modification, recrawler avec `--refresh`.
+- `--cost` mesure les points dépensés par requête. Une stat sans données reste dans `meta.pending`.
+
+**Parse Lord.** Seul achievement mesuré contre le monde et non contre la guilde, ce qui revient sur « pas de parses WCL sur le site » pour cette stat seulement (sera mise en avant différemment). Parses des kills de Fable : par boss, moyenne du meilleur et du médian, puis moyenne sur les boss. DPS et healers, au moins 5 boss.
+
+**Écarté.** `characterRankings` par personnage (milliers de requêtes, et compte les kills hors guilde).

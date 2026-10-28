@@ -6,6 +6,7 @@ export function formatValue(stat, v) {
   switch (stat.format) {
     case 'pct': return `${(v * 100).toFixed(1)}%`;
     case 'score': return int.format(v);
+    case 'parse': return `${int.format(v)} parse`;
     case 'rate': return `${v.toFixed(2)} ${stat.rate_unit || ''}`.trim();
     case 'big': return compact.format(v);
     case 'signed': return `${v >= 0 ? '+' : ''}${v.toFixed(1)}`;

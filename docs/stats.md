@@ -15,7 +15,7 @@ Liste des stats affichées sur le site, issue de la session Claude Chat du 2026-
 
 Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. ⚙️ liste en config ; 📋 casts par sort (déjà dans le cache) ; 🔬 niveau 3 ciblé ; 🆕 crawl supplémentaire.
 
-## Common (24)
+## Common (25)
 
 1. **The Gang**: Never misses a raid night. (Distinct reset weeks with at least one eligible pull. The card also shows hours in boss fights, first logged pull and expansions played.) [P+N]
 2. **The Undecided**: Still can't pick a main. (Distinct characters raided on, with their classes and roles on the card.) [N]
@@ -41,6 +41,8 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 22. **The Terrorist**: Friendly fire isn't. (Damage he dealt to other raid members, self-damage excluded, as a share of the raid's damage taken in the pull. Kills and wipes.) [P+N]
 23. **Clutch Player**: Shows up when it matters. (Average performance score on the guild's first kills of each boss, compared to his score on farm kills.) [P]
 24. **Glow Up**: Look at him now. (Trend of his performance score over the weeks, as the slope of a regression.) [P]
+
+25. **Parse Lord**: Ranked against the whole world, not just Fable. (Warcraft Logs parses on Fable kills: per boss, the average of his best and median parse, then the average over bosses. DPS and healers, at least 5 bosses. The only achievement not measured against the guild.) [P]
 
 ## Tank (7)
 
@@ -73,9 +75,12 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 
 ## Données supplémentaires à crawler
 
-- **Timekeeper / The Tourist** 🆕 : un tableau DamageDone sur les combats de trash (`killType: Trash`), un par rapport (~1 000 requêtes). Le crawl actuel ne demande que `killType: Encounters`.
-- **Blamed the Healer** 🔬 : les buffs du tank autour de chacune de ses morts (fenêtre de quelques secondes avant la mort), sur les pulls éligibles seulement. Les événements de la fenêtre de mort du tableau Deaths ne contiennent que des dégâts.
-- **📋 Casts par sort** : Attention Seeker et le détail « casts par minute » utilisent les capacités du tableau Casts, déjà en cache.
+`python -m pipeline.crawl_extra`, après le crawl principal (détail dans `docs/decisions.md`) :
+- **The Terrorist** : DamageDone filtré joueur → joueur, par pull.
+- **Attention Seeker** 📋 : Casts filtré sur les taunts, par pull (le tableau Casts de niveau 2 ne garde que 5 capacités par joueur). En Era, aussi les consommables (The Junky).
+- **Blamed the Healer** 🔬 : événements de buffs des CD défensifs, sur les pulls où un joueur d'une classe tank meurt.
+- **Timekeeper / The Tourist** 🆕 : DamageDone sur le trash (`killType: Trash`), par rapport.
+- **Parse Lord** : parses WCL des kills, par rapport.
 
 ## Reportées en V2
 

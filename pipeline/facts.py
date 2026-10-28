@@ -88,9 +88,13 @@ def pulls_from_cache(host: str = "classic", limit: int | None = None):
             if not fight:
                 continue
             tables = {k: v["data"] for k, v in _payload(tpath)["report"].items()}
+            # Crawl complements (pipeline/crawl_extra.py), when fetched: filtered tables and buff events.
+            xpath = rdir / f"extra_{fight['id']:03d}.json"
+            extra = _payload(xpath)["report"] if xpath.exists() else None
+            actors = {a["id"]: a["name"] for a in (rep.get("masterData") or {}).get("actors", [])}
             yield {"source": f"{rep['code']}#{fight['id']}", "expansion": exp, "report": rep["code"],
                    "report_start": rep["startTime"], "zone": (rep.get("zone") or {}).get("name"),
-                   "fight": fight, "tables": tables}
+                   "fight": fight, "tables": tables, "extra": extra, "actors": actors}
             done += 1
             if limit and done >= limit:
                 return
@@ -133,6 +137,33 @@ def era_tanks(roles: dict, taken: dict) -> set:
     # WCL healers stay healers: a healer hit by adds is not an off-tank.
     return {n for n, (role, p) in roles.items() if p.get("type") in cfg["classes"] and role != "HEALER"
             and ((tb and boss[n] / tb >= share) or (ta and adds[n] / ta >= share))}
+
+
+def tank_deaths_with_cd(events: list, deaths: list, actors: dict, tanks: set) -> Counter:
+    """Tank name -> deaths (scripted ones excluded) with a defensive cooldown on him at the time of death.
+
+    `events` are buff events already filtered on the cooldowns (config/crawl.json extras). A buff counts
+    when applied before the death and not removed before it (buffs drop at the moment of death).
+    """
+    spans = defaultdict(list)  # (target id, buff) -> [[start, end]], end None while still up
+    for e in sorted(events, key=lambda e: e["timestamp"]):
+        key = (e.get("targetID"), e.get("abilityGameID"))
+        if e["type"] in ("applybuff", "refreshbuff", "applybuffstack"):
+            if not spans[key] or spans[key][-1][1] is not None:
+                spans[key].append([e["timestamp"], None])
+        elif e["type"] == "removebuff" and spans[key] and spans[key][-1][1] is None:
+            spans[key][-1][1] = e["timestamp"]
+    scripted = set(CONFIG["scripted_deaths"])
+    out = Counter()
+    for d in deaths:
+        name = actors.get(d.get("id"), d.get("name"))
+        if name not in tanks or (d.get("killingBlow") or {}).get("name") in scripted:
+            continue
+        ts = d["timestamp"]
+        if any(tid == d.get("id") and a <= ts and (b is None or b >= ts)
+               for (tid, _), ss in spans.items() for a, b in ss):
+            out[name] += 1
+    return out
 
 
 def enchant_slots(gear: list, cls: str, pull: dict) -> tuple[int, int]:
@@ -208,6 +239,10 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
         if extra:
             issues[f"non-player entries ignored in {table}"] += len(extra)
 
+    x = pull.get("extra") or {}
+    ff, taunts, consumables = (_by_name(x[k]["data"]["entries"]) if k in x else None for k in ("friendlyFire", "taunts", "consumables"))
+    cd_deaths = tank_deaths_with_cd(x["cds"]["data"], t["deaths"]["entries"], pull.get("actors", {}), tanks) if "cds" in x else None
+
     interrupts = _detail_counts(t["interrupts"]["entries"])
     dispels = _detail_counts(t["dispels"]["entries"])
 
@@ -242,7 +277,9 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
         gear = (p.get("combatantInfo") or {}).get("gear") or []
         enchantable, enchanted = enchant_slots(gear, p.get("type"), pull)
         if era:
-            cast = Counter({a["name"]: a.get("total", 0) for a in c.get("abilities", [])})
+            # The filtered consumables table when fetched; else the level 2 Casts table (5 abilities per player only).
+            src = consumables.get(name, {}) if consumables is not None else c
+            cast = Counter({a["name"]: a.get("total", 0) for a in src.get("abilities", [])})
             stones = sum(n for a, n in cast.items() if "Healthstone" in a and a in CONFIG["era_consumable_casts"])
             potions = sum(cast[a] for a in CONFIG["era_consumable_casts"]) - stones
         else:
@@ -277,6 +314,11 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
             "interrupts": interrupts.get(name, 0), "dispels": dispels.get(name, 0),
             "casts": c.get("total", 0), "casts_active_ms": c.get("activeTime", 0),
             "potions": potions, "healthstones": stones,
+            # Crawl complements: None when not fetched yet for this pull.
+            "friendly_fire": None if ff is None else sum(
+                y.get("total", 0) for y in ff.get(name, {}).get("targets", []) if y.get("name") != name),
+            "taunts": None if taunts is None else taunts.get(name, {}).get("total", 0),
+            "deaths_with_cd": None if cd_deaths is None else cd_deaths.get(name, 0),
             "gear_known": bool(gear), "enchantable_slots": enchantable, "enchanted_slots": enchanted,
         })
     for n in set(interrupts) | set(dispels):

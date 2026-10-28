@@ -110,7 +110,7 @@ export function explain(stat, settings) {
   const lines = [stat.detail, ROLE_SCOPE[stat.category]];
   const minDen = stat.min_den ?? settings.min_den;
   if (hasPercentile(stat)) {
-    const sample = stat.agg === 'spread' || stat.agg === 'slope' ? 'kills' : 'pulls';
+    const sample = stat.format === 'parse' ? 'bosses' : stat.agg === 'spread' || stat.agg === 'slope' ? 'kills' : 'pulls';
     let rank = `Percentile among players with at least ${minDen} ${sample} under the current filters`;
     rank += stat.direction === 'asc' ? ' (lower is better).' : '.';
     lines.push(rank);

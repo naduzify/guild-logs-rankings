@@ -16,7 +16,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 
-from pipeline.facts import CONFIG, ROOT, add_scores, load_mapping, norm, pull_rows, pulls_from_cache
+from pipeline.facts import CACHE_DIR, CONFIG, ROOT, _payload, add_scores, load_mapping, norm, pull_rows, pulls_from_cache
 
 OUT_DIR = ROOT / "site" / "public" / "fable" / "data"
 WEEK_MS = 7 * 24 * 3600 * 1000
@@ -25,7 +25,7 @@ ROLES = ["TANK", "DPS", "HEALER"]
 CLASSES = ["Death Knight", "Druid", "Hunter", "Mage", "Monk", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"]
 CLASS_NAME = {"DeathKnight": "Death Knight"}
 # Stats that need data the crawl does not have yet (docs/stats.md) or a model still to write.
-PENDING = {"the-terrorist", "attention-seeker", "blamed-the-healer", "timekeeper"}
+PENDING = set()  # stats with no computation yet (shown as such on the site)
 
 
 def load(name: str) -> dict:
@@ -171,6 +171,61 @@ def ilvl_residuals(kills: list) -> dict:
     return out
 
 
+def timekeeper(rows: list, pid: dict, char_class: dict, cells) -> None:
+    """Timekeeper / The Tourist: each DPS's share of the raid's trash damage over a report (one night,
+    cache reports/<code>/trash.json from pipeline/crawl_extra.py), base 100 vs the night's DPS median.
+    A character's role and expansion for the night are those of his boss pulls in that report."""
+    by_report = defaultdict(lambda: defaultdict(Counter))
+    exp_of = {}
+    for r in rows:
+        by_report[r["report"]][r["char"]][r["role"]] += 1
+        exp_of[r["report"]] = r["e"]
+    owner = {r["char"]: r["player"] for r in rows}
+    for code, chars in by_report.items():
+        path = CACHE_DIR / "classic" / "reports" / code / "trash.json"
+        if not path.exists():
+            continue
+        entries = _payload(path)["report"]["trash"]["data"].get("entries", [])
+        dmg = {e["name"]: e.get("total", 0) for e in entries if e.get("name") in chars}
+        total = sum(dmg.values())
+        dps = {ch: d / total for ch, d in dmg.items() if total and chars[ch].most_common(1)[0][0] == "DPS"}
+        if len(dps) < CONFIG["min_players"] // 2:
+            continue  # no real trash in this report
+        med = statistics.median(dps.values())
+        for ch, share in dps.items():
+            if med and owner[ch] in pid and ch in char_class:
+                k = (pid[owner[ch]], exp_of[code], CLASSES.index(char_class[ch]), ROLES.index("DPS"))
+                cells.ratio("timekeeper", k, 100 * share / med)
+
+
+def parse_lord(rows: list, pid: dict, char_class: dict, cells) -> None:
+    """Parse Lord: WCL parses (cache reports/<code>/rankings.json from pipeline/crawl_extra.py), the
+    only stat ranked against the world. Per cell and boss, (best + median parse) / 2; one value per boss."""
+    parses, loaded = {}, set()
+    for r in rows:
+        code = r["report"]
+        if code in loaded:
+            continue
+        loaded.add(code)
+        path = CACHE_DIR / "classic" / "reports" / code / "rankings.json"
+        if not path.exists():
+            continue
+        for fight in _payload(path)["report"]["rankings"].get("data", []):
+            for role in (fight.get("roles") or {}).values():
+                for ch in role.get("characters", []):
+                    if ch.get("rankPercent") is not None:
+                        parses[(code, fight["fightID"], ch["name"])] = ch["rankPercent"]
+    groups = defaultdict(list)
+    for r in rows:
+        x = parses.get((r["report"], r["fight"], r["char"]))
+        if x is None or not r["kill"] or r["role"] not in ("DPS", "HEALER") or r["player"] not in pid or r["char"] not in char_class:
+            continue
+        k = (pid[r["player"]], r["e"], CLASSES.index(char_class[r["char"]]), ROLES.index(r["role"]))
+        groups[(k, r["encounter_id"], r["difficulty"])].append(x)
+    for (k, _, _), xs in groups.items():
+        cells.ratio("parse-lord", k, (max(xs) + statistics.median(xs)) / 2)
+
+
 # --- main --------------------------------------------------------------------
 
 def main() -> None:
@@ -279,6 +334,7 @@ def main() -> None:
             mine_wipes[(pl, boss_key(r0))] += not r0["kill"]
 
     interruptible = {src for src, rs in pulls.items() if any(r["interrupts"] for r in rs)}
+    raid_taken = {src: sum(r["damage_taken"] for r in rs) for src, rs in pulls.items()}
     final_bosses = set(CONFIG["final_bosses"])
     night = CONFIG["night"]
     boss_ids = {}
@@ -313,6 +369,8 @@ def main() -> None:
             cells.sum("last-stand", k, 1)
         if r["killed_by"]:
             cells.top("arch-nemesis", k, r["killed_by"], 1)
+        if r["friendly_fire"] is not None and raid_taken[r["source"]]:
+            cells.ratio("the-terrorist", k, r["friendly_fire"] / raid_taken[r["source"]])
         if id(r) in received:
             cells.ratio("healers-love-him", k, received[id(r)])
         if id(r) in magnet:
@@ -342,6 +400,10 @@ def main() -> None:
                 cells.ratio("secret-dps", k, secret[id(r)])
             if r["damage_taken"]:
                 cells.ratio("add-wrangler", k, r["damage_taken_adds"] / r["damage_taken"])
+            if r["taunts"] is not None:
+                cells.ratio("attention-seeker", k, r["taunts"], r["duration_ms"] / 60000)
+            if r["deaths_with_cd"]:
+                cells.sum("blamed-the-healer", k, r["deaths_with_cd"])
             if kill and med_duration.get(bk):
                 cells.ratio("pacemaker", k, 100 * r["duration_ms"] / med_duration[bk])
         elif role == "HEALER":
@@ -373,6 +435,9 @@ def main() -> None:
                 cells.ratio("one-button-wonder", k, one_button[id(r)])
             if r["engineering_damage"]:
                 cells.sum("engineers-pride", k, r["engineering_damage"])
+
+    timekeeper(rows, pid, char_class, cells)
+    parse_lord(rows, pid, char_class, cells)
 
     stats = cells.export([s["id"] for s in stats_cfg])
     empty = [s["id"] for s in stats_cfg if not stats[s["id"]]]
@@ -416,7 +481,7 @@ def main() -> None:
         "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "mock": False,
         "partial": True,
-        "pending": sorted(PENDING),
+        "pending": sorted(PENDING | set(empty)),
         "guild": {"name": "Fable", "server": "Arugal (AU)"},
         "expansions": tiers_cfg["expansions"],
         "tiers": [{k: t[k] for k in ("id", "name", "short", "expansion")} for t in tiers_cfg["tiers"]],
