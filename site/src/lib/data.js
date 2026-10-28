@@ -20,7 +20,27 @@ export async function loadData() {
     }
   }
 
+  // Time played per (expansion, class, role), for the class dots next to a name: [[e, c, r, hours], …].
+  const played = players.map(() => new Map());
+  for (const [p, e, c, r, v] of stats['hours-played'] || []) {
+    const k = `${e}|${c}|${r}`;
+    played[p].set(k, (played[p].get(k) || 0) + (Number(v) || 0));
+  }
+  const playedRows = played.map(m => [...m].map(([k, h]) => [...k.split('|').map(Number), h]));
+
   const byName = new Map(players.map((pl, i) => [pl.name, i]));
   const statById = new Map(meta.stats.map(s => [s.id, s]));
-  return { meta, players, stats, facets, byName, statById };
+  return { meta, players, stats, facets, played: playedRows, byName, statById };
+}
+
+// Classes a player played under the active filters, most played first.
+export function playedClasses(data, p, filter) {
+  const hours = new Map();
+  for (const [e, c, r, h] of data.played[p]) {
+    if (filter.exp.size && !filter.exp.has(e)) continue;
+    if (filter.role.size && !filter.role.has(r)) continue;
+    if (filter.cls.size && !filter.cls.has(c)) continue;
+    hours.set(c, (hours.get(c) || 0) + h);
+  }
+  return [...hours].sort((a, b) => b[1] - a[1]).map(([c]) => data.meta.classes[c]);
 }

@@ -12,26 +12,29 @@
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" sizes="180x180" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Oswald:wght@400;600;700&family=Roboto:wght@400;500;600;700&display=swap" />
+    <!-- Linked here, not imported from JS: styles apply on first paint, no flash of unstyled page in dev. -->
+    <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body>
-    <main class="wrap chooser">
+    <main class="chooser">
       <header class="hero">
         <h1>Classic Logs <span class="grad">Timewalking</span><small>Pick a guild.</small></h1>
       </header>
       <nav class="guilds" aria-label="Guilds">
-        <a class="scard big guild" href="./nightshift/">
-          <span class="ribbonwrap"><span class="ribbon">Coming soon</span></span>
-          <img class="gicon" src="./nightshift/guild-icon.png" alt="" />
-          <span class="slabel">NightShift</span>
-          <span class="ssub">Thunderstrike (EU)</span>
-        </a>
+        <div class="split" aria-hidden="true"><div class="split-horde"></div><svg class="split-line"><polyline /></svg><i class="firefly"></i></div>
         <a class="scard big guild" href="./fable/">
-          <img class="gicon" src="./fable/guild-icon.png" alt="" />
+          <img class="gicon" src="./fable/guild-icon.png" alt="" width="64" height="64" />
           <span class="slabel">Fable</span>
           <span class="ssub">Arugal (AU)</span>
         </a>
+        <a class="scard big guild horde" href="./nightshift/">
+          <span class="ribbonwrap"><span class="ribbon">Coming soon</span></span>
+          <img class="gicon" src="./nightshift/guild-icon.png" alt="" width="64" height="64" />
+          <span class="slabel">NightShift</span>
+          <span class="ssub">Thunderstrike (EU)</span>
+        </a>
       </nav>
     </main>
-    <script type="module" src="./src/static.js"></script>
+    <script type="module" src="./src/chooser.js"></script>
   </body>
 </html>

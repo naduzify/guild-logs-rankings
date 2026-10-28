@@ -42,7 +42,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 23. **Clutch Player**: Shows up when it matters. (Average performance score on the guild's first kills of each boss, compared to his score on farm kills.) [P]
 24. **Glow Up**: Look at him now. (Trend of his performance score over the weeks, as the slope of a regression.) [P]
 
-25. **Parse Lord**: Ranked against the whole world, not just Fable. (Warcraft Logs parses on Fable kills: per boss, the average of his best and median parse, then the average over bosses. DPS and healers, at least 5 bosses. The only achievement not measured against the guild.) [P]
+25. **Parse Lords**: Ranked against the whole world, not just Fable. (Warcraft Logs parses on Fable kills: per boss, the average of his best and median parse, then the average over bosses. DPS and healers, at least 5 bosses. The only achievement not measured against the guild.) [P]
 
 ## Tank (7)
 
@@ -80,7 +80,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 - **Attention Seeker** 📋 : Casts filtré sur les taunts, par pull (le tableau Casts de niveau 2 ne garde que 5 capacités par joueur). En Era, aussi les consommables (The Junky).
 - **Blamed the Healer** 🔬 : événements de buffs des CD défensifs, sur les pulls où un joueur d'une classe tank meurt.
 - **Timekeeper / The Tourist** 🆕 : DamageDone sur le trash (`killType: Trash`), par rapport.
-- **Parse Lord** : parses WCL des kills, par rapport.
+- **Parse Lords** : parses WCL des kills, par rapport.
 
 ## Reportées en V2
 

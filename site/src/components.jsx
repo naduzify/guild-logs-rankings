@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { CLASS_COLORS, classInk, fold } from './lib/format.js';
+import { playedClasses } from './lib/data.js';
+import { CLASS_COLORS, fold, formatValue, parseColor } from './lib/format.js';
 import { go, href } from './lib/route.js';
 import { explain } from './lib/stats.js';
 
@@ -57,6 +58,20 @@ export function InfoTip({ stat, meta }) {
   );
 }
 
+// A ranked value; Parse Lords adds its best and median parse in small: "71.0 (74.5 | 67.5)".
+// `parseColors` paints the average in its Warcraft Logs parse colour (Parse Lords page).
+export function StatValue({ stat, row, parseColors = false }) {
+  const main = formatValue(stat, row.value);
+  if (stat.format !== 'parse' || !row.extra) return main;
+  const [best, median] = row.extra;
+  return (
+    <>
+      {parseColors ? <span style={{ color: parseColor(row.value) }}>{main}</span> : main}{' '}
+      <small className="vdetail" title="best | median">({best.toFixed(1)} | {median.toFixed(1)})</small>
+    </>
+  );
+}
+
 const ROLE_LABELS = { TANK: 'Tank', DPS: 'DPS', HEALER: 'Healer' };
 export const roleLabel = r => ROLE_LABELS[r] || r;
 
@@ -71,14 +86,19 @@ export function RankBadge({ player, meta, size = 20 }) {
   );
 }
 
-// Name of a player with his rank badge, linking to his page; the main class colours the name.
-export function PlayerName({ data, p, filter }) {
+// Name of a player with his rank badge, linking to his page; one dot per class played under the filters.
+export function PlayerName({ data, p, filter, badge }) {
   const pl = data.players[p];
-  const cls = data.meta.classes[pl.chars[0][1]];
+  const classes = playedClasses(data, p, filter);
   return (
     <a className="pname" href={href('player', pl.name, filter)}>
-      <RankBadge player={pl} meta={data.meta} />
-      <span style={{ '--cls': CLASS_COLORS[cls], '--ink': classInk(CLASS_COLORS[cls]) }}>{pl.name}</span>
+      <RankBadge player={pl} meta={data.meta} size={badge} />
+      <span className="pn">{pl.name}</span>
+      {classes.length > 0 && (
+        <span className="cdots" title={classes.join(', ')} aria-label={classes.join(', ')}>
+          {classes.map(c => <i key={c} style={{ background: CLASS_COLORS[c] }} />)}
+        </span>
+      )}
     </a>
   );
 }

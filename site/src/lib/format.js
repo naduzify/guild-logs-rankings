@@ -6,7 +6,7 @@ export function formatValue(stat, v) {
   switch (stat.format) {
     case 'pct': return `${(v * 100).toFixed(1)}%`;
     case 'score': return int.format(v);
-    case 'parse': return `${int.format(v)} parse`;
+    case 'parse': return v.toFixed(1);
     case 'rate': return `${v.toFixed(2)} ${stat.rate_unit || ''}`.trim();
     case 'big': return compact.format(v);
     case 'signed': return `${v >= 0 ? '+' : ''}${v.toFixed(1)}`;
@@ -24,6 +24,10 @@ export function formatNumber(stat, n) {
 // Scores are relative to the role median of the pull (100 = median), never raw amounts: always label them.
 export const isBase100 = stat => stat.format === 'score';
 export const BASE100 = 'base 100';
+
+// Warcraft Logs parse colours, lightened where needed to stay readable on the navy table rows.
+const PARSE_COLORS = [[99, '#ee82bd'], [95, '#ff8000'], [75, '#c48af7'], [50, '#4d9bff'], [25, '#1eff00'], [0, '#9d9d9d']];
+export const parseColor = v => PARSE_COLORS.find(([min]) => v >= min)[1];
 
 export const formatBig = n => compact.format(n);
 export const formatInt = n => int.format(n);
@@ -48,11 +52,3 @@ export const CLASS_COLORS = {
   'Death Knight': '#C41E3A', Druid: '#FF7C0A', Hunter: '#AAD372', Mage: '#3FC7EB', Monk: '#00FF98',
   Paladin: '#F48CBA', Priest: '#FFFFFF', Rogue: '#FFF468', Shaman: '#0070DD', Warlock: '#8788EE', Warrior: '#C69B6D',
 };
-
-// Text colour on a class colour fill: navy or white, whichever contrasts more (white only on Death Knight and Shaman).
-const luminance = hex => {
-  const c = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255).map(x => (x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4));
-  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
-};
-const NAVY_DEEP = '#061529';
-export const classInk = hex => ((luminance(hex) + 0.05) / (luminance(NAVY_DEEP) + 0.05) >= 1.05 / (luminance(hex) + 0.05) ? NAVY_DEEP : '#ffffff');

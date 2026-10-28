@@ -76,6 +76,11 @@ class Cells:
     def ratio(self, sid, key, num, den=1):
         a = self._get(sid, key, lambda: [0.0, 0.0]); a[0] += num; a[1] += den
 
+    def parse(self, sid, key, best, median):
+        """One boss of Parse Lord: (best + median) / 2, plus best and median themselves."""
+        v = self._get(sid, key, lambda: [0.0, 0, 0.0, 0.0])
+        v[0] += (best + median) / 2; v[1] += 1; v[2] += best; v[3] += median
+
     def sum(self, sid, key, n):
         self._get(sid, key, lambda: [0.0])[0] += n
 
@@ -246,7 +251,7 @@ def parse_lord(rows: list, pid: dict, char_class: dict, cells) -> None:
         k = (pid[r["player"]], r["e"], CLASSES.index(char_class[r["char"]]), ROLES.index(r["role"]))
         groups[(k, r["encounter_id"], r["difficulty"])].append(x)
     for (k, _, _), xs in groups.items():
-        cells.ratio("parse-lord", k, (max(xs) + statistics.median(xs)) / 2)
+        cells.parse("parse-lord", k, max(xs), statistics.median(xs))
 
 
 # --- main --------------------------------------------------------------------

@@ -10,6 +10,12 @@
   --cream: #fff2df;
   --tan: #c6af8d;
   --parchment: #eccaa1;
+  /* Text that used to be in the accent colour: Alliance blue (or Horde red) on these backgrounds is below 4.5:1. */
+  --accent-text: #fff;
+  /* Flip titles: pale red, readable on navy and on Horde red alike (7:1 and more). */
+  --flip-text: #ff9a9d;
+  /* Reserved for the Guild Legends number ones (contrast > 9:1 on navy). */
+  --gold-text: #f3cf7a;
   --red: #e5484d;
   --red-glow: color-mix(in srgb, var(--red) 18%, transparent);
   --line: #ffffff14;
@@ -19,6 +25,15 @@
   --f-subtitle: "Barlow Condensed", "Arial Narrow", sans-serif;
   --f-body: Roboto, system-ui, sans-serif;
   color-scheme: dark;
+}
+/* Horde theme (NightShift): same tokens, red instead of navy and Alliance blue. */
+.horde {
+  --navy-deep: #1a0507;
+  --navy: #4a0d12;
+  --navy-glass: #4a0d128c;
+  --alliance: #d4252c;
+  --alliance-deep: #8f1218;
+  --alliance-glow: color-mix(in srgb, var(--alliance) 26%, transparent);
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -39,7 +54,7 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--navy-deep) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-strong); }
 .topin { display: flex; align-items: center; gap: 8px 16px; padding-block: 10px; flex-wrap: wrap; }
 .brand { font: 700 1.45rem/1 var(--f-headline); text-decoration: none; text-transform: uppercase; letter-spacing: .02em; color: var(--parchment); }
-.brand span { color: var(--alliance); margin-left: 6px; font: 600 .8rem var(--f-subtitle); letter-spacing: .14em; }
+.brand span { color: var(--accent-text); margin-left: 6px; font: 600 .8rem var(--f-subtitle); letter-spacing: .14em; }
 .top nav { margin-left: auto; display: flex; gap: 14px; }
 .top nav a { font: 600 1rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .08em; color: var(--tan); text-decoration: none; padding: 6px 4px; }
 .top nav a:hover { color: var(--cream); }
@@ -62,10 +77,44 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .hero p { max-width: 60ch; color: var(--tan); margin: 10px 0 0; }
 
 /* Guild chooser (/) and placeholder pages. */
+/* Guild chooser background: Alliance blue on Fable's side, Horde red on NightShift's, split by a broad jagged
+   cut that always runs between the two cards, traced by a thin white line and crossed now and then by a firefly.
+   The cut, the line and the firefly's path are computed in px by src/split.js; the clip-paths below are only
+   the plain half split shown before it runs. The layer is anchored on the card grid (100vh above and below
+   it, full screen width): phones split across, red below; from 560px down the middle, red on the right. */
+.split { position: absolute; z-index: -1; top: -100vh; bottom: -100vh; left: 50%; width: 100vw; transform: translateX(-50%); pointer-events: none; }
+.split-horde { position: absolute; inset: 0; background: radial-gradient(120% 40% at 50% 70%, #4a0d12 0%, #1a0507 75%);
+  clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%); }
+.split-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible;
+  filter: drop-shadow(0 0 2px rgb(255 255 255 / .8)) drop-shadow(0 0 6px rgb(255 255 255 / .35)); }
+.split-line polyline { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linejoin: miter; }
+/* The firefly: a warm speck with a soft halo. It dashes along the cut (top to bottom, left to right on
+   phones), fades out, waits, and goes again. --fly-time is set from the path length by split.js. */
+.firefly { position: absolute; top: 0; left: 0; width: 7px; height: 7px; border-radius: 50%; background: #fbffd0; display: none;
+  box-shadow: 0 0 6px 2px #f4ff8a, 0 0 18px 6px color-mix(in srgb, #d8ff4f 45%, transparent);
+  offset-rotate: 0deg; offset-anchor: center; opacity: 0;
+  animation: firefly-fly var(--fly-time, 3s) linear infinite; }
+.firefly.on { display: block; }
+/* First 9.9% of the cycle: the dash, at constant speed; the rest: the pause (about 9 times the dash). */
+@keyframes firefly-fly {
+  0% { offset-distance: 0%; opacity: 0; }
+  0.6% { opacity: 1; }
+  9.3% { opacity: 1; }
+  9.9% { offset-distance: 100%; opacity: 0; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .firefly { display: none; } }
 /* Content centred on the screen, both ways. */
-.chooser { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+.chooser { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  /* svh: the screen height with the phone's address bar shown, so nothing scrolls when everything fits. */
+  min-height: 100svh;
+  /* Full width (not .wrap), and clips the split layer, which reaches 100vh above and below the cards. */
+  overflow: clip; padding-inline: max(14px, env(safe-area-inset-left)) max(14px, env(safe-area-inset-right)); }
 .chooser .hero { padding-block: 24px 0; }
-.guilds { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 28px 0 24px; width: 100%; max-width: 720px; }
+/* "Pick a guild" sits over both halves: bigger, cream, with a dark halo for contrast on red and blue. */
+.chooser .hero h1 small { font: 600 1.35rem var(--f-subtitle); color: var(--cream); text-transform: uppercase; letter-spacing: .22em; margin-top: 10px;
+  text-shadow: 0 1px 2px #000, 0 0 12px rgb(0 0 0 / .7); }
+.guilds { position: relative; display: grid; grid-template-columns: 1fr; gap: 72px; margin: 28px 0 24px; width: 100%; max-width: 720px; }
 .scard.guild { text-decoration: none; min-height: 170px; justify-content: center; gap: 8px; }
 .scard.guild:hover { border-color: var(--alliance); box-shadow: 0 0 24px var(--alliance-glow); }
 .scard.guild .slabel { font: 700 1.9rem var(--f-headline); letter-spacing: .06em; }
@@ -76,7 +125,7 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 /* Filters: collapsed behind a button on phones, always open from 720px. */
 .filters { border-block: 1px solid var(--line); margin-block: 14px 18px; padding-block: 8px; }
 .ftoggle { display: flex; width: 100%; align-items: center; justify-content: space-between; font: 600 1rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .08em; background: none; border: 0; color: var(--cream); padding: 8px 0; cursor: pointer; }
-.ftoggle .count { color: var(--alliance); }
+.ftoggle .count { color: var(--accent-text); }
 .ftoggle .chev { transition: transform .15s; }
 .filters.open .ftoggle .chev { transform: rotate(180deg); }
 .fbody { display: none; flex-direction: column; gap: 12px; padding-block: 6px 8px; }
@@ -102,17 +151,59 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .rboss small { color: var(--tan); font-size: .8rem; margin-left: 4px; }
 .sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 28px; }
 .sechead h2, .cat { font: 700 1.3rem var(--f-headline); text-transform: uppercase; letter-spacing: .03em; margin: 26px 0 10px; color: var(--cream); }
-.sechead a { color: var(--alliance); text-decoration: none; font-size: .9rem; white-space: nowrap; }
+.sechead a { color: var(--accent-text); text-decoration: none; font-size: .9rem; white-space: nowrap; }
 .cat small { font: 400 .85rem var(--f-body); text-transform: none; letter-spacing: 0; color: var(--tan); }
 .cards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 36px; }
-.card { background: var(--navy-glass); border: 1px solid var(--line); border-top: 2px solid var(--alliance); border-radius: 6px; padding: 14px; }
+/* Pinned achievements: right under the guild records, before the Hall of fame heading. */
+/* Guild Legends (pinned achievements): an ornamented heading, then one borderless panel with a warm
+   parchment wash holding both cards, split by a short parchment line (across on phones, down the middle
+   from 720px). Gold (--gold-text) is used nowhere else on the site: only for each card's number one. */
+.legends { margin-top: 40px; }
+.ornament { display: flex; align-items: center; gap: 14px; margin: 0 0 14px; font: 600 1rem var(--f-subtitle); text-transform: uppercase;
+  letter-spacing: .3em; color: var(--gold-text); text-align: center; }
+.ornament::before, .ornament::after { content: ""; flex: 1; height: 1px; }
+.ornament::before { background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--gold-text) 70%, transparent)); }
+.ornament::after { background: linear-gradient(270deg, transparent, color-mix(in srgb, var(--gold-text) 70%, transparent)); }
+.ornament span::before, .ornament span::after { content: "◆"; font-size: .55em; vertical-align: .3em; margin-inline: .9em; opacity: .8; }
+.cards.pinned { margin: 0; gap: 0; border-radius: 8px;
+  background: radial-gradient(90% 120% at 50% 0%, color-mix(in srgb, var(--parchment) 9%, transparent), transparent 70%), var(--navy-glass); }
+.cards.pinned .card { position: relative; border: 0; border-radius: 0; background: none; padding: 22px 20px 20px; }
+.cards.pinned .card + .card::before { content: ""; position: absolute; top: 0; left: 20%; right: 20%; height: 1px;
+  background: color-mix(in srgb, var(--parchment) 45%, transparent); }
+/* Top three of a legend card, scaled down from the first: big names and rank badges. Only the number one
+   gets the gold position and value, and the shine. */
+.champion { display: flex; align-items: center; gap: 6px; padding: 10px 0; border-top: 1px solid var(--line); min-width: 0; }
+/* Same column width for every position, so the badges line up with the rows below (pos 1.2em + 8px gap). */
+.champion .pos { font: 700 1.45rem/1 var(--f-headline); color: var(--parchment); flex: none; width: 21px; }
+.champion .pname { gap: 8px; }
+.champion .pn { font: 700 1.2rem/1.1 var(--f-headline); letter-spacing: .02em; }
+.champion .val { margin-left: auto; flex: none; font: 600 1.1rem var(--f-headline); font-variant-numeric: tabular-nums; }
+.champion.c1 { padding: 14px 0 12px; }
+.champion.c1 .pos { font-size: 2rem; color: var(--gold-text); }
+.champion.c1 .pn { font-size: 1.6rem; }
+.champion.c1 .val { font-size: 1.4rem; color: var(--gold-text); }
+.legend .podium .pos { color: var(--tan); }
+/* A slow shine across the number one's name, like a legendary item: a short sweep, then a long rest. */
+.champion.c1 .pn { background: linear-gradient(110deg, var(--cream) 42%, #fff6d8 50%, var(--cream) 58%) 100% 0 / 250% 100% no-repeat;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: legend-shine 7s ease-in-out infinite; }
+.champion.c1 .pname:hover .pn { -webkit-text-fill-color: var(--parchment); }
+/* Positions stay within 0..100%, where the 250% wide gradient always covers the whole name. */
+@keyframes legend-shine { 0%, 70% { background-position: 100% 0; } 85%, 100% { background-position: 0% 0; } }
+@media (prefers-reduced-motion: reduce) { .champion.c1 .pn { animation: none; } }
+.card { display: flex; flex-direction: column; background: var(--navy-glass); border: 1px solid var(--line); border-top: 2px solid var(--alliance); border-radius: 6px; padding: 14px; }
 .ctitle { font: 700 1.25rem var(--f-headline); text-transform: uppercase; text-decoration: none; color: var(--parchment); }
 .ctitle:hover { color: var(--cream); }
+/* "View more" at the foot of a card, pushed to the bottom so the links line up across a row. 34px tap target. */
+.cmore { margin-top: auto; align-self: flex-end; display: inline-flex; align-items: center; min-height: 34px; padding-top: 8px;
+  font: 600 .8rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .12em; color: var(--accent-text); text-decoration: none; }
+.cmore:hover { text-decoration: underline; }
+.cmore:focus-visible { outline: 2px solid var(--alliance); outline-offset: 2px; border-radius: 2px; }
 .cdesc { margin: 2px 0 10px; color: var(--tan); font-size: .85rem; }
 .podium { list-style: none; margin: 0; padding: 0; }
 .podium li { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-top: 1px solid var(--line); min-width: 0; }
 .podium .pos { font: 700 1rem var(--f-headline); color: var(--tan); width: 1.2em; flex: none; }
 .podium li:first-child .pos { color: var(--parchment); }
+.vdetail { font-size: .5em; color: var(--tan); font-weight: 400; white-space: nowrap; }
 .podium .val { margin-left: auto; font-variant-numeric: tabular-nums; font-size: .9rem; flex: none; }
 
 /* Player names and rank badges */
@@ -141,12 +232,15 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .method li { padding-left: 14px; position: relative; }
 .method li::before { content: ""; position: absolute; left: 0; top: .65em; width: 5px; height: 5px; border-radius: 50%; background: var(--alliance); }
 .pname { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; font-weight: 600; min-width: 0; }
-.pname span { background: var(--cls, transparent); color: var(--ink, inherit); padding: 1px 7px; border-radius: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pname:hover span { filter: brightness(1.15); }
+.pname .pn { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pname:hover .pn { color: var(--parchment); }
+/* Class dots after the name: the classes played under the active filters, most played first. */
+.cdots { display: inline-flex; gap: 3px; flex: none; }
+.cdots i { width: 8px; height: 8px; border-radius: 50%; }
 
 /* Stat page */
 .stathead { padding-top: 22px; }
-.kicker { font: 600 .85rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .14em; color: var(--alliance); }
+.kicker { font: 600 .85rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .14em; color: var(--accent-text); }
 .flipname { color: var(--tan); font-weight: 400; }
 .lead { font-size: 1.1rem; margin: 6px 0 2px; }
 .detail { color: var(--tan); margin: 0; max-width: 70ch; }
@@ -157,11 +251,16 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .board th { font: 600 .85rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .08em; color: var(--tan); }
 .board .l { text-align: left; }
 .board td.l:has(.pname) { max-width: 46vw; }
+/* Phones: in rankings the class dots go under the name, leaving the width to the other columns. */
+.board .pname { display: inline-grid; grid-template: "badge name" auto "badge dots" auto / auto minmax(0, 1fr); column-gap: 7px; row-gap: 3px; align-items: center; }
+.board .pname .rank { grid-area: badge; }
+.board .pname .pn { grid-area: name; }
+.board .pname .cdots { grid-area: dots; }
 .board .n { color: var(--tan); width: 2.5em; }
 .board tr.hi td { background: var(--alliance-glow); }
 .board tr.lo td { background: var(--red-glow); }
 .board .hide-sm, .board .pctxt { display: none; }
-.fliptag { margin-left: 8px; font-size: .75rem; color: var(--red); font-weight: 600; }
+.fliptag { margin-left: 8px; font-size: .75rem; color: var(--flip-text); font-weight: 600; }
 .pbar { display: inline-block; width: 56px; height: 6px; border-radius: 3px; background: var(--line-strong); vertical-align: middle; overflow: hidden; }
 .pbar span { display: block; height: 100%; background: linear-gradient(90deg, var(--alliance-deep), var(--alliance)); }
 
@@ -174,7 +273,7 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 /* Player page */
 .phead { display: flex; gap: 14px; align-items: center; padding-top: 22px; }
 .phead .rank { width: 52px; height: 52px; }
-.rankline { margin: 4px 0; color: var(--alliance); font: 600 1rem var(--f-subtitle); letter-spacing: .04em; }
+.rankline { margin: 4px 0; color: var(--accent-text); font: 600 1rem var(--f-subtitle); letter-spacing: .04em; }
 .chars { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 4px 0 0; }
 .char { border-left: 3px solid var(--cls); padding-left: 6px; font-weight: 600; }
 .char small { color: var(--tan); font-weight: 400; }
@@ -183,6 +282,16 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .tier { flex: none; font-size: .75rem; padding: 3px 8px; border-radius: 3px; border: 1px dashed var(--line-strong); color: var(--tan); }
 .tier.on { border: 1px solid var(--alliance); background: var(--alliance-glow); color: var(--cream); font-weight: 600; }
 .pct { display: inline-flex; align-items: center; gap: 6px; color: var(--tan); }
+/* On cards: the percentile text sits above its bar, aligned on the bar's right end. */
+.pct.stacked { flex-direction: column; align-items: flex-end; gap: 3px; }
+.pct.stacked .ptext { white-space: nowrap; line-height: 1.2; }
+/* 75th percentile and up: the text gets a soft accent glow. */
+.ptext.glow, .pctxt.glow { color: var(--cream); text-shadow: 0 0 6px color-mix(in srgb, var(--alliance) 75%, transparent), 0 0 14px color-mix(in srgb, var(--alliance) 45%, transparent); }
+/* On cards the footer sits at the very bottom, so bars line up across a row, and the bar spans
+   at least half the card (never under 96px, the width of "96th percentile"). */
+.scard .sfoot { margin-top: auto; padding-top: 6px; align-self: stretch; }
+.scard .pct.stacked { width: 50%; min-width: 96px; }
+.scard .pct.stacked .pbar { width: 100%; }
 
 /* Player page: overview tiles, then stat cards (after the Timewalking tiles: thin tan frame, spaced caps label, big Oswald value). */
 .grad { background: linear-gradient(173deg, #fff 10%, var(--parchment) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 6px 26px var(--alliance-glow)); }
@@ -207,18 +316,19 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .svalue { font: 500 1.35rem/1.25 var(--f-headline); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 .ssub { font-size: .75rem; color: var(--tan); }
 /* "base 100" under a score, and as a tag next to a Hall of fame title. */
-.sunit, .b100 { font: 600 .68rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .14em; color: var(--alliance); }
+.sunit, .b100 { font: 600 .68rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .14em; color: var(--accent-text); }
 .b100 { border: 1px solid color-mix(in srgb, var(--alliance) 55%, transparent); border-radius: 3px; padding: 1px 6px; white-space: nowrap; }
 .scard .sdesc { color: var(--tan); font-size: .88rem; margin: 4px 0 0; }
 .sfoot { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; margin: 6px 0 0; font-size: .78rem; color: var(--tan); }
-.scard.small .pbar { width: 44px; }
+/* Wide enough for "96th percentile" to sit above it. */
+.scard.small .pbar { width: 96px; }
 .scard.big { padding: 22px 16px 18px; }
 .scard.big .slabel { font-size: 1rem; letter-spacing: .22em; }
 .scard.big .svalue { font-size: 2.6rem; line-height: 1.1; margin-top: 4px; }
 .scard.big .pbar { width: 120px; }
 .scard.hi { border-color: var(--alliance); background: linear-gradient(180deg, var(--alliance-glow), var(--navy-glass) 70%); box-shadow: 0 0 24px var(--alliance-glow); }
 .scard.lo { border-color: var(--red); background: linear-gradient(180deg, var(--red-glow), var(--navy-glass) 70%); }
-.scard.lo .slabel, .scard.flipside .slabel { color: #ff9a9d; }
+.scard.lo .slabel, .scard.flipside .slabel { color: var(--flip-text); }
 .scard.empty-card { opacity: .55; }
 .ribbon { position: absolute; top: 9px; left: -30px; transform: rotate(-35deg); background: var(--alliance); color: #fff; font: 600 .62rem var(--f-subtitle); letter-spacing: .14em; text-transform: uppercase; padding: 2px 32px; }
 .scard.lo .ribbon { background: var(--red); }
@@ -241,8 +351,14 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
   .tiles { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
   .tile:first-child { grid-column: auto; }
   .cards { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  /* auto-fit: the pinned cards stretch to share the whole row. */
+  .cards.pinned { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .cards.pinned .card + .card::before { top: 22%; bottom: 22%; left: 0; right: auto; width: 1px; height: auto; }
+  .cards.pinned .card { padding: 30px 34px 28px; }
+  .ornament { font-size: 1.15rem; }
   .records { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-  .guilds { grid-template-columns: 1fr 1fr; }
+  .guilds { grid-template-columns: 1fr 1fr; gap: 96px; }
+  .split-horde { background: radial-gradient(60% 40% at 75% 30%, #4a0d12 0%, #1a0507 75%); clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); }
   .board .pctxt { display: inline; }
   .pbar { width: 90px; }
   .statlist { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0 24px; }
@@ -258,6 +374,7 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
   .chip { min-height: 0; padding: 2px 11px; font-size: .8rem; }
   .btn { min-height: 0; align-self: auto; }
   .board .hide-sm { display: table-cell; }
+  .board .pname { display: inline-flex; }
   .board th, .board td { padding: 7px 12px; }
   .tierstrip { flex-wrap: wrap; }
   .phead .rank { width: 64px; height: 64px; }

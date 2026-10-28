@@ -11,6 +11,8 @@ const sumInto = (acc, cell) => { for (let i = 0; i < acc.length; i++) acc[i] += 
 const AGG = {
   ratio: { init: () => [0, 0], add: sumInto, den: a => a[1], value: a => a[0] / a[1],
     number: (a, s) => (s.number === 'den' ? a[1] : a[0]) },
+  // Parse Lords, per boss: [(best + median) / 2, 1, best, median]; extra = average best and median.
+  parse: { init: () => [0, 0, 0, 0], add: sumInto, den: a => a[1], value: a => a[0] / a[1], extra: a => [a[2] / a[1], a[3] / a[1]] },
   sum: { init: () => [0], add: sumInto, den: () => Infinity, value: a => a[0] },
   distinct: { init: () => new Set(), add: (a, c) => c[V].forEach(x => a.add(x)), den: () => Infinity, value: a => a.size },
   diff: { init: () => [0, 0, 0, 0], add: sumInto, den: a => Math.min(a[1], a[3]), value: a => a[0] / a[1] - a[2] / a[3] },
@@ -73,7 +75,7 @@ export function computeStat(stat, cells, filter, settings) {
     if (agg.den(a) < minDen) continue;
     const value = agg.value(a);
     if (!Number.isFinite(value)) continue;
-    byPlayer.set(p, { p, value, number: agg.number ? agg.number(a, stat) : value, label: agg.label?.(a) ?? null });
+    byPlayer.set(p, { p, value, number: agg.number ? agg.number(a, stat) : value, label: agg.label?.(a) ?? null, extra: agg.extra?.(a) ?? null });
   }
 
   const asc = stat.direction === 'asc';

@@ -346,7 +346,7 @@ Suite au calcul d'essai (`docs/calcul-essai.md`).
 ## 2026-10-28 — Une page par guilde : choix de guilde, Fable dans /fable
 
 **Décision.** Le site devient multi-pages (Vite, `rollupOptions.input`) :
-- `/` : choix de guilde, deux grandes cartes NightShift et Fable ;
+- `/` : choix de guilde, deux grandes cartes Fable puis NightShift ;
 - `/fable/` : le site actuel, inchangé à part le bandeau (« Classic Logs Timewalking » mène au choix de guilde, lien « Fable » dans la barre pour revenir à l'accueil de la guilde) ;
 - `/nightshift/` : seulement le texte « Coming soon ».
 
@@ -357,6 +357,16 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 **Écarté.** Une seule app avec la guilde dans le hash (`#/fable/...`) : URL moins lisible, et toutes les guildes chargeraient le même bundle de données.
 
 **Reste ouvert.** Le pipeline et `CLAUDE.md` restent mono-guilde (Fable, fiche WCL 482770) ; NightShift est sur Thunderstrike (EU) ; la brancher demandera sa fiche WCL et sa faction (les icônes de rang sont Alliance).
+
+## 2026-10-28 — Thème Horde pour NightShift, page de choix coupée en deux
+
+**Décision.**
+- NightShift est une guilde Horde : thème rouge. La classe `.horde` redéfinit les mêmes tokens que le thème Alliance (`--navy*` en rouge sombre, `--alliance*` en rouge Horde `#d4252c`). Elle s'applique au `<body>` de `/nightshift/` et à la carte NightShift de `/`.
+- Fond de `/` : bleu côté Fable (1re carte : à gauche, ou en haut sur téléphone), rouge côté NightShift, séparés par une découpe à quelques larges dents (`clip-path`), tracée d'un trait blanc de 1,5 px avec un léger glow (SVG). Une luciole (point lumineux fixe, sans pulsation) parcourt d'un trait la partie visible de la découpe, de haut en bas (de gauche à droite sur téléphone), à vitesse constante (2200 px/s, sans easing), s'éteint, attend environ 9 fois la durée du trajet, puis repart ; masquée si `prefers-reduced-motion`. La géométrie est dans `site/src/split.js`, qui calcule en px la découpe, le trait blanc et le trajet de la luciole (`offset-path`) à partir des mêmes points, et les recalcule au redimensionnement ; sans JS, le fond est simplement coupé en deux moitiés droites. La page `/` fait la hauteur de l'écran visible (`100svh`, barre d'adresse mobile comprise) et coupe le calque (`overflow: clip`), qui sinon allongeait la page et faisait apparaître une barre de défilement. Le calque est ancré sur la grille des cartes, pas sur l'écran : la déchirure passe toujours dans l'espace entre les cartes (72 px sur téléphone, 96 px à partir de 560 px), où ses dents restent courtes, et mord plus largement ailleurs. « Pick a guild » en crème, majuscules espacées, avec une ombre sombre pour rester lisible sur les deux fonds. Sur téléphone (cartes empilées), elle est horizontale ; à partir de 560 px, verticale au milieu.
+
+**Raison.** Marquer la faction de chaque guilde dès la page d'entrée.
+
+**Écarté.** Calque fixé sur l'écran (sur téléphone la cassure tombait en plein dans la carte NightShift). Dégradé doux entre les deux couleurs (moins net que la cassure demandée).
 
 ---
 
@@ -401,6 +411,19 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 **Décision.** Hours Raiding compte, pour chaque soirée d'un personnage, le temps de son premier à son dernier pull de boss éligible (même découpage en soirées que « Hours in raid » sur l'accueil : coupure à plus de `night_gap_hours` d'écart). Le trash entre deux boss est donc compté, celui avant le premier boss non (pas dans le cache). Pour rester additif, le temps est réparti sur ses pulls : de la fin du pull précédent à la fin de celui-ci.
 
 **Raison.** La durée des seuls combats de boss ne faisait qu'environ 20 % d'une soirée (59 h contre 286 h en Era), soit ~0,7 h par semaine pour les plus assidus, loin du ressenti. Après le changement : ~2,7 à 3 h par semaine.
+
+## 2026-10-28 — Accueil : section « Guild Legends » (stats épinglées)
+
+**Décision.** The Gang et Parse Lord (`home.pinned`) sont toujours affichés au-dessus du Hall of fame et sortis de son tirage. Mise en valeur :
+- titre « Guild Legends » (`home.pinned_title`) encadré de filets dégradés et de losanges, en or ;
+- un seul panneau sans bordure pour les deux cartes, fond marine avec un léger halo parchemin venant du haut, padding large, trait court couleur parchemin entre les deux (horizontal sur téléphone) ;
+- top 5 (`home.pinned_top_n`) au lieu du top 3 ; les joueurs classés 1er, 2e ou 3e sont agrandis selon leur place, ex aequo compris (deux 1ers ont la même taille) (nom en Oswald, macaron agrandi) ; seul le n°1 a la position et la valeur en or ;
+- l'or (`--gold-text`, `#f3cf7a`) n'est utilisé nulle part ailleurs sur le site, pour rester le signal du prestige ;
+- reflet lumineux lent sur le nom des n°1 (un balayage toutes les 7 s), coupé si `prefers-reduced-motion`.
+
+**Raison.** Faire ressentir le prestige de ces deux stats par la mise en scène du n°1 plutôt que par un cadre.
+
+**Écarté.** Cadre épais doré et couronnes de laurier dans les coins (essayés : trop chargés).
 
 ---
 

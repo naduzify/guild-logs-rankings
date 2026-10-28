@@ -111,6 +111,11 @@ def cell_values(stat: dict, idx: int, rng: random.Random, player: dict, p: int, 
             return [round(kills * 8 * noise(0.6), 1), kills]
         rate = max(0.0, 0.3 + 0.12 * noise(0.5))
         return [round(rate * pulls, 1), pulls]
+    if agg == "parse":
+        bosses = max(1, kills // 4)
+        best = [min(99.0, max(5.0, 60 + 12 * noise(0.6) + rng.uniform(0, 15))) for _ in range(bosses)]
+        med = [max(1.0, b - rng.uniform(3, 20)) for b in best]
+        return [round(sum((b + m) / 2 for b, m in zip(best, med)), 1), bosses, round(sum(best), 1), round(sum(med), 1)]
     if agg == "sum":
         scale = 2_000_000 if fmt == "big" else 6
         return [max(0, int(scale * pulls / 100 * max(0.0, 1 + 0.5 * noise(0.5))))]

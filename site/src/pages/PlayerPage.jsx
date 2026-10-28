@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FilterBar, InfoTip, PctBar, RankBadge, roleLabel } from '../components.jsx';
+import { FilterBar, InfoTip, PctBar, RankBadge, StatValue, roleLabel } from '../components.jsx';
 import { BASE100, CLASS_COLORS, formatInt, formatNumber, formatPct, formatValue, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat, earnedTitle, hasNumber, hasPercentile, isRankable, shareTotal, valueIsNumber } from '../lib/stats.js';
@@ -33,7 +33,7 @@ function notability(stat, row) {
 function cardView(data, stat, row, total) {
   const settings = data.meta.settings;
   const flipSide = stat.flip && row && isRankable(stat) && row.pct < 50;
-  const value = valueIsNumber(stat) ? formatNumber(stat, row.value) : formatValue(stat, row.value);
+  const value = valueIsNumber(stat) ? formatNumber(stat, row.value) : <StatValue stat={stat} row={row} />;
   return {
     label: flipSide ? stat.flip : stat.title,
     earned: earnedTitle(stat, row, settings),
@@ -71,7 +71,7 @@ function StatCard({ data, stat, row, total, big }) {
       {v.sub && <div className="ssub">{v.sub}</div>}
       {big && <p className="sdesc">{v.desc}</p>}
       <footer className="sfoot">
-        {v.pct != null && <span className="pct"><PctBar pct={v.pct} /> {formatPct(v.pct)}</span>}
+        {v.pct != null && <span className="pct stacked"><span className={v.pct >= 75 ? 'ptext glow' : 'ptext'}>{formatPct(v.pct)}</span><PctBar pct={v.pct} /></span>}
         {big && v.pos && <span>{v.pos}</span>}
         {big && v.number && <span>{v.number}</span>}
       </footer>
@@ -162,7 +162,7 @@ export default function PlayerPage({ data, name, filter }) {
               <header><a className="slabel" href={href('stat', stat.id)}>{label}</a><InfoTip stat={stat} meta={meta} /></header>
               <div className="svalue">{row ? formatInt(row.value) : '–'}</div>
               {row && (percentile ?? hasPercentile(stat)) && (
-                <footer className="sfoot"><span className="pct"><PctBar pct={row.pct} /> {formatPct(row.pct)}</span></footer>
+                <footer className="sfoot"><span className="pct stacked"><span className={row.pct >= 75 ? 'ptext glow' : 'ptext'}>{formatPct(row.pct)}</span><PctBar pct={row.pct} /></span></footer>
               )}
             </article>
           );

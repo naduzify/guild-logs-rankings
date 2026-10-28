@@ -1,5 +1,5 @@
-import { FilterBar, InfoTip, PlayerName } from '../components.jsx';
-import { BASE100, formatInt, formatValue, isBase100 } from '../lib/format.js';
+import { FilterBar, InfoTip, PlayerName, StatValue } from '../components.jsx';
+import { BASE100, formatInt, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat } from '../lib/stats.js';
 
@@ -66,7 +66,8 @@ function GuildRecords({ data, filter }) {
 let featuredIds = null;
 function drawFeatured(meta) {
   if (!featuredIds) {
-    const pool = meta.stats.filter(s => s.category !== 'overview' && s.hall_of_fame !== false).map(s => s.id);
+    const pinned = new Set(meta.home.pinned || []);
+    const pool = meta.stats.filter(s => s.category !== 'overview' && s.hall_of_fame !== false && !pinned.has(s.id)).map(s => s.id);
     for (let i = pool.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -76,44 +77,65 @@ function drawFeatured(meta) {
   return featuredIds;
 }
 
-function TopCard({ data, stat, filter }) {
+function TopCard({ data, stat, filter, legend = false }) {
   const { ranked } = computeStat(stat, data.stats[stat.id], filter, data.meta.settings);
-  const top = ranked.slice(0, data.meta.home.top_n);
+  const top = ranked.slice(0, legend ? data.meta.home.pinned_top_n ?? 5 : data.meta.home.top_n);
+  // Legend cards (pinned stats) feature every player placed 1st to 3rd (ties included), scaled by place.
+  const leaders = legend ? top.filter(r => r.pos <= 3) : [];
+  const rest = legend ? top.filter(r => r.pos > 3) : top;
   return (
-    <article className="card">
+    <article className={legend ? 'card legend' : 'card'}>
       <div className="cname">
         <a className="ctitle" href={href('stat', stat.id, filter)}>{stat.title}</a>
         {isBase100(stat) && <span className="b100">{BASE100}</span>}
         <InfoTip stat={stat} meta={data.meta} />
       </div>
       <p className="cdesc">{stat.description}</p>
-      {top.length === 0 ? <p className="empty">Nobody qualifies with these filters.</p> : (
-        <ol className="podium">
-          {top.map(r => (
+      {top.length === 0 ? <p className="empty">Nobody qualifies with these filters.</p> : (<>
+        {leaders.map(r => (
+          <div key={r.p} className={`champion c${r.pos}`}>
+            <span className="pos">{r.pos}</span>
+            <PlayerName data={data} p={r.p} filter={filter} badge={r.pos === 1 ? 34 : 27} />
+            <span className="val"><StatValue stat={stat} row={r} /></span>
+          </div>
+        ))}
+        {rest.length > 0 && <ol className="podium">
+          {rest.map(r => (
             <li key={r.p}>
               <span className="pos">{r.pos}</span>
               <PlayerName data={data} p={r.p} filter={filter} />
-              <span className="val">{formatValue(stat, r.value)}</span>
+              <span className="val"><StatValue stat={stat} row={r} /></span>
             </li>
           ))}
-        </ol>
-      )}
+        </ol>}
+      </>)}
+      {/* The title links too; this explicit link is the clear, tappable way to the full ranking. */}
+      <a className="cmore" href={href('stat', stat.id, filter)} aria-label={`View the full ${stat.title} ranking`}>View more →</a>
     </article>
   );
 }
 
 export default function Home({ data, filter }) {
   const { meta } = data;
+  const pinned = (meta.home.pinned || []).map(id => data.statById.get(id)).filter(Boolean);
   const featured = drawFeatured(meta).map(id => data.statById.get(id)).filter(Boolean);
   return (
     <>
       <section className="hero">
-        <h1><img className="gicon" src="./guild-icon.png" alt="" />{meta.guild.name}<small>{meta.guild.server}</small></h1>
+        <h1><img className="gicon" src="./guild-icon.png" alt="" width="40" height="40" />{meta.guild.name}<small>{meta.guild.server}</small></h1>
         <p>Seven years of raiding, from Molten Core to Siege of Orgrimmar. Every pull, every wipe, every questionable decision.</p>
       </section>
       <FilterBar meta={meta} filter={filter} onChange={f => go('home', null, f)} note="Guild totals follow the expansion filter only." />
       <GuildTotals data={data} filter={filter} />
       <GuildRecords data={data} filter={filter} />
+      {pinned.length > 0 && (
+        <section className="legends" aria-label={meta.home.pinned_title || 'Guild Legends'}>
+          <h2 className="ornament"><span>{meta.home.pinned_title || 'Guild Legends'}</span></h2>
+          <div className="cards pinned">
+            {pinned.map(s => <TopCard key={s.id} data={data} stat={s} filter={filter} legend />)}
+          </div>
+        </section>
+      )}
       <div className="sechead">
         <h2>Hall of fame</h2>
         <a href={href('stats', null, filter)}>All {meta.stats.filter(s => s.category !== 'overview').length} achievements →</a>

@@ -20,7 +20,7 @@ classes        ["Death Knight", "Druid", …]    (ordre = index utilisé dans le
 roles          ["TANK", "DPS", "HEALER"]      (idem)
 rank           {max, names[14]}                ← config/tiers.json
 settings       {title_percentile, flip_percentile, min_den}  ← config/site.json
-home           {top_n, featured_count, records[]}  ← config/site.json
+home           {top_n, pinned[], pinned_title, pinned_top_n, featured_count, records[]}  ← config/site.json
 player         {overview[], featured_per_category, featured_min_pct, visible_small}  ← config/site.json
 stats          [définitions]                   ← config/stats.json
 guild_totals   [[exp, pulls, kills, wipes, damage, boss_seconds, raid_seconds]]  (une ligne par extension)
@@ -56,6 +56,7 @@ Les valeurs dépendent du mode `agg` de la stat :
 | agg | valeurs | valeur du joueur |
 |---|---|---|
 | `ratio` | `num, den` | Σnum / Σden |
+| `parse` | `avg, n, best, median` (un boss par ligne) | Σavg / Σn ; le site affiche aussi Σbest / Σn et Σmedian / Σn (Parse Lords) |
 | `sum` | `n` | Σn |
 | `distinct` | `[ids]` | taille de l'union des ids (semaines, boss, personnages) |
 | `diff` | `a, ad, b, bd` | Σa/Σad − Σb/Σbd |
