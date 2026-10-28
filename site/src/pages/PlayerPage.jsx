@@ -150,7 +150,7 @@ export default function PlayerPage({ data, name, filter }) {
         note={`Percentiles compare ${pl.name} with every player under the same filters.`} />
 
       <section className="overview" aria-label="Overview">
-        {meta.player.overview.map(({ stat: id, label }) => {
+        {meta.player.overview.map(({ stat: id, label, percentile }) => {
           const stat = data.statById.get(id);
           if (!stat) return null;
           const { row } = result(stat);
@@ -158,7 +158,7 @@ export default function PlayerPage({ data, name, filter }) {
             <article key={id} className="scard big otile">
               <header><a className="slabel" href={href('stat', stat.id)}>{label}</a><InfoTip stat={stat} meta={meta} /></header>
               <div className="svalue">{row ? formatInt(row.value) : '–'}</div>
-              {row && hasPercentile(stat) && (
+              {row && (percentile ?? hasPercentile(stat)) && (
                 <footer className="sfoot"><span className="pct"><PctBar pct={row.pct} /> {formatPct(row.pct)}</span></footer>
               )}
             </article>

@@ -17,15 +17,17 @@
     ]
   },
   "player": {
-    "_doc": "Player page layout. Overview tiles come first; their stats are left out of the category sections. In each category, up to featured_per_category stats at or above featured_min_pct (or deep in flip territory) get a big card; the rest are small cards, visible_small of them shown before a 'Show more' button.",
+    "_doc": "Player page layout. Overview tiles come first; their stats are left out of the category sections. In each category, up to featured_per_category stats at or above featured_min_pct (or deep in flip territory) get a big card; the rest are small cards, visible_small of them shown before a 'Show more' button. An overview tile shows the percentile bar when its stat is ranked in percentile, unless its `percentile` flag says otherwise.",
     "overview": [
       {
         "stat": "hours-played",
-        "label": "Hours raiding"
+        "label": "Hours raiding",
+        "percentile": true
       },
       {
         "stat": "boss-kills",
-        "label": "Boss kills"
+        "label": "Boss kills",
+        "percentile": true
       },
       {
         "stat": "wipes",
@@ -37,7 +39,8 @@
       },
       {
         "stat": "kill-collector",
-        "label": "Unique bosses"
+        "label": "Unique bosses",
+        "percentile": false
       },
       {
         "stat": "the-undecided",
