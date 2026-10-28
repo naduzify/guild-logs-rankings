@@ -212,6 +212,21 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
         deaths[d["name"]].append((d["timestamp"], blow in scripted, blow))
     real = sorted((ts, n) for n, ds in deaths.items() for ts, s, _ in ds if not s)
     first_dead = real[0][1] if real else None
+    pull_dead = sum(1 for n in roles if deaths.get(n))  # any death, scripted or battle-rezzed, counts
+
+    # Healing received, from every healer's targets (pets and totems included as healers).
+    received = Counter()
+    for e in t["healing"]["entries"]:
+        for x in e.get("targets", []):
+            received[x.get("name")] += x.get("total", 0)
+    # "Avoidable" damage: a non-melee enemy ability that hit fewer than half the players of the pull.
+    hit = Counter()
+    for name in roles:
+        for a in taken.get(name, {}).get("abilities", []):
+            if a.get("name") != "Melee" and a.get("total", 0) > 0:
+                hit[a["name"]] += 1
+    avoidable = {a for a, n in hit.items() if n < len(roles) / 2}
+    engineering = set(CONFIG["engineering_abilities"])
 
     rows = []
     for name, (role, p) in roles.items():
@@ -242,6 +257,14 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
             "healing_done": h.get("total", 0), "overheal": h.get("overheal", 0),
             "healing_on_tanks": sum(x.get("total", 0) for x in h.get("targets", []) if x.get("name") in tanks),
             "damage_taken": k.get("total", 0),
+            "damage_taken_adds": sum(x.get("total", 0) for x in k.get("sources", []) if x.get("type") != "Boss"),
+            "avoidable_taken": sum(a.get("total", 0) for a in k.get("abilities", []) if a.get("name") in avoidable),
+            "healing_received": received.get(name, 0),
+            "self_healing": next((x.get("total", 0) for x in h.get("targets", []) if x.get("name") == name), 0),
+            "heal_targets": json.dumps({x["name"]: x.get("total", 0) for x in h.get("targets", []) if x.get("name") in roles}, ensure_ascii=False),
+            "top_ability_share": round(max((a.get("total", 0) for a in d.get("abilities", [])), default=0) / d["total"], 4) if d.get("total") else None,
+            "engineering_damage": sum(a.get("total", 0) for a in d.get("abilities", []) if a.get("name") in engineering),
+            "pull_players": len(roles), "pull_dead": pull_dead,
             "deaths": sum(1 for _, s, _ in my_deaths if not s), "deaths_scripted": sum(1 for _, s, _ in my_deaths if s),
             "killed_by": next((b for _, s, b in my_deaths if not s), None),
             "first_death": name == first_dead,

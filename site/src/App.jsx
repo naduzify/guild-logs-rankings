@@ -27,6 +27,11 @@ export default function App() {
   return (
     <>
       {data.meta.mock && <div className="mockbar">Mock data: every number on this page is random.</div>}
+      {data.meta.partial && (
+        <div className="mockbar" title={`Data as of ${data.meta.generated.slice(0, 10)}. Some achievements are not computed yet.`}>
+          Incomplete data: the logs are still being collected, numbers will change.
+        </div>
+      )}
       <header className="top">
         <div className="wrap topin">
           <a className="brand" href={href('home', null, filter)}>{data.meta.guild.name}<span>Timewalking</span></a>

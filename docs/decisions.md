@@ -296,3 +296,22 @@ Suite au calcul d'essai (`docs/calcul-essai.md`).
 ## 2026-10-28 — Enchantements : la cape compte
 
 **Décision.** La cape (emplacement 14) s'ajoute aux emplacements enchantables, dans toutes les extensions. Oubli dans la liste initiale.
+
+---
+
+## 2026-10-28 — Export du site depuis le cache (données partielles)
+
+**Décision.**
+- `python -m pipeline.export_site` lit le cache brut, passe par `pipeline/facts.py` et écrit `site/public/data/` au format du contrat, à la place des données fictives. `meta.partial = true` tant que le crawl n'est pas fini : le site affiche un bandeau « Incomplete data » au lieu de « Mock data ».
+- **Dédoublonnage** : pulls du même boss et de la même difficulté dont les horaires se chevauchent dans deux rapports ; on garde le rapport qui contient le plus de pulls de boss (188 doublons sur 1 489 pulls au premier export).
+- **Semaines de reset** : reset des royaumes océaniens (région US) le mardi à 15:00 UTC, ancre `reset_anchor_utc`. À confirmer.
+- **Night Owl** : pull commencé entre 0 h et 6 h, heure de Sydney.
+- **Hours in raid** : chaque soirée, du premier au dernier pull de boss (les combats de trash ne sont pas dans le cache). Un rapport est coupé en soirées à toute pause de plus de 3 heures entre deux pulls : certains rapports couvrent plusieurs jours (jusqu'à 290 heures).
+- **Capacité « évitable »** : capacité ennemie hors mêlée qui a touché moins de la moitié des joueurs du pull.
+- **Stats en attente** (`meta.pending`, cellules vides) : Overachiever (modèle ilvl à écrire), The Terrorist (dégâts alliés absents du niveau 2), Attention Seeker (liste des taunts), Blamed the Healer (niveau 3), Timekeeper (crawl du trash).
+- **Base 100 des stats de rôle** : Damage Sponge et Secret DPS contre la médiane des tanks sur le même boss, sur toute l'histoire ; Pacemaker contre la médiane des durées de kill du boss ; One Button Wonder contre la médiane de la classe dans l'extension ; Smite Lord et Parse Fiend contre les healers du pull.
+- Taux « par pull » (Sniper, Tank's Personal Nurse, Tunnel Vision, Add Wrangler, The Sweat, The Unprepared) : moyenne des taux de chaque pull, pour que le seuil de 10 pulls s'applique.
+
+**Raison.** Voir le site sur de vraies données pendant le crawl, et faire apparaître les problèmes tôt.
+
+**À surveiller.** Avec la règle des tanks Era, 89 lignes de healers (druides, paladins) passent tank, sans doute frappés par des adds.

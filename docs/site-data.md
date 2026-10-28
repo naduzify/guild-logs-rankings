@@ -73,3 +73,12 @@ Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (régl
 ## Percentile et titres
 
 Percentile = part des joueurs classés derrière lui (sens `direction`), de 0 à 100. Sur une fiche joueur, le titre est attribué à partir de `title_percentile`, le revers (`flip`) en dessous de `flip_percentile`.
+
+## Données partielles
+
+Pendant le crawl, l'export réel (`python -m pipeline.export_site`) ajoute à `meta.json` :
+
+```
+partial        true tant que le crawl n'est pas fini (bandeau « Incomplete data » sur le site)
+pending        [ids] des stats pas encore calculées : leurs cellules sont vides
+```

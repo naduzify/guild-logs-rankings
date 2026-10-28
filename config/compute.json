@@ -1,32 +1,152 @@
 {
   "_doc": "Compute step settings (pipeline/facts.py). Lists are matched on WCL ability names. Decisions: docs/decisions.md.",
-  "scripted_deaths": ["Fury of Frostmourne"],
-
+  "scripted_deaths": [
+    "Fury of Frostmourne"
+  ],
   "_min_players": "Pulls with fewer players holding a role are fake logs (e.g. a 1-player Onyxia) and are dropped. Raid splits stay.",
   "min_players": 10,
-
   "_era_tank": "Classic Era only: WCL's tank detection is unreliable. A player is a tank when his class can tank and he took at least this share of the boss melee damage of the pull, or of the adds melee damage (off-tanks).",
   "era_tank": {
-    "classes": ["Warrior", "Druid", "Paladin"],
-    "min_melee_share": 0.10
+    "classes": [
+      "Warrior",
+      "Druid",
+      "Paladin"
+    ],
+    "min_melee_share": 0.1
   },
-
   "_era_consumables": "Classic Era only: potionUse / healthstoneUse are always 0, consumables are counted from the Casts table. Mana potions cast 'Restore Mana', protection potions cast their effect.",
   "era_consumable_casts": [
-    "Healing Potion", "Restore Mana", "Major Healthstone", "Greater Healthstone", "Healthstone", "Master Healthstone",
-    "Demonic Rune", "Dark Rune", "Fire Protection", "Shadow Protection", "Nature Protection", "Frost Protection",
-    "Arcane Protection", "Holy Protection", "Free Action", "Invulnerability", "Restoration", "Rage", "Swiftness",
-    "Restore Energy", "Living Free Action"
+    "Healing Potion",
+    "Restore Mana",
+    "Major Healthstone",
+    "Greater Healthstone",
+    "Healthstone",
+    "Master Healthstone",
+    "Demonic Rune",
+    "Dark Rune",
+    "Fire Protection",
+    "Shadow Protection",
+    "Nature Protection",
+    "Frost Protection",
+    "Arcane Protection",
+    "Holy Protection",
+    "Free Action",
+    "Invulnerability",
+    "Restoration",
+    "Rage",
+    "Swiftness",
+    "Restore Energy",
+    "Living Free Action"
   ],
-
   "_enchants": "Enchantable slots (WCL gear slot numbers). Shoulders count in Classic Era from AQ40 only. Off hand counts only for a weapon or a shield (not a caster held-in-off-hand item), ranged only for hunters.",
   "enchants": {
-    "slots": {"head": 0, "shoulder": 2, "chest": 4, "legs": 6, "feet": 7, "wrist": 8, "hands": 9, "back": 14, "main_hand": 15, "off_hand": 16, "ranged": 17},
+    "slots": {
+      "head": 0,
+      "shoulder": 2,
+      "chest": 4,
+      "legs": 6,
+      "feet": 7,
+      "wrist": 8,
+      "hands": 9,
+      "back": 14,
+      "main_hand": 15,
+      "off_hand": 16,
+      "ranged": 17
+    },
     "era_shoulder_from": "2020-07-28",
-    "era_shoulder_zones": ["Temple of Ahn'Qiraj", "Naxxramas"],
-    "ranged_classes": ["Hunter"],
+    "era_shoulder_zones": [
+      "Temple of Ahn'Qiraj",
+      "Naxxramas"
+    ],
+    "ranged_classes": [
+      "Hunter"
+    ],
     "_skip_by_expansion": "Slots without any enchant in that expansion: MoP removed head enchants, and the hunter's weapon moved to the main hand.",
-    "skip_by_expansion": {"mop": ["head", "ranged"]},
-    "off_hand_weapon_icons": ["inv_shield", "inv_sword", "inv_axe", "inv_mace", "inv_hammer", "inv_weapon", "inv_knife", "inv_dagger", "inv_spear", "inv_polearm", "inv_staff", "inv_throwingaxe", "inv_fist"]
-  }
+    "skip_by_expansion": {
+      "mop": [
+        "head",
+        "ranged"
+      ]
+    },
+    "off_hand_weapon_icons": [
+      "inv_shield",
+      "inv_sword",
+      "inv_axe",
+      "inv_mace",
+      "inv_hammer",
+      "inv_weapon",
+      "inv_knife",
+      "inv_dagger",
+      "inv_spear",
+      "inv_polearm",
+      "inv_staff",
+      "inv_throwingaxe",
+      "inv_fist"
+    ]
+  },
+  "_reset": "Weekly reset of the Oceanic realms (US region): Tuesday 15:00 UTC. Reset weeks are counted from this anchor.",
+  "reset_anchor_utc": "2019-08-27T15:00:00",
+  "_night": "Night Owl: a pull started between these local hours (Sydney time) counts as after midnight.",
+  "night": {
+    "timezone": "Australia/Sydney",
+    "from_hour": 0,
+    "to_hour": 6
+  },
+  "_engineering_abilities": "Engineer's Pride: damage done by these abilities (bombs, grenades, sappers, dynamite).",
+  "engineering_abilities": [
+    "Goblin Sapper Charge",
+    "Iron Grenade",
+    "Thorium Grenade",
+    "Dense Dynamite",
+    "Mithril Frag Bomb",
+    "Hi-Explosive Bomb",
+    "Dark Iron Bomb",
+    "Big Iron Bomb",
+    "Arcane Bomb",
+    "Fel Iron Bomb",
+    "Adamantite Grenade",
+    "Super Sapper Charge",
+    "Saronite Bomb",
+    "Cobalt Frag Bomb",
+    "Global Thermal Sapper Charge",
+    "Thermal Sapper Charge",
+    "Explosive Decoy",
+    "Big Daddy",
+    "Goblin Dragon Gun",
+    "Electrostatic Condenser"
+  ],
+  "_final_bosses": "Final Boss Energy: last boss of each raid.",
+  "final_bosses": [
+    "Ragnaros",
+    "Onyxia",
+    "Nefarian",
+    "C'Thun",
+    "Kel'Thuzad",
+    "Gruul the Dragonkiller",
+    "Magtheridon",
+    "Lady Vashj",
+    "Kael'thas Sunstrider",
+    "Archimonde",
+    "Illidan Stormrage",
+    "Kil'jaeden",
+    "Sartharion",
+    "Malygos",
+    "Yogg-Saron",
+    "Algalon the Observer",
+    "Anub'arak",
+    "The Lich King",
+    "Halion",
+    "Cho'gall",
+    "Al'Akir",
+    "Sinestra",
+    "Madness of Deathwing",
+    "Will of the Emperor",
+    "Grand Empress Shek'zeer",
+    "Sha of Fear",
+    "Lei Shen",
+    "Ra-den",
+    "Garrosh Hellscream"
+  ],
+  "_night_gap_hours": "Hours in raid: a report is split into raid nights at any gap between boss pulls longer than this.",
+  "night_gap_hours": 3
 }
