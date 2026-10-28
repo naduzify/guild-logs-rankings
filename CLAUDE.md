@@ -60,7 +60,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 
 ### Calcul (`pipeline/facts.py`, réglages dans `config/compute.json`)
 - **Pulls retenus** : taille et difficulté éligibles, et au moins 10 joueurs avec un rôle. Les raids incomplets et les splits (ex. Onyxia à 20) **comptent** ; seuls les faux logs évidents sont écartés.
-- **Tanks en Classic Era** : le rôle WCL est remplacé. Est tank tout guerrier, druide ou paladin ayant subi au moins 10 % des dégâts de mêlée du boss dans le pull ; un « tank » WCL qui ne passe pas la règle devient DPS.
+- **Tanks en Classic Era** : le rôle WCL est remplacé. Est tank tout guerrier, druide ou paladin ayant subi au moins 10 % des dégâts de mêlée du boss **ou** 10 % de ceux des adds (off-tanks) dans le pull ; un « tank » WCL qui ne passe pas la règle devient DPS.
 - **Consommables en Era** : comptés depuis le tableau Casts avec une liste de sorts en config (les compteurs WCL valent 0 en Era). Liste non exhaustive, acceptée.
 - **Enchantements** : casque, épaules (en Era à partir d'AQ40), torse, poignets, mains, jambes, pieds, armes (main gauche seulement si arme ou bouclier) et arme à distance des chasseurs. En MoP, ni casque ni arme à distance.
 
@@ -89,7 +89,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 ### Site
 - Code dans `site/` (React 18 + Vite 5, routage par hash : `#/`, `#/stats`, `#/stat/<id>`, `#/player/<nom>`, filtres dans l'URL). `npm install` avec `--cache ./.npm-cache` (cache npm local au repo).
 - **Filtres** extension × rôle × classe en multi-sélection sur toutes les pages, comme l'artifact « Fable Guild Rankings ». Pas de bouton « Adjust to Era » (tout est déjà en base 100).
-- **Page d'accueil** : totaux de guilde (kills, wipes, dégâts, heures, pulls ; suivent le filtre d'extension) et top N d'une sélection de stats (`config/site.json`).
+- **Page d'accueil** : totaux de guilde (kills, wipes, dégâts, heures de combat de boss, pulls ; suivent le filtre d'extension), quatre grandes cartes de records de guilde (boss le plus tué, le plus wipé, kill le plus rapide, le plus lent ; `home.records`), puis un Hall of fame de 8 achievements tirés au hasard à chaque chargement, top N de chacun.
 - **Page par stat** : classement complet filtrable. **Recherche** de joueur (main et rerolls, accents ignorés) côté navigateur.
 - **Fiche joueur** : mêmes filtres, limités à ce que le joueur a joué ; percentile calculé contre tous les joueurs sous les mêmes filtres ; titre gagné au-dessus de `title_percentile`, revers sous `flip_percentile`.
 - **Mise en page de la fiche** (`config/site.json` → `player`) : tuiles d'aperçu (heures, kills, wipes, semaines, boss uniques, personnages), en grand (plein écran sur mobile), puis une section par catégorie dans l'ordre **Common > rôle principal > autres rôles joués**, **sans titre de section** (séparées par un grand espace). Dans chaque section, une **carte par stat** : grandes cartes pour les plus marquantes (percentile le plus haut, ou le plus bas sur une stat à revers), petites cartes pour les autres, dont une partie derrière un bouton « Show more ». Pas d'encart des titres gagnés : un ruban « Earned » / « Infamous » sur la carte.
@@ -120,14 +120,13 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - Phrase « blague » de chaque stat, seuils précis (ex. capacité « évitable ») et listes en config (taunts, CD défensifs, morts scriptées, boss de fin, objets d'ingénierie, emplacements enchantables).
 - Seuil minimal de combats pour afficher un rôle sur la fiche d'un joueur.
 - Rang PvP : nombre de semaines de présence pour valider un tier (`min_weeks_per_tier`, 4 par défaut dans `config/tiers.json`).
-- Stats mises en avant sur l'accueil (sélection provisoire dans `config/site.json`), top 1 ou top 3.
+- Accueil : top 1 ou top 3 par achievement du Hall of fame ; nom définitif du record « kill le plus lent » (« Marathon » provisoire).
 - Seuils d'attribution des titres sur la fiche (90e / 10e percentile par défaut) et dénominateur minimal (`min_den`, 10 par défaut).
 - Mode d'agrégation de chaque stat (`agg` dans `config/stats.json`) : proposition à valider au moment d'écrire le calcul.
 - Déploiement GitHub Pages : workflow qui lance l'export JSON depuis le Parquet commité, puis le build Vite.
 - Emplacement définitif de l'instantané du cache brut (Release GitHub par défaut).
 
 - Exclusion des combats en véhicules (Flame Leviathan).
-- Tanks d'adds en Era : avec la règle « 10 % des mêlées du boss », ils passent DPS (Garr, Golemagg, Lucifron…) et tirent leur score DPS vers le bas. Les garder ainsi, ou les exclure des scores DPS de ces pulls.
 - V2 : méthode d'estimation des PV max des cibles pour Savior / True Sniper (les PV des événements de soin sont en pourcentage, après le soin).
 
 Crawl d'essai fait le 2026-10-28 : résultats dans `docs/crawl-essai.md`.

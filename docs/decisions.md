@@ -269,3 +269,24 @@ Suite au calcul d'essai (`docs/calcul-essai.md`).
 **Écarté.** Seuil à 75 % de la taille du raid (aurait exclu les splits). Garder le rôle tank de WCL en Era.
 
 **Conséquence à surveiller.** Les tanks d'adds en Era (Garr, Golemagg, Lucifron…) passent DPS avec la règle des 10 % et tirent leur score DPS vers le bas.
+
+## 2026-10-28 — Accueil : Hall of fame aléatoire et records de guilde
+
+**Décision.**
+- Le Hall of fame tire `featured_count` (8) achievements au hasard parmi tous, une fois par chargement de page ; le tirage ne change pas quand on touche aux filtres.
+- Sous les totaux, quatre grandes cartes de records de guilde, qui suivent le filtre d'extension : Loot Pinata (boss le plus tué), Guild Nemesis (boss le plus wipé), Fastest Finish (kill le plus rapide), et un titre provisoire « Marathon » pour le kill le plus lent. Titres et descriptions dans `config/site.json` → `home.records`, données dans `meta.guild_bosses` (une ligne par boss × difficulté).
+- Bandeau du site : « Classic Logs Timewalking ».
+
+**Raison.** Varier l'accueil à chaque visite ; donner des faits de guilde, pas seulement des classements de joueurs.
+
+**Écarté.** Une liste fixe de stats mises en avant.
+
+---
+
+## 2026-10-28 — Tanks Era : boss ou adds
+
+**Décision.** La règle des tanks en Classic Era devient : guerrier, druide ou paladin ayant subi au moins 10 % de la mêlée du boss **ou** au moins 10 % de la mêlée des adds du pull. La mêlée des adds subie par un joueur est estimée par min(dégâts « Melee » subis hors mêlée du boss, dégâts subis des sources non-boss). Réglage `era_tank.min_melee_share`.
+
+**Raison.** Avec la seule mêlée du boss, les off-tanks (chiens de Golemagg, adds de Garr, Lucifron, Majordomo…) passaient DPS et tiraient leur score DPS vers le bas.
+
+**Effet.** Sur les 1 201 pulls Classic du cache : plus aucun pull sans tank (13 avant). Golemagg passe surtout à 3 tanks, Garr et Lucifron à 3-5, Majordomo à 4-5 ; Magmadar, Geddon et Chromaggus restent à 1 (pas d'adds). Remplace la règle « boss seulement » de l'entrée précédente.

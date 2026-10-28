@@ -5,10 +5,10 @@
   "_min_players": "Pulls with fewer players holding a role are fake logs (e.g. a 1-player Onyxia) and are dropped. Raid splits stay.",
   "min_players": 10,
 
-  "_era_tank": "Classic Era only: WCL's tank detection is unreliable. A player is a tank when his class can tank and he took at least this share of the boss melee damage of the pull.",
+  "_era_tank": "Classic Era only: WCL's tank detection is unreliable. A player is a tank when his class can tank and he took at least this share of the boss melee damage of the pull, or of the adds melee damage (off-tanks).",
   "era_tank": {
     "classes": ["Warrior", "Druid", "Paladin"],
-    "min_boss_melee_share": 0.10
+    "min_melee_share": 0.10
   },
 
   "_era_consumables": "Classic Era only: potionUse / healthstoneUse are always 0, consumables are counted from the Casts table. Mana potions cast 'Restore Mana', protection potions cast their effect.",

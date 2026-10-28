@@ -113,21 +113,25 @@ def _detail_counts(groups: list) -> Counter:
 
 
 def era_tanks(roles: dict, taken: dict) -> set:
-    """Classic Era tanks: a tanking class that took at least min_boss_melee_share of the boss melee.
+    """Classic Era tanks: a tanking class that took at least min_melee_share of the boss melee
+    (main tanks) or of the adds melee (off-tanks) in the pull.
 
-    The DamageTaken table splits damage by ability and by source, not both: boss melee taken by a
-    player is estimated as min(his "Melee" damage taken, his damage taken from Boss sources).
+    The DamageTaken table splits damage by ability and by source, not both, so melee is estimated:
+    boss melee = min(his "Melee" taken, his damage from Boss sources), adds melee = min(the rest of
+    his "Melee" taken, his damage from other NPC sources).
     """
     cfg = CONFIG["era_tank"]
-    melee = {}
+    boss, adds = {}, {}
     for name in roles:
         e = taken.get(name, {})
-        m = sum(a.get("total", 0) for a in e.get("abilities", []) if a.get("name") == "Melee")
-        b = sum(x.get("total", 0) for x in e.get("sources", []) if x.get("type") == "Boss")
-        melee[name] = min(m, b)
-    total = sum(melee.values())
-    return {n for n, (_, p) in roles.items()
-            if total and p.get("type") in cfg["classes"] and melee[n] / total >= cfg["min_boss_melee_share"]}
+        melee = sum(a.get("total", 0) for a in e.get("abilities", []) if a.get("name") == "Melee")
+        from_boss = sum(x.get("total", 0) for x in e.get("sources", []) if x.get("type") == "Boss")
+        from_npc = sum(x.get("total", 0) for x in e.get("sources", []) if x.get("type") != "Boss")
+        boss[name] = min(melee, from_boss)
+        adds[name] = min(melee - boss[name], from_npc)
+    tb, ta, share = sum(boss.values()), sum(adds.values()), cfg["min_melee_share"]
+    return {n for n, (_, p) in roles.items() if p.get("type") in cfg["classes"]
+            and ((tb and boss[n] / tb >= share) or (ta and adds[n] / ta >= share))}
 
 
 def enchant_slots(gear: list, cls: str, pull: dict) -> tuple[int, int]:
