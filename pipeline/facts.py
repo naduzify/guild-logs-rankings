@@ -130,7 +130,8 @@ def era_tanks(roles: dict, taken: dict) -> set:
         boss[name] = min(melee, from_boss)
         adds[name] = min(melee - boss[name], from_npc)
     tb, ta, share = sum(boss.values()), sum(adds.values()), cfg["min_melee_share"]
-    return {n for n, (_, p) in roles.items() if p.get("type") in cfg["classes"]
+    # WCL healers stay healers: a healer hit by adds is not an off-tank.
+    return {n for n, (role, p) in roles.items() if p.get("type") in cfg["classes"] and role != "HEALER"
             and ((tb and boss[n] / tb >= share) or (ta and adds[n] / ta >= share))}
 
 

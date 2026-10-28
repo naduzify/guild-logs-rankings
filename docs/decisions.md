@@ -315,3 +315,11 @@ Suite au calcul d'essai (`docs/calcul-essai.md`).
 **Raison.** Voir le site sur de vraies données pendant le crawl, et faire apparaître les problèmes tôt.
 
 **À surveiller.** Avec la règle des tanks Era, 89 lignes de healers (druides, paladins) passent tank, sans doute frappés par des adds.
+
+---
+
+## 2026-10-28 — Tanks Era : les healers restent healers
+
+**Décision.** La règle des 10 % (mêlée du boss ou des adds) ne s'applique qu'aux joueurs que WCL classe DPS ou tank. Un healer WCL reste healer, même s'il a pris beaucoup de coups d'adds.
+
+**Raison.** Au premier export, 89 lignes de druides et paladins healers passaient tank. Après correction : aucune, et chaque pull Classic garde au moins un tank.
