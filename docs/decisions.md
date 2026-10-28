@@ -197,3 +197,16 @@ Une entrée par décision : date, décision, raison, alternatives écartées. La
 **Raison.** Permet de construire le site contre le vrai contrat de données avant que le calcul n'existe, et de régler textes et seuils sans toucher au code.
 
 **Écarté.** react-router (inutile pour 4 routes). Données fictives écrites à la main dans le site (divergeraient du contrat).
+
+---
+
+## 2026-10-28 — Site : palette Timewalking en bleu Alliance, mobile d'abord
+
+**Décision.**
+- Palette reprise de timewalking.blizzard.com : fond marine profond, cartes marine translucides, texte crème `#fff2df`, texte secondaire beige `#c6af8d`, accent parchemin `#eccaa1`, rouge `#e5484d`. Son bleu-vert principal (`#0093b2`) est remplacé par un bleu Alliance `#2f6fd8` (`#1c4f9e` en foncé), et les deux marines sont légèrement décalées vers ce bleu (`#061529`, `#0b2a4e`) pour rester assorties.
+- Thème sombre uniquement, comme l'original. Polices du site Timewalking : Oswald (titres), Barlow Condensed (sous-titres), Roboto (texte).
+- CSS écrit mobile d'abord : filtres repliés derrière un bouton « Filters » sous 720 px, chips de 34 px de haut, colonne « Career » et texte du percentile masqués sur téléphone, tiers sur une ligne qui défile, champ de recherche en 16 px (pas de zoom iOS), marges `safe-area`.
+
+**Raison.** Le site sera surtout ouvert depuis un lien partagé dans Discord, donc sur téléphone. La palette Timewalking donne le ton « récap Blizzard » voulu ; le bleu Alliance rattache le site à la faction de la guilde et aux icônes de rang.
+
+**Écarté.** Garder le bleu-vert d'origine. Garder le thème clair de l'artifact.

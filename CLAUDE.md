@@ -88,6 +88,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - **Fiche joueur** : mêmes filtres, limités à ce que le joueur a joué ; percentile calculé contre tous les joueurs sous les mêmes filtres ; titre gagné au-dessus de `title_percentile`, revers sous `flip_percentile`.
 - **Rang PvP** : macaron à côté de chaque nom, **icônes officielles Alliance** (Private → Grand Marshal, `site/public/ranks/`). Un rang par tier de raid validé (19 tiers dans `config/tiers.json`), plafonné à 14. Un tier est validé à partir de `min_weeks_per_tier` semaines de reset de présence dans ce tier. Indépendant des filtres.
 - **Données fictives** : `python -m pipeline.mock_site_data` écrit `site/public/data/` (ignoré par git) au format du contrat, tant que l'étape de calcul n'existe pas.
+- **Look** : palette de timewalking.blizzard.com (marine, crème, parchemin), avec un **bleu Alliance** (`#2f6fd8`) à la place de son bleu-vert ; thème sombre uniquement ; polices Oswald / Barlow Condensed / Roboto. **Mobile d'abord** : filtres repliables sur téléphone, colonnes secondaires masquées, cibles tactiles de 34 px.
 - **Langue** : site **en anglais**. Les textes des titres (nom, description, blague) vivent dans la config des titres, pas en dur dans le code React.
 
 ### Stats (V1, détail dans `docs/stats.md`)

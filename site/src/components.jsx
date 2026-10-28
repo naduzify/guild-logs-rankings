@@ -44,10 +44,16 @@ export function FilterBar({ meta, filter, onChange, available, note }) {
     next[k].has(v) ? next[k].delete(v) : next[k].add(v);
     onChange(next);
   };
+  const [open, setOpen] = useState(false);
   const show = (k, i) => !available || available[k].has(i);
-  const any = filter.exp.size || filter.cls.size || filter.role.size;
+  const any = filter.exp.size + filter.cls.size + filter.role.size;
   return (
-    <div className="filters">
+    <div className={'filters' + (open ? ' open' : '')}>
+      <button type="button" className="ftoggle" aria-expanded={open} onClick={() => setOpen(o => !o)}>
+        <span>Filters {any > 0 && <span className="count">· {any} active</span>}</span>
+        <span className="chev" aria-hidden="true">▾</span>
+      </button>
+      <div className="fbody">
       <div className="grp"><b>Expansion</b>
         {meta.expansions.map((x, i) => show('exp', i) &&
           <Chip key={x.id} on={filter.exp.has(i)} onClick={() => toggle('exp', i)}>{x.short}</Chip>)}
@@ -62,6 +68,7 @@ export function FilterBar({ meta, filter, onChange, available, note }) {
       </div>
       {any ? <button type="button" className="btn" onClick={() => onChange({ exp: new Set(), cls: new Set(), role: new Set() })}>Reset filters</button> : null}
       {note && <span className="fnote">{note}</span>}
+      </div>
     </div>
   );
 }

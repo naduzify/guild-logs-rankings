@@ -59,7 +59,7 @@ export default function StatPage({ data, id, filter }) {
                 {isRankable(stat) && <th className="n">#</th>}
                 <th className="l">Player</th>
                 <th>{stat.agg === 'top' ? stat.title : 'Value'}</th>
-                {showN && <th>Career</th>}
+                {showN && <th className="hide-sm">Career</th>}
                 {showP && <th className="l">Percentile</th>}
               </tr>
             </thead>
@@ -71,8 +71,8 @@ export default function StatPage({ data, id, filter }) {
                     {isRankable(stat) && <td className="n">{r.pos}</td>}
                     <td className="l"><PlayerName data={data} p={r.p} filter={filter} /></td>
                     <td className="v">{r.label ? <>{r.label} <span className="muted">{formatValue(stat, r.value)}</span></> : fmt(r.value)}</td>
-                    {showN && <td className="v muted">{formatNumber(stat, r.number)}</td>}
-                    {showP && <td className="l"><PctBar pct={r.pct} /> <span className="muted">{formatPct(r.pct)}</span>
+                    {showN && <td className="v muted hide-sm">{formatNumber(stat, r.number)}</td>}
+                    {showP && <td className="l"><PctBar pct={r.pct} /> <span className="muted pctxt">{formatPct(r.pct)}</span>
                       {tag === 'lo' && <span className="fliptag">{stat.flip}</span>}</td>}
                   </tr>
                 );
