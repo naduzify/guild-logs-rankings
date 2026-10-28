@@ -135,7 +135,7 @@ def cell_values(stat: dict, idx: int, rng: random.Random, player: dict, p: int, 
     if agg == "top":
         if stat["id"] == "favorite-patient":
             labels = player["_friends"]
-            return [{l: [int(rng.uniform(1e6, 4e7)), 1] for l in rng.sample(labels, 3)}]
+            return [{l: [int(rng.uniform(1e6, 4e7)), rng.randint(5, 60)] for l in rng.sample(labels, 3)}]
         labels = NEMESES[e] if stat["id"] == "arch-nemesis" else BOSSES[e]
         if stat["top_by"] == "mean":
             return [{l: [round(n * (100 + 20 * noise(0.8)), 1), n] for l in rng.sample(labels, 3) for n in [rng.randint(1, 12)]}]
