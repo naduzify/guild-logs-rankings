@@ -357,3 +357,14 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 **Écarté.** Une seule app avec la guilde dans le hash (`#/fable/...`) : URL moins lisible, et toutes les guildes chargeraient le même bundle de données.
 
 **Reste ouvert.** Le pipeline et `CLAUDE.md` restent mono-guilde (Fable, fiche WCL 482770) ; NightShift est sur Thunderstrike (EU) ; la brancher demandera sa fiche WCL et sa faction (les icônes de rang sont Alliance).
+
+---
+
+## 2026-10-28 — Favorite Patient : part des soins, classée
+
+**Décision.** Favorite Patient affiche la part des soins du healer sur les autres raideurs qui est allée à son patient favori, avec le total entre parenthèses (ex. « Yogiqt 52.1% (827.5K healing) »). Le classement va de la part la plus haute à la plus basse. Seuls les patients soignés sur au moins 10 pulls (`min_den`) peuvent être retenus, pour éviter qu'un seul pull donne 100 %. La stat n'est jamais tirée dans le Hall of fame de l'accueil (`hall_of_fame: false` dans `config/stats.json`).
+
+**Raison.** Le total brut favorisait surtout les healers qui ont beaucoup joué ; la part dit à quel point le healer est « attaché » à un joueur. Trop compliquée à lire sur une carte d'accueil.
+
+**Alternatives écartées.** Dénominateur = soins totaux, auto-soins compris (non retenu : les auto-soins ne sont pas des patients).
+

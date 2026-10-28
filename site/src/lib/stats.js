@@ -1,4 +1,4 @@
-import { formatPct } from './format.js';
+import { formatBig, formatPct } from './format.js';
 
 // Aggregation of additive stat cells (docs/site-data.md).
 // A cell is [player, expansion, class, role, ...values]; the site only sums
@@ -25,12 +25,15 @@ const AGG = {
 };
 
 // `top` picks the label with the highest count, or the highest mean among labels with enough samples.
+// `share` picks the highest count among labels with enough samples, valued as its share of all labels.
 function topOf(acc, stat, minDen) {
-  let best = null;
+  let best = null, total = 0;
   for (const [label, [n, d]] of Object.entries(acc)) {
-    const v = stat.top_by === 'mean' ? (d >= minDen ? n / d : null) : n;
-    if (v != null && (!best || v > best.value)) best = { label, value: v };
+    total += n;
+    const v = stat.top_by === 'mean' ? (d >= minDen ? n / d : null) : stat.top_by === 'share' && d < minDen ? null : n;
+    if (v != null && (!best || v > best.value)) best = { label, value: v, number: n };
   }
+  if (best && stat.top_by === 'share') best.value = total ? best.number / total : 0;
   return best;
 }
 
@@ -64,7 +67,7 @@ export function computeStat(stat, cells, filter, settings) {
   for (const [p, a] of accs) {
     if (stat.agg === 'top') {
       const t = topOf(a, stat, minDen);
-      if (t) byPlayer.set(p, { p, value: t.value, number: t.value, label: t.label });
+      if (t) byPlayer.set(p, { p, value: t.value, number: t.number, label: t.label });
       continue;
     }
     if (agg.den(a) < minDen) continue;
@@ -92,6 +95,8 @@ export const hasPercentile = stat => stat.display.includes('P');
 // A separate career number column only makes sense for ratios: elsewhere the number is the value itself.
 export const hasNumber = stat => stat.display.includes('N') && stat.agg === 'ratio';
 export const valueIsNumber = stat => stat.agg === 'sum' || stat.agg === 'distinct';
+// A `share` top shows its raw total in brackets after the share.
+export const shareTotal = (stat, row) => (stat.top_by === 'share' ? ` (${formatBig(row.number)}${stat.unit ? ' ' + stat.unit : ''})` : '');
 
 const ROLE_SCOPE = {
   common: 'Counts every role: use the role filter to split tank, DPS and healer.',
@@ -112,6 +117,8 @@ export function explain(stat, settings) {
     let earn = `${formatPct(settings.title_percentile)} and above earn “${stat.title}”`;
     if (stat.flip) earn += `, ${formatPct(settings.flip_percentile)} and below earn “${stat.flip}”`;
     lines.push(earn + '.');
+  } else if (stat.top_by === 'share') {
+    lines.push('Ranked from the highest share.');
   } else if (stat.agg === 'max') {
     lines.push('Best single pull of the career, ranked from highest.');
   } else if (stat.display === 'T') {

@@ -58,7 +58,7 @@ LÃ©gende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. â
 2. **Sniper**: Only heals full-health targets. (Overheal share: overheal / (effective healing + overheal).) [P]
 3. **Tank's Personal Nurse** (flip: **Raid Healer**): Has eyes for the tanks only. (Share of healing done on tanks. The card shows healing on himself, other healers and pets.) [P]
 4. **Smite Lord**: Healer by contract, DPS at heart. (Damage done, base 100 vs healers in the pull.) [P]
-5. **Favorite Patient**: His favourite patient. (Player he healed the most over his career.) [T]
+5. **Favorite Patient**: His favourite patient. (Player he healed the most, shown as the share of his healing on other raiders that went to him, total in brackets; only patients healed on at least 10 pulls. Ranked from the highest share. Not in the home Hall of fame.) [N]
 6. **Parse Fiend**: Stood in the fire to heal it back. For the logs. (Self-healing covering his own avoidable damage: the smaller of avoidable damage taken and self-healing done, base 100 vs healers in the pull.) [P]
 
 ## DPS (7)

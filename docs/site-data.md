@@ -61,7 +61,7 @@ Les valeurs dépendent du mode `agg` de la stat :
 | `diff` | `a, ad, b, bd` | Σa/Σad − Σb/Σbd |
 | `spread` | `n, s, ss` | écart-type : √(Σss/Σn − (Σs/Σn)²) |
 | `slope` | `n, sx, sy, sxx, sxy` | pente de régression de y (score) sur x (semaine) |
-| `top` | `{label: [num, den]}` | label au plus grand Σnum (`top_by: count`) ou Σnum/Σden (`top_by: mean`) |
+| `top` | `{label: [num, den]}` | label au plus grand Σnum (`top_by: count`) ou Σnum/Σden (`top_by: mean`) ; `top_by: share` : label au plus grand Σnum parmi ceux qui ont Σden ≥ `min_den`, valeur = sa part de Σnum de tous les labels |
 | `max` | `v, label` | plus grande valeur, avec son label |
 
 Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (réglage global de `config/site.json`, surchargé par stat) : `den` pour `ratio`, le plus petit de `ad` et `bd` pour `diff`, `n` pour `spread` et `slope`.
@@ -75,6 +75,7 @@ Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (régl
 - `direction` : `desc` (défaut, la valeur haute porte le titre) ou `asc`.
 - `format` : `pct`, `score` (base 100), `rate` (+ `rate_unit`), `int`, `big`, `signed`, `pp` (points de %).
 - `min_den`, `top_by`, `unit` : voir plus haut.
+- `hall_of_fame: false` : achievement jamais tiré dans le Hall of fame de l'accueil.
 
 ## Percentile et titres
 

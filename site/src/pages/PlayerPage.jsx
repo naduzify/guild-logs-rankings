@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FilterBar, InfoTip, PctBar, RankBadge, roleLabel } from '../components.jsx';
 import { BASE100, CLASS_COLORS, formatInt, formatNumber, formatPct, formatValue, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
-import { computeStat, earnedTitle, hasNumber, hasPercentile, isRankable, valueIsNumber } from '../lib/stats.js';
+import { computeStat, earnedTitle, hasNumber, hasPercentile, isRankable, shareTotal, valueIsNumber } from '../lib/stats.js';
 
 const ROLE_CATEGORY = { TANK: 'tank', HEALER: 'healer', DPS: 'dps' };
 
@@ -40,7 +40,7 @@ function cardView(data, stat, row, total) {
     flipSide,
     // `top` shows the winning label (a boss, a spell), `max` the score with its pull underneath.
     main: stat.agg === 'top' ? row.label : value,
-    sub: stat.agg === 'top' ? formatValue(stat, row.value) + (isBase100(stat) ? ` ${BASE100}` : stat.unit ? ` ${stat.unit}` : '') : row.label,
+    sub: stat.agg === 'top' ? formatValue(stat, row.value) + (stat.top_by === 'share' ? shareTotal(stat, row) : isBase100(stat) ? ` ${BASE100}` : stat.unit ? ` ${stat.unit}` : '') : row.label,
     // The main value is a base 100 score: say so, so it is not read as a raw amount.
     base100: stat.agg !== 'top' && !valueIsNumber(stat) && isBase100(stat),
     number: hasNumber(stat) ? formatNumber(stat, row.number) : null,

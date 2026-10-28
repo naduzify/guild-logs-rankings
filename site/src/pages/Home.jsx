@@ -66,7 +66,7 @@ function GuildRecords({ data, filter }) {
 let featuredIds = null;
 function drawFeatured(meta) {
   if (!featuredIds) {
-    const pool = meta.stats.filter(s => s.category !== 'overview').map(s => s.id);
+    const pool = meta.stats.filter(s => s.category !== 'overview' && s.hall_of_fame !== false).map(s => s.id);
     for (let i = pool.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [pool[i], pool[j]] = [pool[j], pool[i]];
