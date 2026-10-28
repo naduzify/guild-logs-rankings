@@ -390,4 +390,6 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 
 **Parse Lord.** Seul achievement mesuré contre le monde et non contre la guilde, ce qui revient sur « pas de parses WCL sur le site » pour cette stat seulement (sera mise en avant différemment). Parses des kills de Fable : par boss, moyenne du meilleur et du médian, puis moyenne sur les boss. DPS et healers, au moins 5 boss. Titre réservé aux 5 % du haut (`title_percentile: 95` sur la stat, au lieu de 90).
 
+**Coût mesuré** (essai du 2026-10-28, 3 rapports) : 1 point par pull (tirs alliés, taunts, consommables, CD), ~0,7 point par rapport pour le trash, ~1 + 2 points par kill pour les parses. Pour tout l'historique (~6 000 pulls, ~5 000 kills, ~800 rapports) : environ 18 000 points, soit ~6 h de budget, dont 11 000 pour les parses.
+
 **Écarté.** `characterRankings` par personnage (milliers de requêtes, et compte les kills hors guilde).
