@@ -48,7 +48,7 @@ function GuildRecords({ data, filter }) {
     <section className="records">
       {meta.home.records.map(rec => {
         const kind = RECORDS[rec.kind];
-        const r = kind && kind.pick(rows);
+        const r = kind && kind.pick(rows.filter(([, boss]) => !(rec.exclude || []).includes(boss)));
         return (
           <article key={rec.kind} className="scard big">
             <span className="slabel">{rec.title}</span>

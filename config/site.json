@@ -4,13 +4,13 @@
   "flip_percentile": 10,
   "min_den": 10,
   "home": {
-    "_doc": "Hall of fame: featured_count achievements drawn at random on each page load. Records: big guild cards built from meta.guild_bosses; `kind` is most_kills, most_wipes, fastest_kill or slowest_kill.",
+    "_doc": "Hall of fame: featured_count achievements drawn at random on each page load. Records: big guild cards built from meta.guild_bosses; `kind` is most_kills, most_wipes, fastest_kill or slowest_kill; `exclude` lists bosses left out of a record (Razorgore: the egg phase is not in the fight length).",
     "top_n": 3,
     "featured_count": 8,
     "records": [
       {"kind": "most_kills", "title": "Loot Pinata", "description": "Most killed boss."},
       {"kind": "most_wipes", "title": "Guild Nemesis", "description": "Most wiped boss."},
-      {"kind": "fastest_kill", "title": "Fastest Finish", "description": "Fastest kill recorded."},
+      {"kind": "fastest_kill", "title": "Fastest Finish", "description": "Fastest kill recorded.", "exclude": ["Razorgore the Untamed"]},
       {"kind": "slowest_kill", "title": "Bring a Snack", "description": "Slowest kill recorded."}
     ]
   },
