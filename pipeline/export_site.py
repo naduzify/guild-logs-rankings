@@ -171,6 +171,29 @@ def ilvl_residuals(kills: list) -> dict:
     return out
 
 
+def raid_time(rows: list) -> dict:
+    """Hours Raiding: {id(row): ms}. Each raid night of a character counts from his first to his last
+    boss pull (same nights as the home page's Hours in raid: a report is cut at gaps longer than
+    night_gap_hours). The time is spread over his pulls (from the end of the previous one to the end
+    of this one), so it adds up per expansion, class and role."""
+    gap = CONFIG["night_gap_hours"] * 3_600_000
+    mine = defaultdict(list)
+    for r in rows:
+        mine[(r["report"], r["char"])].append(r)
+    out = {}
+    for rs in mine.values():
+        rs.sort(key=lambda r: r["start_ms"])
+        prev_end = None
+        for r in rs:
+            end = r["start_ms"] + r["duration_ms"]
+            if prev_end is None or r["start_ms"] - prev_end > gap:
+                out[id(r)] = r["duration_ms"]  # first pull of a night
+            else:
+                out[id(r)] = max(0, end - prev_end)
+            prev_end = end if prev_end is None else max(prev_end, end)
+    return out
+
+
 def timekeeper(rows: list, pid: dict, char_class: dict, cells) -> None:
     """Timekeeper / The Tourist: each DPS's share of the raid's trash damage over a report (one night,
     cache reports/<code>/trash.json from pipeline/crawl_extra.py), base 100 vs the night's DPS median.
@@ -339,6 +362,8 @@ def main() -> None:
     night = CONFIG["night"]
     boss_ids = {}
 
+    raid_ms = raid_time(rows)
+
     cells = Cells()
     for r in rows:
         if r["player"] not in pid or r["char"] not in char_class:
@@ -347,7 +372,7 @@ def main() -> None:
         kill, wipe, score, role = r["kill"], not r["kill"], r["score"], r["role"]
         dead = bool(r["deaths"] or r["deaths_scripted"])
 
-        cells.sum("hours-played", k, r["duration_ms"] / 3_600_000)
+        cells.sum("hours-played", k, raid_ms[id(r)] / 3_600_000)
         cells.sum("boss-kills", k, kill)
         cells.sum("wipes", k, wipe)
         cells.ids("the-gang", k, r["week"])
