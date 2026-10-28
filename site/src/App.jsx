@@ -34,8 +34,8 @@ export default function App() {
       )}
       <header className="top">
         <div className="wrap topin">
-          <a className="brand" href={href('home', null, filter)}>{data.meta.guild.name}<span>Timewalking</span></a>
-          <nav><a href={href('stats', null, filter)}>Achievements</a></nav>
+          <a className="brand" href="../">Classic Logs<span>Timewalking</span></a>
+          <nav><a href={href('home', null, filter)}>{data.meta.guild.name}</a><a href={href('stats', null, filter)}>Achievements</a></nav>
           <Search data={data} filter={filter} />
         </div>
       </header>

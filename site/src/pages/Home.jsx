@@ -1,18 +1,21 @@
 import { FilterBar, InfoTip, PlayerName } from '../components.jsx';
-import { formatBig, formatInt, formatValue } from '../lib/format.js';
+import { BASE100, formatInt, formatValue, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat } from '../lib/stats.js';
 
 function GuildTotals({ data, filter }) {
   const rows = data.meta.guild_totals.filter(([e]) => !filter.exp.size || filter.exp.has(e));
-  const t = rows.reduce((a, [, pulls, kills, wipes, dmg, secs]) =>
-    ({ pulls: a.pulls + pulls, kills: a.kills + kills, wipes: a.wipes + wipes, dmg: a.dmg + dmg, secs: a.secs + secs }),
-  { pulls: 0, kills: 0, wipes: 0, dmg: 0, secs: 0 });
+  const t = rows.reduce((a, [, pulls, kills, wipes, , , raidSecs]) =>
+    ({ pulls: a.pulls + pulls, kills: a.kills + kills, wipes: a.wipes + wipes, raidSecs: a.raidSecs + raidSecs }),
+  { pulls: 0, kills: 0, wipes: 0, raidSecs: 0 });
+  // A raider counts once if he raided in any of the filtered expansions.
+  const want = filter.exp.size ? [...filter.exp].reduce((m, e) => m | 1 << e, 0) : -1;
+  const raiders = data.meta.guild_raiders.reduce((n, [mask, count]) => n + (mask & want ? count : 0), 0);
   const tiles = [
+    ['Hours in raid', formatInt(t.raidSecs / 3600)],
     ['Boss kills', formatInt(t.kills)],
     ['Wipes', formatInt(t.wipes)],
-    ['Damage dealt', formatBig(t.dmg)],
-    ['Hours on bosses', formatInt(t.secs / 3600)],
+    ['Raiders', formatInt(raiders)],
     ['Pulls', formatInt(t.pulls)],
   ];
   return (
@@ -22,6 +25,57 @@ function GuildTotals({ data, filter }) {
   );
 }
 
+const duration = s => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
+
+// Each record picks one boss row: [exp, boss, heroic, kills, wipes, fastest, slowest].
+const RECORDS = {
+  most_kills: { pick: rows => maxBy(rows, r => r[3]), value: r => `${formatInt(r[3])} kills` },
+  most_wipes: { pick: rows => maxBy(rows, r => r[4]), value: r => `${formatInt(r[4])} wipes` },
+  fastest_kill: { pick: rows => maxBy(rows.filter(r => r[5] != null), r => -r[5]), value: r => duration(r[5]) },
+  slowest_kill: { pick: rows => maxBy(rows.filter(r => r[6] != null), r => r[6]), value: r => duration(r[6]) },
+};
+
+function maxBy(rows, key) {
+  let best = null;
+  for (const r of rows) if (best === null || key(r) > key(best)) best = r;
+  return best;
+}
+
+function GuildRecords({ data, filter }) {
+  const { meta } = data;
+  const rows = (meta.guild_bosses || []).filter(([e]) => !filter.exp.size || filter.exp.has(e));
+  return (
+    <section className="records">
+      {meta.home.records.map(rec => {
+        const kind = RECORDS[rec.kind];
+        const r = kind && kind.pick(rows);
+        return (
+          <article key={rec.kind} className="scard big">
+            <span className="slabel">{rec.title}</span>
+            <span className="svalue">{r ? kind.value(r) : '–'}</span>
+            {r && <span className="rboss">{r[1]}{r[2] ? ' (H)' : ''} <small>{meta.expansions[r[0]].short}</small></span>}
+            <p className="sdesc">{rec.description}</p>
+          </article>
+        );
+      })}
+    </section>
+  );
+}
+
+// Drawn once per page load, so the Hall of fame stays put while filters change.
+let featuredIds = null;
+function drawFeatured(meta) {
+  if (!featuredIds) {
+    const pool = meta.stats.filter(s => s.category !== 'overview').map(s => s.id);
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
+    }
+    featuredIds = pool.slice(0, meta.home.featured_count);
+  }
+  return featuredIds;
+}
+
 function TopCard({ data, stat, filter }) {
   const { ranked } = computeStat(stat, data.stats[stat.id], filter, data.meta.settings);
   const top = ranked.slice(0, data.meta.home.top_n);
@@ -29,6 +83,7 @@ function TopCard({ data, stat, filter }) {
     <article className="card">
       <div className="cname">
         <a className="ctitle" href={href('stat', stat.id, filter)}>{stat.title}</a>
+        {isBase100(stat) && <span className="b100">{BASE100}</span>}
         <InfoTip stat={stat} meta={data.meta} />
       </div>
       <p className="cdesc">{stat.description}</p>
@@ -49,15 +104,16 @@ function TopCard({ data, stat, filter }) {
 
 export default function Home({ data, filter }) {
   const { meta } = data;
-  const featured = meta.home.featured.map(id => data.statById.get(id)).filter(Boolean);
+  const featured = drawFeatured(meta).map(id => data.statById.get(id)).filter(Boolean);
   return (
     <>
       <section className="hero">
-        <h1>{meta.guild.name}<small>{meta.guild.server}</small></h1>
+        <h1><img className="gicon" src="./guild-icon.png" alt="" />{meta.guild.name}<small>{meta.guild.server}</small></h1>
         <p>Seven years of raiding, from Molten Core to Siege of Orgrimmar. Every pull, every wipe, every questionable decision.</p>
       </section>
       <FilterBar meta={meta} filter={filter} onChange={f => go('home', null, f)} note="Guild totals follow the expansion filter only." />
       <GuildTotals data={data} filter={filter} />
+      <GuildRecords data={data} filter={filter} />
       <div className="sechead">
         <h2>Hall of fame</h2>
         <a href={href('stats', null, filter)}>All {meta.stats.filter(s => s.category !== 'overview').length} achievements →</a>

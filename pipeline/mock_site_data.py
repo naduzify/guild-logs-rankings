@@ -16,7 +16,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT_DIR = ROOT / "site" / "public" / "data"
+OUT_DIR = ROOT / "site" / "public" / "fable" / "data"
 
 CLASSES = ["Death Knight", "Druid", "Hunter", "Mage", "Monk", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"]
 ROLES = ["TANK", "DPS", "HEALER"]
@@ -180,7 +180,26 @@ def main() -> None:
     for e in range(len(exp_ids)):
         pulls = rng.randint(1500, 4000)
         kills = int(pulls * rng.uniform(0.35, 0.6))
-        guild_totals.append([e, pulls, kills, pulls - kills, rng.randint(2, 9) * 10**10 * (e + 1), pulls * rng.randint(200, 360)])
+        boss_secs = pulls * rng.randint(200, 360)
+        guild_totals.append([e, pulls, kills, pulls - kills, rng.randint(2, 9) * 10**10 * (e + 1), boss_secs, int(boss_secs * rng.uniform(2.2, 3))])
+
+    # Raiders by bitmask of the expansions they raided in: qualified players, plus pugs seen in one or two expansions.
+    masks = {}
+    for pl in players:
+        m = sum(1 << e for e in {e for e, _, _, _ in pl["_played"]})
+        masks[m] = masks.get(m, 0) + 1
+    for _ in range(args.players * 3):
+        e = rng.randrange(len(exp_ids))
+        m = 1 << e | (1 << (e + 1) if e + 1 < len(exp_ids) and rng.random() < 0.2 else 0)
+        masks[m] = masks.get(m, 0) + 1
+    guild_raiders = sorted(masks.items())
+
+    guild_bosses = []
+    for e, bosses in enumerate(BOSSES):
+        for boss in bosses:
+            for heroic in ([0, 1] if e >= 2 else [0]):
+                fastest = rng.randint(40, 300)
+                guild_bosses.append([e, boss, heroic, rng.randint(5, 120), rng.randint(0, 250), fastest, fastest + rng.randint(30, 600)])
 
     meta = {
         "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -192,10 +211,12 @@ def main() -> None:
         "roles": ROLES,
         "rank": {"max": tiers_cfg["rank"]["max"], "names": tiers_cfg["rank"]["names"]},
         "settings": {k: site_cfg[k] for k in ("title_percentile", "flip_percentile", "min_den")},
-        "home": site_cfg["home"],
+        "home": {k: v for k, v in site_cfg["home"].items() if not k.startswith("_")},
         "player": {k: v for k, v in site_cfg["player"].items() if not k.startswith("_")},
         "stats": stats_cfg,
         "guild_totals": guild_totals,
+        "guild_bosses": guild_bosses,
+        "guild_raiders": guild_raiders,
     }
     public_players = [{k: pl[k] for k in ("name", "chars", "tiers", "rank")} for pl in players]
 

@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { CLASS_COLORS, fold } from './lib/format.js';
+import { CLASS_COLORS, classInk, fold } from './lib/format.js';
 import { go, href } from './lib/route.js';
 import { explain } from './lib/stats.js';
 
@@ -66,7 +66,7 @@ export function RankBadge({ player, meta, size = 20 }) {
   const tiers = player.tiers.length;
   const tip = `Rank ${player.rank} · ${name} · ${tiers} raid tier${tiers > 1 ? 's' : ''}`;
   return (
-    <img className="rank" src={`${import.meta.env.BASE_URL}ranks/${player.rank}.jpg`} width={size} height={size}
+    <img className="rank" src={`../ranks/${player.rank}.jpg`} width={size} height={size}
       alt={tip} title={tip} loading="lazy" />
   );
 }
@@ -78,7 +78,7 @@ export function PlayerName({ data, p, filter }) {
   return (
     <a className="pname" href={href('player', pl.name, filter)}>
       <RankBadge player={pl} meta={data.meta} />
-      <span style={{ '--cls': CLASS_COLORS[cls] }}>{pl.name}</span>
+      <span style={{ '--cls': CLASS_COLORS[cls], '--ink': classInk(CLASS_COLORS[cls]) }}>{pl.name}</span>
     </a>
   );
 }

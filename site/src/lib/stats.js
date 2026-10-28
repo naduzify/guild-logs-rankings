@@ -1,3 +1,5 @@
+import { formatPct } from './format.js';
+
 // Aggregation of additive stat cells (docs/site-data.md).
 // A cell is [player, expansion, class, role, ...values]; the site only sums
 // the cells that pass the filters, then ranks players.
@@ -107,8 +109,8 @@ export function explain(stat, settings) {
     let rank = `Percentile among players with at least ${minDen} ${sample} under the current filters`;
     rank += stat.direction === 'asc' ? ' (lower is better).' : '.';
     lines.push(rank);
-    let earn = `Top ${100 - settings.title_percentile}% earn “${stat.title}”`;
-    if (stat.flip) earn += `, bottom ${settings.flip_percentile}% earn “${stat.flip}”`;
+    let earn = `${formatPct(settings.title_percentile)} and above earn “${stat.title}”`;
+    if (stat.flip) earn += `, ${formatPct(settings.flip_percentile)} and below earn “${stat.flip}”`;
     lines.push(earn + '.');
   } else if (stat.agg === 'max') {
     lines.push('Best single pull of the career, ranked from highest.');

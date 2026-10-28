@@ -1,6 +1,6 @@
 # Contrat de données pipeline → site
 
-Le pipeline écrit trois fichiers JSON dans `site/public/data/` (dossier ignoré par git, régénéré au build). Le site les charge au démarrage et ne fait que **filtrer, sommer et classer** : aucune règle de stat n'est codée côté React.
+Le pipeline écrit trois fichiers JSON dans `site/public/fable/data/` (dossier ignoré par git, régénéré au build). Le site les charge au démarrage et ne fait que **filtrer, sommer et classer** : aucune règle de stat n'est codée côté React.
 
 Tant que l'étape de calcul n'existe pas, `python -m pipeline.mock_site_data` écrit des données fictives au même format (`meta.mock = true`, le site affiche alors un bandeau).
 
@@ -20,10 +20,16 @@ classes        ["Death Knight", "Druid", …]    (ordre = index utilisé dans le
 roles          ["TANK", "DPS", "HEALER"]      (idem)
 rank           {max, names[14]}                ← config/tiers.json
 settings       {title_percentile, flip_percentile, min_den}  ← config/site.json
-home           {top_n, featured[]}             ← config/site.json
+home           {top_n, featured_count, records[]}  ← config/site.json
 player         {overview[], featured_per_category, featured_min_pct, visible_small}  ← config/site.json
 stats          [définitions]                   ← config/stats.json
-guild_totals   [[exp, pulls, kills, wipes, damage, seconds]]  (une ligne par extension)
+guild_totals   [[exp, pulls, kills, wipes, damage, boss_seconds, raid_seconds]]  (une ligne par extension)
+               boss_seconds = durée cumulée des pulls de boss, kills et wipes (Hours on bosses)
+               raid_seconds = durée cumulée des soirées de raid : pour chaque rapport retenu, du début du premier combat
+                              (trash compris) dans une zone éligible à la fin du dernier pull de boss éligible (Hours in raid)
+guild_raiders  [[mask, count]]  nombre de joueurs (main + rerolls) ayant au moins un pull éligible, par masque de bits
+               des extensions où ils ont raidé (bit e = extension e). Le site compte ceux dont le masque croise le filtre.
+guild_bosses   [[exp, boss, heroic, kills, wipes, fastest_kill, slowest_kill]]  (une ligne par boss × difficulté ; durées des kills en secondes, null sans kill)
 ```
 
 ## `players.json`

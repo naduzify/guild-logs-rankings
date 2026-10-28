@@ -1,6 +1,7 @@
 // Loads the three pipeline exports (docs/site-data.md) and derives lookups the pages share.
 
-const url = name => `${import.meta.env.BASE_URL}data/${name}.json`;
+// Relative to the guild page (/fable/), in dev and in the build alike.
+const url = name => `./data/${name}.json`;
 
 export async function loadData() {
   const [meta, players, stats] = await Promise.all(

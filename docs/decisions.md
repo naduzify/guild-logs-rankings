@@ -274,12 +274,13 @@ Suite au calcul d'essai (`docs/calcul-essai.md`).
 
 **Décision.**
 - Le Hall of fame tire `featured_count` (8) achievements au hasard parmi tous, une fois par chargement de page ; le tirage ne change pas quand on touche aux filtres.
-- Sous les totaux, quatre grandes cartes de records de guilde, qui suivent le filtre d'extension : Loot Pinata (boss le plus tué), Guild Nemesis (boss le plus wipé), Fastest Finish (kill le plus rapide), et un titre provisoire « Marathon » pour le kill le plus lent. Titres et descriptions dans `config/site.json` → `home.records`, données dans `meta.guild_bosses` (une ligne par boss × difficulté).
+- Sous les totaux, quatre grandes cartes de records de guilde, qui suivent le filtre d'extension : Loot Pinata (boss le plus tué), Guild Nemesis (boss le plus wipé), Fastest Finish (kill le plus rapide), et Bring a Snack (kill le plus lent). Titres et descriptions dans `config/site.json` → `home.records`, données dans `meta.guild_bosses` (une ligne par boss × difficulté).
+- Totaux de l'accueil : Hours in raid, Boss kills, Wipes, Raiders, Pulls. **Hours in raid** = pour chaque rapport retenu, du début du premier combat (trash compris) dans une zone éligible à la fin du dernier pull de boss éligible. **Hours on bosses** (durée des seuls pulls de boss) reste dans les données mais n'est plus affiché sur l'accueil. **Raiders** = joueurs (main + rerolls) ayant au moins un pull éligible, qualifiés ou non ; exporté par masque d'extensions pour suivre le filtre sans double compte.
 - Bandeau du site : « Classic Logs Timewalking ».
 
 **Raison.** Varier l'accueil à chaque visite ; donner des faits de guilde, pas seulement des classements de joueurs.
 
-**Écarté.** Une liste fixe de stats mises en avant.
+**Écarté.** Une liste fixe de stats mises en avant. Damage dealt dans les totaux (chiffre énorme, peu parlant). Hours in raid comme durée totale des rapports (inclut l'attente avant le premier pull).
 
 ---
 
@@ -296,6 +297,14 @@ Suite au calcul d'essai (`docs/calcul-essai.md`).
 ## 2026-10-28 — Enchantements : la cape compte
 
 **Décision.** La cape (emplacement 14) s'ajoute aux emplacements enchantables, dans toutes les extensions. Oubli dans la liste initiale.
+
+## 2026-10-28 — Favicon officiel de WoW Forever
+
+**Décision.** Le favicon est le favicon officiel de *World of Warcraft: Forever*, fourni en SVG (`site/public/favicon.svg`, gardé tel quel). Les PNG `favicon-32.png`, `apple-touch-icon.png` (180, fond marine opaque pour iOS) et `icon-512.png` en sont tirés par `scripts/make_favicon.py` (fontTools + Pillow, sans dépendance de plus), cadrés sur le dessin et non sur le viewBox, qui a des marges vides. Deux éclats vert vif (`#0dff0d`) laissés dans le fichier source sont ignorés dans les PNG. Remplace le « F » de Fable sur fond bleu Alliance.
+
+**Raison.** Le récap se clôt avec la sortie de Forever ; le favicon rattache le site au jeu. L'icône du Discord de la guilde reste visible, dans le hero de l'accueil.
+
+**Écarté.** Un « W » redessiné en Cinzel aux couleurs de Forever (essayé avant d'avoir le fichier officiel). cairosvg ou resvg pour rasteriser (dépendances natives ou npm de plus).
 
 ---
 
@@ -333,3 +342,18 @@ Suite au calcul d'essai (`docs/calcul-essai.md`).
 **Raison.** L'ilvl relatif au raid du soir mesure « en avance ou en retard de stuff », sans mélanger les tiers d'une même extension. En Era, les ilvl sont très resserrés : à ±2, un kill se compare à 55 % de tous les kills de son rôle, à ±1 à 31 %, avec encore des milliers de pairs.
 
 **Écarté.** Le percentile WCL par tranche d'ilvl (un parse contre le monde, demande les rankings de chaque rapport). L'ilvl brut (mélange les tiers d'une extension).
+
+## 2026-10-28 — Une page par guilde : choix de guilde, Fable dans /fable
+
+**Décision.** Le site devient multi-pages (Vite, `rollupOptions.input`) :
+- `/` : choix de guilde, deux grandes cartes NightShift et Fable ;
+- `/fable/` : le site actuel, inchangé à part le bandeau (« Classic Logs Timewalking » mène au choix de guilde, lien « Fable » dans la barre pour revenir à l'accueil de la guilde) ;
+- `/nightshift/` : seulement le texte « Coming soon ».
+
+Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux d'une guilde dans `site/public/<guilde>/`. Le pipeline écrit dans `site/public/fable/data/`. Données et rangs sont chargés en chemins relatifs à la page (`./data/`, `../ranks/`), identiques en dev et au build.
+
+**Raison.** Préparer l'arrivée d'une deuxième guilde (NightShift) sans toucher au site de Fable.
+
+**Écarté.** Une seule app avec la guilde dans le hash (`#/fable/...`) : URL moins lisible, et toutes les guildes chargeraient le même bundle de données.
+
+**Reste ouvert.** Le pipeline et `CLAUDE.md` restent mono-guilde (Fable, fiche WCL 482770) ; NightShift est sur Thunderstrike (EU) ; la brancher demandera sa fiche WCL et sa faction (les icônes de rang sont Alliance).

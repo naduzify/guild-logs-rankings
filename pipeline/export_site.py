@@ -1,4 +1,4 @@
-"""Site export: facts table -> site/public/data/{meta,players,stats}.json (docs/site-data.md).
+"""Site export: facts table -> site/public/fable/data/{meta,players,stats}.json (docs/site-data.md).
 
 Second and third stages of the compute step: pull dedup across reports, reset weeks,
 15-week qualification, raid tiers and PvP ranks, then every stat as additive cells
@@ -18,7 +18,7 @@ from zoneinfo import ZoneInfo
 
 from pipeline.facts import CONFIG, ROOT, add_scores, load_mapping, norm, pull_rows, pulls_from_cache
 
-OUT_DIR = ROOT / "site" / "public" / "data"
+OUT_DIR = ROOT / "site" / "public" / "fable" / "data"
 WEEK_MS = 7 * 24 * 3600 * 1000
 EXP_INDEX = {"classic": 0, "tbc": 1, "wotlk": 2, "cata": 3, "mop": 4}
 ROLES = ["TANK", "DPS", "HEALER"]

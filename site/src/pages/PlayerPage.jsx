@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FilterBar, InfoTip, PctBar, RankBadge, roleLabel } from '../components.jsx';
-import { CLASS_COLORS, formatInt, formatNumber, formatPct, formatValue } from '../lib/format.js';
+import { BASE100, CLASS_COLORS, formatInt, formatNumber, formatPct, formatValue, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat, earnedTitle, hasNumber, hasPercentile, isRankable, valueIsNumber } from '../lib/stats.js';
 
@@ -40,7 +40,9 @@ function cardView(data, stat, row, total) {
     flipSide,
     // `top` shows the winning label (a boss, a spell), `max` the score with its pull underneath.
     main: stat.agg === 'top' ? row.label : value,
-    sub: stat.agg === 'top' ? formatValue(stat, row.value) + (stat.unit ? ` ${stat.unit}` : '') : row.label,
+    sub: stat.agg === 'top' ? formatValue(stat, row.value) + (isBase100(stat) ? ` ${BASE100}` : stat.unit ? ` ${stat.unit}` : '') : row.label,
+    // The main value is a base 100 score: say so, so it is not read as a raw amount.
+    base100: stat.agg !== 'top' && !valueIsNumber(stat) && isBase100(stat),
     number: hasNumber(stat) ? formatNumber(stat, row.number) : null,
     pct: hasPercentile(stat) ? row.pct : null,
     pos: isRankable(stat) ? `#${row.pos} of ${total}` : null,
@@ -65,6 +67,7 @@ function StatCard({ data, stat, row, total, big }) {
       {v.earned && <span className="ribbonwrap"><span className="ribbon">{v.earned.flip ? 'Infamous' : 'Earned'}</span></span>}
       <header><a className="slabel" href={href('stat', stat.id)}>{v.label}</a><InfoTip stat={stat} meta={data.meta} /></header>
       <div className="svalue">{v.main}</div>
+      {v.base100 && <div className="sunit">{BASE100}</div>}
       {v.sub && <div className="ssub">{v.sub}</div>}
       {big && <p className="sdesc">{v.desc}</p>}
       <footer className="sfoot">

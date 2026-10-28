@@ -40,7 +40,7 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .topin { display: flex; align-items: center; gap: 8px 16px; padding-block: 10px; flex-wrap: wrap; }
 .brand { font: 700 1.45rem/1 var(--f-headline); text-decoration: none; text-transform: uppercase; letter-spacing: .02em; color: var(--parchment); }
 .brand span { color: var(--alliance); margin-left: 6px; font: 600 .8rem var(--f-subtitle); letter-spacing: .14em; }
-.top nav { margin-left: auto; }
+.top nav { margin-left: auto; display: flex; gap: 14px; }
 .top nav a { font: 600 1rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .08em; color: var(--tan); text-decoration: none; padding: 6px 4px; }
 .top nav a:hover { color: var(--cream); }
 .search { position: relative; flex: 1 1 100%; }
@@ -58,7 +58,20 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .hero { padding-block: 24px 4px; }
 .hero h1, .ptitle { font: 700 2.1rem/1.05 var(--f-headline); margin: 0; text-transform: uppercase; color: var(--parchment); overflow-wrap: anywhere; }
 .hero h1 small { display: block; font: 500 1.05rem var(--f-subtitle); color: var(--tan); margin-top: 6px; text-transform: none; letter-spacing: .04em; }
+.hero h1 .gicon { width: 1.15em; height: 1.15em; border-radius: 50%; object-fit: cover; vertical-align: -0.2em; margin-right: .3em; }
 .hero p { max-width: 60ch; color: var(--tan); margin: 10px 0 0; }
+
+/* Guild chooser (/) and placeholder pages. */
+/* Content centred on the screen, both ways. */
+.chooser { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+.chooser .hero { padding-block: 24px 0; }
+.guilds { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 28px 0 24px; width: 100%; max-width: 720px; }
+.scard.guild { text-decoration: none; min-height: 170px; justify-content: center; gap: 8px; }
+.scard.guild:hover { border-color: var(--alliance); box-shadow: 0 0 24px var(--alliance-glow); }
+.scard.guild .slabel { font: 700 1.9rem var(--f-headline); letter-spacing: .06em; }
+.scard.guild .gicon { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+.soon { min-height: 100vh; display: grid; place-items: center; }
+.soon p { font: 700 clamp(2.2rem, 9vw, 5rem) var(--f-headline); letter-spacing: .12em; text-transform: uppercase; color: var(--parchment); margin: 0; }
 
 /* Filters: collapsed behind a button on phones, always open from 720px. */
 .filters { border-block: 1px solid var(--line); margin-block: 14px 18px; padding-block: 8px; }
@@ -84,6 +97,9 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .tv { font: 700 1.7rem/1.1 var(--f-headline); color: var(--parchment); font-variant-numeric: tabular-nums; }
 .tk { font: 600 .8rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .1em; color: var(--tan); }
 
+.records { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 10px; }
+.rboss { font: 600 1rem var(--f-subtitle); color: var(--cream); letter-spacing: .04em; }
+.rboss small { color: var(--tan); font-size: .8rem; margin-left: 4px; }
 .sechead { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 28px; }
 .sechead h2, .cat { font: 700 1.3rem var(--f-headline); text-transform: uppercase; letter-spacing: .03em; margin: 26px 0 10px; color: var(--cream); }
 .sechead a { color: var(--alliance); text-decoration: none; font-size: .9rem; white-space: nowrap; }
@@ -125,8 +141,8 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .method li { padding-left: 14px; position: relative; }
 .method li::before { content: ""; position: absolute; left: 0; top: .65em; width: 5px; height: 5px; border-radius: 50%; background: var(--alliance); }
 .pname { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; font-weight: 600; min-width: 0; }
-.pname span { border-bottom: 2px solid var(--cls, transparent); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pname:hover span { color: var(--parchment); }
+.pname span { background: var(--cls, transparent); color: var(--ink, inherit); padding: 1px 7px; border-radius: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pname:hover span { filter: brightness(1.15); }
 
 /* Stat page */
 .stathead { padding-top: 22px; }
@@ -190,6 +206,9 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .scard .tipbtn { width: 18px; height: 18px; font-size: .65rem; }
 .svalue { font: 500 1.35rem/1.25 var(--f-headline); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 .ssub { font-size: .75rem; color: var(--tan); }
+/* "base 100" under a score, and as a tag next to a Hall of fame title. */
+.sunit, .b100 { font: 600 .68rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .14em; color: var(--alliance); }
+.b100 { border: 1px solid color-mix(in srgb, var(--alliance) 55%, transparent); border-radius: 3px; padding: 1px 6px; white-space: nowrap; }
 .scard .sdesc { color: var(--tan); font-size: .88rem; margin: 4px 0 0; }
 .sfoot { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; margin: 6px 0 0; font-size: .78rem; color: var(--tan); }
 .scard.small .pbar { width: 44px; }
@@ -203,6 +222,8 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .scard.empty-card { opacity: .55; }
 .ribbon { position: absolute; top: 9px; left: -30px; transform: rotate(-35deg); background: var(--alliance); color: #fff; font: 600 .62rem var(--f-subtitle); letter-spacing: .14em; text-transform: uppercase; padding: 2px 32px; }
 .scard.lo .ribbon { background: var(--red); }
+/* Longer label on the guild chooser: pushed further into the corner so it is not clipped. */
+.scard.guild .ribbon { top: 22px; left: -42px; padding: 3px 48px; font-size: .7rem; }
 .more { display: block; margin: 12px auto 0; font: 600 .9rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .16em; color: var(--cream); background: transparent; border: 1px solid var(--line-strong); border-radius: 2px; padding: 9px 22px; cursor: pointer; }
 .more:hover { border-color: var(--alliance); color: #fff; }
 @media (min-width: 560px) {
@@ -220,6 +241,8 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
   .tiles { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
   .tile:first-child { grid-column: auto; }
   .cards { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+  .records { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .guilds { grid-template-columns: 1fr 1fr; }
   .board .pctxt { display: inline; }
   .pbar { width: 90px; }
   .statlist { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0 24px; }

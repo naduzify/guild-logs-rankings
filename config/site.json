@@ -4,16 +4,14 @@
   "flip_percentile": 10,
   "min_den": 10,
   "home": {
+    "_doc": "Hall of fame: featured_count achievements drawn at random on each page load. Records: big guild cards built from meta.guild_bosses; `kind` is most_kills, most_wipes, fastest_kill or slowest_kill.",
     "top_n": 3,
-    "featured": [
-      "the-gang",
-      "fishbait",
-      "the-roach",
-      "big-pumper",
-      "healing-machine",
-      "damage-sponge",
-      "the-junky",
-      "night-owl"
+    "featured_count": 8,
+    "records": [
+      {"kind": "most_kills", "title": "Loot Pinata", "description": "Most killed boss."},
+      {"kind": "most_wipes", "title": "Guild Nemesis", "description": "Most wiped boss."},
+      {"kind": "fastest_kill", "title": "Fastest Finish", "description": "Fastest kill recorded."},
+      {"kind": "slowest_kill", "title": "Bring a Snack", "description": "Slowest kill recorded."}
     ]
   },
   "player": {

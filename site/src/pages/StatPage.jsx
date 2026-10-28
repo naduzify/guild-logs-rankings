@@ -1,5 +1,5 @@
 import { FilterBar, InfoTip, PctBar, PlayerName } from '../components.jsx';
-import { formatNumber, formatPct, formatValue } from '../lib/format.js';
+import { BASE100, formatNumber, formatPct, formatValue, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat, explain, hasNumber, hasPercentile, isRankable, valueIsNumber } from '../lib/stats.js';
 
@@ -61,7 +61,7 @@ export default function StatPage({ data, id, filter }) {
               <tr>
                 {isRankable(stat) && <th className="n">#</th>}
                 <th className="l">Player</th>
-                <th>{stat.agg === 'top' ? stat.title : 'Value'}</th>
+                <th>{stat.agg === 'top' ? stat.title : isBase100(stat) ? 'Score (base 100)' : 'Value'}</th>
                 {showN && <th className="hide-sm">Career</th>}
                 {showP && <th className="l">Percentile</th>}
               </tr>
@@ -73,9 +73,9 @@ export default function StatPage({ data, id, filter }) {
                   <tr key={r.p} className={tag || undefined}>
                     {isRankable(stat) && <td className="n">{r.pos}</td>}
                     <td className="l"><PlayerName data={data} p={r.p} filter={filter} /></td>
-                    <td className="v">{r.label ? <>{r.label} <span className="muted">{formatValue(stat, r.value)}</span></> : fmt(r.value)}</td>
+                    <td className="v">{r.label ? <>{r.label} <span className="muted">{formatValue(stat, r.value)}{isBase100(stat) && ` ${BASE100}`}</span></> : fmt(r.value)}</td>
                     {showN && <td className="v muted hide-sm">{formatNumber(stat, r.number)}</td>}
-                    {showP && <td className="l"><PctBar pct={r.pct} /> <span className="muted pctxt">{formatPct(r.pct)}</span>
+                    {showP && <td className="l"><PctBar pct={r.pct} /> <span className="muted pctxt">{formatPct(r.pct, true)}</span>
                       {tag === 'lo' && <span className="fliptag">{stat.flip}</span>}</td>}
                   </tr>
                 );

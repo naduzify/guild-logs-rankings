@@ -20,13 +20,24 @@ export function formatNumber(stat, n) {
   return stat.unit ? `${s} ${stat.unit}` : s;
 }
 
+// Scores are relative to the role median of the pull (100 = median), never raw amounts: always label them.
+export const isBase100 = stat => stat.format === 'score';
+export const BASE100 = 'base 100';
+
 export const formatBig = n => compact.format(n);
 export const formatInt = n => int.format(n);
 
-// "Top 4%" for the upper half, "Bottom 12%" for the lower half.
-export function formatPct(pct) {
+const ordinal = n => {
+  const tens = n % 100;
+  if (tens >= 11 && tens <= 13) return `${n}th`;
+  return n + ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th');
+};
+
+// "96th percentile" (higher is better), kept within 1st..99th. `short` drops the word, for the Percentile column.
+export function formatPct(pct, short = false) {
   if (pct == null) return '';
-  return pct >= 50 ? `Top ${Math.max(1, Math.round(100 - pct))}%` : `Bottom ${Math.max(1, Math.round(pct))}%`;
+  const p = ordinal(Math.min(99, Math.max(1, Math.round(pct))));
+  return short ? p : `${p} percentile`;
 }
 
 // Strip accents for search: "Chãos" matches "chaos".
@@ -36,3 +47,11 @@ export const CLASS_COLORS = {
   'Death Knight': '#C41E3A', Druid: '#FF7C0A', Hunter: '#AAD372', Mage: '#3FC7EB', Monk: '#00FF98',
   Paladin: '#F48CBA', Priest: '#FFFFFF', Rogue: '#FFF468', Shaman: '#0070DD', Warlock: '#8788EE', Warrior: '#C69B6D',
 };
+
+// Text colour on a class colour fill: navy or white, whichever contrasts more (white only on Death Knight and Shaman).
+const luminance = hex => {
+  const c = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255).map(x => (x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+};
+const NAVY_DEEP = '#061529';
+export const classInk = hex => ((luminance(hex) + 0.05) / (luminance(NAVY_DEEP) + 0.05) >= 1.05 / (luminance(hex) + 0.05) ? NAVY_DEEP : '#ffffff');

@@ -87,17 +87,20 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
   3. table de stats calculée (Parquet) : **commitée**, pour reconstruire le site sans crawler ni identifiants WCL.
 
 ### Site
-- Code dans `site/` (React 18 + Vite 5, routage par hash : `#/`, `#/stats`, `#/stat/<id>`, `#/player/<nom>`, filtres dans l'URL). `npm install` avec `--cache ./.npm-cache` (cache npm local au repo).
+- **Une page par guilde** (build Vite multi-pages) : `/` = choix de guilde (NightShift, Thunderstrike EU ; Fable), `/fable/` = le site de Fable, `/nightshift/` = « Coming soon ». Assets partagés (favicon, rangs) à la racine de `site/public/`, ceux d'une guilde dans `site/public/<guilde>/` (données dans `site/public/fable/data/`, icône Discord `guild-icon.png`).
+- Code dans `site/` (React 18 + Vite 5, routage par hash dans la page de guilde : `#/`, `#/stats`, `#/stat/<id>`, `#/player/<nom>`, filtres dans l'URL). `npm install` avec `--cache ./.npm-cache` (cache npm local au repo).
 - **Filtres** extension × rôle × classe en multi-sélection sur toutes les pages, comme l'artifact « Fable Guild Rankings ». Pas de bouton « Adjust to Era » (tout est déjà en base 100).
-- **Page d'accueil** : totaux de guilde (kills, wipes, dégâts, heures de combat de boss, pulls ; suivent le filtre d'extension), quatre grandes cartes de records de guilde (boss le plus tué, le plus wipé, kill le plus rapide, le plus lent ; `home.records`), puis un Hall of fame de 8 achievements tirés au hasard à chaque chargement, top N de chacun.
+- **Page d'accueil** : totaux de guilde (heures de raid, kills, wipes, raideurs, pulls ; suivent le filtre d'extension), quatre grandes cartes de records de guilde (boss le plus tué, le plus wipé, kill le plus rapide, le plus lent ; `home.records`), puis un Hall of fame de 8 achievements tirés au hasard à chaque chargement, top N de chacun.
 - **Page par stat** : classement complet filtrable. **Recherche** de joueur (main et rerolls, accents ignorés) côté navigateur.
 - **Fiche joueur** : mêmes filtres, limités à ce que le joueur a joué ; percentile calculé contre tous les joueurs sous les mêmes filtres ; titre gagné au-dessus de `title_percentile`, revers sous `flip_percentile`.
 - **Mise en page de la fiche** (`config/site.json` → `player`) : tuiles d'aperçu (heures, kills, wipes, semaines, boss uniques, personnages), en grand (plein écran sur mobile), puis une section par catégorie dans l'ordre **Common > rôle principal > autres rôles joués**, **sans titre de section** (séparées par un grand espace). Dans chaque section, une **carte par stat** : grandes cartes pour les plus marquantes (percentile le plus haut, ou le plus bas sur une stat à revers), petites cartes pour les autres, dont une partie derrière un bouton « Show more ». Pas d'encart des titres gagnés : un ruban « Earned » / « Infamous » sur la carte.
 - **Rang PvP** : macaron **rond, sans bordure** à côté de chaque nom, **icônes officielles Alliance** (Private → Grand Marshal, `site/public/ranks/`). Un rang par tier de raid validé (19 tiers dans `config/tiers.json`), plafonné à 14. Un tier est validé à partir de `min_weeks_per_tier` semaines de reset de présence dans ce tier. Indépendant des filtres.
-- **Données fictives** : `python -m pipeline.mock_site_data` écrit `site/public/data/` (ignoré par git) au format du contrat, tant que l'étape de calcul n'existe pas.
-- **Données réelles** : `python -m pipeline.export_site` (Python du `.venv`) calcule tout depuis le cache brut et écrit `site/public/data/` à la place ; tant que le crawl tourne, `meta.partial` affiche un bandeau « Incomplete data » et `meta.pending` liste les stats pas encore calculées.
-- **Favicon** : un « F » en Cinzel Black (police libre proche du logo du jeu *Fable*, icône du Discord de la guilde), dégradé blanc → parchemin sur fond bleu Alliance ; généré par `scripts/make_favicon.py`.
+- Le site lit les définitions de stats et les réglages (`config/stats.json`, `config/site.json`) **dans `meta.json`**, pas dans `config/` : après une modification de config, relancer l'export (`python -m pipeline.export_site`, ou le mock) puis recharger la page.
+- **Données fictives** : `python -m pipeline.mock_site_data` écrit `site/public/fable/data/` (ignoré par git) au format du contrat, tant que l'étape de calcul n'existe pas.
+- **Données réelles** : `python -m pipeline.export_site` (Python du `.venv`) calcule tout depuis le cache brut et écrit `site/public/fable/data/` à la place ; tant que le crawl tourne, `meta.partial` affiche un bandeau « Incomplete data » et `meta.pending` liste les stats pas encore calculées.
+- **Favicon** : le favicon officiel de *World of Warcraft: Forever* (`site/public/favicon.svg`, source) ; les PNG (32, 180, 512) en sont tirés par `scripts/make_favicon.py`. Icône du Discord de la guilde à gauche du nom dans le hero de l'accueil (`site/public/fable/guild-icon.png`).
 - **Look** : palette de timewalking.blizzard.com (marine, crème, parchemin), avec un **bleu Alliance** (`#2f6fd8`) à la place de son bleu-vert ; thème sombre uniquement ; polices Oswald / Barlow Condensed / Roboto. **Mobile d'abord** : filtres repliables sur téléphone, colonnes secondaires masquées, cibles tactiles de 34 px.
+- Toute valeur en base 100 (`format: score`) porte la mention « base 100 » là où elle s'affiche (carte, sous-titre, en-tête de colonne), pour ne pas la confondre avec un nombre brut.
 - Sur le site, les stats s'appellent des **Achievements**. Chacune a une info-bulle « comment c'est calculé », générée depuis `detail` (config) et les règles de classement (`explain()` dans `site/src/lib/stats.js`).
 - **Langue** : site **en anglais**. Les textes des titres (nom, description, blague) vivent dans la config des titres, pas en dur dans le code React.
 
@@ -121,7 +124,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - Phrase « blague » de chaque stat, seuils précis (ex. capacité « évitable ») et listes en config (taunts, CD défensifs, morts scriptées, boss de fin, objets d'ingénierie, emplacements enchantables).
 - Seuil minimal de combats pour afficher un rôle sur la fiche d'un joueur.
 - Rang PvP : nombre de semaines de présence pour valider un tier (`min_weeks_per_tier`, 4 par défaut dans `config/tiers.json`).
-- Accueil : top 1 ou top 3 par achievement du Hall of fame ; nom définitif du record « kill le plus lent » (« Marathon » provisoire).
+- Accueil : top 1 ou top 3 par achievement du Hall of fame ; seuil éventuel de pulls pour compter un raideur (aujourd'hui : un seul pull éligible suffit).
 - Seuils d'attribution des titres sur la fiche (90e / 10e percentile par défaut) et dénominateur minimal (`min_den`, 10 par défaut).
 - Mode d'agrégation de chaque stat (`agg` dans `config/stats.json`) : proposition à valider au moment d'écrire le calcul.
 - Déploiement GitHub Pages : workflow qui lance l'export JSON depuis le Parquet commité, puis le build Vite.
