@@ -1,0 +1,74 @@
+# Contrat de données pipeline → site
+
+Le pipeline écrit trois fichiers JSON dans `site/public/data/` (dossier ignoré par git, régénéré au build). Le site les charge au démarrage et ne fait que **filtrer, sommer et classer** : aucune règle de stat n'est codée côté React.
+
+Tant que l'étape de calcul n'existe pas, `python -m pipeline.mock_site_data` écrit des données fictives au même format (`meta.mock = true`, le site affiche alors un bandeau).
+
+## Pourquoi des « cellules additives »
+
+Chaque stat se filtre par extension × classe × rôle, en multi-sélection (comme l'artifact « Fable Guild Rankings »). Trop de combinaisons pour tout précalculer. Le pipeline exporte donc, pour chaque stat, des **cellules** au grain `(joueur, extension, classe, rôle)` qui contiennent des quantités qu'on peut additionner (numérateur, dénominateur, sommes de régression…). Le site additionne les cellules qui passent les filtres, calcule la valeur de chaque joueur, puis le percentile parmi les joueurs qui ont une valeur.
+
+## `meta.json`
+
+```
+generated      date ISO de l'export
+mock           true si données fictives
+guild          {name, server}
+expansions     [{id, label, short}]            ← config/tiers.json
+tiers          [{id, name, short, expansion}]  ← config/tiers.json
+classes        ["Death Knight", "Druid", …]    (ordre = index utilisé dans les cellules)
+roles          ["TANK", "DPS", "HEALER"]      (idem)
+rank           {max, names[14]}                ← config/tiers.json
+settings       {title_percentile, flip_percentile, min_den}  ← config/site.json
+home           {top_n, featured[]}             ← config/site.json
+stats          [définitions]                   ← config/stats.json
+guild_totals   [[exp, pulls, kills, wipes, damage, seconds]]  (une ligne par extension)
+```
+
+## `players.json`
+
+Liste des joueurs qualifiés (15 semaines de reset). L'index dans la liste est l'identifiant utilisé partout ailleurs.
+
+```
+{ "name": "Rassaa",                      main du mapping des rerolls
+  "chars": [["Rassaa", 1], ["Torean", 6]],  personnage, index de classe
+  "tiers": [0, 1, 2, 5],                  tiers validés pour le rang (index dans meta.tiers)
+  "rank": 4 }                             min(rank.max, nombre de tiers validés)
+```
+
+Un tier est validé quand le joueur y a au moins `rank.min_weeks_per_tier` semaines de reset distinctes de présence (config/tiers.json). Le rang ne dépend pas des filtres.
+
+## `stats.json`
+
+```
+{ "<stat id>": [[joueur, extension, classe, rôle, ...valeurs], …] }
+```
+
+Les valeurs dépendent du mode `agg` de la stat :
+
+| agg | valeurs | valeur du joueur |
+|---|---|---|
+| `ratio` | `num, den` | Σnum / Σden |
+| `sum` | `n` | Σn |
+| `distinct` | `[ids]` | taille de l'union des ids (semaines, boss, personnages) |
+| `diff` | `a, ad, b, bd` | Σa/Σad − Σb/Σbd |
+| `spread` | `n, s, ss` | écart-type : √(Σss/Σn − (Σs/Σn)²) |
+| `slope` | `n, sx, sy, sxx, sxy` | pente de régression de y (score) sur x (semaine) |
+| `top` | `{label: [num, den]}` | label au plus grand Σnum (`top_by: count`) ou Σnum/Σden (`top_by: mean`) |
+| `max` | `v, label` | plus grande valeur, avec son label |
+
+Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (réglage global de `config/site.json`, surchargé par stat) : `den` pour `ratio`, le plus petit de `ad` et `bd` pour `diff`, `n` pour `spread` et `slope`.
+
+## Champs d'une stat (`config/stats.json`)
+
+- `category` : `common`, `tank`, `healer`, `dps`. Les cellules des stats de rôle n'existent que pour ce rôle.
+- `title`, `flip` (titre du bas du classement), `description`, `detail`, `joke` : textes du site.
+- `display` : `P` percentile, `N` nombre, `PN` les deux, `T` texte, `TN` texte et nombre.
+- `number` : pour `PN` en `ratio`, le nombre de carrière affiché (`num` ou `den`).
+- `direction` : `desc` (défaut, la valeur haute porte le titre) ou `asc`.
+- `format` : `pct`, `score` (base 100), `rate` (+ `rate_unit`), `int`, `big`, `signed`, `pp` (points de %).
+- `min_den`, `top_by`, `unit` : voir plus haut.
+
+## Percentile et titres
+
+Percentile = part des joueurs classés derrière lui (sens `direction`), de 0 à 100. Sur une fiche joueur, le titre est attribué à partir de `title_percentile`, le revers (`flip`) en dessous de `flip_percentile`.

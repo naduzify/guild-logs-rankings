@@ -10,3 +10,14 @@ cd guild-logs-rankings
 ```
 
 Copier les variables d'environnement nécessaires dans un fichier `.env` (non versionné).
+
+## Site
+
+```bash
+python -m pipeline.mock_site_data      # données fictives dans site/public/data/
+cd site
+npm install --cache ./.npm-cache
+npm run dev
+```
+
+Contrat de données : `docs/site-data.md`.

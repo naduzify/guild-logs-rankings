@@ -1,0 +1,19 @@
+{
+  "_doc": "Site display settings. Percentile thresholds decide when a stat's title (or its flip) is awarded on a player page.",
+  "title_percentile": 90,
+  "flip_percentile": 10,
+  "min_den": 10,
+  "home": {
+    "top_n": 3,
+    "featured": [
+      "the-gang",
+      "fishbait",
+      "the-roach",
+      "big-pumper",
+      "healing-machine",
+      "damage-sponge",
+      "the-junky",
+      "night-owl"
+    ]
+  }
+}

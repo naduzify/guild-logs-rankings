@@ -1,0 +1,40 @@
+{
+  "expansions": [
+    {"id": "era", "label": "Classic Era", "short": "Era"},
+    {"id": "tbc", "label": "The Burning Crusade", "short": "TBC"},
+    {"id": "wotlk", "label": "Wrath of the Lich King", "short": "WotLK"},
+    {"id": "cata", "label": "Cataclysm", "short": "Cata"},
+    {"id": "mop", "label": "Mists of Pandaria", "short": "MoP"}
+  ],
+  "tiers": [
+    {"id": "mc", "name": "Molten Core", "short": "MC", "expansion": "era", "zones": ["Molten Core", "Onyxia's Lair"]},
+    {"id": "bwl", "name": "Blackwing Lair", "short": "BWL", "expansion": "era", "zones": ["Blackwing Lair"]},
+    {"id": "aq40", "name": "Temple of Ahn'Qiraj", "short": "AQ40", "expansion": "era", "zones": ["Temple of Ahn'Qiraj"]},
+    {"id": "naxx40", "name": "Naxxramas", "short": "Naxx (Era)", "expansion": "era", "zones": ["Naxxramas"]},
+    {"id": "t4", "name": "Gruul / Magtheridon", "short": "Gruul / Mag", "expansion": "tbc", "zones": ["Gruul's Lair", "Magtheridon's Lair"]},
+    {"id": "t5", "name": "Serpentshrine / Tempest Keep", "short": "SSC / TK", "expansion": "tbc", "zones": ["Serpentshrine Cavern", "Tempest Keep", "The Eye"]},
+    {"id": "t6", "name": "Black Temple / Hyjal", "short": "BT / Hyjal", "expansion": "tbc", "zones": ["Black Temple", "Hyjal Summit", "Battle for Mount Hyjal"]},
+    {"id": "swp", "name": "Sunwell Plateau", "short": "SWP", "expansion": "tbc", "zones": ["Sunwell Plateau"]},
+    {"id": "naxx25", "name": "Naxxramas", "short": "Naxx (WotLK)", "expansion": "wotlk", "zones": ["Naxxramas", "The Obsidian Sanctum", "The Eye of Eternity"]},
+    {"id": "ulduar", "name": "Ulduar", "short": "Ulduar", "expansion": "wotlk", "zones": ["Ulduar"]},
+    {"id": "togc", "name": "Trial of the Crusader", "short": "ToGC", "expansion": "wotlk", "zones": ["Trial of the Crusader", "Trial of the Grand Crusader"]},
+    {"id": "icc", "name": "Icecrown Citadel", "short": "ICC", "expansion": "wotlk", "zones": ["Icecrown Citadel", "The Ruby Sanctum"]},
+    {"id": "t11", "name": "Bastion of Twilight / BWD / TotFW", "short": "BoT", "expansion": "cata", "zones": ["The Bastion of Twilight", "Blackwing Descent", "Throne of the Four Winds"]},
+    {"id": "fl", "name": "Firelands", "short": "Firelands", "expansion": "cata", "zones": ["Firelands"]},
+    {"id": "ds", "name": "Dragon Soul", "short": "Dragon Soul", "expansion": "cata", "zones": ["Dragon Soul"]},
+    {"id": "msv", "name": "Mogu'shan Vaults", "short": "Mogu'shan", "expansion": "mop", "zones": ["Mogu'shan Vaults"]},
+    {"id": "hof", "name": "Heart of Fear / Terrace", "short": "HoF / ToES", "expansion": "mop", "zones": ["Heart of Fear", "Terrace of Endless Spring"]},
+    {"id": "tot", "name": "Throne of Thunder", "short": "ToT", "expansion": "mop", "zones": ["Throne of Thunder"]},
+    {"id": "soo", "name": "Siege of Orgrimmar", "short": "SoO", "expansion": "mop", "zones": ["Siege of Orgrimmar"]}
+  ],
+  "rank": {
+    "faction": "alliance",
+    "min_weeks_per_tier": 4,
+    "max": 14,
+    "names": [
+      "Private", "Corporal", "Sergeant", "Master Sergeant", "Sergeant Major",
+      "Knight", "Knight-Lieutenant", "Knight-Captain", "Knight-Champion", "Lieutenant Commander",
+      "Commander", "Marshal", "Field Marshal", "Grand Marshal"
+    ]
+  }
+}

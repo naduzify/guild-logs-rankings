@@ -74,16 +74,20 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 ### Stack et stockage
 - **Pipeline en Python** (collecte + calcul), table de stats en **DuckDB / Parquet**.
 - **Site en React + Vite** (JavaScript), hébergé sur **GitHub Pages**.
-- **Contrat pipeline → site** : fichiers JSON (index des joueurs pour la recherche, une fiche par joueur, tops par catégorie). Le site ne calcule rien.
+- **Contrat pipeline → site** : trois fichiers JSON (`meta`, `players`, `stats`) décrits dans `docs/site-data.md`. Les stats sont exportées en **cellules additives** au grain (joueur, extension, classe, rôle) : le site ne fait que filtrer, sommer et classer, aucune règle de stat n'est codée en React.
 - **Trois étages de données** :
   1. cache brut WCL : local, ignoré par git ;
   2. instantané compressé du cache, archivé hors du PC une fois le crawl fini (Release GitHub par défaut) ;
   3. table de stats calculée (Parquet) : **commitée**, pour reconstruire le site sans crawler ni identifiants WCL.
 
 ### Site
-- **Page d'accueil** : les tops dans une sélection de catégories.
-- **Recherche** de joueur côté navigateur, sans serveur.
-- **Fiche joueur** avec filtres **TANK / DPS / HEALER**, n'affichant que les rôles réellement joués.
+- Code dans `site/` (React 18 + Vite 5, routage par hash : `#/`, `#/stats`, `#/stat/<id>`, `#/player/<nom>`, filtres dans l'URL). `npm install` avec `--cache ./.npm-cache` (cache npm local au repo).
+- **Filtres** extension × rôle × classe en multi-sélection sur toutes les pages, comme l'artifact « Fable Guild Rankings ». Pas de bouton « Adjust to Era » (tout est déjà en base 100).
+- **Page d'accueil** : totaux de guilde (kills, wipes, dégâts, heures, pulls ; suivent le filtre d'extension) et top N d'une sélection de stats (`config/site.json`).
+- **Page par stat** : classement complet filtrable. **Recherche** de joueur (main et rerolls, accents ignorés) côté navigateur.
+- **Fiche joueur** : mêmes filtres, limités à ce que le joueur a joué ; percentile calculé contre tous les joueurs sous les mêmes filtres ; titre gagné au-dessus de `title_percentile`, revers sous `flip_percentile`.
+- **Rang PvP** : macaron à côté de chaque nom, **icônes officielles Alliance** (Private → Grand Marshal, `site/public/ranks/`). Un rang par tier de raid validé (19 tiers dans `config/tiers.json`), plafonné à 14. Un tier est validé à partir de `min_weeks_per_tier` semaines de reset de présence dans ce tier. Indépendant des filtres.
+- **Données fictives** : `python -m pipeline.mock_site_data` écrit `site/public/data/` (ignoré par git) au format du contrat, tant que l'étape de calcul n'existe pas.
 - **Langue** : site **en anglais**. Les textes des titres (nom, description, blague) vivent dans la config des titres, pas en dur dans le code React.
 
 ### Stats (V1, détail dans `docs/stats.md`)
@@ -105,6 +109,11 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 
 - Phrase « blague » de chaque stat, seuils précis (ex. capacité « évitable ») et listes en config (taunts, CD défensifs, morts scriptées, boss de fin, objets d'ingénierie, emplacements enchantables).
 - Seuil minimal de combats pour afficher un rôle sur la fiche d'un joueur.
+- Rang PvP : nombre de semaines de présence pour valider un tier (`min_weeks_per_tier`, 4 par défaut dans `config/tiers.json`).
+- Stats mises en avant sur l'accueil (sélection provisoire dans `config/site.json`), top 1 ou top 3.
+- Seuils d'attribution des titres sur la fiche (90e / 10e percentile par défaut) et dénominateur minimal (`min_den`, 10 par défaut).
+- Mode d'agrégation de chaque stat (`agg` dans `config/stats.json`) : proposition à valider au moment d'écrire le calcul.
+- Déploiement GitHub Pages : workflow qui lance l'export JSON depuis le Parquet commité, puis le build Vite.
 - Emplacement définitif de l'instantané du cache brut (Release GitHub par défaut).
 
 - Filtre anti-pulls parasites au calcul : seuil de joueurs plus strict que les 10 du crawl (des bosses de TK soloés en Cata sont classés en taille 25), et exclusion des combats en véhicules (Flame Leviathan).

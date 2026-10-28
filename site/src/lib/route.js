@@ -1,0 +1,38 @@
+import { useEffect, useState } from 'react';
+
+// Hash routes: #/ , #/stats , #/stat/<id> , #/player/<name>, with filters in the query
+// (?exp=0,2&cls=5&role=0) so a filtered page can be shared as a link.
+
+const SETS = ['exp', 'cls', 'role'];
+
+export function parseHash(hash = window.location.hash) {
+  const [path, query = ''] = hash.replace(/^#/, '').split('?');
+  const params = new URLSearchParams(query);
+  const filter = {};
+  for (const k of SETS) {
+    const raw = params.get(k);
+    filter[k] = new Set(raw ? raw.split(',').map(Number).filter(Number.isInteger) : []);
+  }
+  const parts = (path || '/').split('/').filter(Boolean).map(decodeURIComponent);
+  return { page: parts[0] || 'home', arg: parts[1] ?? null, filter };
+}
+
+export function href(page, arg, filter) {
+  let path = page === 'home' ? '/' : `/${page}${arg != null ? '/' + encodeURIComponent(arg) : ''}`;
+  const q = filter ? SETS.filter(k => filter[k].size).map(k => `${k}=${[...filter[k]].sort((a, b) => a - b).join(',')}`) : [];
+  return '#' + path + (q.length ? '?' + q.join('&') : '');
+}
+
+export function useRoute() {
+  const [route, setRoute] = useState(() => parseHash());
+  useEffect(() => {
+    const on = () => { setRoute(parseHash()); };
+    window.addEventListener('hashchange', on);
+    return () => window.removeEventListener('hashchange', on);
+  }, []);
+  return route;
+}
+
+export function go(page, arg, filter) {
+  window.location.hash = href(page, arg, filter);
+}

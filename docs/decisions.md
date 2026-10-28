@@ -153,3 +153,47 @@ Une entrée par décision : date, décision, raison, alternatives écartées. La
 
 **Écarté pour la V1.** Not Even Close! (événements de dégâts subis des tanks avec leurs PV sur chaque kill, trop cher). Wipe Pumper, Legendary Flex, Necromancer, Bubble Wrap / Gardener, Threat Dealer, Crazy Pet Lady, Savior, True Sniper : reportées en V2.
 
+
+---
+
+## 2026-10-28 — Site : filtres multi-sélection par cellules additives
+
+**Décision.**
+- Chaque stat se filtre par extension × rôle × classe, en multi-sélection, sur l'accueil, les classements et la fiche joueur.
+- Le pipeline exporte chaque stat en cellules `(joueur, extension, classe, rôle, valeurs…)` dont les valeurs s'additionnent (numérateur / dénominateur, ensembles d'ids, sommes de régression…). Le site additionne les cellules filtrées, calcule la valeur de chaque joueur puis son percentile. Format complet dans `docs/site-data.md`.
+- Pas de bouton « Adjust expansions to Era » : les joueurs sont déjà filtrés à 15 semaines et toutes les stats sont en base 100.
+
+**Raison.** Avec 5 extensions, 11 classes et 3 rôles en multi-sélection, les combinaisons se comptent en dizaines de milliers : impossible de tout précalculer. Les cellules additives gardent les règles de stats dans le pipeline (le site ne connaît que 8 modes d'agrégation génériques) pour un export d'environ 1 Mo.
+
+**Écarté.** Filtres à choix unique entièrement précalculés (on ne pourrait pas cocher « TBC + Wrath »). Site qui recalcule les stats depuis les données brutes (règles dupliquées en JavaScript).
+
+---
+
+## 2026-10-28 — Site : rang PvP par tier de raid
+
+**Décision.**
+- Chaque nom de joueur porte un macaron de rang PvP de 1 à 14, avec les **icônes officielles Alliance** (Private → Grand Marshal), copiées dans `site/public/ranks/`.
+- Un rang par tier de raid validé, plafonné à 14. Liste des 19 tiers (fusions Gruul/Mag, SSC/TK, BT/Hyjal, HoF/ToES, comme l'artifact « Fable Guild Rankings ») dans `config/tiers.json`.
+- Un tier est validé à partir d'un seuil de semaines de reset de présence dans ce tier (`min_weeks_per_tier`, valeur à fixer, 4 par défaut).
+- Le rang ne dépend pas des filtres.
+
+**Raison.** Clin d'œil au système d'honneur de Vanilla, lisible d'un coup d'œil : plus un joueur a fait de tiers avec la guilde, plus il est gradé. Un seuil de présence évite qu'un remplaçant d'un soir valide un tier.
+
+**Écarté.** Badge SVG maison (moins reconnaissable). Tier validé dès un pull ou dès un kill (trop facile à obtenir).
+
+**Note.** Les icônes sont des assets Blizzard, utilisées dans un site de fans non commercial.
+
+---
+
+## 2026-10-28 — Site : structure et données fictives
+
+**Décision.**
+- Site dans `site/` : React 18 + Vite 5, sans routeur externe (routage par hash, filtres dans l'URL pour partager une vue filtrée), `base: './'` pour GitHub Pages.
+- Pages : accueil (totaux de guilde + tops), liste des titres, classement par stat, fiche joueur.
+- Les textes et réglages d'affichage vivent en config : `config/stats.json` (44 stats, textes, mode d'agrégation, format), `config/site.json` (stats de l'accueil, seuils des titres), `config/tiers.json` (extensions, tiers, rangs).
+- `site/public/data/` est ignoré par git : régénéré par l'export (ou par `python -m pipeline.mock_site_data` en attendant l'étape de calcul).
+- `npm` tourne avec un cache local au repo (`--cache ./.npm-cache`) pour ne rien écrire hors du dossier.
+
+**Raison.** Permet de construire le site contre le vrai contrat de données avant que le calcul n'existe, et de régler textes et seuils sans toucher au code.
+
+**Écarté.** react-router (inutile pour 4 routes). Données fictives écrites à la main dans le site (divergeraient du contrat).
