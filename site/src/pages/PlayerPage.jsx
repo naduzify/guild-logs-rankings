@@ -1,4 +1,4 @@
-import { FilterBar, PctBar, RankBadge, roleLabel } from '../components.jsx';
+import { FilterBar, InfoTip, PctBar, RankBadge, roleLabel } from '../components.jsx';
 import { CLASS_COLORS, formatNumber, formatPct, formatValue } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat, earnedTitle, hasNumber, hasPercentile, valueIsNumber } from '../lib/stats.js';
@@ -20,6 +20,7 @@ function StatRow({ data, stat, row, title }) {
     <li className={'srow' + (title ? (title.flip ? ' lo' : ' hi') : '')}>
       <div className="sname">
         <a href={href('stat', stat.id)}>{title ? title.name : stat.title}</a>
+        <InfoTip stat={stat} meta={data.meta} />
         <span className="sdesc">{stat.description}</span>
       </div>
       {!row ? <div className="sval muted">Not enough pulls</div> : (
@@ -78,7 +79,7 @@ export default function PlayerPage({ data, name, filter }) {
         note={`Percentiles compare ${pl.name} with every player under the same filters.`} />
       {titles.length > 0 && (
         <section className="earned">
-          <h2>Titles</h2>
+          <h2>Achievements</h2>
           <div className="badges">
             {titles.map(({ stat, title }) => (
               <a key={stat.id} href={href('stat', stat.id, eff)} className={'badge' + (title.flip ? ' lo' : '')}>{title.name}</a>

@@ -1,6 +1,31 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { CLASS_COLORS, fold } from './lib/format.js';
 import { go, href } from './lib/route.js';
+import { explain } from './lib/stats.js';
+
+// "i" button showing how an achievement is calculated. Hover on desktop; tap on touch screens,
+// where it opens as a sheet at the bottom of the screen (CSS), and closes on any tap outside.
+export function InfoTip({ stat, meta }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+  useEffect(() => {
+    if (!open) return;
+    const close = e => { if (e.type === 'keydown' ? e.key === 'Escape' : !ref.current?.contains(e.target)) setOpen(false); };
+    document.addEventListener('pointerdown', close);
+    document.addEventListener('keydown', close);
+    return () => { document.removeEventListener('pointerdown', close); document.removeEventListener('keydown', close); };
+  }, [open]);
+  return (
+    <span ref={ref} className={'tip' + (open ? ' open' : '')}>
+      <button type="button" className="tipbtn" aria-label={`How ${stat.title} is calculated`} aria-expanded={open}
+        onClick={e => { e.preventDefault(); e.stopPropagation(); setOpen(o => !o); }}>i</button>
+      <span role="tooltip" className="tipbox">
+        <b>{stat.title}{stat.flip && ` / ${stat.flip}`}</b>
+        {explain(stat, meta.settings).map(l => <span key={l}>{l}</span>)}
+      </span>
+    </span>
+  );
+}
 
 const ROLE_LABELS = { TANK: 'Tank', DPS: 'DPS', HEALER: 'Healer' };
 export const roleLabel = r => ROLE_LABELS[r] || r;

@@ -91,6 +91,36 @@ export const hasPercentile = stat => stat.display.includes('P');
 export const hasNumber = stat => stat.display.includes('N') && stat.agg === 'ratio';
 export const valueIsNumber = stat => stat.agg === 'sum' || stat.agg === 'distinct';
 
+const ROLE_SCOPE = {
+  common: 'Counts every role: use the role filter to split tank, DPS and healer.',
+  tank: 'Only pulls played as a tank.',
+  healer: 'Only pulls played as a healer.',
+  dps: 'Only pulls played as DPS.',
+};
+
+// Plain-English method of an achievement, for its tooltip: what is measured, on which pulls, how it ranks.
+export function explain(stat, settings) {
+  const lines = [stat.detail, ROLE_SCOPE[stat.category]];
+  const minDen = stat.min_den ?? settings.min_den;
+  if (hasPercentile(stat)) {
+    const sample = stat.agg === 'spread' || stat.agg === 'slope' ? 'kills' : 'pulls';
+    let rank = `Percentile among players with at least ${minDen} ${sample} under the current filters`;
+    rank += stat.direction === 'asc' ? ' (lower is better).' : '.';
+    lines.push(rank);
+    let earn = `Top ${100 - settings.title_percentile}% earn “${stat.title}”`;
+    if (stat.flip) earn += `, bottom ${settings.flip_percentile}% earn “${stat.flip}”`;
+    lines.push(earn + '.');
+  } else if (stat.agg === 'max') {
+    lines.push('Best single pull of the career, ranked from highest.');
+  } else if (stat.display === 'T') {
+    lines.push(stat.top_by === 'mean' ? `Highest average, on at least ${minDen} kills. Shown on each player's page, not ranked.`
+      : "Most frequent one. Shown on each player's page, not ranked.");
+  } else {
+    lines.push('Career total, ranked from highest.');
+  }
+  return lines.filter(Boolean);
+}
+
 // Title earned by a player on a stat, if any: the main title at the top, the flip at the bottom.
 export function earnedTitle(stat, row, settings) {
   if (!row || !hasPercentile(stat)) return null;

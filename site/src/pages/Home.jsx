@@ -1,4 +1,4 @@
-import { FilterBar, PlayerName } from '../components.jsx';
+import { FilterBar, InfoTip, PlayerName } from '../components.jsx';
 import { formatBig, formatInt, formatValue } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat } from '../lib/stats.js';
@@ -27,7 +27,10 @@ function TopCard({ data, stat, filter }) {
   const top = ranked.slice(0, data.meta.home.top_n);
   return (
     <article className="card">
-      <a className="ctitle" href={href('stat', stat.id, filter)}>{stat.title}</a>
+      <div className="cname">
+        <a className="ctitle" href={href('stat', stat.id, filter)}>{stat.title}</a>
+        <InfoTip stat={stat} meta={data.meta} />
+      </div>
       <p className="cdesc">{stat.description}</p>
       {top.length === 0 ? <p className="empty">Nobody qualifies with these filters.</p> : (
         <ol className="podium">
@@ -57,7 +60,7 @@ export default function Home({ data, filter }) {
       <GuildTotals data={data} filter={filter} />
       <div className="sechead">
         <h2>Hall of fame</h2>
-        <a href={href('stats', null, filter)}>All {meta.stats.length} titles →</a>
+        <a href={href('stats', null, filter)}>All {meta.stats.length} achievements →</a>
       </div>
       <section className="cards">
         {featured.map(s => <TopCard key={s.id} data={data} stat={s} filter={filter} />)}

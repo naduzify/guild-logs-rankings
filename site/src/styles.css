@@ -100,7 +100,30 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .podium .val { margin-left: auto; font-variant-numeric: tabular-nums; font-size: .9rem; flex: none; }
 
 /* Player names and rank badges */
-.rank { vertical-align: middle; border-radius: 3px; flex: none; border: 1px solid color-mix(in srgb, var(--parchment) 45%, transparent); }
+/* Round, borderless: the circle crops the square frame baked into the game icons. */
+.rank { vertical-align: middle; flex: none; border-radius: 50%; object-fit: cover; clip-path: circle(46%); }
+
+/* Achievement method tooltip */
+.cname { display: flex; align-items: center; gap: 6px; }
+.tip { position: relative; display: inline-flex; vertical-align: middle; margin-left: 6px; }
+.cname .tip { margin-left: 0; }
+.tipbtn { width: 22px; height: 22px; padding: 0; border-radius: 50%; border: 1px solid var(--line-strong); background: transparent; color: var(--tan);
+  font: italic 600 .75rem/1 Georgia, serif; cursor: pointer; display: inline-grid; place-items: center; }
+.tipbtn::after { content: ""; position: absolute; inset: -9px; } /* 40px touch target */
+.tipbtn:hover, .tip.open .tipbtn { color: #fff; background: var(--alliance); border-color: var(--alliance); }
+.tipbox { display: none; z-index: 30; flex-direction: column; gap: 6px; padding: 12px 14px; background: var(--navy); color: var(--cream);
+  border: 1px solid var(--line-strong); border-top: 2px solid var(--alliance); border-radius: 6px; box-shadow: 0 16px 40px rgb(0 0 0 / .55);
+  font: 400 .85rem/1.45 var(--f-body); text-transform: none; letter-spacing: 0; text-align: left; white-space: normal;
+  position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); }
+.tipbox b { font: 600 1rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .06em; color: var(--parchment); }
+.tip.open .tipbox { display: flex; }
+@media (hover: hover) { .tip:hover .tipbox { display: flex; } }
+@media (min-width: 720px) {
+  .tipbox { position: absolute; left: 0; right: auto; bottom: auto; top: calc(100% + 8px); width: 320px; }
+}
+.method { list-style: none; margin: 8px 0 0; padding: 0; color: var(--tan); max-width: 70ch; }
+.method li { padding-left: 14px; position: relative; }
+.method li::before { content: ""; position: absolute; left: 0; top: .65em; width: 5px; height: 5px; border-radius: 50%; background: var(--alliance); }
 .pname { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; font-weight: 600; min-width: 0; }
 .pname span { border-bottom: 2px solid var(--cls, transparent); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pname:hover span { color: var(--parchment); }
@@ -134,7 +157,7 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 
 /* Player page */
 .phead { display: flex; gap: 14px; align-items: center; padding-top: 22px; }
-.phead .rank { width: 48px; height: 48px; border-width: 2px; }
+.phead .rank { width: 52px; height: 52px; }
 .rankline { margin: 4px 0; color: var(--alliance); font: 600 1rem var(--f-subtitle); letter-spacing: .04em; }
 .chars { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 4px 0 0; }
 .char { border-left: 3px solid var(--cls); padding-left: 6px; font-weight: 600; }
@@ -183,6 +206,6 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
   .srow { flex-direction: row; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
   .pct { min-width: 170px; }
   .tierstrip { flex-wrap: wrap; }
-  .phead .rank { width: 56px; height: 56px; }
+  .phead .rank { width: 64px; height: 64px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

@@ -210,3 +210,16 @@ Une entrée par décision : date, décision, raison, alternatives écartées. La
 **Raison.** Le site sera surtout ouvert depuis un lien partagé dans Discord, donc sur téléphone. La palette Timewalking donne le ton « récap Blizzard » voulu ; le bleu Alliance rattache le site à la faction de la guilde et aux icônes de rang.
 
 **Écarté.** Garder le bleu-vert d'origine. Garder le thème clair de l'artifact.
+
+---
+
+## 2026-10-28 — Site : « Achievements », info-bulles de méthode, macarons ronds
+
+**Décision.**
+- Les stats et leurs titres s'appellent « Achievements » sur le site (navigation, liste, fiche joueur).
+- Chaque achievement a une info-bulle « comment c'est calculé » : la ligne `detail` de `config/stats.json`, les rôles pris en compte, le mode de classement (percentile et dénominateur minimal, total de carrière, meilleur pull…) et les seuils d'attribution du titre et du revers. Le texte est généré par `explain()` (`site/src/lib/stats.js`) à partir de la config, pas écrit à la main. Au survol sur ordinateur, au toucher sur téléphone (panneau en bas de l'écran). Sur la page d'un achievement, le même texte est affiché en clair.
+- Macarons de rang ronds et sans bordure (le cercle rogne le cadre carré des icônes du jeu).
+
+**Raison.** Design plus moderne que rétro. Les classements doivent pouvoir s'expliquer sans quitter la page, d'autant que certaines règles surprennent (base 100, percentile filtré, « lower is better »).
+
+**Écarté.** Attribut `title` du navigateur (invisible sur téléphone). Texte d'explication écrit à la main par stat (diverge des réglages).

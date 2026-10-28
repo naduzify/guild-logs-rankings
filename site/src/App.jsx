@@ -30,7 +30,7 @@ export default function App() {
       <header className="top">
         <div className="wrap topin">
           <a className="brand" href={href('home', null, filter)}>{data.meta.guild.name}<span>Timewalking</span></a>
-          <nav><a href={href('stats', null, filter)}>Titles</a></nav>
+          <nav><a href={href('stats', null, filter)}>Achievements</a></nav>
           <Search data={data} filter={filter} />
         </div>
       </header>

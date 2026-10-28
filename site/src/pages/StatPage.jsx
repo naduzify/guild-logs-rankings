@@ -1,7 +1,7 @@
-import { FilterBar, PctBar, PlayerName } from '../components.jsx';
+import { FilterBar, InfoTip, PctBar, PlayerName } from '../components.jsx';
 import { formatNumber, formatPct, formatValue } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
-import { computeStat, hasNumber, hasPercentile, isRankable, valueIsNumber } from '../lib/stats.js';
+import { computeStat, explain, hasNumber, hasPercentile, isRankable, valueIsNumber } from '../lib/stats.js';
 
 export const CATEGORIES = [
   { id: 'common', label: 'Everyone' },
@@ -13,7 +13,7 @@ export const CATEGORIES = [
 export function StatsIndex({ data, filter }) {
   return (
     <>
-      <h1 className="ptitle">All titles</h1>
+      <h1 className="ptitle">All achievements</h1>
       {CATEGORIES.map(c => (
         <section key={c.id}>
           <h2 className="cat">{c.label}</h2>
@@ -22,6 +22,7 @@ export function StatsIndex({ data, filter }) {
               <li key={s.id}>
                 <a href={href('stat', s.id, filter)}>{s.title}</a>
                 {s.flip && <span className="flipname"> / {s.flip}</span>}
+                <InfoTip stat={s} meta={data.meta} />
                 <span className="sdesc">{s.description}</span>
               </li>
             ))}
@@ -34,7 +35,7 @@ export function StatsIndex({ data, filter }) {
 
 export default function StatPage({ data, id, filter }) {
   const stat = data.statById.get(id);
-  if (!stat) return <p className="empty">Unknown title. <a href={href('stats')}>See all titles</a>.</p>;
+  if (!stat) return <p className="empty">Unknown achievement. <a href={href('stats')}>See all achievements</a>.</p>;
   const { ranked, byPlayer } = computeStat(stat, data.stats[stat.id], filter, data.meta.settings);
   const rows = isRankable(stat) ? ranked : [...byPlayer.values()].sort((a, b) => data.players[a.p].name.localeCompare(data.players[b.p].name));
   const showP = hasPercentile(stat), showN = hasNumber(stat);
@@ -47,7 +48,9 @@ export default function StatPage({ data, id, filter }) {
         <span className="kicker">{CATEGORIES.find(c => c.id === stat.category)?.label}</span>
         <h1 className="ptitle">{stat.title}{stat.flip && <span className="flipname"> / {stat.flip}</span>}</h1>
         <p className="lead">{stat.description}</p>
-        <p className="detail">{stat.detail}</p>
+        <ul className="method" aria-label="How it is calculated">
+          {explain(stat, data.meta.settings).map(l => <li key={l}>{l}</li>)}
+        </ul>
         {stat.joke && <p className="joke">{stat.joke}</p>}
       </header>
       <FilterBar meta={data.meta} filter={filter} onChange={f => go('stat', stat.id, f)} />
