@@ -1,7 +1,7 @@
 import { FilterBar, InfoTip, PctBar, PlayerName } from '../components.jsx';
 import { BASE100, formatNumber, formatPct, formatValue, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
-import { computeStat, explain, hasNumber, hasPercentile, isRankable, shareTotal, valueIsNumber } from '../lib/stats.js';
+import { computeStat, explain, hasNumber, hasPercentile, isRankable, shareTotal, titlePercentile, valueIsNumber } from '../lib/stats.js';
 
 export const CATEGORIES = [
   { id: 'common', label: 'Everyone' },
@@ -40,7 +40,8 @@ export default function StatPage({ data, id, filter }) {
   const rows = isRankable(stat) ? ranked : [...byPlayer.values()].sort((a, b) => data.players[a.p].name.localeCompare(data.players[b.p].name));
   const showP = hasPercentile(stat), showN = hasNumber(stat);
   const fmt = v => (valueIsNumber(stat) ? formatNumber(stat, v) : formatValue(stat, v));
-  const { title_percentile, flip_percentile } = data.meta.settings;
+  const { flip_percentile } = data.meta.settings;
+  const title_percentile = titlePercentile(stat, data.meta.settings);
 
   return (
     <>

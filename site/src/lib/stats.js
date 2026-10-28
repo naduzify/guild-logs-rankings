@@ -114,7 +114,7 @@ export function explain(stat, settings) {
     let rank = `Percentile among players with at least ${minDen} ${sample} under the current filters`;
     rank += stat.direction === 'asc' ? ' (lower is better).' : '.';
     lines.push(rank);
-    let earn = `${formatPct(settings.title_percentile)} and above earn “${stat.title}”`;
+    let earn = `${formatPct(titlePercentile(stat, settings))} and above earn “${stat.title}”`;
     if (stat.flip) earn += `, ${formatPct(settings.flip_percentile)} and below earn “${stat.flip}”`;
     lines.push(earn + '.');
   } else if (stat.top_by === 'share') {
@@ -130,10 +130,13 @@ export function explain(stat, settings) {
   return lines.filter(Boolean);
 }
 
+// Percentile from which a stat's title is earned: its own `title_percentile`, else the site-wide one.
+export const titlePercentile = (stat, settings) => stat.title_percentile ?? settings.title_percentile;
+
 // Title earned by a player on a stat, if any: the main title at the top, the flip at the bottom.
 export function earnedTitle(stat, row, settings) {
   if (!row || !hasPercentile(stat)) return null;
-  if (row.pct >= settings.title_percentile) return { name: stat.title, flip: false };
+  if (row.pct >= titlePercentile(stat, settings)) return { name: stat.title, flip: false };
   if (stat.flip && row.pct <= settings.flip_percentile) return { name: stat.flip, flip: true };
   return null;
 }

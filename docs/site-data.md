@@ -76,6 +76,7 @@ Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (régl
 - `format` : `pct`, `score` (base 100), `rate` (+ `rate_unit`), `int`, `big`, `signed`, `pp` (points de %).
 - `min_den`, `top_by`, `unit` : voir plus haut.
 - `hall_of_fame: false` : achievement jamais tiré dans le Hall of fame de l'accueil.
+- `title_percentile` : seuil du titre propre à l'achievement, à la place de celui de `config/site.json`.
 
 ## Percentile et titres
 

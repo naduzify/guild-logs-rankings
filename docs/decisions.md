@@ -388,6 +388,6 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 - Listes en config (`config/crawl.json` → `extras` : 11 taunts, 26 CD défensifs). Ce sont des filtres WCL : après une modification, recrawler avec `--refresh`.
 - `--cost` mesure les points dépensés par requête. Une stat sans données reste dans `meta.pending`.
 
-**Parse Lord.** Seul achievement mesuré contre le monde et non contre la guilde, ce qui revient sur « pas de parses WCL sur le site » pour cette stat seulement (sera mise en avant différemment). Parses des kills de Fable : par boss, moyenne du meilleur et du médian, puis moyenne sur les boss. DPS et healers, au moins 5 boss.
+**Parse Lord.** Seul achievement mesuré contre le monde et non contre la guilde, ce qui revient sur « pas de parses WCL sur le site » pour cette stat seulement (sera mise en avant différemment). Parses des kills de Fable : par boss, moyenne du meilleur et du médian, puis moyenne sur les boss. DPS et healers, au moins 5 boss. Titre réservé aux 5 % du haut (`title_percentile: 95` sur la stat, au lieu de 90).
 
 **Écarté.** `characterRankings` par personnage (milliers de requêtes, et compte les kills hors guilde).
