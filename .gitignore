@@ -22,3 +22,9 @@ build/
 Thumbs.db
 .vscode/
 .idea/
+
+# Cache brut WCL (archivé à part, jamais commité)
+data/cache/
+
+# Jeton OAuth utilisateur WCL
+.wcl_user_token.json
