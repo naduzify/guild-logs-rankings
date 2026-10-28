@@ -5,6 +5,8 @@
   ],
   "_min_players": "Pulls with fewer players holding a role are fake logs (e.g. a 1-player Onyxia) and are dropped. Raid splits stay.",
   "min_players": 10,
+  "_tank_classes": "Every expansion: a player WCL lists as a tank whose class cannot tank plays DPS (WCL class names).",
+  "tank_classes": ["Warrior", "Druid", "Paladin", "DeathKnight", "Monk"],
   "_era_tank": "Classic Era only: WCL's tank detection is unreliable. A player is a tank when his class can tank and he took at least this share of the boss melee damage of the pull, or of the adds melee damage (off-tanks). Players WCL lists as healers stay healers.",
   "era_tank": {
     "classes": [

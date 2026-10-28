@@ -197,6 +197,11 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
             if new != role:
                 issues[f"era role changed {role} -> {new}"] += 1
                 roles[name] = (new, p)
+    # Every expansion: WCL sometimes lists a class that cannot tank (a hunter with his pet) as a tank.
+    for name, (role, p) in list(roles.items()):
+        if role == "TANK" and p.get("type") not in CONFIG["tank_classes"]:
+            issues[f"tank role dropped for class {p.get('type')}"] += 1
+            roles[name] = ("DPS", p)
     tanks = {n for n, (r, _) in roles.items() if r == "TANK"}
     for table, by in (("damageDone", dmg), ("healing", heal), ("damageTaken", taken), ("casts", casts)):
         extra = set(by) - set(roles)

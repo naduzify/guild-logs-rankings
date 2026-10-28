@@ -368,3 +368,10 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 
 **Alternatives écartées.** Dénominateur = soins totaux, auto-soins compris (non retenu : les auto-soins ne sont pas des patients).
 
+---
+
+## 2026-10-28 — Rôle tank réservé aux classes qui peuvent tanker
+
+**Décision.** Dans toutes les extensions, un joueur que WCL classe tank alors que sa classe ne peut pas tanker devient DPS. Classes tank (`tank_classes` dans `config/compute.json`) : Guerrier, Druide, Paladin, Chevalier de la mort, Moine.
+
+**Raison.** Garde-fou contre les erreurs de rôle de WCL (ex. un chasseur dont le familier tient un add). Sur le cache actuel, aucun pull n'est concerné : les pulls tank de Loveling (chasseur) ont été joués sur son reroll guerrier Lovelain.
