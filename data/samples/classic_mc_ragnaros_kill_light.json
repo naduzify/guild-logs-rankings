@@ -1,0 +1,2705 @@
+{
+ "expansion": "classic",
+ "report": "M9Cwc3axqQWGmzYr",
+ "zone": "Molten Core",
+ "fight": {
+  "id": 52,
+  "encounterID": 50672,
+  "name": "Ragnaros",
+  "difficulty": 3,
+  "size": 40,
+  "kill": true,
+  "startTime": 5638891,
+  "endTime": 5730725,
+  "fightPercentage": 0,
+  "bossPercentage": 0
+ },
+ "players": [
+  {
+   "id": 1,
+   "name": "Offtapblinky",
+   "server": "Arugal",
+   "subType": "Rogue"
+  },
+  {
+   "id": 3,
+   "name": "Karmah",
+   "server": "Arugal",
+   "subType": "Priest"
+  },
+  {
+   "id": 4,
+   "name": "Tentori",
+   "server": "Arugal",
+   "subType": "Warrior"
+  },
+  "... 35 more"
+ ],
+ "tables": {
+  "summary": {
+   "data": {
+    "totalTime": 91834,
+    "itemLevel": 66.0526351928711,
+    "composition": [
+     {
+      "name": "Kush",
+      "id": 47,
+      "guid": 64712,
+      "type": "Rogue",
+      "specs": [
+       {
+        "spec": "Assassination",
+        "role": "dps"
+       }
+      ]
+     },
+     {
+      "name": "Fash",
+      "id": 33,
+      "guid": 2343820,
+      "type": "Druid",
+      "specs": [
+       {
+        "spec": "Restoration",
+        "role": "healer"
+       }
+      ]
+     },
+     {
+      "name": "Speshimunt",
+      "id": 8,
+      "guid": 353331,
+      "type": "Rogue",
+      "specs": [
+       {
+        "spec": "Assassination",
+        "role": "dps"
+       }
+      ]
+     },
+     "... 35 more"
+    ],
+    "damageDone": [
+     {
+      "name": "Kush",
+      "id": 47,
+      "guid": 64712,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "total": 52457
+     },
+     {
+      "name": "Speshimunt",
+      "id": 8,
+      "guid": 353331,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "total": 57344
+     },
+     {
+      "name": "Crab",
+      "id": 32,
+      "guid": 1754434,
+      "type": "Hunter",
+      "icon": "Hunter-Marksmanship",
+      "total": 40270
+     },
+     "... 26 more"
+    ],
+    "healingDone": [
+     {
+      "name": "Kush",
+      "id": 47,
+      "guid": 64712,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "total": 1313
+     },
+     {
+      "name": "Fash",
+      "id": 33,
+      "guid": 2343820,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "total": 13842
+     },
+     {
+      "name": "Oio",
+      "id": 25,
+      "guid": 6084836,
+      "type": "Priest",
+      "icon": "Priest-Holy",
+      "total": 12831
+     },
+     "... 29 more"
+    ],
+    "damageTaken": [
+     {
+      "name": "Lava Burst",
+      "guid": 21158,
+      "type": 4,
+      "abilityIcon": "spell_fire_volcano.jpg",
+      "total": 97177
+     },
+     {
+      "name": "Lava",
+      "guid": 6,
+      "type": 4,
+      "abilityIcon": "inv_axe_02.jpg",
+      "total": 7291
+     },
+     {
+      "name": "Melee",
+      "guid": 1,
+      "type": 1,
+      "abilityIcon": "inv_axe_02.jpg",
+      "total": 46705
+     },
+     "... 3 more"
+    ],
+    "deathEvents": [
+     {
+      "name": "Jhager",
+      "id": 11,
+      "guid": 573833,
+      "type": "Warrior",
+      "icon": "Warrior-Fury",
+      "deathTime": 78881,
+      "ability": {
+       "name": "Melee",
+       "guid": 1,
+       "type": 1,
+       "abilityIcon": "inv_axe_02.jpg"
+      }
+     },
+     {
+      "name": "Røj",
+      "id": 19,
+      "guid": 6171661,
+      "type": "Warrior",
+      "icon": "Warrior-Fury",
+      "deathTime": 82101,
+      "ability": {
+       "name": "Elemental Fire",
+       "guid": 20564,
+       "type": 4,
+       "abilityIcon": "spell_fire_flametounge.jpg"
+      }
+     },
+     {
+      "name": "Vilify",
+      "id": 17,
+      "guid": 3501574,
+      "type": "Mage",
+      "icon": "Mage-Frost",
+      "deathTime": 86146,
+      "ability": {
+       "name": "Lava",
+       "guid": 6,
+       "type": 4,
+       "abilityIcon": "inv_axe_02.jpg"
+      }
+     },
+     "... 1 more"
+    ],
+    "exploitDetails": [],
+    "playerDetails": {
+     "healers": [
+      {
+       "name": "Trentoss",
+       "id": 24,
+       "guid": 4735134,
+       "type": "Paladin",
+       "server": "Arugal",
+       "icon": "Paladin-Holy",
+       "specs": [
+        "Holy"
+       ],
+       "minItemLevel": 52,
+       "maxItemLevel": 52,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Speed": {
+          "min": 0,
+          "max": 0
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 220,
+          "max": 220
+         },
+         "Stamina": {
+          "min": 305,
+          "max": 305
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Leech": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 277,
+          "max": 277
+         },
+         "Agility": {
+          "min": 82,
+          "max": 82
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 52,
+          "max": 52
+         },
+         "Strength": {
+          "min": 136,
+          "max": 136
+         },
+         "Avoidance": {
+          "min": 0,
+          "max": 0
+         },
+         "Versatility": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 12960,
+          "slot": 0,
+          "quality": 3,
+          "icon": "inv_helmet_24.jpg",
+          "name": "Tribal War Feathers",
+          "itemLevel": 60
+         },
+         {
+          "id": 12023,
+          "slot": 1,
+          "quality": 2,
+          "icon": "inv_jewelry_necklace_03.jpg",
+          "name": "Tellurium Necklace",
+          "itemLevel": 45
+         },
+         {
+          "id": 18494,
+          "slot": 2,
+          "quality": 3,
+          "icon": "inv_shoulder_15.jpg",
+          "name": "Denwatcher's Shoulders",
+          "itemLevel": 60
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ]
+       }
+      },
+      {
+       "name": "Fash",
+       "id": 33,
+       "guid": 2343820,
+       "type": "Druid",
+       "server": "Arugal",
+       "icon": "Druid-Restoration",
+       "specs": [
+        "Restoration"
+       ],
+       "minItemLevel": 67,
+       "maxItemLevel": 67,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Speed": {
+          "min": 0,
+          "max": 0
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 293,
+          "max": 293
+         },
+         "Stamina": {
+          "min": 337,
+          "max": 337
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Leech": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 483,
+          "max": 483
+         },
+         "Agility": {
+          "min": 84,
+          "max": 84
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 67,
+          "max": 67
+         },
+         "Strength": {
+          "min": 81,
+          "max": 81
+         },
+         "Avoidance": {
+          "min": 0,
+          "max": 0
+         },
+         "Versatility": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 16900,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_09.jpg",
+          "name": "Stormrage Cover",
+          "itemLevel": 76,
+          "setID": 214
+         },
+         {
+          "id": 17109,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_10.jpg",
+          "name": "Choker of Enlightenment",
+          "itemLevel": 65
+         },
+         {
+          "id": 16836,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_07.jpg",
+          "name": "Cenarion Spaulders",
+          "itemLevel": 66,
+          "setID": 205
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ]
+       }
+      },
+      {
+       "name": "Evangelize",
+       "id": 21,
+       "guid": 5351245,
+       "type": "Priest",
+       "server": "Arugal",
+       "icon": "Priest-Holy",
+       "specs": [
+        "Holy"
+       ],
+       "minItemLevel": 67,
+       "maxItemLevel": 67,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Speed": {
+          "min": 0,
+          "max": 0
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 333,
+          "max": 333
+         },
+         "Stamina": {
+          "min": 302,
+          "max": 302
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Leech": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 388,
+          "max": 388
+         },
+         "Agility": {
+          "min": 52,
+          "max": 52
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 67,
+          "max": 67
+         },
+         "Strength": {
+          "min": 53,
+          "max": 53
+         },
+         "Avoidance": {
+          "min": 0,
+          "max": 0
+         },
+         "Versatility": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 16921,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_24.jpg",
+          "name": "Halo of Transcendence",
+          "itemLevel": 76,
+          "setID": 211
+         },
+         {
+          "id": 17109,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_10.jpg",
+          "name": "Choker of Enlightenment",
+          "itemLevel": 65
+         },
+         {
+          "id": 16816,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_02.jpg",
+          "name": "Mantle of Prophecy",
+          "itemLevel": 66,
+          "setID": 202
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ]
+       }
+      },
+      "... 7 more"
+     ],
+     "dps": [
+      {
+       "name": "Kush",
+       "id": 47,
+       "guid": 64712,
+       "type": "Rogue",
+       "server": "Arugal",
+       "icon": "Rogue-Assassination",
+       "specs": [
+        "Assassination"
+       ],
+       "minItemLevel": 71,
+       "maxItemLevel": 71,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Speed": {
+          "min": 0,
+          "max": 0
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 66,
+          "max": 66
+         },
+         "Stamina": {
+          "min": 323,
+          "max": 323
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Leech": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 51,
+          "max": 51
+         },
+         "Agility": {
+          "min": 436,
+          "max": 436
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 71,
+          "max": 71
+         },
+         "Strength": {
+          "min": 196,
+          "max": 196
+         },
+         "Avoidance": {
+          "min": 0,
+          "max": 0
+         },
+         "Versatility": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 16908,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_41.jpg",
+          "name": "Bloodfang Hood",
+          "itemLevel": 76,
+          "permanentEnchant": 1508,
+          "permanentEnchantName": "+3 Agility",
+          "setID": 213
+         },
+         {
+          "id": 18404,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_09.jpg",
+          "name": "Onyxia Tooth Pendant",
+          "itemLevel": 74
+         },
+         {
+          "id": 16823,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_25.jpg",
+          "name": "Nightslayer Shoulder Pads",
+          "itemLevel": 66,
+          "setID": 204
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ]
+       }
+      },
+      {
+       "name": "Speshimunt",
+       "id": 8,
+       "guid": 353331,
+       "type": "Rogue",
+       "server": "Arugal",
+       "icon": "Rogue-Assassination",
+       "specs": [
+        "Assassination"
+       ],
+       "minItemLevel": 71,
+       "maxItemLevel": 71,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Speed": {
+          "min": 0,
+          "max": 0
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 66,
+          "max": 66
+         },
+         "Stamina": {
+          "min": 337,
+          "max": 337
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Leech": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 56,
+          "max": 56
+         },
+         "Agility": {
+          "min": 422,
+          "max": 422
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 71,
+          "max": 71
+         },
+         "Strength": {
+          "min": 187,
+          "max": 187
+         },
+         "Avoidance": {
+          "min": 0,
+          "max": 0
+         },
+         "Versatility": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 16908,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_41.jpg",
+          "name": "Bloodfang Hood",
+          "itemLevel": 76,
+          "permanentEnchant": 1508,
+          "permanentEnchantName": "+3 Agility",
+          "setID": 213
+         },
+         {
+          "id": 18404,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_09.jpg",
+          "name": "Onyxia Tooth Pendant",
+          "itemLevel": 74
+         },
+         {
+          "id": 16823,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_25.jpg",
+          "name": "Nightslayer Shoulder Pads",
+          "itemLevel": 66,
+          "setID": 204
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ]
+       }
+      },
+      {
+       "name": "Crab",
+       "id": 32,
+       "guid": 1754434,
+       "type": "Hunter",
+       "server": "Arugal",
+       "icon": "Hunter-Marksmanship",
+       "specs": [
+        "Marksmanship"
+       ],
+       "minItemLevel": 69,
+       "maxItemLevel": 69,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Speed": {
+          "min": 0,
+          "max": 0
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 184,
+          "max": 184
+         },
+         "Stamina": {
+          "min": 419,
+          "max": 419
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Leech": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 195,
+          "max": 195
+         },
+         "Agility": {
+          "min": 482,
+          "max": 482
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 69,
+          "max": 69
+         },
+         "Strength": {
+          "min": 70,
+          "max": 70
+         },
+         "Avoidance": {
+          "min": 0,
+          "max": 0
+         },
+         "Versatility": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 16846,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_05.jpg",
+          "name": "Giantstalker's Helmet",
+          "itemLevel": 66,
+          "permanentEnchant": 1508,
+          "permanentEnchantName": "+3 Agility",
+          "setID": 206
+         },
+         {
+          "id": 18404,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_09.jpg",
+          "name": "Onyxia Tooth Pendant",
+          "itemLevel": 74
+         },
+         {
+          "id": 16848,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_10.jpg",
+          "name": "Giantstalker's Epaulets",
+          "itemLevel": 66,
+          "setID": 206
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ]
+       }
+      },
+      "... 22 more"
+     ],
+     "tanks": [
+      {
+       "name": "Tentori",
+       "id": 4,
+       "guid": 460512,
+       "type": "Warrior",
+       "server": "Arugal",
+       "icon": "Warrior-Protection",
+       "specs": [
+        "Protection"
+       ],
+       "minItemLevel": 67,
+       "maxItemLevel": 67,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Speed": {
+          "min": 0,
+          "max": 0
+         },
+         "Dodge": {
+          "min": 0,
+          "max": 0
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 109,
+          "max": 109
+         },
+         "Stamina": {
+          "min": 411,
+          "max": 411
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Leech": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 92,
+          "max": 92
+         },
+         "Armor": {
+          "min": 5771,
+          "max": 5771
+         },
+         "Agility": {
+          "min": 203,
+          "max": 203
+         },
+         "Block": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 67,
+          "max": 67
+         },
+         "Parry": {
+          "min": 0,
+          "max": 0
+         },
+         "Strength": {
+          "min": 177,
+          "max": 177
+         },
+         "Avoidance": {
+          "min": 0,
+          "max": 0
+         },
+         "Versatility": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 19148,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_22.jpg",
+          "name": "Dark Iron Helm",
+          "itemLevel": 66
+         },
+         {
+          "id": 18404,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_09.jpg",
+          "name": "Onyxia Tooth Pendant",
+          "itemLevel": 74
+         },
+         {
+          "id": 19139,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_23.jpg",
+          "name": "Fireguard Shoulders",
+          "itemLevel": 71
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ]
+       }
+      },
+      {
+       "name": "Falcorr",
+       "id": 13,
+       "guid": 4082982,
+       "type": "Warrior",
+       "server": "Arugal",
+       "icon": "Warrior-Protection",
+       "specs": [
+        "Protection"
+       ],
+       "minItemLevel": 66,
+       "maxItemLevel": 66,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Speed": {
+          "min": 0,
+          "max": 0
+         },
+         "Dodge": {
+          "min": 0,
+          "max": 0
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 125,
+          "max": 125
+         },
+         "Stamina": {
+          "min": 484,
+          "max": 484
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Leech": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 46,
+          "max": 46
+         },
+         "Armor": {
+          "min": 6161,
+          "max": 6161
+         },
+         "Agility": {
+          "min": 201,
+          "max": 201
+         },
+         "Block": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 66,
+          "max": 66
+         },
+         "Parry": {
+          "min": 0,
+          "max": 0
+         },
+         "Strength": {
+          "min": 258,
+          "max": 258
+         },
+         "Avoidance": {
+          "min": 0,
+          "max": 0
+         },
+         "Versatility": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 19148,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_22.jpg",
+          "name": "Dark Iron Helm",
+          "itemLevel": 66,
+          "permanentEnchant": 1505,
+          "permanentEnchantName": "+8 Fire Resistance"
+         },
+         {
+          "id": 18404,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_09.jpg",
+          "name": "Onyxia Tooth Pendant",
+          "itemLevel": 74
+         },
+         {
+          "id": 19139,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_23.jpg",
+          "name": "Fireguard Shoulders",
+          "itemLevel": 71,
+          "permanentEnchant": 2483,
+          "permanentEnchantName": "+2 Fire Resistance"
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ]
+       }
+      },
+      {
+       "name": "Bonsoy",
+       "id": 12,
+       "guid": 2669713,
+       "type": "Warrior",
+       "server": "Arugal",
+       "icon": "Warrior-Protection",
+       "specs": [
+        "Protection"
+       ],
+       "minItemLevel": 66,
+       "maxItemLevel": 66,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Speed": {
+          "min": 0,
+          "max": 0
+         },
+         "Dodge": {
+          "min": 0,
+          "max": 0
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 77,
+          "max": 77
+         },
+         "Stamina": {
+          "min": 473,
+          "max": 473
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Leech": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 44,
+          "max": 44
+         },
+         "Armor": {
+          "min": 6976,
+          "max": 6976
+         },
+         "Agility": {
+          "min": 134,
+          "max": 134
+         },
+         "Block": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 66,
+          "max": 66
+         },
+         "Parry": {
+          "min": 0,
+          "max": 0
+         },
+         "Strength": {
+          "min": 261,
+          "max": 261
+         },
+         "Avoidance": {
+          "min": 0,
+          "max": 0
+         },
+         "Versatility": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 12640,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_36.jpg",
+          "name": "Lionheart Helm",
+          "itemLevel": 61,
+          "permanentEnchant": 1503,
+          "permanentEnchantName": "+39 Health"
+         },
+         {
+          "id": 18404,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_09.jpg",
+          "name": "Onyxia Tooth Pendant",
+          "itemLevel": 74
+         },
+         {
+          "id": 19139,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_23.jpg",
+          "name": "Fireguard Shoulders",
+          "itemLevel": 71
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ]
+       }
+      }
+     ]
+    },
+    "logVersion": 14,
+    "gameVersion": 2,
+    "logFileDetails": ""
+   }
+  },
+  "damageDone": {
+   "data": {
+    "entries": [
+     {
+      "name": "Kush",
+      "id": 47,
+      "guid": 64712,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 71,
+      "total": 52457,
+      "activeTime": 89360,
+      "activeTimeReduced": 89360,
+      "abilities": [
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 29823,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 11281,
+        "name": "Backstab",
+        "total": 18847,
+        "type": 1,
+        "icon": "ability_backstab.jpg"
+       },
+       {
+        "guid": 11269,
+        "name": "Ambush",
+        "total": 2898,
+        "type": 1,
+        "icon": "ability_rogue_ambush.jpg"
+       },
+       "... 1 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Ragnaros",
+        "total": 52457,
+        "type": "Boss"
+       }
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16908,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_41.jpg",
+        "name": "Bloodfang Hood",
+        "itemLevel": 76,
+        "permanentEnchant": 1508,
+        "permanentEnchantName": "+3 Agility",
+        "setID": 213
+       },
+       {
+        "id": 18404,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_09.jpg",
+        "name": "Onyxia Tooth Pendant",
+        "itemLevel": 74
+       },
+       {
+        "id": 16823,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_25.jpg",
+        "name": "Nightslayer Shoulder Pads",
+        "itemLevel": 66,
+        "setID": 204
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Speshimunt",
+      "id": 8,
+      "guid": 353331,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 71,
+      "total": 57344,
+      "activeTime": 90557,
+      "activeTimeReduced": 90557,
+      "abilities": [
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 32352,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 11281,
+        "name": "Backstab",
+        "total": 22448,
+        "type": 1,
+        "icon": "ability_backstab.jpg"
+       },
+       {
+        "guid": 11300,
+        "name": "Eviscerate",
+        "total": 2544,
+        "type": 1,
+        "icon": "ability_rogue_eviscerate.jpg"
+       }
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Ragnaros",
+        "total": 57344,
+        "type": "Boss"
+       }
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16908,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_41.jpg",
+        "name": "Bloodfang Hood",
+        "itemLevel": 76,
+        "permanentEnchant": 1508,
+        "permanentEnchantName": "+3 Agility",
+        "setID": 213
+       },
+       {
+        "id": 18404,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_09.jpg",
+        "name": "Onyxia Tooth Pendant",
+        "itemLevel": 74
+       },
+       {
+        "id": 16823,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_25.jpg",
+        "name": "Nightslayer Shoulder Pads",
+        "itemLevel": 66,
+        "setID": 204
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Crab",
+      "id": 32,
+      "guid": 1754434,
+      "type": "Hunter",
+      "icon": "Hunter-Marksmanship",
+      "itemLevel": 69,
+      "total": 40270,
+      "totalReduced": 34472,
+      "activeTime": 87989,
+      "activeTimeReduced": 72901,
+      "abilities": [
+       {
+        "guid": 75,
+        "name": "Auto Shot",
+        "total": 15495,
+        "type": 1,
+        "icon": "ability_whirlwind.jpg"
+       },
+       {
+        "guid": 20904,
+        "name": "Aimed Shot",
+        "total": 10898,
+        "type": 1,
+        "icon": "inv_spear_07.jpg"
+       },
+       {
+        "guid": 14290,
+        "name": "Multi-Shot",
+        "total": 8079,
+        "type": 1,
+        "icon": "ability_upgrademoonglaive.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Ragnaros",
+        "total": 40270,
+        "totalReduced": 34472,
+        "type": "Boss"
+       }
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16846,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_05.jpg",
+        "name": "Giantstalker's Helmet",
+        "itemLevel": 66,
+        "permanentEnchant": 1508,
+        "permanentEnchantName": "+3 Agility",
+        "setID": 206
+       },
+       {
+        "id": 18404,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_09.jpg",
+        "name": "Onyxia Tooth Pendant",
+        "itemLevel": 74
+       },
+       {
+        "id": 16848,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_10.jpg",
+        "name": "Giantstalker's Epaulets",
+        "itemLevel": 66,
+        "setID": 206
+       },
+       "... 16 more"
+      ],
+      "pets": [
+       {
+        "name": "Spectrechewer",
+        "id": 52,
+        "guid": 243364,
+        "type": "Pet",
+        "icon": "abilities/ability_hunter_beastcall.jpg",
+        "total": 5798,
+        "totalReduced": 0,
+        "activeTime": 86555
+       }
+      ]
+     },
+     "... 26 more"
+    ],
+    "totalTime": 91834,
+    "logVersion": 14,
+    "gameVersion": 2,
+    "exploitDetails": []
+   }
+  },
+  "healing": {
+   "data": {
+    "entries": [
+     {
+      "name": "Kush",
+      "id": 47,
+      "guid": 64712,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 71,
+      "total": 1313,
+      "activeTime": 0,
+      "activeTimeReduced": 0,
+      "abilities": [
+       {
+        "guid": 17534,
+        "name": "Healing Potion",
+        "total": 1313,
+        "type": 1,
+        "icon": "inv_potion_54.jpg"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 3,
+        "name": "Falling",
+        "total": 1281,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 20566,
+        "name": "Wrath of Ragnaros",
+        "total": 32,
+        "type": 4,
+        "icon": "spell_fire_soulburn.jpg"
+       }
+      ],
+      "targets": [
+       {
+        "name": "Kush",
+        "total": 1313,
+        "type": "Rogue"
+       }
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16908,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_41.jpg",
+        "name": "Bloodfang Hood",
+        "itemLevel": 76,
+        "permanentEnchant": 1508,
+        "permanentEnchantName": "+3 Agility",
+        "setID": 213
+       },
+       {
+        "id": 18404,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_09.jpg",
+        "name": "Onyxia Tooth Pendant",
+        "itemLevel": 74
+       },
+       {
+        "id": 16823,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_25.jpg",
+        "name": "Nightslayer Shoulder Pads",
+        "itemLevel": 66,
+        "setID": 204
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Fash",
+      "id": 33,
+      "guid": 2343820,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "itemLevel": 67,
+      "total": 13842,
+      "activeTime": 85565,
+      "activeTimeReduced": 74000,
+      "overheal": 7296,
+      "abilities": [
+       {
+        "guid": 9841,
+        "name": "Rejuvenation",
+        "total": 9773,
+        "type": 8,
+        "icon": "spell_nature_rejuvenation.jpg"
+       },
+       {
+        "guid": 9858,
+        "name": "Regrowth",
+        "total": 2864,
+        "type": 8,
+        "icon": "spell_nature_resistnature.jpg"
+       },
+       {
+        "guid": 6778,
+        "name": "Healing Touch",
+        "total": 1205,
+        "type": 8,
+        "icon": "spell_nature_healingtouch.jpg"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 21158,
+        "name": "Lava Burst",
+        "total": 5034,
+        "type": 4,
+        "icon": "spell_fire_volcano.jpg"
+       },
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 516,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 20566,
+        "name": "Wrath of Ragnaros",
+        "total": 385,
+        "type": 4,
+        "icon": "spell_fire_soulburn.jpg"
+       },
+       "... 1 more"
+      ],
+      "targets": [
+       {
+        "name": "Crab",
+        "total": 3045,
+        "type": "Hunter"
+       },
+       {
+        "name": "Fash",
+        "total": 2446,
+        "type": "Druid"
+       },
+       {
+        "name": "Jesterboost",
+        "total": 2100,
+        "type": "Mage"
+       },
+       "... 2 more"
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16900,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_09.jpg",
+        "name": "Stormrage Cover",
+        "itemLevel": 76,
+        "setID": 214
+       },
+       {
+        "id": 17109,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_10.jpg",
+        "name": "Choker of Enlightenment",
+        "itemLevel": 65
+       },
+       {
+        "id": 16836,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_07.jpg",
+        "name": "Cenarion Spaulders",
+        "itemLevel": 66,
+        "setID": 205
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Speshimunt",
+      "id": 8,
+      "guid": 353331,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 71,
+      "total": 0,
+      "activeTime": 0,
+      "activeTimeReduced": 0,
+      "overheal": 75,
+      "abilities": [],
+      "damageAbilities": [],
+      "targets": [],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16908,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_41.jpg",
+        "name": "Bloodfang Hood",
+        "itemLevel": 76,
+        "permanentEnchant": 1508,
+        "permanentEnchantName": "+3 Agility",
+        "setID": 213
+       },
+       {
+        "id": 18404,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_09.jpg",
+        "name": "Onyxia Tooth Pendant",
+        "itemLevel": 74
+       },
+       {
+        "id": 16823,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_25.jpg",
+        "name": "Nightslayer Shoulder Pads",
+        "itemLevel": 66,
+        "setID": 204
+       },
+       "... 16 more"
+      ]
+     },
+     "... 31 more"
+    ],
+    "totalTime": 91834,
+    "logVersion": 14,
+    "gameVersion": 2,
+    "exploitDetails": []
+   }
+  },
+  "damageTaken": {
+   "data": {
+    "entries": [
+     {
+      "name": "Kush",
+      "id": 47,
+      "guid": 64712,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 71,
+      "total": 6137,
+      "activeTime": 9690,
+      "activeTimeReduced": 9690,
+      "overheal": 261,
+      "abilities": [
+       {
+        "guid": 21158,
+        "name": "Lava Burst",
+        "total": 3856,
+        "type": 4,
+        "icon": "spell_fire_volcano.jpg"
+       },
+       {
+        "guid": 3,
+        "name": "Falling",
+        "total": 1281,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 20566,
+        "name": "Wrath of Ragnaros",
+        "total": 1000,
+        "type": 4,
+        "icon": "spell_fire_soulburn.jpg"
+       }
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Lionfish",
+        "total": 3856,
+        "type": "NPC"
+       },
+       {
+        "name": "Environment",
+        "total": 1281,
+        "type": "NPC"
+       },
+       {
+        "name": "Ragnaros",
+        "total": 1000,
+        "type": "Boss"
+       }
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16908,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_41.jpg",
+        "name": "Bloodfang Hood",
+        "itemLevel": 76,
+        "permanentEnchant": 1508,
+        "permanentEnchantName": "+3 Agility",
+        "setID": 213
+       },
+       {
+        "id": 18404,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_09.jpg",
+        "name": "Onyxia Tooth Pendant",
+        "itemLevel": 74
+       },
+       {
+        "id": 16823,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_25.jpg",
+        "name": "Nightslayer Shoulder Pads",
+        "itemLevel": 66,
+        "setID": 204
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Fash",
+      "id": 33,
+      "guid": 2343820,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "itemLevel": 67,
+      "total": 2860,
+      "activeTime": 2405,
+      "activeTimeReduced": 2405,
+      "overheal": 947,
+      "abilities": [
+       {
+        "guid": 21158,
+        "name": "Lava Burst",
+        "total": 2860,
+        "type": 4,
+        "icon": "spell_fire_volcano.jpg"
+       }
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Lionfish",
+        "total": 2860,
+        "type": "NPC"
+       }
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16900,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_09.jpg",
+        "name": "Stormrage Cover",
+        "itemLevel": 76,
+        "setID": 214
+       },
+       {
+        "id": 17109,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_10.jpg",
+        "name": "Choker of Enlightenment",
+        "itemLevel": 65
+       },
+       {
+        "id": 16836,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_07.jpg",
+        "name": "Cenarion Spaulders",
+        "itemLevel": 66,
+        "setID": 205
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Speshimunt",
+      "id": 8,
+      "guid": 353331,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 71,
+      "total": 3925,
+      "activeTime": 2405,
+      "activeTimeReduced": 2405,
+      "abilities": [
+       {
+        "guid": 21158,
+        "name": "Lava Burst",
+        "total": 3925,
+        "type": 4,
+        "icon": "spell_fire_volcano.jpg"
+       }
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Lionfish",
+        "total": 3925,
+        "type": "NPC"
+       }
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16908,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_41.jpg",
+        "name": "Bloodfang Hood",
+        "itemLevel": 76,
+        "permanentEnchant": 1508,
+        "permanentEnchantName": "+3 Agility",
+        "setID": 213
+       },
+       {
+        "id": 18404,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_09.jpg",
+        "name": "Onyxia Tooth Pendant",
+        "itemLevel": 74
+       },
+       {
+        "id": 16823,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_25.jpg",
+        "name": "Nightslayer Shoulder Pads",
+        "itemLevel": 66,
+        "setID": 204
+       },
+       "... 16 more"
+      ]
+     },
+     "... 35 more"
+    ],
+    "totalTime": 91834,
+    "logVersion": 14,
+    "gameVersion": 2,
+    "exploitDetails": []
+   }
+  },
+  "deaths": {
+   "data": {
+    "entries": [
+     {
+      "name": "Jhager",
+      "id": 11,
+      "guid": 573833,
+      "type": "Warrior",
+      "icon": "Warrior-Fury",
+      "timestamp": 5717772,
+      "fight": 52,
+      "damage": {
+       "total": 5987,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 19,
+       "abilities": [
+        {
+         "guid": 1,
+         "name": "Melee",
+         "total": 3975,
+         "type": 1,
+         "icon": "inv_axe_02.jpg"
+        },
+        {
+         "guid": 21158,
+         "name": "Lava Burst",
+         "total": 2012,
+         "type": 4,
+         "icon": "spell_fire_volcano.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Ragnaros",
+         "total": 3975,
+         "type": "Boss"
+        },
+        {
+         "name": "Lionfish",
+         "total": 2012,
+         "type": "NPC"
+        }
+       ]
+      },
+      "healing": {
+       "total": 347,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 20007,
+         "name": "Holy Strength",
+         "total": 207,
+         "type": 2,
+         "icon": "spell_holy_blessingofstrength.jpg"
+        },
+        {
+         "guid": 23891,
+         "name": "Bloodthirst",
+         "total": 140,
+         "type": 1,
+         "icon": "spell_nature_bloodlust.jpg"
+        }
+       ],
+       "damageAbilities": [
+        {
+         "guid": 21158,
+         "name": "Lava Burst",
+         "total": 117,
+         "type": 4,
+         "icon": "spell_fire_volcano.jpg"
+        }
+       ],
+       "sources": [
+        {
+         "name": "Jhager",
+         "total": 347,
+         "type": "Warrior"
+        }
+       ]
+      },
+      "deathWindow": 13354,
+      "overkill": 1219,
+      "events": [
+       {
+        "timestamp": 5717371,
+        "type": "damage",
+        "sourceID": 80,
+        "sourceIsFriendly": false,
+        "targetID": 11,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Melee",
+         "guid": 1,
+         "type": 1,
+         "abilityIcon": "inv_axe_02.jpg"
+        },
+        "fight": 52,
+        "hitType": 15,
+        "amount": 2756,
+        "unmitigatedAmount": 2776,
+        "overkill": 1219,
+        "isAoE": false
+       },
+       {
+        "timestamp": 5716147,
+        "type": "damage",
+        "source": {
+         "name": "Lionfish",
+         "id": 84,
+         "guid": 178088,
+         "type": "NPC",
+         "icon": "custom-icon-spell_fire_volcano.jpg"
+        },
+        "sourceInstance": 11,
+        "sourceIsFriendly": false,
+        "targetID": 11,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Lava Burst",
+         "guid": 21158,
+         "type": 4,
+         "abilityIcon": "spell_fire_volcano.jpg"
+        },
+        "fight": 52,
+        "hitType": 16,
+        "amount": 958,
+        "mitigated": 9,
+        "unmitigatedAmount": 967,
+        "resisted": 242,
+        "isAoE": false
+       },
+       {
+        "timestamp": 5713742,
+        "type": "damage",
+        "source": {
+         "name": "Lionfish",
+         "id": 84,
+         "guid": 178088,
+         "type": "NPC",
+         "icon": "custom-icon-spell_fire_volcano.jpg"
+        },
+        "sourceInstance": 10,
+        "sourceIsFriendly": false,
+        "targetID": 11,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Lava Burst",
+         "guid": 21158,
+         "type": 4,
+         "abilityIcon": "spell_fire_volcano.jpg"
+        },
+        "fight": 52,
+        "hitType": 16,
+        "amount": 1054,
+        "mitigated": 10,
+        "unmitigatedAmount": 1064,
+        "resisted": 266,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Melee",
+       "guid": 1,
+       "type": 1,
+       "abilityIcon": "inv_axe_02.jpg"
+      }
+     },
+     {
+      "name": "Røj",
+      "id": 19,
+      "guid": 6171661,
+      "type": "Warrior",
+      "icon": "Warrior-Fury",
+      "timestamp": 5720992,
+      "fight": 52,
+      "damage": {
+       "total": 6332,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 1190,
+       "abilities": [
+        {
+         "guid": 20564,
+         "name": "Elemental Fire",
+         "total": 2649,
+         "type": 4,
+         "icon": "spell_fire_flametounge.jpg"
+        },
+        {
+         "guid": 21158,
+         "name": "Lava Burst",
+         "total": 1906,
+         "type": 4,
+         "icon": "spell_fire_volcano.jpg"
+        },
+        {
+         "guid": 1,
+         "name": "Melee",
+         "total": 1777,
+         "type": 1,
+         "icon": "inv_axe_02.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Ragnaros",
+         "total": 4426,
+         "type": "Boss"
+        },
+        {
+         "name": "Lionfish",
+         "total": 1906,
+         "type": "NPC"
+        }
+       ]
+      },
+      "healing": {
+       "total": 491,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 9841,
+         "name": "Rejuvenation",
+         "total": 262,
+         "type": 8,
+         "icon": "spell_nature_rejuvenation.jpg"
+        },
+        {
+         "guid": 20007,
+         "name": "Holy Strength",
+         "total": 191,
+         "type": 2,
+         "icon": "spell_holy_blessingofstrength.jpg"
+        },
+        {
+         "guid": 23880,
+         "name": "Bloodthirst",
+         "total": 20,
+         "type": 1,
+         "icon": "spell_nature_bloodlust.jpg"
+        },
+        "... 1 more"
+       ],
+       "damageAbilities": [
+        {
+         "guid": 1,
+         "name": "Melee",
+         "total": 271,
+         "type": 1,
+         "icon": "inv_axe_02.jpg"
+        },
+        {
+         "guid": 21158,
+         "name": "Lava Burst",
+         "total": 220,
+         "type": 4,
+         "icon": "spell_fire_volcano.jpg"
+        }
+       ],
+       "sources": [
+        {
+         "name": "Fash",
+         "total": 262,
+         "type": "Druid"
+        },
+        {
+         "name": "Røj",
+         "total": 229,
+         "type": "Warrior"
+        }
+       ]
+      },
+      "deathWindow": 6845,
+      "overkill": 1820,
+      "events": [
+       {
+        "timestamp": 5720587,
+        "type": "damage",
+        "sourceID": 80,
+        "sourceIsFriendly": false,
+        "targetID": 19,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Elemental Fire",
+         "guid": 20564,
+         "type": 4,
+         "abilityIcon": "spell_fire_flametounge.jpg"
+        },
+        "fight": 52,
+        "hitType": 1,
+        "amount": 829,
+        "unmitigatedAmount": 2408,
+        "overkill": 1820,
+        "isAoE": false
+       },
+       {
+        "timestamp": 5719784,
+        "type": "damage",
+        "sourceID": 80,
+        "sourceIsFriendly": false,
+        "targetID": 19,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Melee",
+         "guid": 1,
+         "type": 1,
+         "abilityIcon": "inv_axe_02.jpg"
+        },
+        "fight": 52,
+        "hitType": 1,
+        "amount": 1777,
+        "mitigated": 1017,
+        "unmitigatedAmount": 2794,
+        "isAoE": false
+       },
+       {
+        "timestamp": 5716147,
+        "type": "damage",
+        "source": {
+         "name": "Lionfish",
+         "id": 84,
+         "guid": 178088,
+         "type": "NPC",
+         "icon": "custom-icon-spell_fire_volcano.jpg"
+        },
+        "sourceInstance": 11,
+        "sourceIsFriendly": false,
+        "targetID": 19,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Lava Burst",
+         "guid": 21158,
+         "type": 4,
+         "abilityIcon": "spell_fire_volcano.jpg"
+        },
+        "fight": 52,
+        "hitType": 16,
+        "amount": 817,
+        "mitigated": 173,
+        "unmitigatedAmount": 990,
+        "resisted": 248,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Elemental Fire",
+       "guid": 20564,
+       "type": 4,
+       "abilityIcon": "spell_fire_flametounge.jpg"
+      }
+     },
+     {
+      "name": "Vilify",
+      "id": 17,
+      "guid": 3501574,
+      "type": "Mage",
+      "icon": "Mage-Frost",
+      "timestamp": 5725037,
+      "fight": 52,
+      "damage": {
+       "total": 2095,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 496,
+       "abilities": [
+        {
+         "guid": 21158,
+         "name": "Lava Burst",
+         "total": 1488,
+         "type": 4,
+         "icon": "spell_fire_volcano.jpg"
+        },
+        {
+         "guid": 6,
+         "name": "Lava",
+         "total": 607,
+         "type": 4,
+         "icon": "inv_axe_02.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Lionfish",
+         "total": 1488,
+         "type": "NPC"
+        },
+        {
+         "name": "Environment",
+         "total": 607,
+         "type": "NPC"
+        }
+       ]
+      },
+      "healing": {
+       "total": 0,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [],
+       "damageAbilities": [],
+       "sources": []
+      },
+      "deathWindow": 11295,
+      "overkill": 0,
+      "events": [
+       {
+        "timestamp": 5725037,
+        "type": "damage",
+        "source": {
+         "name": "Environment",
+         "id": -1,
+         "guid": 0,
+         "type": "NPC",
+         "icon": "NPC"
+        },
+        "sourceIsFriendly": false,
+        "targetID": 17,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Lava",
+         "guid": 6,
+         "type": 4,
+         "abilityIcon": "inv_axe_02.jpg"
+        },
+        "fight": 52,
+        "hitType": 1,
+        "amount": 607,
+        "unmitigatedAmount": 607,
+        "overkill": 0,
+        "isAoE": false,
+        "targetMarker": 1
+       },
+       {
+        "timestamp": 5716147,
+        "type": "damage",
+        "source": {
+         "name": "Lionfish",
+         "id": 84,
+         "guid": 178088,
+         "type": "NPC",
+         "icon": "custom-icon-spell_fire_volcano.jpg"
+        },
+        "sourceInstance": 11,
+        "sourceIsFriendly": false,
+        "targetID": 17,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Lava Burst",
+         "guid": 21158,
+         "type": 4,
+         "abilityIcon": "spell_fire_volcano.jpg"
+        },
+        "fight": 52,
+        "hitType": 16,
+        "amount": 727,
+        "mitigated": 242,
+        "unmitigatedAmount": 969,
+        "resisted": 242,
+        "isAoE": false,
+        "targetMarker": 1
+       },
+       {
+        "timestamp": 5713742,
+        "type": "damage",
+        "source": {
+         "name": "Lionfish",
+         "id": 84,
+         "guid": 178088,
+         "type": "NPC",
+         "icon": "custom-icon-spell_fire_volcano.jpg"
+        },
+        "sourceInstance": 10,
+        "sourceIsFriendly": false,
+        "targetID": 17,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Lava Burst",
+         "guid": 21158,
+         "type": 4,
+         "abilityIcon": "spell_fire_volcano.jpg"
+        },
+        "fight": 52,
+        "hitType": 16,
+        "amount": 761,
+        "mitigated": 254,
+        "unmitigatedAmount": 1015,
+        "resisted": 254,
+        "isAoE": false,
+        "targetMarker": 1
+       }
+      ],
+      "killingBlow": {
+       "name": "Lava",
+       "guid": 6,
+       "type": 4,
+       "abilityIcon": "inv_axe_02.jpg"
+      }
+     },
+     "... 1 more"
+    ]
+   }
+  },
+  "interrupts": {
+   "data": {
+    "entries": [
+     {
+      "entries": []
+     }
+    ],
+    "totalTime": 91834
+   }
+  },
+  "dispels": {
+   "data": {
+    "entries": [
+     {
+      "entries": []
+     }
+    ],
+    "totalTime": 91834
+   }
+  },
+  "casts": {
+   "data": {
+    "entries": [
+     {
+      "name": "Kush",
+      "id": 47,
+      "guid": 64712,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 71,
+      "total": 31,
+      "activeTime": 89038,
+      "activeTimeReduced": 89038,
+      "abilities": [
+       {
+        "guid": 11281,
+        "name": "Backstab",
+        "total": 15,
+        "type": 1,
+        "icon": "ability_backstab.jpg"
+       },
+       {
+        "guid": 6774,
+        "name": "Slice and Dice",
+        "total": 6,
+        "type": 1,
+        "icon": "ability_rogue_slicedice.jpg"
+       },
+       {
+        "guid": 11269,
+        "name": "Ambush",
+        "total": 2,
+        "type": 1,
+        "icon": "ability_rogue_ambush.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Ragnaros",
+        "total": 24,
+        "type": "Boss"
+       },
+       {
+        "name": "Environment",
+        "total": 7,
+        "type": "NPC"
+       }
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16908,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_41.jpg",
+        "name": "Bloodfang Hood",
+        "itemLevel": 76,
+        "permanentEnchant": 1508,
+        "permanentEnchantName": "+3 Agility",
+        "setID": 213
+       },
+       {
+        "id": 18404,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_09.jpg",
+        "name": "Onyxia Tooth Pendant",
+        "itemLevel": 74
+       },
+       {
+        "id": 16823,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_25.jpg",
+        "name": "Nightslayer Shoulder Pads",
+        "itemLevel": 66,
+        "setID": 204
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Fash",
+      "id": 33,
+      "guid": 2343820,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "itemLevel": 67,
+      "total": 24,
+      "activeTime": 75965,
+      "activeTimeReduced": 75965,
+      "abilities": [
+       {
+        "guid": 9841,
+        "name": "Rejuvenation",
+        "total": 20,
+        "type": 8,
+        "icon": "spell_nature_rejuvenation.jpg"
+       },
+       {
+        "guid": 9858,
+        "name": "Regrowth",
+        "total": 2,
+        "type": 8,
+        "icon": "spell_nature_resistnature.jpg"
+       },
+       {
+        "guid": 6778,
+        "name": "Healing Touch",
+        "total": 1,
+        "type": 8,
+        "icon": "spell_nature_healingtouch.jpg"
+       },
+       "... 1 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Crab",
+        "total": 4,
+        "type": "Hunter"
+       },
+       {
+        "name": "Cloudrunner",
+        "total": 3,
+        "type": "Mage"
+       },
+       {
+        "name": "Kush",
+        "total": 2,
+        "type": "Rogue"
+       },
+       "... 2 more"
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16900,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_09.jpg",
+        "name": "Stormrage Cover",
+        "itemLevel": 76,
+        "setID": 214
+       },
+       {
+        "id": 17109,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_10.jpg",
+        "name": "Choker of Enlightenment",
+        "itemLevel": 65
+       },
+       {
+        "id": 16836,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_07.jpg",
+        "name": "Cenarion Spaulders",
+        "itemLevel": 66,
+        "setID": 205
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Speshimunt",
+      "id": 8,
+      "guid": 353331,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 71,
+      "total": 30,
+      "activeTime": 89128,
+      "activeTimeReduced": 89128,
+      "abilities": [
+       {
+        "guid": 11281,
+        "name": "Backstab",
+        "total": 18,
+        "type": 1,
+        "icon": "ability_backstab.jpg"
+       },
+       {
+        "guid": 6774,
+        "name": "Slice and Dice",
+        "total": 6,
+        "type": 1,
+        "icon": "ability_rogue_slicedice.jpg"
+       },
+       {
+        "guid": 11300,
+        "name": "Eviscerate",
+        "total": 2,
+        "type": 1,
+        "icon": "ability_rogue_eviscerate.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Ragnaros",
+        "total": 27,
+        "type": "Boss"
+       },
+       {
+        "name": "Environment",
+        "total": 3,
+        "type": "NPC"
+       }
+      ],
+      "talents": [],
+      "gear": [
+       {
+        "id": 16908,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_41.jpg",
+        "name": "Bloodfang Hood",
+        "itemLevel": 76,
+        "permanentEnchant": 1508,
+        "permanentEnchantName": "+3 Agility",
+        "setID": 213
+       },
+       {
+        "id": 18404,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_09.jpg",
+        "name": "Onyxia Tooth Pendant",
+        "itemLevel": 74
+       },
+       {
+        "id": 16823,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_25.jpg",
+        "name": "Nightslayer Shoulder Pads",
+        "itemLevel": 66,
+        "setID": 204
+       },
+       "... 16 more"
+      ]
+     },
+     "... 35 more"
+    ],
+    "totalTime": 91834,
+    "logVersion": 14,
+    "gameVersion": 2,
+    "exploitDetails": []
+   }
+  }
+ }
+}

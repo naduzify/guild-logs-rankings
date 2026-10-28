@@ -1,0 +1,24 @@
+{
+  "tables": [
+    "Summary",
+    "DamageDone",
+    "Healing",
+    "DamageTaken",
+    "Deaths",
+    "Interrupts",
+    "Dispels",
+    "Casts"
+  ],
+  "eligible_size": {
+    "classic": 40,
+    "tbc": 25,
+    "wotlk": 25,
+    "cata": 25,
+    "mop": 25
+  },
+  "eligible_difficulties": [
+    3,
+    4
+  ],
+  "min_players": 10
+}

@@ -1,0 +1,3562 @@
+{
+ "expansion": "tbc",
+ "report": "gGAQ9Z7bWFTxVhwJ",
+ "zone": "BT / Hyjal",
+ "fight": {
+  "id": 40,
+  "encounterID": 609,
+  "name": "Illidan Stormrage",
+  "difficulty": 3,
+  "size": 25,
+  "kill": true,
+  "startTime": 5451541,
+  "endTime": 5876116,
+  "fightPercentage": 0.01,
+  "bossPercentage": 0.01
+ },
+ "players": [
+  {
+   "id": 1,
+   "name": "Greenparse",
+   "server": "Arugal",
+   "subType": "Hunter"
+  },
+  {
+   "id": 2,
+   "name": "Relaxable",
+   "server": "Arugal",
+   "subType": "Druid"
+  },
+  {
+   "id": 3,
+   "name": "Miccybowze",
+   "server": "Arugal",
+   "subType": "Priest"
+  },
+  "... 313 more"
+ ],
+ "tables": {
+  "summary": {
+   "data": {
+    "totalTime": 424575,
+    "itemLevel": 132.0399932861328,
+    "composition": [
+     {
+      "name": "Masomum",
+      "id": 6,
+      "guid": 10411207,
+      "type": "Paladin",
+      "specs": [
+       {
+        "spec": "Protection",
+        "role": "tank"
+       }
+      ]
+     },
+     {
+      "name": "Solor",
+      "id": 20,
+      "guid": 4795257,
+      "type": "Druid",
+      "specs": [
+       {
+        "spec": "Restoration",
+        "role": "healer"
+       }
+      ]
+     },
+     {
+      "name": "Enrkey",
+      "id": 24,
+      "guid": 10967772,
+      "type": "Shaman",
+      "specs": [
+       {
+        "spec": "Restoration",
+        "role": "healer"
+       }
+      ]
+     },
+     "... 22 more"
+    ],
+    "damageDone": [
+     {
+      "name": "Masomum",
+      "id": 6,
+      "guid": 10411207,
+      "type": "Paladin",
+      "icon": "Paladin-Protection",
+      "total": 117403
+     },
+     {
+      "name": "Solor",
+      "id": 20,
+      "guid": 4795257,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "total": 3594
+     },
+     {
+      "name": "Rassaa",
+      "id": 13,
+      "guid": 165862,
+      "type": "Druid",
+      "icon": "Druid-Warden",
+      "total": 273410
+     },
+     "... 20 more"
+    ],
+    "healingDone": [
+     {
+      "name": "Solor",
+      "id": 20,
+      "guid": 4795257,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "total": 229150
+     },
+     {
+      "name": "Enrkey",
+      "id": 24,
+      "guid": 10967772,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "total": 282909
+     },
+     {
+      "name": "Zaazaa",
+      "id": 60,
+      "guid": 5497101,
+      "type": "Paladin",
+      "icon": "Paladin-Holy",
+      "total": 202218
+     },
+     "... 14 more"
+    ],
+    "damageTaken": [
+     {
+      "name": "Seal of the Martyr",
+      "guid": 348703,
+      "type": 2,
+      "abilityIcon": "spell_holy_sealofblood.jpg",
+      "total": 8772
+     },
+     {
+      "name": "Flame Crash",
+      "guid": 40832,
+      "type": 4,
+      "abilityIcon": "spell_fire_bluehellfire.jpg",
+      "total": 3613
+     },
+     {
+      "name": "Demon Fire",
+      "guid": 40030,
+      "type": 4,
+      "abilityIcon": "trade_engineering.jpg",
+      "total": 5350
+     },
+     "... 16 more"
+    ],
+    "deathEvents": [
+     {
+      "name": "Violetsky",
+      "id": 30,
+      "guid": 5589479,
+      "type": "Mage",
+      "icon": "Mage-Arcane",
+      "deathTime": 275141,
+      "ability": {
+       "name": "Parasitic Shadowfiend",
+       "guid": 41917,
+       "type": 32,
+       "abilityIcon": "spell_shadow_soulleech_3.jpg"
+      }
+     },
+     {
+      "name": "Yogiqt",
+      "id": 14,
+      "guid": 2967199,
+      "type": "Warrior",
+      "icon": "Warrior-Protection",
+      "deathTime": 327632,
+      "ability": {
+       "name": "Melee",
+       "guid": 1,
+       "type": 1,
+       "abilityIcon": "inv_axe_02.jpg"
+      }
+     },
+     {
+      "name": "Meng",
+      "id": 15,
+      "guid": 12090042,
+      "type": "Warrior",
+      "icon": "Warrior-Fury",
+      "deathTime": 331958,
+      "ability": {
+       "name": "Melee",
+       "guid": 1,
+       "type": 1,
+       "abilityIcon": "inv_axe_02.jpg"
+      }
+     },
+     "... 11 more"
+    ],
+    "exploitDetails": [],
+    "playerDetails": {
+     "dps": [
+      {
+       "name": "Illumi",
+       "id": 4,
+       "guid": 2086725,
+       "type": "Mage",
+       "server": "Arugal",
+       "icon": "Mage-Arcane",
+       "specs": [
+        "Arcane"
+       ],
+       "minItemLevel": 135,
+       "maxItemLevel": 135,
+       "potionUse": 3,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 133,
+          "max": 133
+         },
+         "Intellect": {
+          "min": 759,
+          "max": 759
+         },
+         "Agility": {
+          "min": 69,
+          "max": 69
+         },
+         "Crit": {
+          "min": 350,
+          "max": 350
+         },
+         "Item Level": {
+          "min": 135,
+          "max": 135
+         },
+         "Spirit": {
+          "min": 418,
+          "max": 418
+         },
+         "Strength": {
+          "min": 62,
+          "max": 62
+         },
+         "Stamina": {
+          "min": 627,
+          "max": 627
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 28,
+          "max": 28
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 40,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 21,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 30206,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_86.jpg",
+          "name": "Cowl of Tirisfal",
+          "itemLevel": 133,
+          "permanentEnchant": 3002,
+          "permanentEnchantName": "+7 Spell Power and +4 Critical Strike",
+          "gems": [
+           {
+            "id": 34220,
+            "itemLevel": 70,
+            "icon": "inv_misc_gem_diamond_07.jpg"
+           },
+           {
+            "id": 32204,
+            "itemLevel": 100,
+            "icon": "inv_jewelcrafting_lionseye_02.jpg"
+           }
+          ],
+          "setID": 649
+         },
+         {
+          "id": 30015,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_14.jpg",
+          "name": "The Sun King's Talisman",
+          "itemLevel": 138
+         },
+         {
+          "id": 30210,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_49.jpg",
+          "name": "Mantle of Tirisfal",
+          "itemLevel": 133,
+          "permanentEnchant": 2982,
+          "permanentEnchantName": "+2 Spell Power and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 32204,
+            "itemLevel": 100,
+            "icon": "inv_jewelcrafting_lionseye_02.jpg"
+           },
+           {
+            "id": 31116,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_nightseye_03.jpg"
+           }
+          ],
+          "setID": 649
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Meng",
+       "id": 15,
+       "guid": 12090042,
+       "type": "Warrior",
+       "server": "Arugal",
+       "icon": "Warrior-Fury",
+       "specs": [
+        "Fury"
+       ],
+       "minItemLevel": 132,
+       "maxItemLevel": 132,
+       "potionUse": 2,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 146,
+          "max": 146
+         },
+         "Intellect": {
+          "min": 106,
+          "max": 106
+         },
+         "Agility": {
+          "min": 306,
+          "max": 306
+         },
+         "Crit": {
+          "min": 317,
+          "max": 317
+         },
+         "Item Level": {
+          "min": 132,
+          "max": 132
+         },
+         "Spirit": {
+          "min": 114,
+          "max": 114
+         },
+         "Strength": {
+          "min": 762,
+          "max": 762
+         },
+         "Stamina": {
+          "min": 803,
+          "max": 803
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 21,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 40,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 30972,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_98.jpg",
+          "name": "Onslaught Battle-Helm",
+          "itemLevel": 146,
+          "permanentEnchant": 3003,
+          "permanentEnchantName": "+5 Attack Power and +5 Critical Strike",
+          "gems": [
+           {
+            "id": 32409,
+            "itemLevel": 70,
+            "icon": "inv_misc_gem_diamond_06.jpg"
+           },
+           {
+            "id": 24058,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_nobletopaz_03.jpg"
+           }
+          ],
+          "setID": 672
+         },
+         {
+          "id": 32591,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_34.jpg",
+          "name": "Choker of Serrated Blades",
+          "itemLevel": 141
+         },
+         {
+          "id": 30122,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_56.jpg",
+          "name": "Destroyer Shoulderblades",
+          "itemLevel": 133,
+          "permanentEnchant": 2986,
+          "permanentEnchantName": "+2 Attack Power and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 24067,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_talasite_03.jpg"
+           },
+           {
+            "id": 24067,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_talasite_03.jpg"
+           }
+          ],
+          "setID": 657
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Greenparse",
+       "id": 1,
+       "guid": 11618995,
+       "type": "Hunter",
+       "server": "Arugal",
+       "icon": "Hunter-BeastMastery",
+       "specs": [
+        "BeastMastery"
+       ],
+       "minItemLevel": 139,
+       "maxItemLevel": 139,
+       "potionUse": 3,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 105,
+          "max": 105
+         },
+         "Intellect": {
+          "min": 350,
+          "max": 350
+         },
+         "Agility": {
+          "min": 893,
+          "max": 893
+         },
+         "Crit": {
+          "min": 284,
+          "max": 284
+         },
+         "Item Level": {
+          "min": 139,
+          "max": 139
+         },
+         "Spirit": {
+          "min": 139,
+          "max": 139
+         },
+         "Strength": {
+          "min": 201,
+          "max": 201
+         },
+         "Stamina": {
+          "min": 684,
+          "max": 684
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 41,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 20,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 32235,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_misc_bandana_03.jpg",
+          "name": "Cursed Vision of Sargeras",
+          "itemLevel": 151,
+          "permanentEnchant": 3003,
+          "permanentEnchantName": "+5 Attack Power and +5 Critical Strike",
+          "gems": [
+           {
+            "id": 32409,
+            "itemLevel": 70,
+            "icon": "inv_misc_gem_diamond_06.jpg"
+           },
+           {
+            "id": 33143,
+            "itemLevel": 130,
+            "icon": "inv_jewelcrafting_lionseye_02.jpg"
+           }
+          ]
+         },
+         {
+          "id": 30017,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_30naxxramas.jpg",
+          "name": "Telonicus' Pendant of Mayhem",
+          "itemLevel": 138
+         },
+         {
+          "id": 30143,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_14.jpg",
+          "name": "Rift Stalker Mantle",
+          "itemLevel": 133,
+          "permanentEnchant": 2986,
+          "permanentEnchantName": "+2 Attack Power and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 24028,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_livingruby_03.jpg"
+           },
+           {
+            "id": 24028,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_livingruby_03.jpg"
+           }
+          ],
+          "setID": 652
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      "... 14 more"
+     ],
+     "healers": [
+      {
+       "name": "Solor",
+       "id": 20,
+       "guid": 4795257,
+       "type": "Druid",
+       "server": "Arugal",
+       "icon": "Druid-Restoration",
+       "specs": [
+        "Restoration"
+       ],
+       "minItemLevel": 127,
+       "maxItemLevel": 127,
+       "potionUse": 2,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 575,
+          "max": 575
+         },
+         "Agility": {
+          "min": 102,
+          "max": 102
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 127,
+          "max": 127
+         },
+         "Spirit": {
+          "min": 621,
+          "max": 621
+         },
+         "Strength": {
+          "min": 100,
+          "max": 100
+         },
+         "Stamina": {
+          "min": 632,
+          "max": 632
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 385,
+          "max": 385
+         }
+        },
+        "talents": [
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Really Long bow shot",
+          "guid": 61,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 30219,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_85.jpg",
+          "name": "Nordrassil Headguard",
+          "itemLevel": 133,
+          "permanentEnchant": 3001,
+          "permanentEnchantName": "+5 Intellect and +6 Versatility",
+          "gems": [
+           {
+            "id": 24029,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_livingruby_03.jpg"
+           },
+           {
+            "id": 25897,
+            "itemLevel": 70,
+            "icon": "inv_misc_gem_diamond_06.jpg"
+           }
+          ],
+          "setID": 642
+         },
+         {
+          "id": 28609,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_17.jpg",
+          "name": "Emberspur Talisman",
+          "itemLevel": 115
+         },
+         {
+          "id": 31047,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_58.jpg",
+          "name": "Thunderheart Spaulders",
+          "itemLevel": 146,
+          "permanentEnchant": 2980,
+          "permanentEnchantName": "+2 Intellect and +1 Versatility",
+          "gems": [
+           {
+            "id": 32195,
+            "itemLevel": 100,
+            "icon": "inv_jewelcrafting_crimsonspinel_02.jpg"
+           },
+           {
+            "id": 32195,
+            "itemLevel": 100,
+            "icon": "inv_jewelcrafting_crimsonspinel_02.jpg"
+           }
+          ],
+          "setID": 678
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Livity",
+       "id": 25,
+       "guid": 5344468,
+       "type": "Priest",
+       "server": "Arugal",
+       "icon": "Priest-Holy",
+       "specs": [
+        "Holy"
+       ],
+       "minItemLevel": 133,
+       "maxItemLevel": 133,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 641,
+          "max": 641
+         },
+         "Agility": {
+          "min": 74,
+          "max": 74
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 133,
+          "max": 133
+         },
+         "Spirit": {
+          "min": 975,
+          "max": 975
+         },
+         "Strength": {
+          "min": 59,
+          "max": 59
+         },
+         "Stamina": {
+          "min": 639,
+          "max": 639
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 64,
+          "max": 64
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 20,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 41,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 32329,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_32.jpg",
+          "name": "Cowl of Benevolence",
+          "itemLevel": 141,
+          "permanentEnchant": 3001,
+          "permanentEnchantName": "+5 Intellect and +6 Versatility",
+          "gems": [
+           {
+            "id": 25897,
+            "itemLevel": 70,
+            "icon": "inv_misc_gem_diamond_06.jpg"
+           },
+           {
+            "id": 30603,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_nightseye_03.jpg"
+           }
+          ]
+         },
+         {
+          "id": 28822,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_bone_09.jpg",
+          "name": "Teeth of Gruul",
+          "itemLevel": 125
+         },
+         {
+          "id": 32585,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_25.jpg",
+          "name": "Swiftheal Mantle",
+          "itemLevel": 141,
+          "permanentEnchant": 2979,
+          "permanentEnchantName": "+2 Spell Power"
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Enrkey",
+       "id": 24,
+       "guid": 10967772,
+       "type": "Shaman",
+       "server": "Arugal",
+       "icon": "Shaman-Restoration",
+       "specs": [
+        "Restoration"
+       ],
+       "minItemLevel": 137,
+       "maxItemLevel": 137,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 553,
+          "max": 553
+         },
+         "Agility": {
+          "min": 86,
+          "max": 86
+         },
+         "Crit": {
+          "min": 71,
+          "max": 71
+         },
+         "Item Level": {
+          "min": 137,
+          "max": 137
+         },
+         "Spirit": {
+          "min": 287,
+          "max": 287
+         },
+         "Strength": {
+          "min": 133,
+          "max": 133
+         },
+         "Stamina": {
+          "min": 684,
+          "max": 684
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 30,
+          "max": 30
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 8,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Backstab",
+          "guid": 53,
+          "type": 1,
+          "abilityIcon": "ability_backstab.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 31012,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_97.jpg",
+          "name": "Skyshatter Helmet",
+          "itemLevel": 146,
+          "permanentEnchant": 3001,
+          "permanentEnchantName": "+5 Intellect and +6 Versatility",
+          "gems": [
+           {
+            "id": 25897,
+            "itemLevel": 70,
+            "icon": "inv_misc_gem_diamond_06.jpg"
+           },
+           {
+            "id": 24029,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_livingruby_03.jpg"
+           }
+          ],
+          "setID": 683
+         },
+         {
+          "id": 32370,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_32.jpg",
+          "name": "Nadina's Pendant of Purity",
+          "itemLevel": 141
+         },
+         {
+          "id": 30168,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_14.jpg",
+          "name": "Cataclysm Shoulderguards",
+          "itemLevel": 133,
+          "permanentEnchant": 2979,
+          "permanentEnchantName": "+2 Spell Power",
+          "gems": [
+           {
+            "id": 23094,
+            "itemLevel": 60,
+            "icon": "inv_misc_gem_bloodgem_02.jpg"
+           },
+           {
+            "id": 23094,
+            "itemLevel": 60,
+            "icon": "inv_misc_gem_bloodgem_02.jpg"
+           }
+          ],
+          "setID": 634
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      "... 2 more"
+     ],
+     "tanks": [
+      {
+       "name": "Masomum",
+       "id": 6,
+       "guid": 10411207,
+       "type": "Paladin",
+       "server": "Arugal",
+       "icon": "Paladin-Protection",
+       "specs": [
+        "Protection"
+       ],
+       "minItemLevel": 123,
+       "maxItemLevel": 123,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 153,
+          "max": 153
+         },
+         "Stamina": {
+          "min": 1164,
+          "max": 1164
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Hit": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 289,
+          "max": 289
+         },
+         "Armor": {
+          "min": 16664,
+          "max": 16664
+         },
+         "Agility": {
+          "min": 117,
+          "max": 117
+         },
+         "Block": {
+          "min": 20,
+          "max": 20
+         },
+         "Crit": {
+          "min": 0,
+          "max": 0
+         },
+         "Item Level": {
+          "min": 123,
+          "max": 123
+         },
+         "Parry": {
+          "min": 19,
+          "max": 19
+         },
+         "Strength": {
+          "min": 176,
+          "max": 176
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         }
+        },
+        "talents": [
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 40,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 21,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 23516,
+          "slot": 0,
+          "quality": 3,
+          "icon": "inv_helmet_22.jpg",
+          "name": "Flamebane Helm",
+          "itemLevel": 113,
+          "permanentEnchant": 3007,
+          "permanentEnchantName": "+6 Fire Resistance",
+          "gems": [
+           {
+            "id": 33782,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_talasite_03.jpg"
+           },
+           {
+            "id": 33782,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_talasite_03.jpg"
+           },
+           {
+            "id": 33782,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_talasite_03.jpg"
+           }
+          ],
+          "setID": 564
+         },
+         {
+          "id": 33921,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_36.jpg",
+          "name": "Vindicator's Pendant of Dominance",
+          "itemLevel": 141,
+          "gems": [
+           {
+            "id": 30592,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_talasite_03.jpg"
+           }
+          ]
+         },
+         {
+          "id": 30127,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_41.jpg",
+          "name": "Crystalforge Shoulderguards",
+          "itemLevel": 133,
+          "permanentEnchant": 2982,
+          "permanentEnchantName": "+2 Spell Power and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 24030,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_livingruby_03.jpg"
+           },
+           {
+            "id": 24030,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_livingruby_03.jpg"
+           }
+          ],
+          "setID": 628
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Rassaa",
+       "id": 13,
+       "guid": 165862,
+       "type": "Druid",
+       "server": "Arugal",
+       "icon": "Druid-Warden",
+       "specs": [
+        "Warden"
+       ],
+       "minItemLevel": 126,
+       "maxItemLevel": 126,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 218,
+          "max": 218
+         },
+         "Stamina": {
+          "min": 952,
+          "max": 952
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Hit": {
+          "min": 56,
+          "max": 56
+         },
+         "Intellect": {
+          "min": 319,
+          "max": 319
+         },
+         "Armor": {
+          "min": 5378,
+          "max": 5378
+         },
+         "Agility": {
+          "min": 458,
+          "max": 458
+         },
+         "Crit": {
+          "min": 174,
+          "max": 174
+         },
+         "Item Level": {
+          "min": 126,
+          "max": 126
+         },
+         "Parry": {
+          "min": 0,
+          "max": 0
+         },
+         "Strength": {
+          "min": 395,
+          "max": 395
+         },
+         "Expertise": {
+          "min": 25,
+          "max": 25
+         }
+        },
+        "talents": [
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 44,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Power Word: Shield",
+          "guid": 17,
+          "type": 1,
+          "abilityIcon": "spell_holy_powerwordshield.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 33672,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_94.jpg",
+          "name": "Vengeful Gladiator's Dragonhide Helm",
+          "itemLevel": 146,
+          "permanentEnchant": 3003,
+          "permanentEnchantName": "+5 Attack Power and +5 Critical Strike",
+          "gems": [
+           {
+            "id": 32409,
+            "itemLevel": 70,
+            "icon": "inv_misc_gem_diamond_06.jpg"
+           },
+           {
+            "id": 32220,
+            "itemLevel": 100,
+            "icon": "inv_jewelcrafting_pyrestone_02.jpg"
+           }
+          ],
+          "setID": 721
+         },
+         {
+          "id": 33923,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_36.jpg",
+          "name": "Vindicator's Pendant of Triumph",
+          "itemLevel": 141,
+          "gems": [
+           {
+            "id": 24053,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_dawnstone_03.jpg"
+           }
+          ]
+         },
+         {
+          "id": 31048,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_58.jpg",
+          "name": "Thunderheart Pauldrons",
+          "itemLevel": 146,
+          "permanentEnchant": 2986,
+          "permanentEnchantName": "+2 Attack Power and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 32220,
+            "itemLevel": 100,
+            "icon": "inv_jewelcrafting_pyrestone_02.jpg"
+           },
+           {
+            "id": 32200,
+            "itemLevel": 100,
+            "icon": "inv_jewelcrafting_empyreansapphire_02.jpg"
+           }
+          ],
+          "setID": 676
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Yogiqt",
+       "id": 14,
+       "guid": 2967199,
+       "type": "Warrior",
+       "server": "Arugal",
+       "icon": "Warrior-Protection",
+       "specs": [
+        "Protection"
+       ],
+       "minItemLevel": 133,
+       "maxItemLevel": 133,
+       "potionUse": 2,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 123,
+          "max": 123
+         },
+         "Spirit": {
+          "min": 103,
+          "max": 103
+         },
+         "Stamina": {
+          "min": 1422,
+          "max": 1422
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Hit": {
+          "min": 149,
+          "max": 149
+         },
+         "Intellect": {
+          "min": 105,
+          "max": 105
+         },
+         "Armor": {
+          "min": 22939,
+          "max": 22939
+         },
+         "Agility": {
+          "min": 264,
+          "max": 264
+         },
+         "Block": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 91,
+          "max": 91
+         },
+         "Item Level": {
+          "min": 133,
+          "max": 133
+         },
+         "Parry": {
+          "min": 41,
+          "max": 41
+         },
+         "Strength": {
+          "min": 451,
+          "max": 451
+         },
+         "Expertise": {
+          "min": 62,
+          "max": 62
+         }
+        },
+        "talents": [
+         {
+          "name": "Power Word: Shield",
+          "guid": 17,
+          "type": 1,
+          "abilityIcon": "spell_holy_powerwordshield.jpg"
+         },
+         {
+          "name": "Melee",
+          "guid": 1,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Berserk",
+          "guid": 43,
+          "type": 1,
+          "abilityIcon": "ability_racial_bloodrage.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 33730,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_98.jpg",
+          "name": "Vengeful Gladiator's Plate Helm",
+          "itemLevel": 146,
+          "permanentEnchant": 3003,
+          "permanentEnchantName": "+5 Attack Power and +5 Critical Strike",
+          "gems": [
+           {
+            "id": 25896,
+            "itemLevel": 70,
+            "icon": "inv_misc_gem_diamond_06.jpg"
+           },
+           {
+            "id": 32200,
+            "itemLevel": 100,
+            "icon": "inv_jewelcrafting_empyreansapphire_02.jpg"
+           }
+          ],
+          "setID": 736
+         },
+         {
+          "id": 32362,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_amulet_03.jpg",
+          "name": "Pendant of Titans",
+          "itemLevel": 141
+         },
+         {
+          "id": 30117,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_56.jpg",
+          "name": "Destroyer Shoulderguards",
+          "itemLevel": 133,
+          "permanentEnchant": 2997,
+          "permanentEnchantName": "+2 Critical Strike and +1 Attack Power",
+          "gems": [
+           {
+            "id": 24033,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_starofelune_03.jpg"
+           },
+           {
+            "id": 24033,
+            "itemLevel": 70,
+            "icon": "inv_jewelcrafting_starofelune_03.jpg"
+           }
+          ],
+          "setID": 656
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      }
+     ]
+    },
+    "logVersion": 14,
+    "gameVersion": 3,
+    "logFileDetails": ""
+   }
+  },
+  "damageDone": {
+   "data": {
+    "entries": [
+     {
+      "name": "Masomum",
+      "id": 6,
+      "guid": 10411207,
+      "type": "Paladin",
+      "icon": "Paladin-Protection",
+      "itemLevel": 123,
+      "total": 117403,
+      "activeTime": 290624,
+      "activeTimeReduced": 290624,
+      "blocked": 270,
+      "abilities": [
+       {
+        "guid": 27157,
+        "name": "Judgement of Righteousness",
+        "total": 28506,
+        "type": 2,
+        "icon": "ability_thunderbolt.jpg"
+       },
+       {
+        "guid": 27173,
+        "name": "Consecration",
+        "total": 25766,
+        "type": 2,
+        "icon": "spell_holy_innerfire.jpg"
+       },
+       {
+        "guid": 27156,
+        "name": "Seal of Righteousness",
+        "total": 21668,
+        "type": 2,
+        "icon": "ability_thunderbolt.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Illidan Stormrage",
+        "total": 76534,
+        "type": "Boss"
+       },
+       {
+        "name": "Flame of Azzinoth",
+        "total": 40869,
+        "type": "NPC"
+       }
+      ],
+      "talents": [
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 40,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 21,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 23516,
+        "slot": 0,
+        "quality": 3,
+        "icon": "inv_helmet_22.jpg",
+        "name": "Flamebane Helm",
+        "itemLevel": 113,
+        "permanentEnchant": 3007,
+        "permanentEnchantName": "+6 Fire Resistance",
+        "gems": [
+         {
+          "id": 33782,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         },
+         {
+          "id": 33782,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         },
+         {
+          "id": 33782,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         }
+        ],
+        "setID": 564
+       },
+       {
+        "id": 33921,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_36.jpg",
+        "name": "Vindicator's Pendant of Dominance",
+        "itemLevel": 141,
+        "gems": [
+         {
+          "id": 30592,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         }
+        ]
+       },
+       {
+        "id": 30127,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_41.jpg",
+        "name": "Crystalforge Shoulderguards",
+        "itemLevel": 133,
+        "permanentEnchant": 2982,
+        "permanentEnchantName": "+2 Spell Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 24030,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 24030,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         }
+        ],
+        "setID": 628
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Zaazaa",
+      "id": 60,
+      "guid": 5497101,
+      "type": "Paladin",
+      "icon": "Paladin-Holy",
+      "itemLevel": 137,
+      "total": 23081,
+      "activeTime": 42843,
+      "activeTimeReduced": 42843,
+      "abilities": [
+       {
+        "guid": 27157,
+        "name": "Judgement of Righteousness",
+        "total": 5456,
+        "type": 2,
+        "icon": "ability_thunderbolt.jpg"
+       },
+       {
+        "guid": 27173,
+        "name": "Consecration",
+        "total": 4975,
+        "type": 2,
+        "icon": "spell_holy_innerfire.jpg"
+       },
+       {
+        "guid": 27138,
+        "name": "Exorcism",
+        "total": 4471,
+        "type": 2,
+        "icon": "spell_holy_excorcism_02.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Illidan Stormrage",
+        "total": 22679,
+        "type": "Boss"
+       },
+       {
+        "name": "Flame of Azzinoth",
+        "total": 402,
+        "type": "NPC"
+       }
+      ],
+      "talents": [
+       {
+        "name": "War Stomp",
+        "guid": 45,
+        "type": 1,
+        "abilityIcon": "ability_bullrush.jpg"
+       },
+       {
+        "name": "Frostbolt of Ages",
+        "guid": 11,
+        "type": 1,
+        "abilityIcon": "spell_frost_frostbolt02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 5,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 30136,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_78.jpg",
+        "name": "Crystalforge Greathelm",
+        "itemLevel": 133,
+        "permanentEnchant": 3001,
+        "permanentEnchantName": "+5 Intellect and +6 Versatility",
+        "gems": [
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 25897,
+          "itemLevel": 70,
+          "icon": "inv_misc_gem_diamond_06.jpg"
+         }
+        ],
+        "setID": 627
+       },
+       {
+        "id": 30018,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_29naxxramas.jpg",
+        "name": "Lord Sanguinar's Claim",
+        "itemLevel": 138
+       },
+       {
+        "id": 30878,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_65.jpg",
+        "name": "Glimmering Steel Mantle",
+        "itemLevel": 141,
+        "permanentEnchant": 2980,
+        "permanentEnchantName": "+2 Intellect and +1 Versatility",
+        "gems": [
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Kapouss",
+      "id": 22,
+      "guid": 10729822,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "itemLevel": 134,
+      "total": 501403,
+      "activeTime": 300243,
+      "activeTimeReduced": 300243,
+      "abilities": [
+       {
+        "guid": 25449,
+        "name": "Lightning Bolt",
+        "total": 342676,
+        "type": 8,
+        "icon": "spell_nature_lightning.jpg"
+       },
+       {
+        "guid": 25442,
+        "name": "Chain Lightning",
+        "total": 98774,
+        "type": 8,
+        "icon": "spell_nature_chainlightning.jpg"
+       },
+       {
+        "guid": 45296,
+        "name": "Lightning Bolt",
+        "total": 32598,
+        "type": 8,
+        "icon": "spell_nature_lightning.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Illidan Stormrage",
+        "total": 342515,
+        "type": "Boss"
+       },
+       {
+        "name": "Flame of Azzinoth",
+        "total": 152023,
+        "type": "NPC"
+       },
+       {
+        "name": "Parasitic Shadowfiend",
+        "total": 6865,
+        "type": "NPC"
+       }
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 41,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 20,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 31014,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_97.jpg",
+        "name": "Skyshatter Headguard",
+        "itemLevel": 146,
+        "permanentEnchant": 3002,
+        "permanentEnchantName": "+7 Spell Power and +4 Critical Strike",
+        "gems": [
+         {
+          "id": 34220,
+          "itemLevel": 70,
+          "icon": "inv_misc_gem_diamond_07.jpg"
+         },
+         {
+          "id": 32215,
+          "itemLevel": 100,
+          "icon": "inv_jewelcrafting_shadowsongamethyst_02.jpg"
+         }
+        ],
+        "setID": 684
+       },
+       {
+        "id": 24121,
+        "slot": 1,
+        "quality": 3,
+        "icon": "inv_jewelry_necklace_ahnqiraj_02.jpg",
+        "name": "Chain of the Twilight Owl",
+        "itemLevel": 115
+       },
+       {
+        "id": 29037,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_14.jpg",
+        "name": "Cyclone Shoulderguards",
+        "itemLevel": 120,
+        "permanentEnchant": 2982,
+        "permanentEnchantName": "+2 Spell Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 24030,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 24030,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         }
+        ],
+        "setID": 632
+       },
+       "... 16 more"
+      ]
+     },
+     "... 20 more"
+    ],
+    "totalTime": 424575,
+    "logVersion": 14,
+    "gameVersion": 3,
+    "exploitDetails": []
+   }
+  },
+  "healing": {
+   "data": {
+    "entries": [
+     {
+      "name": "Solor",
+      "id": 20,
+      "guid": 4795257,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "itemLevel": 127,
+      "total": 229150,
+      "activeTime": 377502,
+      "activeTimeReduced": 337339,
+      "overheal": 426674,
+      "abilities": [
+       {
+        "guid": 33763,
+        "name": "Lifebloom",
+        "total": 135215,
+        "type": 8,
+        "icon": "inv_misc_herb_felblossom.jpg"
+       },
+       {
+        "guid": 26982,
+        "name": "Rejuvenation",
+        "total": 42217,
+        "type": 8,
+        "icon": "spell_nature_rejuvenation.jpg"
+       },
+       {
+        "guid": 33778,
+        "name": "Lifebloom",
+        "total": 26769,
+        "type": 8,
+        "icon": "inv_misc_herb_felblossom.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 56617,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": -4,
+        "name": "Melee",
+        "total": 37079,
+        "type": 4,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 40598,
+        "name": "Fireball",
+        "total": 35100,
+        "type": 4,
+        "icon": "spell_fire_blueflamebolt.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Yogiqt",
+        "total": 62666,
+        "type": "Warrior"
+       },
+       {
+        "name": "Masomum",
+        "total": 51610,
+        "type": "Paladin"
+       },
+       {
+        "name": "Rassaa",
+        "total": 21255,
+        "type": "Druid"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Really Long bow shot",
+        "guid": 61,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 30219,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_85.jpg",
+        "name": "Nordrassil Headguard",
+        "itemLevel": 133,
+        "permanentEnchant": 3001,
+        "permanentEnchantName": "+5 Intellect and +6 Versatility",
+        "gems": [
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 25897,
+          "itemLevel": 70,
+          "icon": "inv_misc_gem_diamond_06.jpg"
+         }
+        ],
+        "setID": 642
+       },
+       {
+        "id": 28609,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_17.jpg",
+        "name": "Emberspur Talisman",
+        "itemLevel": 115
+       },
+       {
+        "id": 31047,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_58.jpg",
+        "name": "Thunderheart Spaulders",
+        "itemLevel": 146,
+        "permanentEnchant": 2980,
+        "permanentEnchantName": "+2 Intellect and +1 Versatility",
+        "gems": [
+         {
+          "id": 32195,
+          "itemLevel": 100,
+          "icon": "inv_jewelcrafting_crimsonspinel_02.jpg"
+         },
+         {
+          "id": 32195,
+          "itemLevel": 100,
+          "icon": "inv_jewelcrafting_crimsonspinel_02.jpg"
+         }
+        ],
+        "setID": 678
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Enrkey",
+      "id": 24,
+      "guid": 10967772,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "itemLevel": 137,
+      "total": 282909,
+      "activeTime": 331817,
+      "activeTimeReduced": 316271,
+      "overheal": 295717,
+      "abilities": [
+       {
+        "guid": 25423,
+        "name": "Chain Heal",
+        "total": 211178,
+        "type": 8,
+        "icon": "spell_nature_healingwavegreater.jpg"
+       },
+       {
+        "guid": 1064,
+        "name": "Chain Heal",
+        "total": 26244,
+        "type": 8,
+        "icon": "inv_1115_shaman_chainheal.jpg"
+       },
+       {
+        "guid": 379,
+        "name": "Earth Shield",
+        "total": 23662,
+        "type": 8,
+        "icon": "spell_nature_skinofearth.jpg"
+       },
+       "... 1 more"
+      ],
+      "damageAbilities": [
+       {
+        "guid": 40598,
+        "name": "Fireball",
+        "total": 79263,
+        "type": 4,
+        "icon": "spell_fire_blueflamebolt.jpg"
+       },
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 44131,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 40932,
+        "name": "Agonizing Flames",
+        "total": 42282,
+        "type": 4,
+        "icon": "spell_fire_blueimmolation.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Yogiqt",
+        "total": 46063,
+        "type": "Warrior"
+       },
+       {
+        "name": "Greenparse",
+        "total": 18800,
+        "type": "Hunter"
+       },
+       {
+        "name": "Miccybowze",
+        "total": 18290,
+        "type": "Priest"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Backstab",
+        "guid": 53,
+        "type": 1,
+        "abilityIcon": "ability_backstab.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 31012,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_97.jpg",
+        "name": "Skyshatter Helmet",
+        "itemLevel": 146,
+        "permanentEnchant": 3001,
+        "permanentEnchantName": "+5 Intellect and +6 Versatility",
+        "gems": [
+         {
+          "id": 25897,
+          "itemLevel": 70,
+          "icon": "inv_misc_gem_diamond_06.jpg"
+         },
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         }
+        ],
+        "setID": 683
+       },
+       {
+        "id": 32370,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_32.jpg",
+        "name": "Nadina's Pendant of Purity",
+        "itemLevel": 141
+       },
+       {
+        "id": 30168,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_14.jpg",
+        "name": "Cataclysm Shoulderguards",
+        "itemLevel": 133,
+        "permanentEnchant": 2979,
+        "permanentEnchantName": "+2 Spell Power",
+        "gems": [
+         {
+          "id": 23094,
+          "itemLevel": 60,
+          "icon": "inv_misc_gem_bloodgem_02.jpg"
+         },
+         {
+          "id": 23094,
+          "itemLevel": 60,
+          "icon": "inv_misc_gem_bloodgem_02.jpg"
+         }
+        ],
+        "setID": 634
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Zaazaa",
+      "id": 60,
+      "guid": 5497101,
+      "type": "Paladin",
+      "icon": "Paladin-Holy",
+      "itemLevel": 137,
+      "total": 202218,
+      "activeTime": 328483,
+      "activeTimeReduced": 299090,
+      "overheal": 262731,
+      "abilities": [
+       {
+        "guid": 27137,
+        "name": "Flash of Light",
+        "total": 187827,
+        "type": 2,
+        "icon": "spell_holy_flashheal.jpg"
+       },
+       {
+        "guid": 27154,
+        "name": "Lay on Hands",
+        "total": 8402,
+        "type": 2,
+        "icon": "spell_holy_layonhands.jpg"
+       },
+       {
+        "guid": 40471,
+        "name": "Enduring Light",
+        "total": 5989,
+        "type": 8,
+        "icon": "spell_holy_flashheal.jpg"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 60748,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": -4,
+        "name": "Melee",
+        "total": 32546,
+        "type": 4,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 40598,
+        "name": "Fireball",
+        "total": 20550,
+        "type": 4,
+        "icon": "spell_fire_blueflamebolt.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Yogiqt",
+        "total": 68484,
+        "type": "Warrior"
+       },
+       {
+        "name": "Masomum",
+        "total": 50664,
+        "type": "Paladin"
+       },
+       {
+        "name": "Biris",
+        "total": 12135,
+        "type": "Warlock"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "War Stomp",
+        "guid": 45,
+        "type": 1,
+        "abilityIcon": "ability_bullrush.jpg"
+       },
+       {
+        "name": "Frostbolt of Ages",
+        "guid": 11,
+        "type": 1,
+        "abilityIcon": "spell_frost_frostbolt02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 5,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 30136,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_78.jpg",
+        "name": "Crystalforge Greathelm",
+        "itemLevel": 133,
+        "permanentEnchant": 3001,
+        "permanentEnchantName": "+5 Intellect and +6 Versatility",
+        "gems": [
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 25897,
+          "itemLevel": 70,
+          "icon": "inv_misc_gem_diamond_06.jpg"
+         }
+        ],
+        "setID": 627
+       },
+       {
+        "id": 30018,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_29naxxramas.jpg",
+        "name": "Lord Sanguinar's Claim",
+        "itemLevel": 138
+       },
+       {
+        "id": 30878,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_65.jpg",
+        "name": "Glimmering Steel Mantle",
+        "itemLevel": 141,
+        "permanentEnchant": 2980,
+        "permanentEnchantName": "+2 Intellect and +1 Versatility",
+        "gems": [
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 16 more"
+    ],
+    "totalTime": 424575,
+    "logVersion": 14,
+    "gameVersion": 3,
+    "exploitDetails": []
+   }
+  },
+  "damageTaken": {
+   "data": {
+    "entries": [
+     {
+      "name": "Masomum",
+      "id": 6,
+      "guid": 10411207,
+      "type": "Paladin",
+      "icon": "Paladin-Protection",
+      "itemLevel": 123,
+      "total": 270833,
+      "totalReduced": 266285,
+      "activeTime": 123566,
+      "activeTimeReduced": 123566,
+      "overheal": 467006,
+      "abilities": [
+       {
+        "guid": -4,
+        "name": "Melee",
+        "total": 146665,
+        "totalReduced": 144401,
+        "type": 4,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 40611,
+        "name": "Blaze",
+        "total": 61100,
+        "totalReduced": 61090,
+        "type": 4,
+        "icon": "spell_fire_felfire.jpg"
+       },
+       {
+        "guid": 41078,
+        "name": "Shadow Blast",
+        "total": 23338,
+        "type": 32,
+        "icon": "spell_shadow_shadowbolt.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Flame of Azzinoth",
+        "total": 161616,
+        "totalReduced": 159352,
+        "type": "NPC"
+       },
+       {
+        "name": "Environment",
+        "total": 63450,
+        "totalReduced": 63440,
+        "type": "NPC"
+       },
+       {
+        "name": "Illidan Stormrage",
+        "total": 45767,
+        "totalReduced": 43493,
+        "type": "Boss"
+       }
+      ],
+      "talents": [
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 40,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 21,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 23516,
+        "slot": 0,
+        "quality": 3,
+        "icon": "inv_helmet_22.jpg",
+        "name": "Flamebane Helm",
+        "itemLevel": 113,
+        "permanentEnchant": 3007,
+        "permanentEnchantName": "+6 Fire Resistance",
+        "gems": [
+         {
+          "id": 33782,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         },
+         {
+          "id": 33782,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         },
+         {
+          "id": 33782,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         }
+        ],
+        "setID": 564
+       },
+       {
+        "id": 33921,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_36.jpg",
+        "name": "Vindicator's Pendant of Dominance",
+        "itemLevel": 141,
+        "gems": [
+         {
+          "id": 30592,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         }
+        ]
+       },
+       {
+        "id": 30127,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_41.jpg",
+        "name": "Crystalforge Shoulderguards",
+        "itemLevel": 133,
+        "permanentEnchant": 2982,
+        "permanentEnchantName": "+2 Spell Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 24030,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 24030,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         }
+        ],
+        "setID": 628
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Zaazaa",
+      "id": 60,
+      "guid": 5497101,
+      "type": "Paladin",
+      "icon": "Paladin-Holy",
+      "itemLevel": 137,
+      "total": 33446,
+      "activeTime": 48522,
+      "activeTimeReduced": 48522,
+      "abilities": [
+       {
+        "guid": 40932,
+        "name": "Agonizing Flames",
+        "total": 25600,
+        "type": 4,
+        "icon": "spell_fire_blueimmolation.jpg"
+       },
+       {
+        "guid": 40598,
+        "name": "Fireball",
+        "total": 5846,
+        "type": 4,
+        "icon": "spell_fire_blueflamebolt.jpg"
+       },
+       {
+        "guid": 41142,
+        "name": "Aura of Dread",
+        "total": 2000,
+        "type": 32,
+        "icon": "spell_shadow_shadowpower.jpg"
+       }
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Illidan Stormrage",
+        "total": 33446,
+        "type": "Boss"
+       }
+      ],
+      "talents": [
+       {
+        "name": "War Stomp",
+        "guid": 45,
+        "type": 1,
+        "abilityIcon": "ability_bullrush.jpg"
+       },
+       {
+        "name": "Frostbolt of Ages",
+        "guid": 11,
+        "type": 1,
+        "abilityIcon": "spell_frost_frostbolt02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 5,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 30136,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_78.jpg",
+        "name": "Crystalforge Greathelm",
+        "itemLevel": 133,
+        "permanentEnchant": 3001,
+        "permanentEnchantName": "+5 Intellect and +6 Versatility",
+        "gems": [
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 25897,
+          "itemLevel": 70,
+          "icon": "inv_misc_gem_diamond_06.jpg"
+         }
+        ],
+        "setID": 627
+       },
+       {
+        "id": 30018,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_29naxxramas.jpg",
+        "name": "Lord Sanguinar's Claim",
+        "itemLevel": 138
+       },
+       {
+        "id": 30878,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_65.jpg",
+        "name": "Glimmering Steel Mantle",
+        "itemLevel": 141,
+        "permanentEnchant": 2980,
+        "permanentEnchantName": "+2 Intellect and +1 Versatility",
+        "gems": [
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Maiev Shadowsong",
+      "id": 121,
+      "guid": 23197,
+      "type": "NPC",
+      "icon": "custom-icon-inv_weapon_shortblade_25.jpg",
+      "total": 6526,
+      "activeTime": 9092,
+      "activeTimeReduced": 9092,
+      "overheal": 6338,
+      "abilities": [
+       {
+        "guid": 41078,
+        "name": "Shadow Blast",
+        "total": 4226,
+        "type": 32,
+        "icon": "spell_shadow_shadowbolt.jpg"
+       },
+       {
+        "guid": 41142,
+        "name": "Aura of Dread",
+        "total": 2300,
+        "type": 32,
+        "icon": "spell_shadow_shadowpower.jpg"
+       }
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Illidan Stormrage",
+        "total": 6526,
+        "type": "Boss"
+       }
+      ]
+     },
+     "... 24 more"
+    ],
+    "totalTime": 424575,
+    "logVersion": 14,
+    "gameVersion": 3,
+    "exploitDetails": []
+   }
+  },
+  "deaths": {
+   "data": {
+    "entries": [
+     {
+      "name": "Violetsky",
+      "id": 30,
+      "guid": 5589479,
+      "type": "Mage",
+      "icon": "Mage-Arcane",
+      "timestamp": 5726682,
+      "fight": 40,
+      "damage": {
+       "total": 11250,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 750,
+       "abilities": [
+        {
+         "guid": 41917,
+         "name": "Parasitic Shadowfiend",
+         "total": 11250,
+         "type": 32,
+         "icon": "spell_shadow_soulleech_3.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Illidan Stormrage",
+         "total": 11250,
+         "type": "Boss"
+        }
+       ]
+      },
+      "healing": {
+       "total": 499,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 15290,
+         "name": "Vampiric Embrace",
+         "total": 499,
+         "type": 32,
+         "icon": "spell_shadow_unsummonbuilding.jpg"
+        }
+       ],
+       "damageAbilities": [
+        {
+         "guid": 41917,
+         "name": "Parasitic Shadowfiend",
+         "total": 499,
+         "type": 32,
+         "icon": "spell_shadow_soulleech_3.jpg"
+        }
+       ],
+       "sources": [
+        {
+         "name": "Miccybowze",
+         "total": 499,
+         "type": "Priest"
+        }
+       ]
+      },
+      "deathWindow": 5992,
+      "overkill": 858,
+      "events": [
+       {
+        "timestamp": 5726665,
+        "type": "damage",
+        "sourceID": 106,
+        "sourceIsFriendly": false,
+        "targetID": 30,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Parasitic Shadowfiend",
+         "guid": 41917,
+         "type": 32,
+         "abilityIcon": "spell_shadow_soulleech_3.jpg"
+        },
+        "fight": 40,
+        "hitType": 16,
+        "amount": 1392,
+        "mitigated": 750,
+        "unmitigatedAmount": 3000,
+        "resisted": 750,
+        "overkill": 858,
+        "isAoE": false,
+        "tick": true,
+        "targetMarker": 8
+       },
+       {
+        "timestamp": 5724669,
+        "type": "damage",
+        "sourceID": 106,
+        "sourceIsFriendly": false,
+        "targetID": 30,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Parasitic Shadowfiend",
+         "guid": 41917,
+         "type": 32,
+         "abilityIcon": "spell_shadow_soulleech_3.jpg"
+        },
+        "fight": 40,
+        "hitType": 1,
+        "amount": 3000,
+        "unmitigatedAmount": 3000,
+        "isAoE": false,
+        "tick": true,
+        "targetMarker": 8
+       },
+       {
+        "timestamp": 5722664,
+        "type": "damage",
+        "sourceID": 106,
+        "sourceIsFriendly": false,
+        "targetID": 30,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Parasitic Shadowfiend",
+         "guid": 41917,
+         "type": 32,
+         "abilityIcon": "spell_shadow_soulleech_3.jpg"
+        },
+        "fight": 40,
+        "hitType": 1,
+        "amount": 3000,
+        "unmitigatedAmount": 3000,
+        "isAoE": false,
+        "tick": true,
+        "targetMarker": 8
+       }
+      ],
+      "killingBlow": {
+       "name": "Parasitic Shadowfiend",
+       "guid": 41917,
+       "type": 32,
+       "abilityIcon": "spell_shadow_soulleech_3.jpg"
+      }
+     },
+     {
+      "name": "Yogiqt",
+      "id": 14,
+      "guid": 2967199,
+      "type": "Warrior",
+      "icon": "Warrior-Protection",
+      "timestamp": 5779173,
+      "fight": 40,
+      "damage": {
+       "total": 24484,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 49007,
+       "blocked": 1245,
+       "abilities": [
+        {
+         "guid": 1,
+         "name": "Melee",
+         "total": 24484,
+         "type": 1,
+         "icon": "inv_axe_02.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Illidan Stormrage",
+         "total": 24484,
+         "type": "Boss"
+        }
+       ]
+      },
+      "healing": {
+       "total": 4535,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 27137,
+         "name": "Flash of Light",
+         "total": 1966,
+         "type": 2,
+         "icon": "spell_holy_flashheal.jpg"
+        },
+        {
+         "guid": 26981,
+         "name": "Rejuvenation",
+         "total": 1089,
+         "type": 8,
+         "icon": "spell_nature_rejuvenation.jpg"
+        },
+        {
+         "guid": 33763,
+         "name": "Lifebloom",
+         "total": 929,
+         "type": 8,
+         "icon": "inv_misc_herb_felblossom.jpg"
+        },
+        "... 1 more"
+       ],
+       "damageAbilities": [
+        {
+         "guid": 1,
+         "name": "Melee",
+         "total": 4535,
+         "type": 1,
+         "icon": "inv_axe_02.jpg"
+        }
+       ],
+       "sources": [
+        {
+         "name": "Relaxable",
+         "total": 2569,
+         "type": "Druid"
+        },
+        {
+         "name": "Zaazaa",
+         "total": 1966,
+         "type": "Paladin"
+        }
+       ]
+      },
+      "deathWindow": 2158,
+      "overkill": 1465,
+      "events": [
+       {
+        "timestamp": 5779124,
+        "type": "damage",
+        "sourceID": 106,
+        "sourceIsFriendly": false,
+        "targetID": 14,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Melee",
+         "guid": 1,
+         "type": 1,
+         "abilityIcon": "inv_axe_02.jpg"
+        },
+        "fight": 40,
+        "hitType": 4,
+        "amount": 6630,
+        "mitigated": 16303,
+        "unmitigatedAmount": 24398,
+        "overkill": 1465,
+        "blocked": 415,
+        "isAoE": false
+       },
+       {
+        "timestamp": 5778054,
+        "type": "damage",
+        "sourceID": 106,
+        "sourceIsFriendly": false,
+        "targetID": 14,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Melee",
+         "guid": 1,
+         "type": 1,
+         "abilityIcon": "inv_axe_02.jpg"
+        },
+        "fight": 40,
+        "hitType": 1,
+        "amount": 6159,
+        "mitigated": 11498,
+        "unmitigatedAmount": 17657,
+        "isAoE": false
+       },
+       {
+        "timestamp": 5776966,
+        "type": "damage",
+        "sourceID": 106,
+        "sourceIsFriendly": false,
+        "targetID": 14,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Melee",
+         "guid": 1,
+         "type": 1,
+         "abilityIcon": "inv_axe_02.jpg"
+        },
+        "fight": 40,
+        "hitType": 4,
+        "amount": 3753,
+        "mitigated": 8092,
+        "unmitigatedAmount": 11845,
+        "blocked": 415,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Melee",
+       "guid": 1,
+       "type": 1,
+       "abilityIcon": "inv_axe_02.jpg"
+      }
+     },
+     {
+      "name": "Meng",
+      "id": 15,
+      "guid": 12090042,
+      "type": "Warrior",
+      "icon": "Warrior-Fury",
+      "timestamp": 5783499,
+      "fight": 40,
+      "damage": {
+       "total": 14750,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 9213,
+       "abilities": [
+        {
+         "guid": 1,
+         "name": "Melee",
+         "total": 9481,
+         "type": 1,
+         "icon": "inv_axe_02.jpg"
+        },
+        {
+         "guid": 40904,
+         "name": "Draw Soul",
+         "total": 5269,
+         "type": 32,
+         "icon": "spell_shadow_coneofsilence.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Illidan Stormrage",
+         "total": 14750,
+         "type": "Boss"
+        }
+       ]
+      },
+      "healing": {
+       "total": 0,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [],
+       "damageAbilities": [],
+       "sources": []
+      },
+      "deathWindow": 1787,
+      "overkill": 2456,
+      "events": [
+       {
+        "timestamp": 5783452,
+        "type": "damage",
+        "sourceID": 106,
+        "sourceIsFriendly": false,
+        "targetID": 15,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Melee",
+         "guid": 1,
+         "type": 1,
+         "abilityIcon": "inv_axe_02.jpg"
+        },
+        "fight": 40,
+        "hitType": 1,
+        "amount": 7025,
+        "mitigated": 9213,
+        "unmitigatedAmount": 18694,
+        "overkill": 2456,
+        "isAoE": false
+       },
+       {
+        "timestamp": 5781665,
+        "type": "damage",
+        "sourceID": 106,
+        "sourceIsFriendly": false,
+        "targetID": 15,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Draw Soul",
+         "guid": 40904,
+         "type": 32,
+         "abilityIcon": "spell_shadow_coneofsilence.jpg"
+        },
+        "fight": 40,
+        "hitType": 1,
+        "amount": 5269,
+        "unmitigatedAmount": 4790,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Melee",
+       "guid": 1,
+       "type": 1,
+       "abilityIcon": "inv_axe_02.jpg"
+      }
+     },
+     "... 11 more"
+    ]
+   }
+  },
+  "interrupts": {
+   "data": {
+    "entries": [
+     {
+      "entries": []
+     }
+    ],
+    "totalTime": 424575
+   }
+  },
+  "dispels": {
+   "data": {
+    "entries": [
+     {
+      "entries": []
+     }
+    ],
+    "totalTime": 424575
+   }
+  },
+  "casts": {
+   "data": {
+    "entries": [
+     {
+      "name": "Masomum",
+      "id": 6,
+      "guid": 10411207,
+      "type": "Paladin",
+      "icon": "Paladin-Protection",
+      "itemLevel": 123,
+      "total": 121,
+      "activeTime": 278163,
+      "activeTimeReduced": 278163,
+      "abilities": [
+       {
+        "guid": 27155,
+        "name": "Seal of Righteousness",
+        "total": 36,
+        "type": 2,
+        "icon": "ability_thunderbolt.jpg"
+       },
+       {
+        "guid": 20271,
+        "name": "Judgment",
+        "total": 31,
+        "type": 2,
+        "icon": "spell_holy_righteousfury.jpg"
+       },
+       {
+        "guid": 27173,
+        "name": "Consecration",
+        "total": 22,
+        "type": 2,
+        "icon": "spell_holy_innerfire.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Environment",
+        "total": 71,
+        "type": "NPC"
+       },
+       {
+        "name": "Illidan Stormrage",
+        "total": 28,
+        "type": "Boss"
+       },
+       {
+        "name": "Flame of Azzinoth",
+        "total": 18,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 40,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 21,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 23516,
+        "slot": 0,
+        "quality": 3,
+        "icon": "inv_helmet_22.jpg",
+        "name": "Flamebane Helm",
+        "itemLevel": 113,
+        "permanentEnchant": 3007,
+        "permanentEnchantName": "+6 Fire Resistance",
+        "gems": [
+         {
+          "id": 33782,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         },
+         {
+          "id": 33782,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         },
+         {
+          "id": 33782,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         }
+        ],
+        "setID": 564
+       },
+       {
+        "id": 33921,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_36.jpg",
+        "name": "Vindicator's Pendant of Dominance",
+        "itemLevel": 141,
+        "gems": [
+         {
+          "id": 30592,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_talasite_03.jpg"
+         }
+        ]
+       },
+       {
+        "id": 30127,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_41.jpg",
+        "name": "Crystalforge Shoulderguards",
+        "itemLevel": 133,
+        "permanentEnchant": 2982,
+        "permanentEnchantName": "+2 Spell Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 24030,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 24030,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         }
+        ],
+        "setID": 628
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Zaazaa",
+      "id": 60,
+      "guid": 5497101,
+      "type": "Paladin",
+      "icon": "Paladin-Holy",
+      "itemLevel": 137,
+      "total": 223,
+      "activeTime": 350028,
+      "activeTimeReduced": 350028,
+      "abilities": [
+       {
+        "guid": 27137,
+        "name": "Flash of Light",
+        "total": 192,
+        "type": 2,
+        "icon": "spell_holy_flashheal.jpg"
+       },
+       {
+        "guid": 20271,
+        "name": "Judgment",
+        "total": 5,
+        "type": 2,
+        "icon": "spell_holy_righteousfury.jpg"
+       },
+       {
+        "guid": 27155,
+        "name": "Seal of Righteousness",
+        "total": 5,
+        "type": 2,
+        "icon": "ability_thunderbolt.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Yogiqt",
+        "total": 85,
+        "type": "Warrior"
+       },
+       {
+        "name": "Masomum",
+        "total": 46,
+        "type": "Paladin"
+       },
+       {
+        "name": "Environment",
+        "total": 20,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "War Stomp",
+        "guid": 45,
+        "type": 1,
+        "abilityIcon": "ability_bullrush.jpg"
+       },
+       {
+        "name": "Frostbolt of Ages",
+        "guid": 11,
+        "type": 1,
+        "abilityIcon": "spell_frost_frostbolt02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 5,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 30136,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_78.jpg",
+        "name": "Crystalforge Greathelm",
+        "itemLevel": 133,
+        "permanentEnchant": 3001,
+        "permanentEnchantName": "+5 Intellect and +6 Versatility",
+        "gems": [
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 25897,
+          "itemLevel": 70,
+          "icon": "inv_misc_gem_diamond_06.jpg"
+         }
+        ],
+        "setID": 627
+       },
+       {
+        "id": 30018,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_29naxxramas.jpg",
+        "name": "Lord Sanguinar's Claim",
+        "itemLevel": 138
+       },
+       {
+        "id": 30878,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_65.jpg",
+        "name": "Glimmering Steel Mantle",
+        "itemLevel": 141,
+        "permanentEnchant": 2980,
+        "permanentEnchantName": "+2 Intellect and +1 Versatility",
+        "gems": [
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 24029,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Kapouss",
+      "id": 22,
+      "guid": 10729822,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "itemLevel": 134,
+      "total": 191,
+      "activeTime": 354009,
+      "activeTimeReduced": 354009,
+      "abilities": [
+       {
+        "guid": 25449,
+        "name": "Lightning Bolt",
+        "total": 123,
+        "type": 8,
+        "icon": "spell_nature_lightning.jpg"
+       },
+       {
+        "guid": 25442,
+        "name": "Chain Lightning",
+        "total": 35,
+        "type": 8,
+        "icon": "spell_nature_chainlightning.jpg"
+       },
+       {
+        "guid": 30706,
+        "name": "Totem of Wrath",
+        "total": 4,
+        "type": 4,
+        "icon": "spell_fire_totemofwrath.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Illidan Stormrage",
+        "total": 105,
+        "type": "Boss"
+       },
+       {
+        "name": "Flame of Azzinoth",
+        "total": 52,
+        "type": "NPC"
+       },
+       {
+        "name": "Environment",
+        "total": 31,
+        "type": "NPC"
+       },
+       "... 1 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 41,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 20,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 31014,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_97.jpg",
+        "name": "Skyshatter Headguard",
+        "itemLevel": 146,
+        "permanentEnchant": 3002,
+        "permanentEnchantName": "+7 Spell Power and +4 Critical Strike",
+        "gems": [
+         {
+          "id": 34220,
+          "itemLevel": 70,
+          "icon": "inv_misc_gem_diamond_07.jpg"
+         },
+         {
+          "id": 32215,
+          "itemLevel": 100,
+          "icon": "inv_jewelcrafting_shadowsongamethyst_02.jpg"
+         }
+        ],
+        "setID": 684
+       },
+       {
+        "id": 24121,
+        "slot": 1,
+        "quality": 3,
+        "icon": "inv_jewelry_necklace_ahnqiraj_02.jpg",
+        "name": "Chain of the Twilight Owl",
+        "itemLevel": 115
+       },
+       {
+        "id": 29037,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_14.jpg",
+        "name": "Cyclone Shoulderguards",
+        "itemLevel": 120,
+        "permanentEnchant": 2982,
+        "permanentEnchantName": "+2 Spell Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 24030,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         },
+         {
+          "id": 24030,
+          "itemLevel": 70,
+          "icon": "inv_jewelcrafting_livingruby_03.jpg"
+         }
+        ],
+        "setID": 632
+       },
+       "... 16 more"
+      ]
+     },
+     "... 22 more"
+    ],
+    "totalTime": 424575,
+    "logVersion": 14,
+    "gameVersion": 3,
+    "exploitDetails": []
+   }
+  }
+ }
+}

@@ -54,6 +54,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - **Sources** : uniquement les rapports rattachés à la fiche de guilde. Pas de rapports perso.
 - **Format** : on garde les combats en **40 en Era** et en **25 de TBC à MoP** (normal et héroïque). Exclus : 20 (ZG, AQ20), 10 (Kara, ZA, versions 10 de Wrath à MoP), LFR, Flex. Le filtre se fait **au niveau du combat** (taille et difficulté WCL), pas sur le nom de zone. La liste des zones et boss éligibles est en config.
 - **Dédoublonnage par pull** : si un même pull de boss apparaît dans plusieurs rapports à des horaires qui se chevauchent, on garde celui du rapport qui contient le plus de boss. On compare des plages horaires, jamais des dates calendaires. Le cache brut garde tout, le dédoublonnage se fait au calcul.
+- **Crawl complet** : `python -m pipeline.crawl`. Seuls les pulls éligibles (taille, difficulté, ≥ 10 joueurs ; `config/crawl.json`) sont crawlés, avec 8 tableaux : Summary, DamageDone, Healing, DamageTaken, Deaths, Interrupts, Dispels, Casts. Pas de Buffs / Debuffs. Échantillons lisibles dans `data/samples/`.
 - **Niveau de détail** : niveau 2, c'est-à-dire les tableaux agrégés par combat et par joueur (dégâts, soins, dégâts subis, morts, interruptions, dispels…). Le niveau 3 (événements bruts) n'est crawlé que pour des **stats listées à l'avance**, uniquement sur les combats concernés.
 
 ### Modèle
@@ -99,8 +100,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - Seuil minimal de combats pour afficher un rôle sur la fiche d'un joueur.
 - Emplacement définitif de l'instantané du cache brut (Release GitHub par défaut).
 
-- Filtre anti-pulls parasites : nombre minimal de joueurs par pull (des bosses de TK soloés en Cata sont classés en taille 25), et exclusion des combats en véhicules (Flame Leviathan).
-- Tableaux à crawler pour le crawl complet (coût estimé ~40 h à 10 tableaux par pull) et crawl ou non des pulls hors format.
+- Filtre anti-pulls parasites au calcul : seuil de joueurs plus strict que les 10 du crawl (des bosses de TK soloés en Cata sont classés en taille 25), et exclusion des combats en véhicules (Flame Leviathan).
 - Méthode d'estimation des PV max des cibles pour Savior / Sniper (les PV des événements de soin sont en pourcentage, après le soin).
 
 Crawl d'essai fait le 2026-10-28 : résultats dans `docs/crawl-essai.md`.

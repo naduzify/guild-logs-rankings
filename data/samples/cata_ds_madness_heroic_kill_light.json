@@ -1,0 +1,3621 @@
+{
+ "expansion": "cata",
+ "report": "rBkgF3pPNfzjRLJm",
+ "zone": "Dragon Soul",
+ "fight": {
+  "id": 21,
+  "encounterID": 1299,
+  "name": "Madness of Deathwing",
+  "difficulty": 4,
+  "size": 25,
+  "kill": true,
+  "startTime": 436595016,
+  "endTime": 437317394,
+  "fightPercentage": 0.19,
+  "bossPercentage": 0.19
+ },
+ "players": [
+  {
+   "id": 1,
+   "name": "Paltivian",
+   "server": "Arugal",
+   "subType": "Paladin"
+  },
+  {
+   "id": 2,
+   "name": "Foris",
+   "server": "Arugal",
+   "subType": "Shaman"
+  },
+  {
+   "id": 3,
+   "name": "Torean",
+   "server": "Arugal",
+   "subType": "DeathKnight"
+  },
+  "... 88 more"
+ ],
+ "tables": {
+  "summary": {
+   "data": {
+    "totalTime": 722378,
+    "itemLevel": 403.1199951171875,
+    "composition": [
+     {
+      "name": "Paxman",
+      "id": 17,
+      "guid": 15767437,
+      "type": "Priest",
+      "specs": [
+       {
+        "spec": "Shadow",
+        "role": "dps"
+       }
+      ]
+     },
+     {
+      "name": "Chãos",
+      "id": 14,
+      "guid": 12724562,
+      "type": "Mage",
+      "specs": [
+       {
+        "spec": "Fire",
+        "role": "dps"
+       }
+      ]
+     },
+     {
+      "name": "Hipy",
+      "id": 4,
+      "guid": 13579878,
+      "type": "Rogue",
+      "specs": [
+       {
+        "spec": "Subtlety",
+        "role": "dps"
+       }
+      ]
+     },
+     "... 22 more"
+    ],
+    "damageDone": [
+     {
+      "name": "Paxman",
+      "id": 17,
+      "guid": 15767437,
+      "type": "Priest",
+      "icon": "Priest-Shadow",
+      "total": 41831113
+     },
+     {
+      "name": "Hipy",
+      "id": 4,
+      "guid": 13579878,
+      "type": "Rogue",
+      "icon": "Rogue-Subtlety",
+      "total": 37282406
+     },
+     {
+      "name": "Garland",
+      "id": 22,
+      "guid": 15901009,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "total": 43188564
+     },
+     "... 25 more"
+    ],
+    "healingDone": [
+     {
+      "name": "Paxman",
+      "id": 17,
+      "guid": 15767437,
+      "type": "Priest",
+      "icon": "Priest-Shadow",
+      "total": 4845999
+     },
+     {
+      "name": "Chãos",
+      "id": 14,
+      "guid": 12724562,
+      "type": "Mage",
+      "icon": "Mage-Fire",
+      "total": 89141
+     },
+     {
+      "name": "Hipy",
+      "id": 4,
+      "guid": 13579878,
+      "type": "Rogue",
+      "icon": "Rogue-Subtlety",
+      "total": 806194
+     },
+     "... 21 more"
+    ],
+    "damageTaken": [
+     {
+      "name": "Burning Blood",
+      "guid": 105408,
+      "type": 4,
+      "abilityIcon": "spell_deathknight_bloodboil.jpg",
+      "total": 79542342
+     },
+     {
+      "name": "Unstable Corruption",
+      "guid": 108813,
+      "type": 4,
+      "abilityIcon": "spell_fire_incinerate.jpg",
+      "total": 2911882
+     },
+     {
+      "name": "Shadow Word: Death",
+      "guid": 32409,
+      "type": 32,
+      "abilityIcon": "spell_shadow_demonicfortitude.jpg",
+      "total": 114800
+     },
+     "... 18 more"
+    ],
+    "deathEvents": [
+     {
+      "name": "Yogiqt",
+      "id": 15,
+      "guid": 2967199,
+      "type": "Warrior",
+      "icon": "Warrior-Fury",
+      "deathTime": 315513,
+      "ability": {
+       "name": "Corrupting Parasite",
+       "guid": 108601,
+       "type": 32,
+       "abilityIcon": "trade_engineering.jpg"
+      }
+     },
+     {
+      "name": "Masomum",
+      "id": 10,
+      "guid": 10411207,
+      "type": "Paladin",
+      "icon": "Paladin-Protection",
+      "deathTime": 317068,
+      "ability": {
+       "name": "Impale",
+       "guid": 106444,
+       "type": 1,
+       "abilityIcon": "ability_searingarrow.jpg"
+      }
+     },
+     {
+      "name": "Masomum",
+      "id": 10,
+      "guid": 10411207,
+      "type": "Paladin",
+      "icon": "Paladin-Protection",
+      "deathTime": 378153,
+      "ability": {
+       "name": "Parasitic Backlash",
+       "guid": 108787,
+       "type": 4,
+       "abilityIcon": "ability_rhyolith_magmaflow_wave.jpg"
+      }
+     },
+     "... 8 more"
+    ],
+    "exploitDetails": [],
+    "playerDetails": {
+     "dps": [
+      {
+       "name": "Paxman",
+       "id": 17,
+       "guid": 15767437,
+       "type": "Priest",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Priest-Shadow",
+       "specs": [
+        "Shadow"
+       ],
+       "minItemLevel": 403,
+       "maxItemLevel": 403,
+       "potionUse": 2,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 1764,
+          "max": 1764
+         },
+         "Intellect": {
+          "min": 9489,
+          "max": 9489
+         },
+         "Agility": {
+          "min": 654,
+          "max": 654
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 622,
+          "max": 622
+         },
+         "Item Level": {
+          "min": 403,
+          "max": 403
+         },
+         "Spirit": {
+          "min": 1576,
+          "max": 1576
+         },
+         "Strength": {
+          "min": 645,
+          "max": 645
+         },
+         "Stamina": {
+          "min": 9051,
+          "max": 9051
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 2253,
+          "max": 2253
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 9,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 32,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 78703,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_robe_raidpriest_k_01.jpg",
+          "name": "Hood of Dying Light",
+          "itemLevel": 410,
+          "permanentEnchant": 4207,
+          "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+          "gems": [
+           {
+            "id": 68780,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           }
+          ]
+         },
+         {
+          "id": 78364,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklace15.jpg",
+          "name": "Petrified Fungal Heart",
+          "itemLevel": 410
+         },
+         {
+          "id": 78750,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_robe_raidpriest_k_01.jpg",
+          "name": "Mantle of Dying Light",
+          "itemLevel": 410,
+          "permanentEnchant": 4200,
+          "permanentEnchantName": "+3 Intellect and +1 Haste",
+          "gems": [
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           },
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Chãos",
+       "id": 14,
+       "guid": 12724562,
+       "type": "Mage",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Mage-Fire",
+       "specs": [
+        "Fire"
+       ],
+       "minItemLevel": 405,
+       "maxItemLevel": 405,
+       "potionUse": 2,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 1742,
+          "max": 1742
+         },
+         "Intellect": {
+          "min": 9759,
+          "max": 9759
+         },
+         "Agility": {
+          "min": 645,
+          "max": 645
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 1170,
+          "max": 1170
+         },
+         "Item Level": {
+          "min": 405,
+          "max": 405
+         },
+         "Spirit": {
+          "min": 216,
+          "max": 216
+         },
+         "Strength": {
+          "min": 636,
+          "max": 636
+         },
+         "Stamina": {
+          "min": 9288,
+          "max": 9288
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 3137,
+          "max": 3137
+         }
+        },
+        "talents": [
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Teleport Elwynn",
+          "guid": 35,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         },
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 78701,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_robe_raidmage_k_01.jpg",
+          "name": "Time Lord's Hood",
+          "itemLevel": 410,
+          "permanentEnchant": 4207,
+          "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+          "gems": [
+           {
+            "id": 68780,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           }
+          ]
+         },
+         {
+          "id": 77088,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklace_16.jpg",
+          "name": "Opal of the Secret Order",
+          "itemLevel": 397
+         },
+         {
+          "id": 78748,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_robe_raidmage_k_01.jpg",
+          "name": "Time Lord's Mantle",
+          "itemLevel": 410,
+          "permanentEnchant": 4200,
+          "permanentEnchantName": "+3 Intellect and +1 Haste",
+          "gems": [
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           },
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Hipy",
+       "id": 4,
+       "guid": 13579878,
+       "type": "Rogue",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Rogue-Subtlety",
+       "specs": [
+        "Subtlety"
+       ],
+       "minItemLevel": 406,
+       "maxItemLevel": 406,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 555,
+          "max": 555
+         },
+         "Intellect": {
+          "min": 69,
+          "max": 69
+         },
+         "Agility": {
+          "min": 11543,
+          "max": 11543
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 1947,
+          "max": 1947
+         },
+         "Item Level": {
+          "min": 406,
+          "max": 406
+         },
+         "Spirit": {
+          "min": 93,
+          "max": 93
+         },
+         "Strength": {
+          "min": 725,
+          "max": 725
+         },
+         "Stamina": {
+          "min": 9118,
+          "max": 9118
+         },
+         "Expertise": {
+          "min": 781,
+          "max": 781
+         },
+         "Haste": {
+          "min": 2946,
+          "max": 2946
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 8,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 2,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Teleport Goldshire",
+          "guid": 31,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 78699,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_leather_raidrogue_k_01.jpg",
+          "name": "Blackfang Battleweave Helmet",
+          "itemLevel": 410,
+          "permanentEnchant": 4209,
+          "permanentEnchantName": "+3 Agility and +2 Haste",
+          "gems": [
+           {
+            "id": 68778,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 71879,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           }
+          ]
+         },
+         {
+          "id": 77091,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklace14.jpg",
+          "name": "Cameo of Terrible Memories",
+          "itemLevel": 397
+         },
+         {
+          "id": 71541,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulders_leather_raidrogue_j_01.jpg",
+          "name": "Dark Phoenix Spaulders",
+          "itemLevel": 391,
+          "permanentEnchant": 4204,
+          "permanentEnchantName": "+3 Agility and +1 Mastery",
+          "gems": [
+           {
+            "id": 52258,
+            "itemLevel": 85,
+            "icon": "inv_jewelcrafting_dragonseye05.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      "... 15 more"
+     ],
+     "healers": [
+      {
+       "name": "Minpally",
+       "id": 26,
+       "guid": 10892525,
+       "type": "Paladin",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Paladin-Holy",
+       "specs": [
+        "Holy"
+       ],
+       "minItemLevel": 404,
+       "maxItemLevel": 404,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 1663,
+          "max": 1663
+         },
+         "Intellect": {
+          "min": 8523,
+          "max": 8523
+         },
+         "Agility": {
+          "min": 699,
+          "max": 699
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 181,
+          "max": 181
+         },
+         "Item Level": {
+          "min": 404,
+          "max": 404
+         },
+         "Spirit": {
+          "min": 3440,
+          "max": 3440
+         },
+         "Strength": {
+          "min": 769,
+          "max": 769
+         },
+         "Stamina": {
+          "min": 9041,
+          "max": 9041
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 2475,
+          "max": 2475
+         }
+        },
+        "talents": [
+         {
+          "name": "Teleport Goldshire",
+          "guid": 31,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         },
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 7,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 78692,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_plate_raidpaladin_k_01.jpg",
+          "name": "Headguard of Radiant Glory",
+          "itemLevel": 410,
+          "permanentEnchant": 4207,
+          "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+          "gems": [
+           {
+            "id": 52296,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           }
+          ]
+         },
+         {
+          "id": 78364,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklace15.jpg",
+          "name": "Petrified Fungal Heart",
+          "itemLevel": 410
+         },
+         {
+          "id": 78841,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_plate_raidpaladin_k_01.jpg",
+          "name": "Mantle of Radiant Glory",
+          "itemLevel": 384,
+          "permanentEnchant": 4200,
+          "permanentEnchantName": "+3 Intellect and +1 Haste",
+          "gems": [
+           {
+            "id": 52207,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior6.jpg"
+           },
+           {
+            "id": 52207,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior6.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Nototemsforu",
+       "id": 21,
+       "guid": 11729283,
+       "type": "Shaman",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Shaman-Restoration",
+       "specs": [
+        "Restoration"
+       ],
+       "minItemLevel": 406,
+       "maxItemLevel": 406,
+       "potionUse": 2,
+       "healthstoneUse": 1,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 520,
+          "max": 520
+         },
+         "Intellect": {
+          "min": 10157,
+          "max": 10157
+         },
+         "Agility": {
+          "min": 677,
+          "max": 677
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 1385,
+          "max": 1385
+         },
+         "Item Level": {
+          "min": 406,
+          "max": 406
+         },
+         "Spirit": {
+          "min": 1731,
+          "max": 1731
+         },
+         "Strength": {
+          "min": 740,
+          "max": 740
+         },
+         "Stamina": {
+          "min": 9251,
+          "max": 9251
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 5360,
+          "max": 5360
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 6,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Teleport Elwynn",
+          "guid": 35,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 78691,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_mail_raidshaman_k_01.jpg",
+          "name": "Spiritwalker's Faceguard",
+          "itemLevel": 410,
+          "permanentEnchant": 4207,
+          "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+          "gems": [
+           {
+            "id": 68780,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           }
+          ]
+         },
+         {
+          "id": 78364,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklace15.jpg",
+          "name": "Petrified Fungal Heart",
+          "itemLevel": 410
+         },
+         {
+          "id": 78435,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_mail_raidshaman_k_01.jpg",
+          "name": "Imperfect Specimens 27 and 28",
+          "itemLevel": 410,
+          "permanentEnchant": 4200,
+          "permanentEnchantName": "+3 Intellect and +1 Haste",
+          "gems": [
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           },
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Teazy",
+       "id": 37,
+       "guid": 15696991,
+       "type": "Shaman",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Shaman-Restoration",
+       "specs": [
+        "Restoration"
+       ],
+       "minItemLevel": 401,
+       "maxItemLevel": 401,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 1263,
+          "max": 1263
+         },
+         "Intellect": {
+          "min": 8474,
+          "max": 8474
+         },
+         "Agility": {
+          "min": 678,
+          "max": 678
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 185,
+          "max": 185
+         },
+         "Item Level": {
+          "min": 401,
+          "max": 401
+         },
+         "Spirit": {
+          "min": 2072,
+          "max": 2072
+         },
+         "Strength": {
+          "min": 736,
+          "max": 736
+         },
+         "Stamina": {
+          "min": 8980,
+          "max": 8980
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 2320,
+          "max": 2320
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 7,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 2,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 32,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 78685,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_mail_raidshaman_k_01.jpg",
+          "name": "Spiritwalker's Headpiece",
+          "itemLevel": 410,
+          "permanentEnchant": 4207,
+          "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+          "gems": [
+           {
+            "id": 68780,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 71881,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_01.jpg"
+           }
+          ]
+         },
+         {
+          "id": 78364,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklace15.jpg",
+          "name": "Petrified Fungal Heart",
+          "itemLevel": 410
+         },
+         {
+          "id": 71546,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_mail_raidshaman_j_01.jpg",
+          "name": "Erupting Volcanic Mantle",
+          "itemLevel": 391,
+          "permanentEnchant": 4200,
+          "permanentEnchantName": "+3 Intellect and +1 Haste",
+          "gems": [
+           {
+            "id": 52207,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior6.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      "... 2 more"
+     ],
+     "tanks": [
+      {
+       "name": "Masomum",
+       "id": 10,
+       "guid": 10411207,
+       "type": "Paladin",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Paladin-Protection",
+       "specs": [
+        "Protection"
+       ],
+       "minItemLevel": 404,
+       "maxItemLevel": 404,
+       "potionUse": 2,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 1427,
+          "max": 1427
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 117,
+          "max": 117
+         },
+         "Stamina": {
+          "min": 15492,
+          "max": 15492
+         },
+         "Haste": {
+          "min": 584,
+          "max": 584
+         },
+         "Hit": {
+          "min": 961,
+          "max": 961
+         },
+         "Intellect": {
+          "min": 111,
+          "max": 111
+         },
+         "Armor": {
+          "min": 44108,
+          "max": 44108
+         },
+         "Agility": {
+          "min": 678,
+          "max": 678
+         },
+         "Block": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 257,
+          "max": 257
+         },
+         "Item Level": {
+          "min": 404,
+          "max": 404
+         },
+         "Parry": {
+          "min": 2605,
+          "max": 2605
+         },
+         "Strength": {
+          "min": 6738,
+          "max": 6738
+         },
+         "Expertise": {
+          "min": 1275,
+          "max": 1275
+         }
+        },
+        "talents": [
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 32,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 9,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 78693,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_plate_raidpaladin_k_01.jpg",
+          "name": "Helmet of Radiant Glory",
+          "itemLevel": 410,
+          "permanentEnchant": 4206,
+          "permanentEnchantName": "+4 Stamina and +2 Dodge",
+          "gems": [
+           {
+            "id": 52293,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 71820,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_02.jpg"
+           }
+          ]
+         },
+         {
+          "id": 77092,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklace13.jpg",
+          "name": "Guardspike Choker",
+          "itemLevel": 397
+         },
+         {
+          "id": 78745,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_plate_raidpaladin_k_01.jpg",
+          "name": "Shoulderguards of Radiant Glory",
+          "itemLevel": 410,
+          "permanentEnchant": 4198,
+          "permanentEnchantName": "+3 Stamina and +1 Dodge",
+          "gems": [
+           {
+            "id": 71820,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_02.jpg"
+           },
+           {
+            "id": 71820,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_02.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Torean",
+       "id": 3,
+       "guid": 13478508,
+       "type": "DeathKnight",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "DeathKnight-Blood",
+       "specs": [
+        "Blood"
+       ],
+       "minItemLevel": 406,
+       "maxItemLevel": 406,
+       "potionUse": 2,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 268,
+          "max": 268
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 82,
+          "max": 82
+         },
+         "Stamina": {
+          "min": 15807,
+          "max": 15807
+         },
+         "Haste": {
+          "min": 1445,
+          "max": 1445
+         },
+         "Hit": {
+          "min": 962,
+          "max": 962
+         },
+         "Intellect": {
+          "min": 54,
+          "max": 54
+         },
+         "Armor": {
+          "min": 44062,
+          "max": 44062
+         },
+         "Agility": {
+          "min": 726,
+          "max": 726
+         },
+         "Crit": {
+          "min": 647,
+          "max": 647
+         },
+         "Item Level": {
+          "min": 406,
+          "max": 406
+         },
+         "Parry": {
+          "min": 2271,
+          "max": 2271
+         },
+         "Strength": {
+          "min": 7460,
+          "max": 7460
+         },
+         "Expertise": {
+          "min": 631,
+          "max": 631
+         }
+        },
+        "talents": [
+         {
+          "name": "Teleport Elwynn",
+          "guid": 35,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         },
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 78687,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_plate_raiddeathknight_k_01.jpg",
+          "name": "Necrotic Boneplate Helmet",
+          "itemLevel": 410,
+          "permanentEnchant": 4208,
+          "permanentEnchantName": "+3 Strength and +2 Mastery",
+          "gems": [
+           {
+            "id": 68779,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 71870,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_05.jpg"
+           }
+          ]
+         },
+         {
+          "id": 77090,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_bonenecklace.jpg",
+          "name": "Necklace of Black Dragon's Teeth",
+          "itemLevel": 397
+         },
+         {
+          "id": 78751,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_plate_raiddeathknight_k_01.jpg",
+          "name": "Necrotic Boneplate Shoulderguards",
+          "itemLevel": 410,
+          "permanentEnchant": 4198,
+          "permanentEnchantName": "+3 Stamina and +1 Dodge",
+          "gems": [
+           {
+            "id": 71836,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_06.jpg"
+           },
+           {
+            "id": 71820,
+            "itemLevel": 85,
+            "icon": "inv_misc_epicgem_02.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      }
+     ]
+    },
+    "logVersion": 17,
+    "gameVersion": 5,
+    "logFileDetails": ""
+   }
+  },
+  "damageDone": {
+   "data": {
+    "entries": [
+     {
+      "name": "Paxman",
+      "id": 17,
+      "guid": 15767437,
+      "type": "Priest",
+      "icon": "Priest-Shadow",
+      "itemLevel": 403,
+      "total": 41831113,
+      "totalReduced": 40278491,
+      "activeTime": 708512,
+      "activeTimeReduced": 708512,
+      "abilities": [
+       {
+        "guid": 49821,
+        "name": "Mind Sear",
+        "total": 7179948,
+        "type": 32,
+        "icon": "spell_shadow_mindshear.jpg"
+       },
+       {
+        "guid": 8092,
+        "name": "Mind Blast",
+        "total": 6250940,
+        "type": 32,
+        "icon": "spell_shadow_unholyfrenzy.jpg"
+       },
+       {
+        "guid": 15407,
+        "name": "Mind Flay",
+        "total": 5731236,
+        "type": 32,
+        "icon": "spell_shadow_siphonmana.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Wing Tentacle",
+        "total": 7809549,
+        "totalReduced": 7310357,
+        "type": "Boss"
+       },
+       {
+        "name": "Mutated Corruption",
+        "total": 7501330,
+        "totalReduced": 7166429,
+        "type": "NPC"
+       },
+       {
+        "name": "Arm Tentacle",
+        "total": 4979749,
+        "totalReduced": 4753272,
+        "type": "Boss"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 9,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 32,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 78703,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_robe_raidpriest_k_01.jpg",
+        "name": "Hood of Dying Light",
+        "itemLevel": 410,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       {
+        "id": 78364,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace15.jpg",
+        "name": "Petrified Fungal Heart",
+        "itemLevel": 410
+       },
+       {
+        "id": 78750,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_robe_raidpriest_k_01.jpg",
+        "name": "Mantle of Dying Light",
+        "itemLevel": 410,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ],
+      "pets": [
+       {
+        "name": "Shadowfiend",
+        "id": 73,
+        "guid": 19668,
+        "type": "Pet",
+        "icon": "abilities/spell_shadow_shadowfiend.jpg",
+        "total": 1013716,
+        "totalReduced": 0,
+        "activeTime": 85261
+       },
+       {
+        "name": "Shadowy Apparition",
+        "id": 93,
+        "guid": 46954,
+        "type": "Pet",
+        "icon": "abilities/spell_shadow_painandsuffering.jpg",
+        "total": 538906,
+        "totalReduced": 0,
+        "activeTime": 103561
+       }
+      ]
+     },
+     {
+      "name": "Flux",
+      "id": 25,
+      "guid": 6526,
+      "type": "Hunter",
+      "icon": "Hunter-Survival",
+      "itemLevel": 403,
+      "total": 34202095,
+      "totalReduced": 33263251,
+      "activeTime": 720311,
+      "activeTimeReduced": 720311,
+      "blocked": 17383,
+      "abilities": [
+       {
+        "guid": 1215484,
+        "name": "Chaos Bolt",
+        "total": 7719818,
+        "type": 4,
+        "icon": "ability_warlock_chaosbolt.jpg"
+       },
+       {
+        "guid": 77767,
+        "name": "Cobra Shot",
+        "total": 5605726,
+        "type": 8,
+        "icon": "ability_hunter_cobrashot.jpg"
+       },
+       {
+        "guid": 75,
+        "name": "Auto Shot",
+        "total": 4596123,
+        "type": 1,
+        "icon": "ability_whirlwind.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Mutated Corruption",
+        "total": 7437787,
+        "totalReduced": 7041158,
+        "type": "NPC"
+       },
+       {
+        "name": "Wing Tentacle",
+        "total": 7162298,
+        "totalReduced": 6896801,
+        "type": "Boss"
+       },
+       {
+        "name": "Arm Tentacle",
+        "total": 3480612,
+        "type": "Boss"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Falling",
+        "guid": 3,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 7,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 78698,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_mail_raidhunter_k_01.jpg",
+        "name": "Wyrmstalker's Headguard",
+        "itemLevel": 410,
+        "permanentEnchant": 4209,
+        "permanentEnchantName": "+3 Agility and +2 Haste",
+        "gems": [
+         {
+          "id": 68778,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       {
+        "id": 77091,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace14.jpg",
+        "name": "Cameo of Terrible Memories",
+        "itemLevel": 397
+       },
+       {
+        "id": 78832,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_mail_raidhunter_k_01.jpg",
+        "name": "Wyrmstalker's Spaulders",
+        "itemLevel": 384,
+        "permanentEnchant": 4204,
+        "permanentEnchantName": "+3 Agility and +1 Mastery",
+        "gems": [
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         },
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ],
+      "pets": [
+       {
+        "name": "Muf",
+        "id": 49,
+        "guid": 2510356,
+        "type": "Pet",
+        "icon": "abilities/ability_hunter_beastcall.jpg",
+        "total": 938844,
+        "totalReduced": 0,
+        "activeTime": 152123
+       }
+      ]
+     },
+     {
+      "name": "Timm",
+      "id": 16,
+      "guid": 15838384,
+      "type": "Warrior",
+      "icon": "Warrior-Arms",
+      "itemLevel": 390,
+      "total": 20059101,
+      "totalReduced": 18700039,
+      "activeTime": 492524,
+      "activeTimeReduced": 492524,
+      "blocked": 4007,
+      "abilities": [
+       {
+        "guid": 12294,
+        "name": "Mortal Strike",
+        "total": 2565991,
+        "type": 1,
+        "icon": "ability_warrior_savageblow.jpg"
+       },
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 2015954,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 5308,
+        "name": "Execute",
+        "total": 2013487,
+        "type": 1,
+        "icon": "inv_sword_48.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Mutated Corruption",
+        "total": 4356786,
+        "totalReduced": 4183468,
+        "type": "NPC"
+       },
+       {
+        "name": "Deathwing",
+        "total": 3595894,
+        "type": "Boss"
+       },
+       {
+        "name": "Wing Tentacle",
+        "total": 3344285,
+        "totalReduced": 3005201,
+        "type": "Boss"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 2,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 71430,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_plate_raiddeathknight_j_01.jpg",
+        "name": "Greathelm of the Voracious Maw",
+        "itemLevel": 391,
+        "permanentEnchant": 4208,
+        "permanentEnchantName": "+3 Strength and +2 Mastery",
+        "gems": [
+         {
+          "id": 68779,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52213,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior3.jpg"
+         }
+        ]
+       },
+       {
+        "id": 71446,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_53.jpg",
+        "name": "Necklace of Fetishes",
+        "itemLevel": 391
+       },
+       {
+        "id": 78830,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_plate_raidwarrior_k_01.jpg",
+        "name": "Colossal Dragonplate Pauldrons",
+        "itemLevel": 384,
+        "permanentEnchant": 4202,
+        "permanentEnchantName": "+3 Strength and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 52206,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         },
+         {
+          "id": 52213,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior3.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ],
+      "pets": [
+       {
+        "name": "Tentacle of the Old Ones",
+        "id": 98,
+        "guid": 58077,
+        "type": "Pet",
+        "icon": "abilities/inv_misc_monsterhorn_02.jpg",
+        "total": 1359062,
+        "totalReduced": 0,
+        "activeTime": 70701
+       }
+      ]
+     },
+     "... 25 more"
+    ],
+    "totalTime": 722378,
+    "logVersion": 17,
+    "gameVersion": 5,
+    "exploitDetails": []
+   }
+  },
+  "healing": {
+   "data": {
+    "entries": [
+     {
+      "name": "Paxman",
+      "id": 17,
+      "guid": 15767437,
+      "type": "Priest",
+      "icon": "Priest-Shadow",
+      "itemLevel": 403,
+      "total": 4845999,
+      "activeTime": 708511,
+      "activeTimeReduced": 671178,
+      "overheal": 5337574,
+      "abilities": [
+       {
+        "guid": 15290,
+        "name": "Vampiric Embrace",
+        "total": 4572357,
+        "type": 32,
+        "icon": "spell_shadow_unsummonbuilding.jpg"
+       },
+       {
+        "guid": 2944,
+        "name": "Devouring Plague",
+        "total": 188552,
+        "type": 32,
+        "icon": "spell_shadow_devouringplague.jpg"
+       },
+       {
+        "guid": 75999,
+        "name": "Improved Devouring Plague",
+        "total": 85090,
+        "type": 32,
+        "icon": "spell_shadow_devouringplague.jpg"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 105408,
+        "name": "Burning Blood",
+        "total": 3123740,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 106835,
+        "name": "Corrupted Blood",
+        "total": 743074,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 105445,
+        "name": "Blistering Heat",
+        "total": 233250,
+        "type": 4,
+        "icon": "ability_warrior_bloodnova.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Paxman",
+        "total": 1526041,
+        "type": "Priest"
+       },
+       {
+        "name": "Kerrod",
+        "total": 824221,
+        "type": "Druid"
+       },
+       {
+        "name": "Ragingelf",
+        "total": 765569,
+        "type": "Druid"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 9,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 32,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 78703,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_robe_raidpriest_k_01.jpg",
+        "name": "Hood of Dying Light",
+        "itemLevel": 410,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       {
+        "id": 78364,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace15.jpg",
+        "name": "Petrified Fungal Heart",
+        "itemLevel": 410
+       },
+       {
+        "id": 78750,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_robe_raidpriest_k_01.jpg",
+        "name": "Mantle of Dying Light",
+        "itemLevel": 410,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Hipy",
+      "id": 4,
+      "guid": 13579878,
+      "type": "Rogue",
+      "icon": "Rogue-Subtlety",
+      "itemLevel": 406,
+      "total": 806194,
+      "activeTime": 585663,
+      "activeTimeReduced": 519201,
+      "overheal": 337195,
+      "abilities": [
+       {
+        "guid": 73651,
+        "name": "Recuperate",
+        "total": 806194,
+        "type": 1,
+        "icon": "ability_rogue_recuperate.jpg"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 105408,
+        "name": "Burning Blood",
+        "total": 597704,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 106835,
+        "name": "Corrupted Blood",
+        "total": 150265,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 105445,
+        "name": "Blistering Heat",
+        "total": 35991,
+        "type": 4,
+        "icon": "ability_warrior_bloodnova.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Hipy",
+        "total": 806194,
+        "type": "Rogue"
+       }
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 2,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 78699,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_leather_raidrogue_k_01.jpg",
+        "name": "Blackfang Battleweave Helmet",
+        "itemLevel": 410,
+        "permanentEnchant": 4209,
+        "permanentEnchantName": "+3 Agility and +2 Haste",
+        "gems": [
+         {
+          "id": 68778,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 71879,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       {
+        "id": 77091,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace14.jpg",
+        "name": "Cameo of Terrible Memories",
+        "itemLevel": 397
+       },
+       {
+        "id": 71541,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulders_leather_raidrogue_j_01.jpg",
+        "name": "Dark Phoenix Spaulders",
+        "itemLevel": 391,
+        "permanentEnchant": 4204,
+        "permanentEnchantName": "+3 Agility and +1 Mastery",
+        "gems": [
+         {
+          "id": 52258,
+          "itemLevel": 85,
+          "icon": "inv_jewelcrafting_dragonseye05.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Garland",
+      "id": 22,
+      "guid": 15901009,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "itemLevel": 403,
+      "total": 2002183,
+      "totalReduced": 1570757,
+      "activeTime": 674586,
+      "activeTimeReduced": 534484,
+      "overheal": 579462,
+      "abilities": [
+       {
+        "guid": 52042,
+        "name": "Healing Stream Totem",
+        "total": 1560889,
+        "type": 8,
+        "icon": "inv_spear_04.jpg"
+       },
+       {
+        "guid": 77830,
+        "name": "Ancestral Resolve",
+        "total": 431426,
+        "totalReduced": 0,
+        "type": 1,
+        "icon": "spell_nature_rune.jpg"
+       },
+       {
+        "guid": 73921,
+        "name": "Healing Rain",
+        "total": 9868,
+        "type": 8,
+        "icon": "spell_nature_giftofthewaterspirit.jpg"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 105408,
+        "name": "Burning Blood",
+        "total": 1347837,
+        "totalReduced": 1067850,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 106835,
+        "name": "Corrupted Blood",
+        "total": 453697,
+        "totalReduced": 354595,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 105445,
+        "name": "Blistering Heat",
+        "total": 124296,
+        "totalReduced": 96004,
+        "type": 4,
+        "icon": "ability_warrior_bloodnova.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Garland",
+        "total": 783964,
+        "totalReduced": 352538,
+        "type": "Shaman"
+       },
+       {
+        "name": "Chãos",
+        "total": 312964,
+        "type": "Mage"
+       },
+       {
+        "name": "Dinie",
+        "total": 312289,
+        "type": "Mage"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Falling",
+        "guid": 3,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 7,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 77037,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_mail_raidshaman_k_01.jpg",
+        "name": "Spiritwalker's Headpiece",
+        "itemLevel": 397,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52207,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ],
+        "setID": 1070
+       },
+       {
+        "id": 78364,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace15.jpg",
+        "name": "Petrified Fungal Heart",
+        "itemLevel": 410
+       },
+       {
+        "id": 78741,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_mail_raidshaman_k_01.jpg",
+        "name": "Spiritwalker's Shoulderwraps",
+        "itemLevel": 410,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 21 more"
+    ],
+    "totalTime": 722378,
+    "logVersion": 17,
+    "gameVersion": 5,
+    "exploitDetails": []
+   }
+  },
+  "damageTaken": {
+   "data": {
+    "entries": [
+     {
+      "name": "Paxman",
+      "id": 17,
+      "guid": 15767437,
+      "type": "Priest",
+      "icon": "Priest-Shadow",
+      "itemLevel": 403,
+      "total": 5182898,
+      "totalReduced": 4989837,
+      "activeTime": 644749,
+      "activeTimeReduced": 630720,
+      "overheal": 2641869,
+      "abilities": [
+       {
+        "guid": 105408,
+        "name": "Burning Blood",
+        "total": 2947151,
+        "totalReduced": 2836126,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 106835,
+        "name": "Corrupted Blood",
+        "total": 1040586,
+        "totalReduced": 1011307,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 105445,
+        "name": "Blistering Heat",
+        "total": 358843,
+        "totalReduced": 338405,
+        "type": 4,
+        "icon": "ability_warrior_bloodnova.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Wing Tentacle",
+        "total": 1409312,
+        "totalReduced": 1340374,
+        "type": "Boss"
+       },
+       {
+        "name": "Deathwing",
+        "total": 1040586,
+        "totalReduced": 1011307,
+        "type": "Boss"
+       },
+       {
+        "name": "Arm Tentacle",
+        "total": 792383,
+        "totalReduced": 767810,
+        "type": "Boss"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 9,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 32,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 78703,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_robe_raidpriest_k_01.jpg",
+        "name": "Hood of Dying Light",
+        "itemLevel": 410,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       {
+        "id": 78364,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace15.jpg",
+        "name": "Petrified Fungal Heart",
+        "itemLevel": 410
+       },
+       {
+        "id": 78750,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_robe_raidpriest_k_01.jpg",
+        "name": "Mantle of Dying Light",
+        "itemLevel": 410,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Hipy",
+      "id": 4,
+      "guid": 13579878,
+      "type": "Rogue",
+      "icon": "Rogue-Subtlety",
+      "itemLevel": 406,
+      "total": 4693940,
+      "totalReduced": 4440966,
+      "activeTime": 556242,
+      "activeTimeReduced": 537377,
+      "overheal": 1402440,
+      "abilities": [
+       {
+        "guid": 105408,
+        "name": "Burning Blood",
+        "total": 2819970,
+        "totalReduced": 2656939,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 106835,
+        "name": "Corrupted Blood",
+        "total": 1229287,
+        "totalReduced": 1158153,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 105445,
+        "name": "Blistering Heat",
+        "total": 236184,
+        "totalReduced": 219137,
+        "type": 4,
+        "icon": "ability_warrior_bloodnova.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Deathwing",
+        "total": 1229287,
+        "totalReduced": 1158153,
+        "type": "Boss"
+       },
+       {
+        "name": "Wing Tentacle",
+        "total": 995895,
+        "totalReduced": 930209,
+        "type": "Boss"
+       },
+       {
+        "name": "Arm Tentacle",
+        "total": 952785,
+        "totalReduced": 903874,
+        "type": "Boss"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 2,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 78699,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_leather_raidrogue_k_01.jpg",
+        "name": "Blackfang Battleweave Helmet",
+        "itemLevel": 410,
+        "permanentEnchant": 4209,
+        "permanentEnchantName": "+3 Agility and +2 Haste",
+        "gems": [
+         {
+          "id": 68778,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 71879,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       {
+        "id": 77091,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace14.jpg",
+        "name": "Cameo of Terrible Memories",
+        "itemLevel": 397
+       },
+       {
+        "id": 71541,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulders_leather_raidrogue_j_01.jpg",
+        "name": "Dark Phoenix Spaulders",
+        "itemLevel": 391,
+        "permanentEnchant": 4204,
+        "permanentEnchantName": "+3 Agility and +1 Mastery",
+        "gems": [
+         {
+          "id": 52258,
+          "itemLevel": 85,
+          "icon": "inv_jewelcrafting_dragonseye05.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Garland",
+      "id": 22,
+      "guid": 15901009,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "itemLevel": 403,
+      "total": 5566856,
+      "totalReduced": 4961179,
+      "activeTime": 634134,
+      "activeTimeReduced": 634134,
+      "overheal": 1544905,
+      "abilities": [
+       {
+        "guid": 105408,
+        "name": "Burning Blood",
+        "total": 3523573,
+        "totalReduced": 3131570,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 106835,
+        "name": "Corrupted Blood",
+        "total": 1252727,
+        "totalReduced": 1116630,
+        "type": 4,
+        "icon": "spell_deathknight_bloodboil.jpg"
+       },
+       {
+        "guid": 105445,
+        "name": "Blistering Heat",
+        "total": 423460,
+        "totalReduced": 365211,
+        "type": 4,
+        "icon": "ability_warrior_bloodnova.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Wing Tentacle",
+        "total": 1701568,
+        "totalReduced": 1519605,
+        "type": "Boss"
+       },
+       {
+        "name": "Deathwing",
+        "total": 1252727,
+        "totalReduced": 1116630,
+        "type": "Boss"
+       },
+       {
+        "name": "Arm Tentacle",
+        "total": 946620,
+        "totalReduced": 829601,
+        "type": "Boss"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Falling",
+        "guid": 3,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 7,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 77037,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_mail_raidshaman_k_01.jpg",
+        "name": "Spiritwalker's Headpiece",
+        "itemLevel": 397,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52207,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ],
+        "setID": 1070
+       },
+       {
+        "id": 78364,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace15.jpg",
+        "name": "Petrified Fungal Heart",
+        "itemLevel": 410
+       },
+       {
+        "id": 78741,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_mail_raidshaman_k_01.jpg",
+        "name": "Spiritwalker's Shoulderwraps",
+        "itemLevel": 410,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 26 more"
+    ],
+    "totalTime": 722378,
+    "logVersion": 17,
+    "gameVersion": 5,
+    "exploitDetails": []
+   }
+  },
+  "deaths": {
+   "data": {
+    "entries": [
+     {
+      "name": "Yogiqt",
+      "id": 15,
+      "guid": 2967199,
+      "type": "Warrior",
+      "icon": "Warrior-Fury",
+      "timestamp": 436910529,
+      "fight": 21,
+      "damage": {
+       "total": 297511,
+       "totalReduced": 270729,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 82034,
+       "abilities": [
+        {
+         "guid": 108601,
+         "name": "Corrupting Parasite",
+         "total": 282391,
+         "totalReduced": 255609,
+         "type": 32,
+         "icon": "trade_engineering.jpg"
+        },
+        {
+         "guid": 105408,
+         "name": "Burning Blood",
+         "total": 15120,
+         "type": 4,
+         "icon": "spell_deathknight_bloodboil.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Deathwing",
+         "total": 282391,
+         "totalReduced": 255609,
+         "type": "Boss"
+        },
+        {
+         "name": "Arm Tentacle",
+         "total": 15120,
+         "type": "Boss"
+        }
+       ]
+      },
+      "healing": {
+       "total": 31663,
+       "totalReduced": 4881,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 86273,
+         "name": "Illuminated Healing",
+         "total": 26782,
+         "totalReduced": 0,
+         "type": 2,
+         "icon": "spell_holy_absolution.jpg"
+        },
+        {
+         "guid": 23880,
+         "name": "Bloodthirst",
+         "total": 4068,
+         "type": 1,
+         "icon": "spell_nature_bloodlust.jpg"
+        },
+        {
+         "guid": 16488,
+         "name": "Blood Craze",
+         "total": 813,
+         "type": 1,
+         "icon": "spell_shadow_summonimp.jpg"
+        }
+       ],
+       "damageAbilities": [
+        {
+         "guid": 108601,
+         "name": "Corrupting Parasite",
+         "total": 30646,
+         "totalReduced": 3864,
+         "type": 32,
+         "icon": "trade_engineering.jpg"
+        },
+        {
+         "guid": 105408,
+         "name": "Burning Blood",
+         "total": 1017,
+         "type": 4,
+         "icon": "spell_deathknight_bloodboil.jpg"
+        }
+       ],
+       "sources": [
+        {
+         "name": "Minpally",
+         "total": 13701,
+         "totalReduced": 0,
+         "type": "Paladin"
+        },
+        {
+         "name": "Maríel",
+         "total": 13081,
+         "totalReduced": 0,
+         "type": "Paladin"
+        },
+        {
+         "name": "Yogiqt",
+         "total": 4881,
+         "type": "Warrior"
+        }
+       ]
+      },
+      "deathWindow": 3016,
+      "overkill": 62519,
+      "events": [
+       {
+        "timestamp": 436910528,
+        "type": "damage",
+        "sourceID": 213,
+        "sourceIsFriendly": false,
+        "targetID": 15,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Corrupting Parasite",
+         "guid": 108601,
+         "type": 32,
+         "abilityIcon": "trade_engineering.jpg"
+        },
+        "fight": 21,
+        "hitType": 16,
+        "amount": 41967,
+        "mitigated": 11609,
+        "unmitigatedAmount": 116095,
+        "resisted": 11610,
+        "overkill": 62519,
+        "isAoE": false,
+        "tick": true,
+        "targetMarker": 8
+       },
+       {
+        "timestamp": 436910390,
+        "type": "damage",
+        "sourceID": 224,
+        "sourceIsFriendly": false,
+        "targetID": 15,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Burning Blood",
+         "guid": 105408,
+         "type": 4,
+         "abilityIcon": "spell_deathknight_bloodboil.jpg"
+        },
+        "fight": 21,
+        "hitType": 16,
+        "amount": 7560,
+        "mitigated": 1890,
+        "unmitigatedAmount": 9450,
+        "resisted": 1890,
+        "isAoE": true,
+        "targetMarker": 8
+       },
+       {
+        "timestamp": 436909501,
+        "type": "damage",
+        "sourceID": 213,
+        "sourceIsFriendly": false,
+        "targetID": 15,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Corrupting Parasite",
+         "guid": 108601,
+         "type": 32,
+         "abilityIcon": "trade_engineering.jpg"
+        },
+        "fight": 21,
+        "hitType": 16,
+        "amount": 67722,
+        "mitigated": 29023,
+        "unmitigatedAmount": 96745,
+        "resisted": 29024,
+        "isAoE": false,
+        "tick": true,
+        "targetMarker": 8
+       }
+      ],
+      "killingBlow": {
+       "name": "Corrupting Parasite",
+       "guid": 108601,
+       "type": 32,
+       "abilityIcon": "trade_engineering.jpg"
+      }
+     },
+     {
+      "name": "Masomum",
+      "id": 10,
+      "guid": 10411207,
+      "type": "Paladin",
+      "icon": "Paladin-Protection",
+      "timestamp": 436912084,
+      "fight": 21,
+      "damage": {
+       "total": 524880,
+       "totalReduced": 488584,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 285119,
+       "abilities": [
+        {
+         "guid": 106444,
+         "name": "Impale",
+         "total": 524880,
+         "totalReduced": 488584,
+         "type": 1,
+         "icon": "ability_searingarrow.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Mutated Corruption",
+         "total": 524880,
+         "totalReduced": 488584,
+         "type": "NPC"
+        }
+       ]
+      },
+      "healing": {
+       "total": 0,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [],
+       "damageAbilities": [],
+       "sources": []
+      },
+      "deathWindow": 0,
+      "overkill": 219588,
+      "events": [
+       {
+        "timestamp": 436911989,
+        "type": "damage",
+        "sourceID": 216,
+        "sourceInstance": 3,
+        "sourceIsFriendly": false,
+        "targetID": 10,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Impale",
+         "guid": 106444,
+         "type": 1,
+         "abilityIcon": "ability_searingarrow.jpg"
+        },
+        "fight": 21,
+        "hitType": 1,
+        "amount": 268996,
+        "mitigated": 285119,
+        "unmitigatedAmount": 809999,
+        "overkill": 219588,
+        "absorbed": 36296,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Impale",
+       "guid": 106444,
+       "type": 1,
+       "abilityIcon": "ability_searingarrow.jpg"
+      }
+     },
+     {
+      "name": "Masomum",
+      "id": 10,
+      "guid": 10411207,
+      "type": "Paladin",
+      "icon": "Paladin-Protection",
+      "timestamp": 436973169,
+      "fight": 21,
+      "damage": {
+       "total": 427577,
+       "totalReduced": 423151,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 175048,
+       "blocked": 9874,
+       "abilities": [
+        {
+         "guid": 108787,
+         "name": "Parasitic Backlash",
+         "total": 206093,
+         "type": 4,
+         "icon": "ability_rhyolith_magmaflow_wave.jpg"
+        },
+        {
+         "guid": 105841,
+         "name": "Degenerative Bite",
+         "total": 102140,
+         "totalReduced": 101346,
+         "type": 32,
+         "icon": "spell_deathknight_bloodplague.jpg"
+        },
+        {
+         "guid": 105408,
+         "name": "Burning Blood",
+         "total": 49086,
+         "type": 4,
+         "icon": "spell_deathknight_bloodboil.jpg"
+        },
+        "... 2 more"
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Beefyboom",
+         "total": 206093,
+         "type": "Mage"
+        },
+        {
+         "name": "Regenerative Blood",
+         "total": 124114,
+         "totalReduced": 123320,
+         "type": "NPC"
+        },
+        {
+         "name": "Arm Tentacle",
+         "total": 49086,
+         "type": "Boss"
+        },
+        "... 1 more"
+       ]
+      },
+      "healing": {
+       "total": 112557,
+       "totalReduced": 108131,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 53652,
+         "name": "Beacon of Light",
+         "total": 50598,
+         "type": 2,
+         "icon": "ability_paladin_beaconoflight.jpg"
+        },
+        {
+         "guid": 85222,
+         "name": "Light of Dawn",
+         "total": 25224,
+         "type": 2,
+         "icon": "spell_paladin_lightofdawn.jpg"
+        },
+        {
+         "guid": 109831,
+         "name": "Drain Life",
+         "total": 13971,
+         "type": 32,
+         "icon": "spell_shadow_lifedrain02.jpg"
+        },
+        "... 2 more"
+       ],
+       "damageAbilities": [
+        {
+         "guid": 105841,
+         "name": "Degenerative Bite",
+         "total": 50604,
+         "totalReduced": 49810,
+         "type": 32,
+         "icon": "spell_deathknight_bloodplague.jpg"
+        },
+        {
+         "guid": 105445,
+         "name": "Blistering Heat",
+         "total": 29108,
+         "totalReduced": 25476,
+         "type": 4,
+         "icon": "ability_warrior_bloodnova.jpg"
+        },
+        {
+         "guid": 105408,
+         "name": "Burning Blood",
+         "total": 25839,
+         "type": 4,
+         "icon": "spell_deathknight_bloodboil.jpg"
+        },
+        "... 1 more"
+       ],
+       "sources": [
+        {
+         "name": "Paltivian",
+         "total": 80248,
+         "totalReduced": 75822,
+         "type": "Paladin"
+        },
+        {
+         "name": "Masomum",
+         "total": 13971,
+         "type": "Paladin"
+        },
+        {
+         "name": "Teazy",
+         "total": 13419,
+         "type": "Shaman"
+        },
+        "... 1 more"
+       ]
+      },
+      "deathWindow": 7132,
+      "overkill": 36220,
+      "events": [
+       {
+        "timestamp": 436973163,
+        "type": "damage",
+        "sourceID": 8,
+        "sourceIsFriendly": true,
+        "targetID": 10,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Parasitic Backlash",
+         "guid": 108787,
+         "type": 4,
+         "abilityIcon": "ability_rhyolith_magmaflow_wave.jpg"
+        },
+        "fight": 21,
+        "hitType": 16,
+        "amount": 169873,
+        "mitigated": 48342,
+        "unmitigatedAmount": 254435,
+        "resisted": 25443,
+        "overkill": 36220,
+        "isAoE": true,
+        "sourceMarker": 8
+       },
+       {
+        "timestamp": 436973038,
+        "type": "damage",
+        "sourceID": 222,
+        "sourceInstance": 13,
+        "sourceIsFriendly": false,
+        "targetID": 10,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Degenerative Bite",
+         "guid": 105841,
+         "type": 32,
+         "abilityIcon": "spell_deathknight_bloodplague.jpg"
+        },
+        "fight": 21,
+        "hitType": 16,
+        "amount": 15422,
+        "mitigated": 5998,
+        "unmitigatedAmount": 21420,
+        "resisted": 4284,
+        "isAoE": false,
+        "tick": true
+       },
+       {
+        "timestamp": 436972439,
+        "type": "damage",
+        "sourceID": 224,
+        "sourceIsFriendly": false,
+        "targetID": 10,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Burning Blood",
+         "guid": 105408,
+         "type": 4,
+         "abilityIcon": "spell_deathknight_bloodboil.jpg"
+        },
+        "fight": 21,
+        "hitType": 16,
+        "amount": 11907,
+        "mitigated": 6993,
+        "unmitigatedAmount": 18900,
+        "resisted": 5670,
+        "isAoE": true
+       }
+      ],
+      "killingBlow": {
+       "name": "Parasitic Backlash",
+       "guid": 108787,
+       "type": 4,
+       "abilityIcon": "ability_rhyolith_magmaflow_wave.jpg"
+      }
+     },
+     "... 8 more"
+    ]
+   }
+  },
+  "interrupts": {
+   "data": {
+    "entries": [
+     {
+      "entries": []
+     }
+    ],
+    "totalTime": 722378
+   }
+  },
+  "dispels": {
+   "data": {
+    "entries": [
+     {
+      "entries": []
+     }
+    ],
+    "totalTime": 722378
+   }
+  },
+  "casts": {
+   "data": {
+    "entries": [
+     {
+      "name": "Paxman",
+      "id": 17,
+      "guid": 15767437,
+      "type": "Priest",
+      "icon": "Priest-Shadow",
+      "itemLevel": 403,
+      "total": 594,
+      "activeTime": 702488,
+      "activeTimeReduced": 702488,
+      "abilities": [
+       {
+        "guid": 15407,
+        "name": "Mind Flay",
+        "total": 146,
+        "type": 32,
+        "icon": "spell_shadow_siphonmana.jpg"
+       },
+       {
+        "guid": 49821,
+        "name": "Mind Sear",
+        "total": 115,
+        "type": 32,
+        "icon": "spell_shadow_mindshear.jpg"
+       },
+       {
+        "guid": 8092,
+        "name": "Mind Blast",
+        "total": 65,
+        "type": 32,
+        "icon": "spell_shadow_unholyfrenzy.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Environment",
+        "total": 145,
+        "type": "NPC"
+       },
+       {
+        "name": "Wing Tentacle",
+        "total": 87,
+        "type": "Boss"
+       },
+       {
+        "name": "Mutated Corruption",
+        "total": 83,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 9,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 32,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 78703,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_robe_raidpriest_k_01.jpg",
+        "name": "Hood of Dying Light",
+        "itemLevel": 410,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       {
+        "id": 78364,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace15.jpg",
+        "name": "Petrified Fungal Heart",
+        "itemLevel": 410
+       },
+       {
+        "id": 78750,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_robe_raidpriest_k_01.jpg",
+        "name": "Mantle of Dying Light",
+        "itemLevel": 410,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Hipy",
+      "id": 4,
+      "guid": 13579878,
+      "type": "Rogue",
+      "icon": "Rogue-Subtlety",
+      "itemLevel": 406,
+      "total": 502,
+      "activeTime": 632721,
+      "activeTimeReduced": 632721,
+      "abilities": [
+       {
+        "guid": 53,
+        "name": "Backstab",
+        "total": 219,
+        "type": 1,
+        "icon": "ability_backstab.jpg"
+       },
+       {
+        "guid": 2098,
+        "name": "Dispatch",
+        "total": 96,
+        "type": 1,
+        "icon": "ability_rogue_waylay.jpg"
+       },
+       {
+        "guid": 16511,
+        "name": "Hemorrhage",
+        "total": 35,
+        "type": 1,
+        "icon": "spell_shadow_lifedrain.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Mutated Corruption",
+        "total": 122,
+        "type": "NPC"
+       },
+       {
+        "name": "Environment",
+        "total": 88,
+        "type": "NPC"
+       },
+       {
+        "name": "Wing Tentacle",
+        "total": 74,
+        "type": "Boss"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 2,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 78699,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_leather_raidrogue_k_01.jpg",
+        "name": "Blackfang Battleweave Helmet",
+        "itemLevel": 410,
+        "permanentEnchant": 4209,
+        "permanentEnchantName": "+3 Agility and +2 Haste",
+        "gems": [
+         {
+          "id": 68778,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 71879,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       {
+        "id": 77091,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace14.jpg",
+        "name": "Cameo of Terrible Memories",
+        "itemLevel": 397
+       },
+       {
+        "id": 71541,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulders_leather_raidrogue_j_01.jpg",
+        "name": "Dark Phoenix Spaulders",
+        "itemLevel": 391,
+        "permanentEnchant": 4204,
+        "permanentEnchantName": "+3 Agility and +1 Mastery",
+        "gems": [
+         {
+          "id": 52258,
+          "itemLevel": 85,
+          "icon": "inv_jewelcrafting_dragonseye05.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Garland",
+      "id": 22,
+      "guid": 15901009,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "itemLevel": 403,
+      "total": 640,
+      "activeTime": 720505,
+      "activeTimeReduced": 720505,
+      "abilities": [
+       {
+        "guid": 403,
+        "name": "Lightning Bolt",
+        "total": 233,
+        "type": 8,
+        "icon": "spell_nature_lightning.jpg"
+       },
+       {
+        "guid": 421,
+        "name": "Chain Lightning",
+        "total": 181,
+        "type": 8,
+        "icon": "spell_nature_chainlightning.jpg"
+       },
+       {
+        "guid": 51505,
+        "name": "Lava Burst",
+        "total": 59,
+        "type": 4,
+        "icon": "spell_shaman_lavaburst.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Wing Tentacle",
+        "total": 120,
+        "type": "Boss"
+       },
+       {
+        "name": "Mutated Corruption",
+        "total": 116,
+        "type": "NPC"
+       },
+       {
+        "name": "Environment",
+        "total": 89,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Falling",
+        "guid": 3,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 7,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 77037,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_mail_raidshaman_k_01.jpg",
+        "name": "Spiritwalker's Headpiece",
+        "itemLevel": 397,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52207,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ],
+        "setID": 1070
+       },
+       {
+        "id": 78364,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace15.jpg",
+        "name": "Petrified Fungal Heart",
+        "itemLevel": 410
+       },
+       {
+        "id": 78741,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_mail_raidshaman_k_01.jpg",
+        "name": "Spiritwalker's Shoulderwraps",
+        "itemLevel": 410,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         },
+         {
+          "id": 71881,
+          "itemLevel": 85,
+          "icon": "inv_misc_epicgem_01.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 22 more"
+    ],
+    "totalTime": 722378,
+    "logVersion": 17,
+    "gameVersion": 5,
+    "exploitDetails": []
+   }
+  }
+ }
+}

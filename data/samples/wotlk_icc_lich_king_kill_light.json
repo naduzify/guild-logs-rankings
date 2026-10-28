@@ -1,0 +1,3510 @@
+{
+ "expansion": "wotlk",
+ "report": "nvWrhw1QxFj89dgG",
+ "zone": "Icecrown Citadel",
+ "fight": {
+  "id": 30,
+  "encounterID": 856,
+  "name": "The Lich King",
+  "difficulty": 3,
+  "size": 25,
+  "kill": true,
+  "startTime": 11738226,
+  "endTime": 12385476,
+  "fightPercentage": 0.01,
+  "bossPercentage": 0.01
+ },
+ "players": [
+  {
+   "id": 1,
+   "name": "Relaxable",
+   "server": "Arugal",
+   "subType": "Druid"
+  },
+  {
+   "id": 2,
+   "name": "Kerrod",
+   "server": "Arugal",
+   "subType": "Druid"
+  },
+  {
+   "id": 3,
+   "name": "Smmity",
+   "server": "Arugal",
+   "subType": "Warlock"
+  },
+  "... 383 more"
+ ],
+ "tables": {
+  "summary": {
+   "data": {
+    "totalTime": 647250,
+    "itemLevel": 258.6400146484375,
+    "damageDowntime": 197701,
+    "composition": [
+     {
+      "name": "Smmity",
+      "id": 3,
+      "guid": 2037717,
+      "type": "Warlock",
+      "specs": [
+       {
+        "spec": "Affliction",
+        "role": "dps"
+       }
+      ]
+     },
+     {
+      "name": "Minpally",
+      "id": 74,
+      "guid": 10892525,
+      "type": "Paladin",
+      "specs": [
+       {
+        "spec": "Holy",
+        "role": "healer"
+       }
+      ]
+     },
+     {
+      "name": "Rhub",
+      "id": 21,
+      "guid": 13788762,
+      "type": "Warlock",
+      "specs": [
+       {
+        "spec": "Affliction",
+        "role": "dps"
+       }
+      ]
+     },
+     "... 22 more"
+    ],
+    "damageDone": [
+     {
+      "name": "Billycannon",
+      "id": 13,
+      "guid": 15258969,
+      "type": "Hunter",
+      "icon": "Hunter-Survival",
+      "total": 3978329
+     },
+     {
+      "name": "Stompyz",
+      "id": 20,
+      "guid": 10723841,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "total": 2908717
+     },
+     {
+      "name": "Ragingelf",
+      "id": 6,
+      "guid": 5624003,
+      "type": "Druid",
+      "icon": "Druid-Balance",
+      "total": 3246850
+     },
+     "... 22 more"
+    ],
+    "healingDone": [
+     {
+      "name": "Stompyz",
+      "id": 20,
+      "guid": 10723841,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "total": 61642
+     },
+     {
+      "name": "Billycannon",
+      "id": 13,
+      "guid": 15258969,
+      "type": "Hunter",
+      "icon": "Hunter-Survival",
+      "total": 26252
+     },
+     {
+      "name": "Resmeplease",
+      "id": 25,
+      "guid": 12931789,
+      "type": "Priest",
+      "icon": "Priest-Discipline",
+      "total": 1588451
+     },
+     "... 24 more"
+    ],
+    "damageTaken": [
+     {
+      "name": "Pain and Suffering",
+      "guid": 72133,
+      "type": 32,
+      "abilityIcon": "ability_warlock_shadowflame.jpg",
+      "total": 3239309
+     },
+     {
+      "name": "Infest",
+      "guid": 70541,
+      "type": 32,
+      "abilityIcon": "ability_rogue_envelopingshadows.jpg",
+      "total": 1769683
+     },
+     {
+      "name": "Shockwave",
+      "guid": 72149,
+      "type": 1,
+      "abilityIcon": "ability_warrior_shockwave.jpg",
+      "total": 202942
+     },
+     "... 13 more"
+    ],
+    "deathEvents": [
+     {
+      "name": "Ragingelf",
+      "id": 6,
+      "guid": 5624003,
+      "type": "Druid",
+      "icon": "Druid-Balance",
+      "deathTime": 85010,
+      "ability": {
+       "name": "Shockwave",
+       "guid": 72149,
+       "type": 1,
+       "abilityIcon": "ability_warrior_shockwave.jpg"
+      }
+     },
+     {
+      "name": "Relaxable",
+      "id": 1,
+      "guid": 10365223,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "deathTime": 85010,
+      "ability": {
+       "name": "Shockwave",
+       "guid": 72149,
+       "type": 1,
+       "abilityIcon": "ability_warrior_shockwave.jpg"
+      }
+     },
+     {
+      "name": "Resmeplease",
+      "id": 25,
+      "guid": 12931789,
+      "type": "Priest",
+      "icon": "Priest-Discipline",
+      "deathTime": 85010,
+      "ability": {
+       "name": "Shockwave",
+       "guid": 72149,
+       "type": 1,
+       "abilityIcon": "ability_warrior_shockwave.jpg"
+      }
+     },
+     "... 25 more"
+    ],
+    "exploitDetails": [],
+    "playerDetails": {
+     "healers": [
+      {
+       "name": "Relaxable",
+       "id": 1,
+       "guid": 10365223,
+       "type": "Druid",
+       "server": "Arugal",
+       "icon": "Druid-Restoration",
+       "specs": [
+        "Restoration"
+       ],
+       "minItemLevel": 259,
+       "maxItemLevel": 259,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 43,
+          "max": 43
+         },
+         "Intellect": {
+          "min": 1615,
+          "max": 1615
+         },
+         "Agility": {
+          "min": 364,
+          "max": 364
+         },
+         "Crit": {
+          "min": 220,
+          "max": 220
+         },
+         "Item Level": {
+          "min": 259,
+          "max": 259
+         },
+         "Spirit": {
+          "min": 1474,
+          "max": 1474
+         },
+         "Strength": {
+          "min": 337,
+          "max": 337
+         },
+         "Stamina": {
+          "min": 1788,
+          "max": 1788
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 837,
+          "max": 837
+         }
+        },
+        "talents": [
+         {
+          "name": "Frostbolt of Ages",
+          "guid": 11,
+          "type": 1,
+          "abilityIcon": "spell_frost_frostbolt02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Long bow shot",
+          "guid": 60,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 50108,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_148.jpg",
+          "name": "Lasherweave Helmet",
+          "itemLevel": 251,
+          "permanentEnchant": 3819,
+          "permanentEnchantName": "+3 Intellect and +3 Versatility",
+          "gems": [
+           {
+            "id": 41401,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+           },
+           {
+            "id": 40113,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_37.jpg"
+           }
+          ],
+          "setID": 887
+         },
+         {
+          "id": 45243,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_30naxxramas.jpg",
+          "name": "Sapphire Amulet of Renewal",
+          "itemLevel": 252,
+          "gems": [
+           {
+            "id": 40113,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_37.jpg"
+           }
+          ]
+         },
+         {
+          "id": 50113,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_111.jpg",
+          "name": "Lasherweave Pauldrons",
+          "itemLevel": 251,
+          "permanentEnchant": 3809,
+          "permanentEnchantName": "+3 Intellect and +1 Versatility",
+          "gems": [
+           {
+            "id": 40113,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_37.jpg"
+           }
+          ],
+          "setID": 887
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Minpally",
+       "id": 74,
+       "guid": 10892525,
+       "type": "Paladin",
+       "server": "Arugal",
+       "icon": "Paladin-Holy",
+       "specs": [
+        "Holy"
+       ],
+       "minItemLevel": 257,
+       "maxItemLevel": 257,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 2647,
+          "max": 2647
+         },
+         "Agility": {
+          "min": 347,
+          "max": 347
+         },
+         "Crit": {
+          "min": 883,
+          "max": 883
+         },
+         "Item Level": {
+          "min": 257,
+          "max": 257
+         },
+         "Spirit": {
+          "min": 290,
+          "max": 290
+         },
+         "Strength": {
+          "min": 414,
+          "max": 414
+         },
+         "Stamina": {
+          "min": 1848,
+          "max": 1848
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 1368,
+          "max": 1368
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 54,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Power Word: Shield",
+          "guid": 17,
+          "type": 1,
+          "abilityIcon": "spell_holy_powerwordshield.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 48582,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_25.jpg",
+          "name": "Turalyon's Headpiece of Triumph",
+          "itemLevel": 258,
+          "permanentEnchant": 3820,
+          "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+          "gems": [
+           {
+            "id": 41401,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+           },
+           {
+            "id": 40123,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_38.jpg"
+           }
+          ],
+          "setID": 875
+         },
+         {
+          "id": 45933,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_46.jpg",
+          "name": "Pendant of the Shallow Grave",
+          "itemLevel": 239,
+          "gems": [
+           {
+            "id": 40123,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_38.jpg"
+           }
+          ]
+         },
+         {
+          "id": 51166,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_117.jpg",
+          "name": "Sanctified Lightsworn Spaulders",
+          "itemLevel": 264,
+          "permanentEnchant": 3810,
+          "permanentEnchantName": "+3 Spell Power and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 40123,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_38.jpg"
+           }
+          ],
+          "setID": 899
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Resmeplease",
+       "id": 25,
+       "guid": 12931789,
+       "type": "Priest",
+       "server": "Arugal",
+       "icon": "Priest-Discipline",
+       "specs": [
+        "Discipline"
+       ],
+       "minItemLevel": 235,
+       "maxItemLevel": 235,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 149,
+          "max": 149
+         },
+         "Intellect": {
+          "min": 1612,
+          "max": 1612
+         },
+         "Agility": {
+          "min": 293,
+          "max": 293
+         },
+         "Crit": {
+          "min": 280,
+          "max": 280
+         },
+         "Item Level": {
+          "min": 235,
+          "max": 235
+         },
+         "Spirit": {
+          "min": 1096,
+          "max": 1096
+         },
+         "Strength": {
+          "min": 284,
+          "max": 284
+         },
+         "Stamina": {
+          "min": 1568,
+          "max": 1568
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 456,
+          "max": 456
+         }
+        },
+        "talents": [
+         {
+          "name": "Stun",
+          "guid": 56,
+          "type": 1,
+          "abilityIcon": "inv_mace_02.jpg"
+         },
+         {
+          "name": "Leech",
+          "guid": 15,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 45386,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_crown_01.jpg",
+          "name": "Valorous Cowl of Sanctification",
+          "itemLevel": 225,
+          "permanentEnchant": 3820,
+          "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+          "gems": [
+           {
+            "id": 41401,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+           },
+           {
+            "id": 40113,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_37.jpg"
+           }
+          ],
+          "setID": 833
+         },
+         {
+          "id": 50196,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_spiritshard_02.jpg",
+          "name": "Love's Prisoner",
+          "itemLevel": 232
+         },
+         {
+          "id": 50449,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_119.jpg",
+          "name": "Stiffened Corpse Shoulderpads",
+          "itemLevel": 264,
+          "permanentEnchant": 3836,
+          "permanentEnchantName": "+3 Intellect and +2 Versatility",
+          "gems": [
+           {
+            "id": 40151,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_39.jpg"
+           },
+           {
+            "id": 40151,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_39.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      "... 2 more"
+     ],
+     "dps": [
+      {
+       "name": "Smmity",
+       "id": 3,
+       "guid": 2037717,
+       "type": "Warlock",
+       "server": "Arugal",
+       "icon": "Warlock-Affliction",
+       "specs": [
+        "Affliction"
+       ],
+       "minItemLevel": 257,
+       "maxItemLevel": 257,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 298,
+          "max": 298
+         },
+         "Intellect": {
+          "min": 1580,
+          "max": 1580
+         },
+         "Agility": {
+          "min": 325,
+          "max": 325
+         },
+         "Crit": {
+          "min": 833,
+          "max": 833
+         },
+         "Item Level": {
+          "min": 257,
+          "max": 257
+         },
+         "Spirit": {
+          "min": 1089,
+          "max": 1089
+         },
+         "Strength": {
+          "min": 291,
+          "max": 291
+         },
+         "Stamina": {
+          "min": 1740,
+          "max": 1740
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 549,
+          "max": 549
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 55,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Fear (NYI)",
+          "guid": 16,
+          "type": 1,
+          "abilityIcon": "spell_shadow_possession.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 47778,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_146.jpg",
+          "name": "Kel'Thuzad's Hood of Triumph",
+          "itemLevel": 245,
+          "permanentEnchant": 3820,
+          "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+          "gems": [
+           {
+            "id": 41285,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_icediamond_02.jpg"
+           },
+           {
+            "id": 40133,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_40.jpg"
+           }
+          ],
+          "setID": 846
+         },
+         {
+          "id": 47144,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_36.jpg",
+          "name": "Wail of the Val'kyr",
+          "itemLevel": 258,
+          "gems": [
+           {
+            "id": 40155,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_39.jpg"
+           }
+          ]
+         },
+         {
+          "id": 47781,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_110.jpg",
+          "name": "Kel'Thuzad's Shoulderpads of Triumph",
+          "itemLevel": 245,
+          "permanentEnchant": 3810,
+          "permanentEnchantName": "+3 Spell Power and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 40155,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_39.jpg"
+           }
+          ],
+          "setID": 846
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Rhub",
+       "id": 21,
+       "guid": 13788762,
+       "type": "Warlock",
+       "server": "Arugal",
+       "icon": "Warlock-Affliction",
+       "specs": [
+        "Affliction"
+       ],
+       "minItemLevel": 262,
+       "maxItemLevel": 262,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 292,
+          "max": 292
+         },
+         "Intellect": {
+          "min": 1637,
+          "max": 1637
+         },
+         "Agility": {
+          "min": 311,
+          "max": 311
+         },
+         "Crit": {
+          "min": 1100,
+          "max": 1100
+         },
+         "Item Level": {
+          "min": 262,
+          "max": 262
+         },
+         "Spirit": {
+          "min": 699,
+          "max": 699
+         },
+         "Strength": {
+          "min": 302,
+          "max": 302
+         },
+         "Stamina": {
+          "min": 1763,
+          "max": 1763
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 1067,
+          "max": 1067
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 55,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Fear (NYI)",
+          "guid": 16,
+          "type": 1,
+          "abilityIcon": "spell_shadow_possession.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 51208,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_152.jpg",
+          "name": "Sanctified Dark Coven Hood",
+          "itemLevel": 264,
+          "permanentEnchant": 3820,
+          "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+          "gems": [
+           {
+            "id": 41285,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_icediamond_02.jpg"
+           },
+           {
+            "id": 40133,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_40.jpg"
+           }
+          ],
+          "setID": 884
+         },
+         {
+          "id": 47144,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_36.jpg",
+          "name": "Wail of the Val'kyr",
+          "itemLevel": 258,
+          "gems": [
+           {
+            "id": 40155,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_39.jpg"
+           }
+          ]
+         },
+         {
+          "id": 47792,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_110.jpg",
+          "name": "Kel'Thuzad's Shoulderpads of Triumph",
+          "itemLevel": 258,
+          "permanentEnchant": 3810,
+          "permanentEnchantName": "+3 Spell Power and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 40155,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_39.jpg"
+           }
+          ],
+          "setID": 846
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Billycannon",
+       "id": 13,
+       "guid": 15258969,
+       "type": "Hunter",
+       "server": "Arugal",
+       "icon": "Hunter-Survival",
+       "specs": [
+        "Survival"
+       ],
+       "minItemLevel": 257,
+       "maxItemLevel": 257,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 229,
+          "max": 229
+         },
+         "Intellect": {
+          "min": 818,
+          "max": 818
+         },
+         "Agility": {
+          "min": 3042,
+          "max": 3042
+         },
+         "Crit": {
+          "min": 888,
+          "max": 888
+         },
+         "Item Level": {
+          "min": 257,
+          "max": 257
+         },
+         "Spirit": {
+          "min": 275,
+          "max": 275
+         },
+         "Strength": {
+          "min": 331,
+          "max": 331
+         },
+         "Stamina": {
+          "min": 2121,
+          "max": 2121
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 270,
+          "max": 270
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 5,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Leech",
+          "guid": 15,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 51,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 50115,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_158.jpg",
+          "name": "Ahn'Kahar Blood Hunter's Headpiece",
+          "itemLevel": 251,
+          "permanentEnchant": 3817,
+          "permanentEnchantName": "+3 Attack Power and +3 Critical Strike",
+          "gems": [
+           {
+            "id": 41398,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+           },
+           {
+            "id": 40112,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_37.jpg"
+           }
+          ],
+          "setID": 891
+         },
+         {
+          "id": 50421,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_monsterhorn_03.jpg",
+          "name": "Sindragosa's Cruel Claw",
+          "itemLevel": 264,
+          "gems": [
+           {
+            "id": 42143,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_dragonseye05.jpg"
+           }
+          ]
+         },
+         {
+          "id": 51151,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_113.jpg",
+          "name": "Sanctified Ahn'Kahar Blood Hunter's Spaulders",
+          "itemLevel": 264,
+          "permanentEnchant": 3808,
+          "permanentEnchantName": "+3 Attack Power and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 40112,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_37.jpg"
+           }
+          ],
+          "setID": 891
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      "... 15 more"
+     ],
+     "tanks": [
+      {
+       "name": "Torean",
+       "id": 11,
+       "guid": 13478508,
+       "type": "DeathKnight",
+       "server": "Arugal",
+       "icon": "DeathKnight-Blood",
+       "specs": [
+        "Blood"
+       ],
+       "minItemLevel": 263,
+       "maxItemLevel": 263,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 667,
+          "max": 667
+         },
+         "Spirit": {
+          "min": 215,
+          "max": 215
+         },
+         "Stamina": {
+          "min": 4440,
+          "max": 4440
+         },
+         "Haste": {
+          "min": 97,
+          "max": 97
+         },
+         "Hit": {
+          "min": 304,
+          "max": 304
+         },
+         "Intellect": {
+          "min": 160,
+          "max": 160
+         },
+         "Armor": {
+          "min": 40233,
+          "max": 40233
+         },
+         "Agility": {
+          "min": 551,
+          "max": 551
+         },
+         "Crit": {
+          "min": 24,
+          "max": 24
+         },
+         "Item Level": {
+          "min": 263,
+          "max": 263
+         },
+         "Parry": {
+          "min": 897,
+          "max": 897
+         },
+         "Strength": {
+          "min": 2103,
+          "max": 2103
+         },
+         "Expertise": {
+          "min": 122,
+          "max": 122
+         }
+        },
+        "talents": [
+         {
+          "name": "Berserk",
+          "guid": 43,
+          "type": 1,
+          "abilityIcon": "ability_racial_bloodrage.jpg"
+         },
+         {
+          "name": "Bind Self",
+          "guid": 26,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 2,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 50640,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_151.jpg",
+          "name": "Broken Ram Skull Helm",
+          "itemLevel": 277,
+          "permanentEnchant": 3878,
+          "permanentEnchantName": "Mind Amplification Dish",
+          "gems": [
+           {
+            "id": 41380,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+           },
+           {
+            "id": 40141,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_40.jpg"
+           }
+          ]
+         },
+         {
+          "id": 50682,
+          "slot": 1,
+          "quality": 4,
+          "icon": "item_icecrownnecklaceb.jpg",
+          "name": "Bile-Encrusted Medallion",
+          "itemLevel": 277,
+          "gems": [
+           {
+            "id": 40141,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_40.jpg"
+           }
+          ]
+         },
+         {
+          "id": 51309,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_130.jpg",
+          "name": "Sanctified Scourgelord Pauldrons",
+          "itemLevel": 277,
+          "permanentEnchant": 3852,
+          "permanentEnchantName": "+4 Stamina and +2 Armor",
+          "gems": [
+           {
+            "id": 40141,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_40.jpg"
+           }
+          ],
+          "setID": 898
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Masomum",
+       "id": 8,
+       "guid": 10411207,
+       "type": "Paladin",
+       "server": "Arugal",
+       "icon": "Paladin-Justicar",
+       "specs": [
+        "Justicar"
+       ],
+       "minItemLevel": 266,
+       "maxItemLevel": 266,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 676,
+          "max": 676
+         },
+         "Spirit": {
+          "min": 278,
+          "max": 278
+         },
+         "Stamina": {
+          "min": 4717,
+          "max": 4717
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Hit": {
+          "min": 352,
+          "max": 352
+         },
+         "Intellect": {
+          "min": 240,
+          "max": 240
+         },
+         "Armor": {
+          "min": 36352,
+          "max": 36352
+         },
+         "Agility": {
+          "min": 386,
+          "max": 386
+         },
+         "Crit": {
+          "min": 49,
+          "max": 49
+         },
+         "Item Level": {
+          "min": 266,
+          "max": 266
+         },
+         "Parry": {
+          "min": 470,
+          "max": 470
+         },
+         "Strength": {
+          "min": 2313,
+          "max": 2313
+         },
+         "Expertise": {
+          "min": 63,
+          "max": 63
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Backstab",
+          "guid": 53,
+          "type": 1,
+          "abilityIcon": "ability_backstab.jpg"
+         },
+         {
+          "name": "Leech",
+          "guid": 15,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 51173,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_154.jpg",
+          "name": "Sanctified Lightsworn Faceguard",
+          "itemLevel": 264,
+          "permanentEnchant": 3818,
+          "permanentEnchantName": "+3 Stamina and +3 Dodge",
+          "gems": [
+           {
+            "id": 41380,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+           }
+          ],
+          "setID": 901
+         },
+         {
+          "id": 50627,
+          "slot": 1,
+          "quality": 4,
+          "icon": "item_icecrownnecklacec.jpg",
+          "name": "Noose of Malachite",
+          "itemLevel": 277,
+          "gems": [
+           {
+            "id": 40119,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_42.jpg"
+           }
+          ]
+         },
+         {
+          "id": 51383,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_129.jpg",
+          "name": "Spaulders of the Blood Princes",
+          "itemLevel": 251,
+          "permanentEnchant": 3852,
+          "permanentEnchantName": "+4 Stamina and +2 Armor",
+          "gems": [
+           {
+            "id": 40141,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_40.jpg"
+           },
+           {
+            "id": 40119,
+            "itemLevel": 80,
+            "icon": "inv_jewelcrafting_gem_42.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      }
+     ]
+    },
+    "logVersion": 14,
+    "gameVersion": 4,
+    "logFileDetails": ""
+   }
+  },
+  "damageDone": {
+   "data": {
+    "entries": [
+     {
+      "name": "Billycannon",
+      "id": 13,
+      "guid": 15258969,
+      "type": "Hunter",
+      "icon": "Hunter-Survival",
+      "itemLevel": 257,
+      "total": 3978329,
+      "totalReduced": 3669627,
+      "activeTime": 447412,
+      "activeTimeReduced": 446711,
+      "blocked": 879,
+      "abilities": [
+       {
+        "guid": 53352,
+        "name": "Explosive Shot",
+        "total": 1274699,
+        "type": 4,
+        "icon": "ability_hunter_explosiveshot.jpg"
+       },
+       {
+        "guid": 75,
+        "name": "Auto Shot",
+        "total": 897927,
+        "type": 1,
+        "icon": "ability_whirlwind.jpg"
+       },
+       {
+        "guid": 49065,
+        "name": "Explosive Trap Effect",
+        "total": 644471,
+        "type": 4,
+        "icon": "spell_fire_selfdestruct.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "The Lich King",
+        "total": 2988789,
+        "totalReduced": 2680087,
+        "type": "Boss"
+       },
+       {
+        "name": "Raging Spirit",
+        "total": 706706,
+        "type": "NPC"
+       },
+       {
+        "name": "Val'kyr Shadowguard",
+        "total": 217104,
+        "type": "NPC"
+       },
+       "... 1 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 5,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Leech",
+        "guid": 15,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 51,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 50115,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_158.jpg",
+        "name": "Ahn'Kahar Blood Hunter's Headpiece",
+        "itemLevel": 251,
+        "permanentEnchant": 3817,
+        "permanentEnchantName": "+3 Attack Power and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41398,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+         },
+         {
+          "id": 40112,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 891
+       },
+       {
+        "id": 50421,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_monsterhorn_03.jpg",
+        "name": "Sindragosa's Cruel Claw",
+        "itemLevel": 264,
+        "gems": [
+         {
+          "id": 42143,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_dragonseye05.jpg"
+         }
+        ]
+       },
+       {
+        "id": 51151,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_113.jpg",
+        "name": "Sanctified Ahn'Kahar Blood Hunter's Spaulders",
+        "itemLevel": 264,
+        "permanentEnchant": 3808,
+        "permanentEnchantName": "+3 Attack Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 40112,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 891
+       },
+       "... 16 more"
+      ],
+      "pets": [
+       {
+        "name": "Viper",
+        "id": 117,
+        "guid": 19921,
+        "type": "Pet",
+        "icon": "custom-icon-spell_nature_nullifypoison.jpg",
+        "total": 894,
+        "totalReduced": 0,
+        "activeTime": 15197,
+        "blocked": 30
+       },
+       {
+        "name": "Billybooms",
+        "id": 14,
+        "guid": 2322469,
+        "type": "Pet",
+        "icon": "abilities/ability_hunter_beastsoothe.jpg",
+        "total": 306389,
+        "totalReduced": 0,
+        "activeTime": 253357,
+        "blocked": 76
+       },
+       {
+        "name": "Venomous Snake",
+        "id": 118,
+        "guid": 19833,
+        "type": "Pet",
+        "icon": "custom-icon-spell_nature_nullifypoison.jpg",
+        "total": 1419,
+        "totalReduced": 0,
+        "activeTime": 22022,
+        "blocked": 13
+       }
+      ]
+     },
+     {
+      "name": "Stompyz",
+      "id": 20,
+      "guid": 10723841,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "itemLevel": 257,
+      "total": 2908717,
+      "totalReduced": 2768804,
+      "activeTime": 436085,
+      "activeTimeReduced": 436085,
+      "blocked": 76,
+      "abilities": [
+       {
+        "guid": 49238,
+        "name": "Lightning Bolt",
+        "total": 1338523,
+        "type": 8,
+        "icon": "spell_nature_lightning.jpg"
+       },
+       {
+        "guid": 60043,
+        "name": "Lava Burst",
+        "total": 456043,
+        "type": 4,
+        "icon": "spell_shaman_lavaburst.jpg"
+       },
+       {
+        "guid": 49233,
+        "name": "Flame Shock",
+        "total": 429698,
+        "type": 4,
+        "icon": "spell_fire_flameshock.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "The Lich King",
+        "total": 2015541,
+        "totalReduced": 1879331,
+        "type": "Boss"
+       },
+       {
+        "name": "Raging Spirit",
+        "total": 732479,
+        "type": "NPC"
+       },
+       {
+        "name": "Val'kyr Shadowguard",
+        "total": 156994,
+        "type": "NPC"
+       },
+       "... 1 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 57,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Mana Drain",
+        "guid": 14,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 48318,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_95.jpg",
+        "name": "Nobundo's Helm of Triumph",
+        "itemLevel": 245,
+        "permanentEnchant": 3820,
+        "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41285,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_icediamond_02.jpg"
+         },
+         {
+          "id": 40155,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_39.jpg"
+         }
+        ],
+        "setID": 864
+       },
+       {
+        "id": 50658,
+        "slot": 1,
+        "quality": 4,
+        "icon": "item_icecrownnecklaced.jpg",
+        "name": "Amulet of the Silent Eulogy",
+        "itemLevel": 277,
+        "gems": [
+         {
+          "id": 40128,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_38.jpg"
+         }
+        ]
+       },
+       {
+        "id": 50845,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_133.jpg",
+        "name": "Frost Witch's Shoulderpads",
+        "itemLevel": 251,
+        "permanentEnchant": 3810,
+        "permanentEnchantName": "+3 Spell Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 49110,
+          "itemLevel": 80,
+          "icon": "inv_misc_gem_pearl_12.jpg"
+         }
+        ],
+        "setID": 893
+       },
+       "... 16 more"
+      ],
+      "pets": [
+       {
+        "name": "Greater Fire Elemental",
+        "id": 99,
+        "guid": 15438,
+        "type": "Pet",
+        "icon": "abilities/spell_fire_elemental_totem.jpg",
+        "total": 136894,
+        "totalReduced": 0,
+        "activeTime": 90656
+       },
+       {
+        "name": "Greater Earth Elemental",
+        "id": 169,
+        "guid": 15352,
+        "type": "Pet",
+        "icon": "abilities/spell_nature_earthelemental_totem.jpg",
+        "total": 3019,
+        "totalReduced": 0,
+        "activeTime": 12020,
+        "blocked": 76
+       }
+      ]
+     },
+     {
+      "name": "Venomous Snake",
+      "id": 110,
+      "guid": 19833,
+      "type": "Pet",
+      "icon": "Pet",
+      "total": 0,
+      "activeTime": 0,
+      "blocked": 15,
+      "abilities": [],
+      "damageAbilities": [],
+      "targets": []
+     },
+     "... 24 more"
+    ],
+    "totalTime": 647250,
+    "damageDowntime": 197701,
+    "logVersion": 14,
+    "gameVersion": 4,
+    "exploitDetails": []
+   }
+  },
+  "healing": {
+   "data": {
+    "entries": [
+     {
+      "name": "Stompyz",
+      "id": 20,
+      "guid": 10723841,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "itemLevel": 257,
+      "total": 61642,
+      "activeTime": 370805,
+      "activeTimeReduced": 115214,
+      "overheal": 338749,
+      "abilities": [
+       {
+        "guid": 55459,
+        "name": "Chain Heal",
+        "total": 34841,
+        "type": 8,
+        "icon": "spell_nature_healingwavegreater.jpg"
+       },
+       {
+        "guid": 52042,
+        "name": "Healing Stream Totem",
+        "total": 23564,
+        "type": 8,
+        "icon": "inv_spear_04.jpg"
+       },
+       {
+        "guid": 20267,
+        "name": "Judgement of Light",
+        "total": 3237,
+        "type": 2,
+        "icon": "spell_holy_healingaura.jpg"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 72133,
+        "name": "Pain and Suffering",
+        "total": 30839,
+        "type": 32,
+        "icon": "ability_warlock_shadowflame.jpg"
+       },
+       {
+        "guid": 69099,
+        "name": "Ice Pulse",
+        "total": 7252,
+        "type": 16,
+        "icon": "spell_ice_rune.jpg"
+       },
+       {
+        "guid": 70541,
+        "name": "Infest",
+        "total": 6921,
+        "type": 32,
+        "icon": "ability_rogue_envelopingshadows.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Kerrod",
+        "total": 11809,
+        "type": "Druid"
+       },
+       {
+        "name": "Kitanaf",
+        "total": 9447,
+        "type": "Shaman"
+       },
+       {
+        "name": "Stompyz",
+        "total": 7483,
+        "type": "Shaman"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 57,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Mana Drain",
+        "guid": 14,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 48318,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_95.jpg",
+        "name": "Nobundo's Helm of Triumph",
+        "itemLevel": 245,
+        "permanentEnchant": 3820,
+        "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41285,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_icediamond_02.jpg"
+         },
+         {
+          "id": 40155,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_39.jpg"
+         }
+        ],
+        "setID": 864
+       },
+       {
+        "id": 50658,
+        "slot": 1,
+        "quality": 4,
+        "icon": "item_icecrownnecklaced.jpg",
+        "name": "Amulet of the Silent Eulogy",
+        "itemLevel": 277,
+        "gems": [
+         {
+          "id": 40128,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_38.jpg"
+         }
+        ]
+       },
+       {
+        "id": 50845,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_133.jpg",
+        "name": "Frost Witch's Shoulderpads",
+        "itemLevel": 251,
+        "permanentEnchant": 3810,
+        "permanentEnchantName": "+3 Spell Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 49110,
+          "itemLevel": 80,
+          "icon": "inv_misc_gem_pearl_12.jpg"
+         }
+        ],
+        "setID": 893
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Billycannon",
+      "id": 13,
+      "guid": 15258969,
+      "type": "Hunter",
+      "icon": "Hunter-Survival",
+      "itemLevel": 257,
+      "total": 26252,
+      "activeTime": 426227,
+      "activeTimeReduced": 66145,
+      "overheal": 329987,
+      "abilities": [
+       {
+        "guid": 34299,
+        "name": "Leader of the Pack",
+        "total": 15293,
+        "type": 1,
+        "icon": "spell_nature_unyeildingstamina.jpg"
+       },
+       {
+        "guid": 20267,
+        "name": "Judgement of Light",
+        "total": 10133,
+        "type": 2,
+        "icon": "spell_holy_healingaura.jpg"
+       },
+       {
+        "guid": 54131,
+        "name": "Bloodthirsty",
+        "total": 826,
+        "type": 1,
+        "icon": "ability_druid_primaltenacity.jpg",
+        "petName": "Billybooms"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 72133,
+        "name": "Pain and Suffering",
+        "total": 11936,
+        "type": 32,
+        "icon": "ability_warlock_shadowflame.jpg"
+       },
+       {
+        "guid": 70541,
+        "name": "Infest",
+        "total": 10086,
+        "type": 32,
+        "icon": "ability_rogue_envelopingshadows.jpg"
+       },
+       {
+        "guid": 70503,
+        "name": "Spirit Burst",
+        "total": 3683,
+        "type": 32,
+        "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+       },
+       "... 1 more"
+      ],
+      "targets": [
+       {
+        "name": "Billycannon",
+        "total": 25426,
+        "type": "Hunter"
+       },
+       {
+        "name": "Billybooms",
+        "total": 826,
+        "type": "Pet"
+       }
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 5,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Leech",
+        "guid": 15,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 51,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 50115,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_158.jpg",
+        "name": "Ahn'Kahar Blood Hunter's Headpiece",
+        "itemLevel": 251,
+        "permanentEnchant": 3817,
+        "permanentEnchantName": "+3 Attack Power and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41398,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+         },
+         {
+          "id": 40112,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 891
+       },
+       {
+        "id": 50421,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_monsterhorn_03.jpg",
+        "name": "Sindragosa's Cruel Claw",
+        "itemLevel": 264,
+        "gems": [
+         {
+          "id": 42143,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_dragonseye05.jpg"
+         }
+        ]
+       },
+       {
+        "id": 51151,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_113.jpg",
+        "name": "Sanctified Ahn'Kahar Blood Hunter's Spaulders",
+        "itemLevel": 264,
+        "permanentEnchant": 3808,
+        "permanentEnchantName": "+3 Attack Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 40112,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 891
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Resmeplease",
+      "id": 25,
+      "guid": 12931789,
+      "type": "Priest",
+      "icon": "Priest-Discipline",
+      "itemLevel": 235,
+      "total": 1588451,
+      "totalReduced": 383238,
+      "activeTime": 427534,
+      "activeTimeReduced": 197953,
+      "overheal": 437908,
+      "abilities": [
+       {
+        "guid": 48066,
+        "name": "Power Word: Shield",
+        "total": 1133253,
+        "totalReduced": 0,
+        "type": 2,
+        "icon": "spell_holy_powerwordshield.jpg"
+       },
+       {
+        "guid": 52985,
+        "name": "Penance",
+        "total": 123829,
+        "type": 2,
+        "icon": "spell_holy_penance.jpg"
+       },
+       {
+        "guid": 33110,
+        "name": "Prayer of Mending",
+        "total": 105039,
+        "type": 2,
+        "icon": "spell_holy_prayerofmendingtga.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [
+       {
+        "guid": 70541,
+        "name": "Infest",
+        "total": 726916,
+        "totalReduced": 39075,
+        "type": 32,
+        "icon": "ability_rogue_envelopingshadows.jpg"
+       },
+       {
+        "guid": 72133,
+        "name": "Pain and Suffering",
+        "total": 331385,
+        "totalReduced": 147740,
+        "type": 32,
+        "icon": "ability_warlock_shadowflame.jpg"
+       },
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 184941,
+        "totalReduced": 89226,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Masomum",
+        "total": 164941,
+        "totalReduced": 74658,
+        "type": "Paladin"
+       },
+       {
+        "name": "Torean",
+        "total": 157752,
+        "totalReduced": 67948,
+        "type": "DeathKnight"
+       },
+       {
+        "name": "Resmeplease",
+        "total": 111521,
+        "totalReduced": 39645,
+        "type": "Priest"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Stun",
+        "guid": 56,
+        "type": 1,
+        "abilityIcon": "inv_mace_02.jpg"
+       },
+       {
+        "name": "Leech",
+        "guid": 15,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 45386,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_crown_01.jpg",
+        "name": "Valorous Cowl of Sanctification",
+        "itemLevel": 225,
+        "permanentEnchant": 3820,
+        "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41401,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+         },
+         {
+          "id": 40113,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 833
+       },
+       {
+        "id": 50196,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_spiritshard_02.jpg",
+        "name": "Love's Prisoner",
+        "itemLevel": 232
+       },
+       {
+        "id": 50449,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_119.jpg",
+        "name": "Stiffened Corpse Shoulderpads",
+        "itemLevel": 264,
+        "permanentEnchant": 3836,
+        "permanentEnchantName": "+3 Intellect and +2 Versatility",
+        "gems": [
+         {
+          "id": 40151,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_39.jpg"
+         },
+         {
+          "id": 40151,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_39.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 24 more"
+    ],
+    "totalTime": 647250,
+    "damageDowntime": 197701,
+    "logVersion": 14,
+    "gameVersion": 4,
+    "exploitDetails": []
+   }
+  },
+  "damageTaken": {
+   "data": {
+    "entries": [
+     {
+      "name": "Billycannon",
+      "id": 13,
+      "guid": 15258969,
+      "type": "Hunter",
+      "icon": "Hunter-Survival",
+      "itemLevel": 257,
+      "total": 870192,
+      "totalReduced": 810728,
+      "activeTime": 85941,
+      "activeTimeReduced": 68561,
+      "overheal": 432229,
+      "abilities": [
+       {
+        "guid": 72350,
+        "name": "Fury of Frostmourne",
+        "total": 651840,
+        "type": 32,
+        "icon": "inv_sword_122.jpg"
+       },
+       {
+        "guid": 72133,
+        "name": "Pain and Suffering",
+        "total": 123350,
+        "totalReduced": 109669,
+        "type": 32,
+        "icon": "ability_warlock_shadowflame.jpg"
+       },
+       {
+        "guid": 70541,
+        "name": "Infest",
+        "total": 71065,
+        "totalReduced": 33070,
+        "type": 32,
+        "icon": "ability_rogue_envelopingshadows.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "The Lich King",
+        "total": 853835,
+        "totalReduced": 802159,
+        "type": "Boss"
+       },
+       {
+        "name": "Vile Spirit",
+        "total": 16357,
+        "totalReduced": 8569,
+        "type": "NPC"
+       }
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 5,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Leech",
+        "guid": 15,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 51,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 50115,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_158.jpg",
+        "name": "Ahn'Kahar Blood Hunter's Headpiece",
+        "itemLevel": 251,
+        "permanentEnchant": 3817,
+        "permanentEnchantName": "+3 Attack Power and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41398,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+         },
+         {
+          "id": 40112,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 891
+       },
+       {
+        "id": 50421,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_monsterhorn_03.jpg",
+        "name": "Sindragosa's Cruel Claw",
+        "itemLevel": 264,
+        "gems": [
+         {
+          "id": 42143,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_dragonseye05.jpg"
+         }
+        ]
+       },
+       {
+        "id": 51151,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_113.jpg",
+        "name": "Sanctified Ahn'Kahar Blood Hunter's Spaulders",
+        "itemLevel": 264,
+        "permanentEnchant": 3808,
+        "permanentEnchantName": "+3 Attack Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 40112,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 891
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Stompyz",
+      "id": 20,
+      "guid": 10723841,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "itemLevel": 257,
+      "total": 1018098,
+      "totalReduced": 968540,
+      "activeTime": 112749,
+      "activeTimeReduced": 102921,
+      "overheal": 260545,
+      "abilities": [
+       {
+        "guid": 72350,
+        "name": "Fury of Frostmourne",
+        "total": 820620,
+        "type": 32,
+        "icon": "inv_sword_122.jpg"
+       },
+       {
+        "guid": 72133,
+        "name": "Pain and Suffering",
+        "total": 124665,
+        "totalReduced": 111594,
+        "type": 32,
+        "icon": "ability_warlock_shadowflame.jpg"
+       },
+       {
+        "guid": 70541,
+        "name": "Infest",
+        "total": 69253,
+        "totalReduced": 34750,
+        "type": 32,
+        "icon": "ability_rogue_envelopingshadows.jpg"
+       },
+       "... 1 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "The Lich King",
+        "total": 1014538,
+        "totalReduced": 966964,
+        "type": "Boss"
+       },
+       {
+        "name": "Environment",
+        "total": 3560,
+        "totalReduced": 1576,
+        "type": "NPC"
+       }
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 57,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Mana Drain",
+        "guid": 14,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 48318,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_95.jpg",
+        "name": "Nobundo's Helm of Triumph",
+        "itemLevel": 245,
+        "permanentEnchant": 3820,
+        "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41285,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_icediamond_02.jpg"
+         },
+         {
+          "id": 40155,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_39.jpg"
+         }
+        ],
+        "setID": 864
+       },
+       {
+        "id": 50658,
+        "slot": 1,
+        "quality": 4,
+        "icon": "item_icecrownnecklaced.jpg",
+        "name": "Amulet of the Silent Eulogy",
+        "itemLevel": 277,
+        "gems": [
+         {
+          "id": 40128,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_38.jpg"
+         }
+        ]
+       },
+       {
+        "id": 50845,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_133.jpg",
+        "name": "Frost Witch's Shoulderpads",
+        "itemLevel": 251,
+        "permanentEnchant": 3810,
+        "permanentEnchantName": "+3 Spell Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 49110,
+          "itemLevel": 80,
+          "icon": "inv_misc_gem_pearl_12.jpg"
+         }
+        ],
+        "setID": 893
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Resmeplease",
+      "id": 25,
+      "guid": 12931789,
+      "type": "Priest",
+      "icon": "Priest-Discipline",
+      "itemLevel": 235,
+      "total": 979779,
+      "totalReduced": 888813,
+      "activeTime": 98089,
+      "activeTimeReduced": 94474,
+      "overheal": 431260,
+      "abilities": [
+       {
+        "guid": 72350,
+        "name": "Fury of Frostmourne",
+        "total": 698400,
+        "type": 32,
+        "icon": "inv_sword_122.jpg"
+       },
+       {
+        "guid": 72133,
+        "name": "Pain and Suffering",
+        "total": 114276,
+        "totalReduced": 81587,
+        "type": 32,
+        "icon": "ability_warlock_shadowflame.jpg"
+       },
+       {
+        "guid": 70541,
+        "name": "Infest",
+        "total": 72311,
+        "totalReduced": 32885,
+        "type": 32,
+        "icon": "ability_rogue_envelopingshadows.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "The Lich King",
+        "total": 910577,
+        "totalReduced": 830630,
+        "type": "Boss"
+       },
+       {
+        "name": "Shambling Horror",
+        "total": 60452,
+        "totalReduced": 50524,
+        "type": "NPC"
+       },
+       {
+        "name": "Environment",
+        "total": 8750,
+        "totalReduced": 7659,
+        "type": "NPC"
+       }
+      ],
+      "talents": [
+       {
+        "name": "Stun",
+        "guid": 56,
+        "type": 1,
+        "abilityIcon": "inv_mace_02.jpg"
+       },
+       {
+        "name": "Leech",
+        "guid": 15,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 45386,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_crown_01.jpg",
+        "name": "Valorous Cowl of Sanctification",
+        "itemLevel": 225,
+        "permanentEnchant": 3820,
+        "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41401,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+         },
+         {
+          "id": 40113,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 833
+       },
+       {
+        "id": 50196,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_spiritshard_02.jpg",
+        "name": "Love's Prisoner",
+        "itemLevel": 232
+       },
+       {
+        "id": 50449,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_119.jpg",
+        "name": "Stiffened Corpse Shoulderpads",
+        "itemLevel": 264,
+        "permanentEnchant": 3836,
+        "permanentEnchantName": "+3 Intellect and +2 Versatility",
+        "gems": [
+         {
+          "id": 40151,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_39.jpg"
+         },
+         {
+          "id": 40151,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_39.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 22 more"
+    ],
+    "totalTime": 647250,
+    "logVersion": 14,
+    "gameVersion": 4,
+    "exploitDetails": []
+   }
+  },
+  "deaths": {
+   "data": {
+    "entries": [
+     {
+      "name": "Ragingelf",
+      "id": 6,
+      "guid": 5624003,
+      "type": "Druid",
+      "icon": "Druid-Balance",
+      "timestamp": 11823236,
+      "fight": 30,
+      "damage": {
+       "total": 32316,
+       "totalReduced": 31955,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 57484,
+       "abilities": [
+        {
+         "guid": 72149,
+         "name": "Shockwave",
+         "total": 32316,
+         "totalReduced": 31955,
+         "type": 1,
+         "icon": "ability_warrior_shockwave.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Shambling Horror",
+         "total": 32316,
+         "totalReduced": 31955,
+         "type": "NPC"
+        }
+       ]
+      },
+      "healing": {
+       "total": 0,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [],
+       "damageAbilities": [],
+       "sources": []
+      },
+      "deathWindow": 0,
+      "overkill": 4150,
+      "events": [
+       {
+        "timestamp": 11823184,
+        "type": "damage",
+        "sourceID": 157,
+        "sourceIsFriendly": false,
+        "targetID": 6,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Shockwave",
+         "guid": 72149,
+         "type": 1,
+         "abilityIcon": "ability_warrior_shockwave.jpg"
+        },
+        "fight": 30,
+        "hitType": 1,
+        "amount": 27805,
+        "mitigated": 57484,
+        "unmitigatedAmount": 89800,
+        "overkill": 4150,
+        "absorbed": 361,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Shockwave",
+       "guid": 72149,
+       "type": 1,
+       "abilityIcon": "ability_warrior_shockwave.jpg"
+      }
+     },
+     {
+      "name": "Relaxable",
+      "id": 1,
+      "guid": 10365223,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "timestamp": 11823236,
+      "fight": 30,
+      "damage": {
+       "total": 44960,
+       "totalReduced": 44754,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 39858,
+       "abilities": [
+        {
+         "guid": 72149,
+         "name": "Shockwave",
+         "total": 44960,
+         "totalReduced": 44754,
+         "type": 1,
+         "icon": "ability_warrior_shockwave.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Shambling Horror",
+         "total": 44960,
+         "totalReduced": 44754,
+         "type": "NPC"
+        }
+       ]
+      },
+      "healing": {
+       "total": 0,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [],
+       "damageAbilities": [],
+       "sources": []
+      },
+      "deathWindow": 0,
+      "overkill": 16819,
+      "events": [
+       {
+        "timestamp": 11823171,
+        "type": "damage",
+        "sourceID": 157,
+        "sourceIsFriendly": false,
+        "targetID": 1,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Shockwave",
+         "guid": 72149,
+         "type": 1,
+         "abilityIcon": "ability_warrior_shockwave.jpg"
+        },
+        "fight": 30,
+        "hitType": 1,
+        "amount": 27935,
+        "mitigated": 39858,
+        "unmitigatedAmount": 84818,
+        "overkill": 16819,
+        "absorbed": 206,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Shockwave",
+       "guid": 72149,
+       "type": 1,
+       "abilityIcon": "ability_warrior_shockwave.jpg"
+      }
+     },
+     {
+      "name": "Resmeplease",
+      "id": 25,
+      "guid": 12931789,
+      "type": "Priest",
+      "icon": "Priest-Discipline",
+      "timestamp": 11823236,
+      "fight": 30,
+      "damage": {
+       "total": 60452,
+       "totalReduced": 50524,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 43527,
+       "abilities": [
+        {
+         "guid": 72149,
+         "name": "Shockwave",
+         "total": 60452,
+         "totalReduced": 50524,
+         "type": 1,
+         "icon": "ability_warrior_shockwave.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Shambling Horror",
+         "total": 60452,
+         "totalReduced": 50524,
+         "type": "NPC"
+        }
+       ]
+      },
+      "healing": {
+       "total": 0,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [],
+       "damageAbilities": [],
+       "sources": []
+      },
+      "deathWindow": 0,
+      "overkill": 25246,
+      "events": [
+       {
+        "timestamp": 11823171,
+        "type": "damage",
+        "sourceID": 157,
+        "sourceIsFriendly": false,
+        "targetID": 25,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Shockwave",
+         "guid": 72149,
+         "type": 1,
+         "abilityIcon": "ability_warrior_shockwave.jpg"
+        },
+        "fight": 30,
+        "hitType": 1,
+        "amount": 25278,
+        "mitigated": 43527,
+        "unmitigatedAmount": 103979,
+        "overkill": 25246,
+        "absorbed": 9928,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Shockwave",
+       "guid": 72149,
+       "type": 1,
+       "abilityIcon": "ability_warrior_shockwave.jpg"
+      }
+     },
+     "... 25 more"
+    ]
+   }
+  },
+  "interrupts": {
+   "data": {
+    "entries": [
+     {
+      "entries": []
+     }
+    ],
+    "totalTime": 647250
+   }
+  },
+  "dispels": {
+   "data": {
+    "entries": [
+     {
+      "entries": [
+       {
+        "name": "Enrage",
+        "guid": 72143,
+        "type": 1,
+        "abilityIcon": "ability_warrior_rampage.jpg",
+        "spellsBegun": 5,
+        "spellsCompleted": 1,
+        "spellsInterrupted": 4,
+        "spellChannelsInterrupted": 0,
+        "timestamp": 11773415,
+        "details": [
+         {
+          "name": "Tides",
+          "id": 7,
+          "guid": 15094978,
+          "type": "Hunter",
+          "icon": "Hunter",
+          "total": 4,
+          "actors": [
+           {
+            "name": "Shambling Horror",
+            "total": 4,
+            "type": "NPC"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Tranquilizing Shot",
+            "total": 4,
+            "type": 8
+           }
+          ]
+         }
+        ],
+        "missedCasts": [
+         {
+          "name": "Shambling Horror",
+          "id": 157,
+          "guid": 37698,
+          "type": "NPC",
+          "icon": "custom-icon-ability_warrior_shockwave.jpg",
+          "timestamp": 119527,
+          "target": {
+           "name": "Shambling Horror",
+           "id": 157,
+           "guid": 37698,
+           "type": "NPC",
+           "icon": "custom-icon-ability_warrior_shockwave.jpg"
+          }
+         }
+        ]
+       },
+       {
+        "name": "Necrotic Plague",
+        "guid": 70338,
+        "type": 32,
+        "abilityIcon": "ability_creature_disease_02.jpg",
+        "spellsBegun": 0,
+        "spellsCompleted": 0,
+        "spellsInterrupted": 4,
+        "spellChannelsInterrupted": 4,
+        "timestamp": 11778052,
+        "details": [
+         {
+          "name": "Masomum",
+          "id": 8,
+          "guid": 10411207,
+          "type": "Paladin",
+          "icon": "Paladin",
+          "total": 4,
+          "actors": [
+           {
+            "name": "Masomum",
+            "total": 3,
+            "type": "Paladin"
+           },
+           {
+            "name": "Kerrod",
+            "total": 1,
+            "type": "Druid"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Cleanse",
+            "total": 4,
+            "type": 2
+           }
+          ]
+         }
+        ],
+        "missedCasts": []
+       },
+       {
+        "name": "Soul Shriek",
+        "guid": 69242,
+        "type": 32,
+        "abilityIcon": "ability_warlock_improvedsoulleech.jpg",
+        "spellsBegun": 12,
+        "spellsCompleted": 4,
+        "spellsInterrupted": 8,
+        "spellChannelsInterrupted": 0,
+        "timestamp": 11866191,
+        "details": [
+         {
+          "name": "Minpally",
+          "id": 74,
+          "guid": 10892525,
+          "type": "Paladin",
+          "icon": "Paladin",
+          "total": 2,
+          "actors": [
+           {
+            "name": "Masomum",
+            "total": 2,
+            "type": "Paladin"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Cleanse",
+            "total": 2,
+            "type": 2
+           }
+          ]
+         },
+         {
+          "name": "Resmeplease",
+          "id": 25,
+          "guid": 12931789,
+          "type": "Priest",
+          "icon": "Priest",
+          "total": 6,
+          "actors": [
+           {
+            "name": "Torean",
+            "total": 3,
+            "type": "DeathKnight"
+           },
+           {
+            "name": "Notmeng",
+            "total": 2,
+            "type": "DeathKnight"
+           },
+           {
+            "name": "Masomum",
+            "total": 1,
+            "type": "Paladin"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Dispel Magic",
+            "total": 6,
+            "type": 2
+           }
+          ]
+         }
+        ],
+        "missedCasts": [
+         {
+          "name": "Raging Spirit 1",
+          "id": "158.1",
+          "guid": 36701,
+          "type": "NPC",
+          "instance": 1,
+          "icon": "custom-icon-ability_warlock_improvedsoulleech.jpg",
+          "timestamp": 110218,
+          "target": {
+           "name": "Kosmo",
+           "id": 4,
+           "guid": 22091,
+           "type": "Warrior",
+           "icon": "Warrior-Fury",
+           "server": "Arugal"
+          }
+         },
+         {
+          "name": "Raging Spirit 1",
+          "id": "158.1",
+          "guid": 36701,
+          "type": "NPC",
+          "instance": 1,
+          "icon": "custom-icon-ability_warlock_improvedsoulleech.jpg",
+          "timestamp": 110218,
+          "target": {
+           "name": "Torean",
+           "id": 11,
+           "guid": 13478508,
+           "type": "DeathKnight",
+           "icon": "DeathKnight-Blood",
+           "server": "Arugal"
+          }
+         },
+         {
+          "name": "Raging Spirit 3",
+          "id": "158.3",
+          "guid": 36701,
+          "type": "NPC",
+          "instance": 3,
+          "icon": "custom-icon-ability_warlock_improvedsoulleech.jpg",
+          "timestamp": 160835,
+          "target": {
+           "name": "Wormchomp",
+           "id": 10,
+           "guid": 1862216,
+           "type": "Pet",
+           "icon": "abilities/spell_shadow_animatedead.jpg"
+          }
+         },
+         "... 1 more"
+        ]
+       },
+       "... 1 more"
+      ]
+     }
+    ],
+    "totalTime": 647250
+   }
+  },
+  "casts": {
+   "data": {
+    "entries": [
+     {
+      "name": "Billycannon",
+      "id": 13,
+      "guid": 15258969,
+      "type": "Hunter",
+      "icon": "Hunter-Survival",
+      "itemLevel": 257,
+      "total": 455,
+      "activeTime": 462565,
+      "activeTimeReduced": 462565,
+      "abilities": [
+       {
+        "guid": 75,
+        "name": "Auto Shot",
+        "total": 177,
+        "type": 1,
+        "icon": "ability_whirlwind.jpg"
+       },
+       {
+        "guid": 60053,
+        "name": "Explosive Shot",
+        "total": 73,
+        "type": 4,
+        "icon": "ability_hunter_explosiveshot.jpg"
+       },
+       {
+        "guid": 49052,
+        "name": "Steady Shot",
+        "total": 40,
+        "type": 1,
+        "icon": "ability_hunter_steadyshot.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "The Lich King",
+        "total": 275,
+        "type": "Boss"
+       },
+       {
+        "name": "Environment",
+        "total": 68,
+        "type": "NPC"
+       },
+       {
+        "name": "Raging Spirit",
+        "total": 64,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 5,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Leech",
+        "guid": 15,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 51,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 50115,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_158.jpg",
+        "name": "Ahn'Kahar Blood Hunter's Headpiece",
+        "itemLevel": 251,
+        "permanentEnchant": 3817,
+        "permanentEnchantName": "+3 Attack Power and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41398,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+         },
+         {
+          "id": 40112,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 891
+       },
+       {
+        "id": 50421,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_monsterhorn_03.jpg",
+        "name": "Sindragosa's Cruel Claw",
+        "itemLevel": 264,
+        "gems": [
+         {
+          "id": 42143,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_dragonseye05.jpg"
+         }
+        ]
+       },
+       {
+        "id": 51151,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_113.jpg",
+        "name": "Sanctified Ahn'Kahar Blood Hunter's Spaulders",
+        "itemLevel": 264,
+        "permanentEnchant": 3808,
+        "permanentEnchantName": "+3 Attack Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 40112,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 891
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Stompyz",
+      "id": 20,
+      "guid": 10723841,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "itemLevel": 257,
+      "total": 314,
+      "activeTime": 464223,
+      "activeTimeReduced": 464223,
+      "abilities": [
+       {
+        "guid": 49238,
+        "name": "Lightning Bolt",
+        "total": 177,
+        "type": 8,
+        "icon": "spell_nature_lightning.jpg"
+       },
+       {
+        "guid": 49233,
+        "name": "Flame Shock",
+        "total": 41,
+        "type": 4,
+        "icon": "spell_fire_flameshock.jpg"
+       },
+       {
+        "guid": 60043,
+        "name": "Lava Burst",
+        "total": 39,
+        "type": 4,
+        "icon": "spell_shaman_lavaburst.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "The Lich King",
+        "total": 196,
+        "type": "Boss"
+       },
+       {
+        "name": "Raging Spirit",
+        "total": 61,
+        "type": "NPC"
+       },
+       {
+        "name": "Environment",
+        "total": 40,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "UseDatabaseForName",
+        "guid": 57,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Mana Drain",
+        "guid": 14,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 48318,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_95.jpg",
+        "name": "Nobundo's Helm of Triumph",
+        "itemLevel": 245,
+        "permanentEnchant": 3820,
+        "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41285,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_icediamond_02.jpg"
+         },
+         {
+          "id": 40155,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_39.jpg"
+         }
+        ],
+        "setID": 864
+       },
+       {
+        "id": 50658,
+        "slot": 1,
+        "quality": 4,
+        "icon": "item_icecrownnecklaced.jpg",
+        "name": "Amulet of the Silent Eulogy",
+        "itemLevel": 277,
+        "gems": [
+         {
+          "id": 40128,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_38.jpg"
+         }
+        ]
+       },
+       {
+        "id": 50845,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_133.jpg",
+        "name": "Frost Witch's Shoulderpads",
+        "itemLevel": 251,
+        "permanentEnchant": 3810,
+        "permanentEnchantName": "+3 Spell Power and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 49110,
+          "itemLevel": 80,
+          "icon": "inv_misc_gem_pearl_12.jpg"
+         }
+        ],
+        "setID": 893
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Resmeplease",
+      "id": 25,
+      "guid": 12931789,
+      "type": "Priest",
+      "icon": "Priest-Discipline",
+      "itemLevel": 235,
+      "total": 268,
+      "activeTime": 405684,
+      "activeTimeReduced": 405684,
+      "abilities": [
+       {
+        "guid": 48066,
+        "name": "Power Word: Shield",
+        "total": 165,
+        "type": 2,
+        "icon": "spell_holy_powerwordshield.jpg"
+       },
+       {
+        "guid": 52985,
+        "name": "Penance",
+        "total": 64,
+        "type": 2,
+        "icon": "spell_holy_penance.jpg"
+       },
+       {
+        "guid": 48071,
+        "name": "Flash Heal",
+        "total": 8,
+        "type": 2,
+        "icon": "spell_holy_flashheal.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Environment",
+        "total": 78,
+        "type": "NPC"
+       },
+       {
+        "name": "Masomum",
+        "total": 19,
+        "type": "Paladin"
+       },
+       {
+        "name": "Torean",
+        "total": 17,
+        "type": "DeathKnight"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Stun",
+        "guid": 56,
+        "type": 1,
+        "abilityIcon": "inv_mace_02.jpg"
+       },
+       {
+        "name": "Leech",
+        "guid": 15,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 45386,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_crown_01.jpg",
+        "name": "Valorous Cowl of Sanctification",
+        "itemLevel": 225,
+        "permanentEnchant": 3820,
+        "permanentEnchantName": "+3 Intellect and +3 Critical Strike",
+        "gems": [
+         {
+          "id": 41401,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_shadowspirit_02.jpg"
+         },
+         {
+          "id": 40113,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_37.jpg"
+         }
+        ],
+        "setID": 833
+       },
+       {
+        "id": 50196,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_spiritshard_02.jpg",
+        "name": "Love's Prisoner",
+        "itemLevel": 232
+       },
+       {
+        "id": 50449,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_119.jpg",
+        "name": "Stiffened Corpse Shoulderpads",
+        "itemLevel": 264,
+        "permanentEnchant": 3836,
+        "permanentEnchantName": "+3 Intellect and +2 Versatility",
+        "gems": [
+         {
+          "id": 40151,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_39.jpg"
+         },
+         {
+          "id": 40151,
+          "itemLevel": 80,
+          "icon": "inv_jewelcrafting_gem_39.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 22 more"
+    ],
+    "totalTime": 647250,
+    "damageDowntime": 197701,
+    "logVersion": 14,
+    "gameVersion": 4,
+    "exploitDetails": []
+   }
+  }
+ }
+}

@@ -1,0 +1,4058 @@
+{
+ "expansion": "mop",
+ "report": "R9N4Y2LTncC8AyMk",
+ "zone": "Siege of Orgrimmar",
+ "fight": {
+  "id": 35,
+  "encounterID": 51623,
+  "name": "Garrosh Hellscream",
+  "difficulty": 3,
+  "size": 25,
+  "kill": true,
+  "startTime": 8559468,
+  "endTime": 8987883,
+  "fightPercentage": 0,
+  "bossPercentage": 0.01
+ },
+ "players": [
+  {
+   "id": 1,
+   "name": "Yogiqt",
+   "server": "Arugal(AU)",
+   "subType": "Warrior"
+  },
+  {
+   "id": 3,
+   "name": "Couladin",
+   "server": "Arugal(AU)",
+   "subType": "Monk"
+  },
+  {
+   "id": 4,
+   "name": "Gripzaa",
+   "server": "Arugal(AU)",
+   "subType": "DeathKnight"
+  },
+  "... 22 more"
+ ],
+ "tables": {
+  "summary": {
+   "data": {
+    "totalTime": 428415,
+    "itemLevel": 557.6400146484375,
+    "composition": [
+     {
+      "name": "Sythe",
+      "id": 7,
+      "guid": 23980,
+      "type": "Warrior",
+      "specs": [
+       {
+        "spec": "Fury",
+        "role": "dps"
+       }
+      ]
+     },
+     {
+      "name": "Jaiitoo",
+      "id": 15,
+      "guid": 12675938,
+      "type": "Druid",
+      "specs": [
+       {
+        "spec": "Balance",
+        "role": "dps"
+       }
+      ]
+     },
+     {
+      "name": "Musthaverole",
+      "id": 137,
+      "guid": 19176979,
+      "type": "Priest",
+      "specs": [
+       {
+        "spec": "Shadow",
+        "role": "dps"
+       }
+      ]
+     },
+     "... 22 more"
+    ],
+    "damageDone": [
+     {
+      "name": "Skull Banner (Bogstrong)",
+      "id": 30000012,
+      "guid": 46067267,
+      "type": "RedistributedDamage",
+      "icon": "custom-icon-warrior_skullbanner.jpg",
+      "total": 22856258
+     },
+     {
+      "name": "Chãos",
+      "id": 5,
+      "guid": 12724562,
+      "type": "Mage",
+      "icon": "Mage-Arcane",
+      "total": 91710469
+     },
+     {
+      "name": "Masobloom",
+      "id": 11,
+      "guid": 20571379,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "total": 4138679
+     },
+     "... 26 more"
+    ],
+    "healingDone": [
+     {
+      "name": "Chãos",
+      "id": 5,
+      "guid": 12724562,
+      "type": "Mage",
+      "icon": "Mage-Arcane",
+      "total": 1700931
+     },
+     {
+      "name": "Masobloom",
+      "id": 11,
+      "guid": 20571379,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "total": 62594029
+     },
+     {
+      "name": "Baximers",
+      "id": 73,
+      "guid": 20882457,
+      "type": "DeathKnight",
+      "icon": "DeathKnight-Unholy",
+      "total": 1843621
+     },
+     "... 23 more"
+    ],
+    "damageTaken": [
+     {
+      "name": "Desecrated",
+      "guid": 144762,
+      "type": 32,
+      "abilityIcon": "inv_axe_2h_orgrimmarraid_d_01.jpg",
+      "total": 7164139
+     },
+     {
+      "name": "Empowered Gripping Despair",
+      "guid": 145195,
+      "type": 32,
+      "abilityIcon": "ability_deathknight_aoedeathgrip.jpg",
+      "total": 3436578
+     },
+     {
+      "name": "Essence of Yu'lon",
+      "guid": 148008,
+      "type": 12,
+      "abilityIcon": "monk_stance_wiseserpent.jpg",
+      "total": 551209
+     },
+     "... 47 more"
+    ],
+    "deathEvents": [
+     {
+      "name": "Maari",
+      "id": 14,
+      "guid": 15291180,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "deathTime": 340790,
+      "ability": {
+       "name": "Annihilate",
+       "guid": 144969,
+       "type": 32,
+       "abilityIcon": "sha_spell_fire_bluehellfire.jpg"
+      }
+     },
+     {
+      "name": "Baximers",
+      "id": 73,
+      "guid": 20882457,
+      "type": "DeathKnight",
+      "icon": "DeathKnight-Unholy",
+      "deathTime": 363167,
+      "ability": {
+       "name": "Annihilate",
+       "guid": 144969,
+       "type": 32,
+       "abilityIcon": "sha_spell_fire_bluehellfire.jpg"
+      },
+      "deathSaveTime": 360133,
+      "deathSaveAbility": {
+       "name": "Shroud of Purgatory",
+       "guid": 116888,
+       "type": 32,
+       "abilityIcon": "inv_misc_shadowegg.jpg"
+      }
+     },
+     {
+      "name": "Maari",
+      "id": 14,
+      "guid": 15291180,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "deathTime": 414679,
+      "ability": {
+       "name": "Explosive Despair",
+       "guid": 145199,
+       "type": 32,
+       "abilityIcon": "ability_deathknight_asphixiate.jpg"
+      }
+     },
+     "... 3 more"
+    ],
+    "exploitDetails": [],
+    "playerDetails": {
+     "dps": [
+      {
+       "name": "Sythe",
+       "id": 7,
+       "guid": 23980,
+       "type": "Warrior",
+       "server": "Arugal(AU)",
+       "region": "US",
+       "icon": "Warrior-Fury",
+       "specs": [
+        "Fury"
+       ],
+       "minItemLevel": 562,
+       "maxItemLevel": 562,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 2858,
+          "max": 2858
+         },
+         "Intellect": {
+          "min": 124,
+          "max": 124
+         },
+         "Agility": {
+          "min": 223,
+          "max": 223
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 19650,
+          "max": 19650
+         },
+         "Item Level": {
+          "min": 562,
+          "max": 562
+         },
+         "Spirit": {
+          "min": 160,
+          "max": 160
+         },
+         "Strength": {
+          "min": 33070,
+          "max": 33070
+         },
+         "Stamina": {
+          "min": 41013,
+          "max": 41013
+         },
+         "Expertise": {
+          "min": 2240,
+          "max": 2240
+         },
+         "Haste": {
+          "min": 2537,
+          "max": 2537
+         }
+        },
+        "talents": [
+         {
+          "name": "Juggernaut",
+          "guid": 103826,
+          "type": 1,
+          "abilityIcon": "ability_warrior_bullrush.jpg"
+         },
+         {
+          "name": "Enraged Regeneration",
+          "guid": 55694,
+          "type": 1,
+          "abilityIcon": "ability_warrior_focusedrage.jpg"
+         },
+         {
+          "name": "Disrupting Shout",
+          "guid": 102060,
+          "type": 1,
+          "abilityIcon": "warrior_disruptingshout.jpg"
+         },
+         "... 3 more"
+        ],
+        "artifact": [
+         {
+          "name": "Glyph of Bloody Healing",
+          "guid": 58369,
+          "type": 1,
+          "abilityIcon": "ability_backstab.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Unending Rage",
+          "guid": 58098,
+          "type": 1,
+          "abilityIcon": "ability_warrior_intensifyrage.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of the Blazing Trail",
+          "guid": 123779,
+          "type": 1,
+          "abilityIcon": "spell_fire_burningspeed.jpg",
+          "total": 1
+         },
+         "... 3 more"
+        ],
+        "gear": [
+         {
+          "id": 99206,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_plate_raidwarrior_n_01.jpg",
+          "name": "Helmet of the Prehistoric Marauder",
+          "itemLevel": 561,
+          "gems": [
+           {
+            "id": 95346,
+            "itemLevel": 90,
+            "icon": "inv_legendary_chimeraoffear.jpg"
+           },
+           {
+            "id": 76659,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           }
+          ],
+          "setID": 1180
+         },
+         {
+          "id": 96420,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_139.jpg",
+          "name": "Talisman of Angry Spirits",
+          "itemLevel": 549
+         },
+         {
+          "id": 103748,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_plate_raidwarrior_n_01.jpg",
+          "name": "Krugruk's Rigid Shoulderplates",
+          "itemLevel": 567,
+          "permanentEnchant": 4803,
+          "permanentEnchantName": "+3 Strength and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 76697,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+           },
+           {
+            "id": 76697,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+           }
+          ]
+         },
+         "... 15 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Jaiitoo",
+       "id": 15,
+       "guid": 12675938,
+       "type": "Druid",
+       "server": "Arugal(AU)",
+       "region": "US",
+       "icon": "Druid-Balance",
+       "specs": [
+        "Balance"
+       ],
+       "minItemLevel": 554,
+       "maxItemLevel": 554,
+       "potionUse": 2,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 5213,
+          "max": 5213
+         },
+         "Intellect": {
+          "min": 32529,
+          "max": 32529
+         },
+         "Agility": {
+          "min": 185,
+          "max": 185
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 15804,
+          "max": 15804
+         },
+         "Item Level": {
+          "min": 554,
+          "max": 554
+         },
+         "Spirit": {
+          "min": 4678,
+          "max": 4678
+         },
+         "Strength": {
+          "min": 196,
+          "max": 196
+         },
+         "Stamina": {
+          "min": 34312,
+          "max": 34312
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 10299,
+          "max": 10299
+         }
+        },
+        "talents": [
+         {
+          "name": "Feline Swiftness",
+          "guid": 131768,
+          "type": 1,
+          "abilityIcon": "ability_druid_dash.jpg"
+         },
+         {
+          "name": "Ysera's Gift",
+          "guid": 145108,
+          "type": 1,
+          "abilityIcon": "inv_misc_head_dragon_green.jpg"
+         },
+         {
+          "name": "Typhoon",
+          "guid": 132469,
+          "type": 1,
+          "abilityIcon": "ability_druid_typhoon.jpg"
+         },
+         "... 3 more"
+        ],
+        "artifact": [
+         {
+          "name": "Glyph of Aquatic Form",
+          "guid": 57856,
+          "type": 1,
+          "abilityIcon": "inv_enchant_essencemagiclarge.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Grace",
+          "guid": 114295,
+          "type": 1,
+          "abilityIcon": "inv_feather_01.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Stars",
+          "guid": 114301,
+          "type": 1,
+          "abilityIcon": "achievement_boss_algalon_01.jpg",
+          "total": 1
+         },
+         "... 3 more"
+        ],
+        "gear": [
+         {
+          "id": 96590,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_leather_raiddruid_m_01.jpg",
+          "name": "Cover of the Haunted Forest",
+          "itemLevel": 543,
+          "gems": [
+           {
+            "id": 95347,
+            "itemLevel": 90,
+            "icon": "inv_legendary_chimeraoffear.jpg"
+           },
+           {
+            "id": 76697,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+           }
+          ]
+         },
+         {
+          "id": 96560,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_136.jpg",
+          "name": "Soul Prism of Lei Shen",
+          "itemLevel": 549,
+          "gems": [
+           {
+            "id": 76640,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+           },
+           {
+            "id": 76640,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+           }
+          ]
+         },
+         {
+          "id": 96593,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_leather_raiddruid_m_01.jpg",
+          "name": "Shoulderwraps of the Haunted Forest",
+          "itemLevel": 543,
+          "permanentEnchant": 4915,
+          "permanentEnchantName": "+4 Intellect and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 76660,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           },
+           {
+            "id": 76697,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+           }
+          ]
+         },
+         "... 15 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Musthaverole",
+       "id": 137,
+       "guid": 19176979,
+       "type": "Priest",
+       "server": "Arugal(AU)",
+       "region": "US",
+       "icon": "Priest-Shadow",
+       "specs": [
+        "Shadow"
+       ],
+       "minItemLevel": 556,
+       "maxItemLevel": 556,
+       "potionUse": 1,
+       "healthstoneUse": 1,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 11013,
+          "max": 11013
+         },
+         "Intellect": {
+          "min": 30641,
+          "max": 30641
+         },
+         "Agility": {
+          "min": 147,
+          "max": 147
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 8424,
+          "max": 8424
+         },
+         "Item Level": {
+          "min": 556,
+          "max": 556
+         },
+         "Spirit": {
+          "min": 7963,
+          "max": 7963
+         },
+         "Strength": {
+          "min": 137,
+          "max": 137
+         },
+         "Stamina": {
+          "min": 35429,
+          "max": 35429
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 12570,
+          "max": 12570
+         }
+        },
+        "talents": [
+         {
+          "name": "Void Tendrils",
+          "guid": 108920,
+          "type": 1,
+          "abilityIcon": "spell_priest_voidtendrils.jpg"
+         },
+         {
+          "name": "Angelic Feather",
+          "guid": 121536,
+          "type": 2,
+          "abilityIcon": "ability_priest_angelicfeather.jpg"
+         },
+         {
+          "name": "Solace and Insanity",
+          "guid": 139139,
+          "type": 1,
+          "abilityIcon": "ability_priest_flashoflight.jpg"
+         },
+         "... 3 more"
+        ],
+        "artifact": [
+         {
+          "name": "Glyph of Inner Sanctum",
+          "guid": 14771,
+          "type": 1,
+          "abilityIcon": "priest_icon_innewill.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Dark Archangel",
+          "guid": 58228,
+          "type": 1,
+          "abilityIcon": "spell_shadow_summonvoidwalker.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Prayer of Mending",
+          "guid": 55685,
+          "type": 1,
+          "abilityIcon": "spell_holy_prayerofmendingtga.jpg",
+          "total": 1
+         },
+         "... 1 more"
+        ],
+        "gear": [
+         {
+          "id": 96399,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_cloth_raidmage_m_01.jpg",
+          "name": "Flamecaster's Burning Crown",
+          "itemLevel": 549,
+          "gems": [
+           {
+            "id": 95347,
+            "itemLevel": 90,
+            "icon": "inv_legendary_chimeraoffear.jpg"
+           },
+           {
+            "id": 76651,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+           }
+          ]
+         },
+         {
+          "id": 96537,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_123.jpg",
+          "name": "Passionfire Choker",
+          "itemLevel": 549,
+          "gems": [
+           {
+            "id": 76697,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+           }
+          ]
+         },
+         {
+          "id": 105464,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_cloth_raidmage_n_01.jpg",
+          "name": "Rime-Rift Shoulders",
+          "itemLevel": 572,
+          "permanentEnchant": 4806,
+          "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 76668,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           },
+           {
+            "id": 76651,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+           }
+          ]
+         },
+         "... 15 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      "... 16 more"
+     ],
+     "healers": [
+      {
+       "name": "Relaxable",
+       "id": 35,
+       "guid": 10365223,
+       "type": "Druid",
+       "server": "Arugal(AU)",
+       "region": "US",
+       "icon": "Druid-Restoration",
+       "specs": [
+        "Restoration"
+       ],
+       "minItemLevel": 554,
+       "maxItemLevel": 554,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 28243,
+          "max": 28243
+         },
+         "Agility": {
+          "min": 187,
+          "max": 187
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 1407,
+          "max": 1407
+         },
+         "Item Level": {
+          "min": 554,
+          "max": 554
+         },
+         "Spirit": {
+          "min": 10713,
+          "max": 10713
+         },
+         "Strength": {
+          "min": 189,
+          "max": 189
+         },
+         "Stamina": {
+          "min": 34012,
+          "max": 34012
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 13164,
+          "max": 13164
+         }
+        },
+        "talents": [
+         {
+          "name": "Displacer Beast",
+          "guid": 102280,
+          "type": 1,
+          "abilityIcon": "spell_druid_displacement.jpg"
+         },
+         {
+          "name": "Ysera's Gift",
+          "guid": 145108,
+          "type": 1,
+          "abilityIcon": "inv_misc_head_dragon_green.jpg"
+         },
+         {
+          "name": "Typhoon",
+          "guid": 132469,
+          "type": 1,
+          "abilityIcon": "ability_druid_typhoon.jpg"
+         },
+         "... 3 more"
+        ],
+        "artifact": [
+         {
+          "name": "Glyph of Grace",
+          "guid": 114295,
+          "type": 1,
+          "abilityIcon": "inv_feather_01.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Wild Growth",
+          "guid": 62970,
+          "type": 1,
+          "abilityIcon": "ability_druid_flourish.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Efflorescence",
+          "guid": 145529,
+          "type": 1,
+          "abilityIcon": "spell_nature_healingtouch.jpg",
+          "total": 1
+         },
+         "... 3 more"
+        ],
+        "gear": [
+         {
+          "id": 96585,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_leather_raiddruid_m_01.jpg",
+          "name": "Helm of the Haunted Forest",
+          "itemLevel": 543,
+          "gems": [
+           {
+            "id": 95345,
+            "itemLevel": 90,
+            "icon": "inv_legendary_chimeraoffear.jpg"
+           },
+           {
+            "id": 76668,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           }
+          ]
+         },
+         {
+          "id": 96774,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_141.jpg",
+          "name": "Horridon's Tusk Fragment",
+          "itemLevel": 549
+         },
+         {
+          "id": 96588,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_leather_raiddruid_m_01.jpg",
+          "name": "Mantle of the Haunted Forest",
+          "itemLevel": 543,
+          "permanentEnchant": 4806,
+          "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 76668,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           },
+           {
+            "id": 76668,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           }
+          ]
+         },
+         "... 15 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Masobloom",
+       "id": 11,
+       "guid": 20571379,
+       "type": "Druid",
+       "server": "Arugal(AU)",
+       "region": "US",
+       "icon": "Druid-Restoration",
+       "specs": [
+        "Restoration"
+       ],
+       "minItemLevel": 558,
+       "maxItemLevel": 558,
+       "potionUse": 0,
+       "healthstoneUse": 1,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 33632,
+          "max": 33632
+         },
+         "Agility": {
+          "min": 187,
+          "max": 187
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 514,
+          "max": 514
+         },
+         "Item Level": {
+          "min": 558,
+          "max": 558
+         },
+         "Spirit": {
+          "min": 13461,
+          "max": 13461
+         },
+         "Strength": {
+          "min": 189,
+          "max": 189
+         },
+         "Stamina": {
+          "min": 35553,
+          "max": 35553
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 6883,
+          "max": 6883
+         }
+        },
+        "talents": [
+         {
+          "name": "Displacer Beast",
+          "guid": 102280,
+          "type": 1,
+          "abilityIcon": "spell_druid_displacement.jpg"
+         },
+         {
+          "name": "Ysera's Gift",
+          "guid": 145108,
+          "type": 1,
+          "abilityIcon": "inv_misc_head_dragon_green.jpg"
+         },
+         {
+          "name": "Typhoon",
+          "guid": 132469,
+          "type": 1,
+          "abilityIcon": "ability_druid_typhoon.jpg"
+         },
+         "... 3 more"
+        ],
+        "artifact": [
+         {
+          "name": "Glyph of the Stag",
+          "guid": 114338,
+          "type": 1,
+          "abilityIcon": "trade_archaeology_antleredcloakclasp.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Grace",
+          "guid": 114295,
+          "type": 1,
+          "abilityIcon": "inv_feather_01.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Wild Growth",
+          "guid": 62970,
+          "type": 1,
+          "abilityIcon": "ability_druid_flourish.jpg",
+          "total": 1
+         },
+         "... 3 more"
+        ],
+        "gear": [
+         {
+          "id": 96585,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_leather_raiddruid_m_01.jpg",
+          "name": "Helm of the Haunted Forest",
+          "itemLevel": 543,
+          "gems": [
+           {
+            "id": 95345,
+            "itemLevel": 90,
+            "icon": "inv_legendary_chimeraoffear.jpg"
+           },
+           {
+            "id": 76668,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           }
+          ]
+         },
+         {
+          "id": 96402,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_141.jpg",
+          "name": "Horridon's Tusk Fragment",
+          "itemLevel": 549
+         },
+         {
+          "id": 96588,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_leather_raiddruid_m_01.jpg",
+          "name": "Mantle of the Haunted Forest",
+          "itemLevel": 543,
+          "permanentEnchant": 4806,
+          "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 76668,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           },
+           {
+            "id": 76672,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           }
+          ]
+         },
+         "... 15 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Vedreesh",
+       "id": 78,
+       "guid": 10974697,
+       "type": "Priest",
+       "server": "Arugal(AU)",
+       "region": "US",
+       "icon": "Priest-Discipline",
+       "specs": [
+        "Discipline"
+       ],
+       "minItemLevel": 557,
+       "maxItemLevel": 557,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 32191,
+          "max": 32191
+         },
+         "Agility": {
+          "min": 142,
+          "max": 142
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 13130,
+          "max": 13130
+         },
+         "Item Level": {
+          "min": 557,
+          "max": 557
+         },
+         "Spirit": {
+          "min": 12059,
+          "max": 12059
+         },
+         "Strength": {
+          "min": 134,
+          "max": 134
+         },
+         "Stamina": {
+          "min": 35548,
+          "max": 35548
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 1735,
+          "max": 1735
+         }
+        },
+        "talents": [
+         {
+          "name": "Psyfiend",
+          "guid": 108921,
+          "type": 1,
+          "abilityIcon": "spell_priest_psyfiend.jpg"
+         },
+         {
+          "name": "Angelic Feather",
+          "guid": 121536,
+          "type": 2,
+          "abilityIcon": "ability_priest_angelicfeather.jpg"
+         },
+         {
+          "name": "Mindbender",
+          "guid": 123040,
+          "type": 1,
+          "abilityIcon": "spell_shadow_soulleech_3.jpg"
+         },
+         "... 3 more"
+        ],
+        "artifact": [
+         {
+          "name": "Glyph of the Sha",
+          "guid": 147776,
+          "type": 1,
+          "abilityIcon": "inv_hand_1h_shaclaw.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Dark Archangel",
+          "guid": 58228,
+          "type": 1,
+          "abilityIcon": "spell_shadow_summonvoidwalker.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Borrowed Time",
+          "guid": 58009,
+          "type": 1,
+          "abilityIcon": "spell_holy_borrowedtime.jpg",
+          "total": 1
+         },
+         "... 3 more"
+        ],
+        "gear": [
+         {
+          "id": 96670,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_cloth_raidpriest_m_01helm.jpg",
+          "name": "Cowl of the Exorcist",
+          "itemLevel": 543,
+          "gems": [
+           {
+            "id": 95345,
+            "itemLevel": 90,
+            "icon": "inv_legendary_chimeraoffear.jpg"
+           },
+           {
+            "id": 76697,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+           }
+          ]
+         },
+         {
+          "id": 96774,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_141.jpg",
+          "name": "Horridon's Tusk Fragment",
+          "itemLevel": 549
+         },
+         {
+          "id": 99120,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_cloth_raidpriest_n_01shoulder.jpg",
+          "name": "Mantle of the Ternion Glory",
+          "itemLevel": 561,
+          "permanentEnchant": 4806,
+          "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 76660,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           },
+           {
+            "id": 76660,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           }
+          ],
+          "setID": 1187
+         },
+         "... 15 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      "... 1 more"
+     ],
+     "tanks": [
+      {
+       "name": "Yogiqt",
+       "id": 1,
+       "guid": 2967199,
+       "type": "Warrior",
+       "server": "Arugal(AU)",
+       "region": "US",
+       "icon": "Warrior-Protection",
+       "specs": [
+        "Protection"
+       ],
+       "minItemLevel": 564,
+       "maxItemLevel": 564,
+       "potionUse": 2,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 5313,
+          "max": 5313
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 146,
+          "max": 146
+         },
+         "Stamina": {
+          "min": 50972,
+          "max": 50972
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Hit": {
+          "min": 2903,
+          "max": 2903
+         },
+         "Intellect": {
+          "min": 123,
+          "max": 123
+         },
+         "Armor": {
+          "min": 77275,
+          "max": 77275
+         },
+         "Agility": {
+          "min": 219,
+          "max": 219
+         },
+         "Block": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 5260,
+          "max": 5260
+         },
+         "Item Level": {
+          "min": 564,
+          "max": 564
+         },
+         "Parry": {
+          "min": 12569,
+          "max": 12569
+         },
+         "Strength": {
+          "min": 31424,
+          "max": 31424
+         },
+         "Expertise": {
+          "min": 6096,
+          "max": 6096
+         }
+        },
+        "talents": [
+         {
+          "name": "Juggernaut",
+          "guid": 103826,
+          "type": 1,
+          "abilityIcon": "ability_warrior_bullrush.jpg"
+         },
+         {
+          "name": "Second Wind",
+          "guid": 29838,
+          "type": 1,
+          "abilityIcon": "ability_hunter_harass.jpg"
+         },
+         {
+          "name": "Disrupting Shout",
+          "guid": 102060,
+          "type": 1,
+          "abilityIcon": "warrior_disruptingshout.jpg"
+         },
+         "... 3 more"
+        ],
+        "artifact": [
+         {
+          "name": "Glyph of Heavy Repercussions",
+          "guid": 58388,
+          "type": 1,
+          "abilityIcon": "ability_defend.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Rude Interruption",
+          "guid": 58372,
+          "type": 1,
+          "abilityIcon": "ability_warrior_commandingshout.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Thunder Strike",
+          "guid": 68164,
+          "type": 1,
+          "abilityIcon": "ability_thunderclap.jpg",
+          "total": 1
+         },
+         "... 3 more"
+        ],
+        "gear": [
+         {
+          "id": 103839,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_plate_raiddeathknight_n_01.jpg",
+          "name": "Rage-Blind Greathelm",
+          "itemLevel": 567,
+          "gems": [
+           {
+            "id": 95346,
+            "itemLevel": 90,
+            "icon": "inv_legendary_chimeraoffear.jpg"
+           },
+           {
+            "id": 76641,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+           }
+          ]
+         },
+         {
+          "id": 96429,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_118.jpg",
+          "name": "Amulet of the Primal Turtle",
+          "itemLevel": 549,
+          "gems": [
+           {
+            "id": 76641,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+           }
+          ]
+         },
+         {
+          "id": 96618,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_plate_deathknight_m_01.jpg",
+          "name": "Reconstructed Bloody Shoulderplates",
+          "itemLevel": 549,
+          "permanentEnchant": 4803,
+          "permanentEnchantName": "+3 Strength and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 76641,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+           }
+          ]
+         },
+         "... 15 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Couladin",
+       "id": 3,
+       "guid": 20838998,
+       "type": "Monk",
+       "server": "Arugal(AU)",
+       "region": "US",
+       "icon": "Monk-Brewmaster",
+       "specs": [
+        "Brewmaster"
+       ],
+       "minItemLevel": 562,
+       "maxItemLevel": 562,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 120,
+          "max": 120
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 272,
+          "max": 272
+         },
+         "Stamina": {
+          "min": 49428,
+          "max": 49428
+         },
+         "Haste": {
+          "min": 10261,
+          "max": 10261
+         },
+         "Hit": {
+          "min": 3693,
+          "max": 3693
+         },
+         "Intellect": {
+          "min": 260,
+          "max": 260
+         },
+         "Armor": {
+          "min": 21640,
+          "max": 21640
+         },
+         "Agility": {
+          "min": 31411,
+          "max": 31411
+         },
+         "Crit": {
+          "min": 16208,
+          "max": 16208
+         },
+         "Item Level": {
+          "min": 562,
+          "max": 562
+         },
+         "Parry": {
+          "min": 0,
+          "max": 0
+         },
+         "Strength": {
+          "min": 183,
+          "max": 183
+         },
+         "Expertise": {
+          "min": 5504,
+          "max": 5504
+         }
+        },
+        "talents": [
+         {
+          "name": "Tiger's Lust",
+          "guid": 116841,
+          "type": 1,
+          "abilityIcon": "ability_monk_tigerslust.jpg"
+         },
+         {
+          "name": "Chi Wave",
+          "guid": 115098,
+          "type": 8,
+          "abilityIcon": "ability_monk_chiwave.jpg"
+         },
+         {
+          "name": "Black Ox Brew",
+          "guid": 115399,
+          "type": 1,
+          "abilityIcon": "ability_monk_chibrew.jpg"
+         },
+         "... 3 more"
+        ],
+        "artifact": [
+         {
+          "name": "Glyph of Fighting Pose",
+          "guid": 125872,
+          "type": 1,
+          "abilityIcon": "ability_monk_dpsstance.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Spirit Roll",
+          "guid": 125154,
+          "type": 1,
+          "abilityIcon": "spell_holy_guardianspirit.jpg",
+          "total": 1
+         },
+         {
+          "name": "Glyph of Enduring Healing Sphere",
+          "guid": 120482,
+          "type": 1,
+          "abilityIcon": "ability_monk_healthsphere.jpg",
+          "total": 1
+         },
+         "... 3 more"
+        ],
+        "gear": [
+         {
+          "id": 104413,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_leather_raiddruid_n_01helm.jpg",
+          "name": "Hood of Blackened Tears",
+          "itemLevel": 580,
+          "gems": [
+           {
+            "id": 95344,
+            "itemLevel": 90,
+            "icon": "inv_legendary_chimeraoffear.jpg"
+           },
+           {
+            "id": 76659,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           }
+          ]
+         },
+         {
+          "id": 96390,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_119.jpg",
+          "name": "Talisman of Living Poison",
+          "itemLevel": 549
+         },
+         {
+          "id": 96653,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_leather_raidmonk_m_01.jpg",
+          "name": "Fire-Charm Shoulderguards",
+          "itemLevel": 543,
+          "permanentEnchant": 4914,
+          "permanentEnchantName": "+4 Agility and +1 Critical Strike",
+          "gems": [
+           {
+            "id": 76659,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+           },
+           {
+            "id": 76697,
+            "itemLevel": 90,
+            "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+           }
+          ]
+         },
+         "... 15 more"
+        ],
+        "heartOfAzeroth": [],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      }
+     ]
+    },
+    "logVersion": 17,
+    "gameVersion": 6,
+    "logFileDetails": ""
+   }
+  },
+  "damageDone": {
+   "data": {
+    "entries": [
+     {
+      "name": "Skull Banner (Bogstrong)",
+      "id": 30000012,
+      "guid": 46067267,
+      "type": "RedistributedDamage",
+      "icon": "custom-icon-warrior_skullbanner.jpg",
+      "total": 22856258,
+      "activeTime": 20161,
+      "activeTimeReduced": 20161,
+      "blocked": 40746,
+      "abilities": [
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 1901377,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 51505,
+        "name": "Lava Burst",
+        "total": 1773957,
+        "type": 4,
+        "icon": "spell_shaman_lavaburst.jpg"
+       },
+       {
+        "guid": 53301,
+        "name": "Explosive Shot",
+        "total": 1146227,
+        "type": 4,
+        "icon": "ability_hunter_explosiveshot.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Garrosh Hellscream",
+        "total": 21524787,
+        "type": "Boss"
+       },
+       {
+        "name": "Desecrated Weapon",
+        "total": 701239,
+        "type": "NPC"
+       },
+       {
+        "name": "Kor'kron Warbringer",
+        "total": 630232,
+        "type": "NPC"
+       }
+      ],
+      "talents": [],
+      "gear": []
+     },
+     {
+      "name": "Amarranth",
+      "id": 9,
+      "guid": 20846254,
+      "type": "Monk",
+      "icon": "Monk-Windwalker",
+      "itemLevel": 563,
+      "total": 146808811,
+      "activeTime": 376454,
+      "activeTimeReduced": 376454,
+      "blocked": 740357,
+      "abilities": [
+       {
+        "guid": 148187,
+        "name": "Rushing Jade Wind",
+        "total": 27938678,
+        "type": 1,
+        "icon": "ability_monk_rushingjadewind.jpg"
+       },
+       {
+        "guid": 100784,
+        "name": "Blackout Kick",
+        "total": 25215005,
+        "type": 1,
+        "icon": "ability_monk_roundhousekick.jpg"
+       },
+       {
+        "guid": 107428,
+        "name": "Rising Sun Kick",
+        "total": 21148082,
+        "type": 1,
+        "icon": "ability_monk_risingsunkick.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Garrosh Hellscream",
+        "total": 118247390,
+        "type": "Boss"
+       },
+       {
+        "name": "Kor'kron Warbringer",
+        "total": 22150403,
+        "type": "NPC"
+       },
+       {
+        "name": "Embodied Doubt",
+        "total": 2943342,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Celerity",
+        "guid": 115173,
+        "type": 1,
+        "abilityIcon": "ability_monk_quipunch.jpg"
+       },
+       {
+        "name": "Chi Wave",
+        "guid": 115098,
+        "type": 8,
+        "abilityIcon": "ability_monk_chiwave.jpg"
+       },
+       {
+        "name": "Black Ox Brew",
+        "guid": 115399,
+        "type": 1,
+        "abilityIcon": "ability_monk_chibrew.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 99073,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_leather_raidmonk_n_01.jpg",
+        "name": "Headpiece of Seven Sacred Seals",
+        "itemLevel": 536,
+        "gems": [
+         {
+          "id": 95346,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76680,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_purple.jpg"
+         }
+        ]
+       },
+       {
+        "id": 105353,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace_mop2.jpg",
+        "name": "Gleaming Eye of the Devilsaur",
+        "itemLevel": 567
+       },
+       {
+        "id": 96643,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_leather_raidmonk_m_01.jpg",
+        "name": "Fire-Charm Spaulders",
+        "itemLevel": 543,
+        "permanentEnchant": 4804,
+        "permanentEnchantName": "+3 Agility and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 83151,
+          "itemLevel": 90,
+          "icon": "inv_jewelcrafting_dragonseye05.jpg"
+         },
+         {
+          "id": 76699,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ]
+     },
+     {
+      "name": "Teazy",
+      "id": 38,
+      "guid": 15696991,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "itemLevel": 560,
+      "total": 108085201,
+      "totalReduced": 102783844,
+      "activeTime": 401953,
+      "activeTimeReduced": 401426,
+      "blocked": 39259,
+      "abilities": [
+       {
+        "guid": 51505,
+        "name": "Lava Burst",
+        "total": 17918028,
+        "type": 4,
+        "icon": "spell_shaman_lavaburst.jpg"
+       },
+       {
+        "guid": 403,
+        "name": "Lightning Bolt",
+        "total": 17228390,
+        "type": 8,
+        "icon": "spell_nature_lightning.jpg"
+       },
+       {
+        "guid": 45284,
+        "name": "Lightning Bolt Overload",
+        "total": 10401555,
+        "type": 8,
+        "icon": "spell_nature_lightning.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Garrosh Hellscream",
+        "total": 83033156,
+        "totalReduced": 78362084,
+        "type": "Boss"
+       },
+       {
+        "name": "Kor'kron Warbringer",
+        "total": 18998735,
+        "totalReduced": 18567323,
+        "type": "NPC"
+       },
+       {
+        "name": "Desecrated Weapon",
+        "total": 2207604,
+        "totalReduced": 2166220,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Astral Shift",
+        "guid": 108271,
+        "type": 1,
+        "abilityIcon": "ability_shaman_astralshift.jpg"
+       },
+       {
+        "name": "Windwalk Totem",
+        "guid": 108273,
+        "type": 1,
+        "abilityIcon": "ability_shaman_windwalktotem.jpg"
+       },
+       {
+        "name": "Totemic Persistence",
+        "guid": 108284,
+        "type": 1,
+        "abilityIcon": "ability_shaman_totemcooldownrefund.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 96509,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_mail_raidshaman_m_01.jpg",
+        "name": "Clear-Mind Helm",
+        "itemLevel": 549,
+        "gems": [
+         {
+          "id": 95347,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76645,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+         }
+        ]
+       },
+       {
+        "id": 103867,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace_mop6.jpg",
+        "name": "Untainted Guardian's Chain",
+        "itemLevel": 567
+       },
+       {
+        "id": 96698,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_mail_raidshaman_m_01.jpg",
+        "name": "Shoulderwraps of the Witch Doctor",
+        "itemLevel": 543,
+        "permanentEnchant": 4806,
+        "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 76672,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         },
+         {
+          "id": 76700,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ],
+      "pets": [
+       {
+        "name": "Searing Totem",
+        "id": 70,
+        "guid": 2523,
+        "type": "Pet",
+        "icon": "abilities/spell_fire_searingtotem.jpg",
+        "total": 731356,
+        "totalReduced": 0,
+        "activeTime": 123364
+       },
+       {
+        "name": "Primal Fire Elemental",
+        "id": 91,
+        "guid": 61029,
+        "type": "Pet",
+        "icon": "abilities/spell_fire_elemental_totem.jpg",
+        "total": 4442025,
+        "totalReduced": 0,
+        "activeTime": 88035,
+        "blocked": 39259
+       },
+       {
+        "name": "Magma Totem",
+        "id": 274,
+        "guid": 5929,
+        "type": "Pet",
+        "icon": "abilities/spell_fire_selfdestruct.jpg",
+        "total": 127976,
+        "totalReduced": 0,
+        "activeTime": 1
+       }
+      ]
+     },
+     "... 26 more"
+    ],
+    "totalTime": 428415,
+    "logVersion": 17,
+    "gameVersion": 6,
+    "exploitDetails": []
+   }
+  },
+  "healing": {
+   "data": {
+    "entries": [
+     {
+      "name": "Chãos",
+      "id": 5,
+      "guid": 12724562,
+      "type": "Mage",
+      "icon": "Mage-Arcane",
+      "itemLevel": 559,
+      "total": 1700931,
+      "activeTime": 35967,
+      "activeTimeReduced": 31969,
+      "overheal": 315130,
+      "abilities": [
+       {
+        "guid": 115611,
+        "name": "Temporal Ripples",
+        "total": 1700931,
+        "type": 64,
+        "icon": "spell_mage_temporalshield.jpg"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 144989,
+        "name": "Whirling Corruption",
+        "total": 1035100,
+        "type": 32,
+        "icon": "ability_garrosh_whirling_corruption.jpg"
+       },
+       {
+        "guid": 144969,
+        "name": "Annihilate",
+        "total": 484265,
+        "type": 32,
+        "icon": "sha_spell_fire_bluehellfire.jpg"
+       },
+       {
+        "guid": 145199,
+        "name": "Explosive Despair",
+        "total": 80186,
+        "type": 32,
+        "icon": "ability_deathknight_asphixiate.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Chãos",
+        "total": 1700931,
+        "type": "Mage"
+       }
+      ],
+      "talents": [
+       {
+        "name": "Presence of Mind",
+        "guid": 12043,
+        "type": 1,
+        "abilityIcon": "spell_nature_enchantarmor.jpg"
+       },
+       {
+        "name": "Temporal Shield",
+        "guid": 115610,
+        "type": 64,
+        "abilityIcon": "spell_mage_temporalshield.jpg"
+       },
+       {
+        "name": "Ring of Frost",
+        "guid": 113724,
+        "type": 16,
+        "abilityIcon": "spell_frost_ring-of-frost.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 104424,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_cloth_raidmage_n_01.jpg",
+        "name": "Hood of Swirling Senses",
+        "itemLevel": 580,
+        "gems": [
+         {
+          "id": 95347,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76643,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+         }
+        ]
+       },
+       {
+        "id": 96453,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_126.jpg",
+        "name": "Megaera's Shining Eye",
+        "itemLevel": 549
+       },
+       {
+        "id": 96638,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_cloth_raidmage_m_01.jpg",
+        "name": "Mantle of the Chromatic Hydra",
+        "itemLevel": 543,
+        "permanentEnchant": 4806,
+        "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 76668,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         },
+         {
+          "id": 76699,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ]
+     },
+     {
+      "name": "Masobloom",
+      "id": 11,
+      "guid": 20571379,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "itemLevel": 558,
+      "total": 62594029,
+      "activeTime": 427638,
+      "activeTimeReduced": 391965,
+      "overheal": 81842274,
+      "abilities": [
+       {
+        "guid": 774,
+        "name": "Rejuvenation",
+        "total": 8768808,
+        "type": 8,
+        "icon": "spell_nature_rejuvenation.jpg"
+       },
+       {
+        "guid": 44203,
+        "name": "Tranquility",
+        "total": 8765234,
+        "type": 8,
+        "icon": "spell_nature_tranquility.jpg"
+       },
+       {
+        "guid": 48438,
+        "name": "Wild Growth",
+        "total": 8166020,
+        "type": 8,
+        "icon": "ability_druid_flourish.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [
+       {
+        "guid": 144969,
+        "name": "Annihilate",
+        "total": 25852760,
+        "type": 32,
+        "icon": "sha_spell_fire_bluehellfire.jpg"
+       },
+       {
+        "guid": 144989,
+        "name": "Whirling Corruption",
+        "total": 11915402,
+        "type": 32,
+        "icon": "ability_garrosh_whirling_corruption.jpg"
+       },
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 7101689,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Yogiqt",
+        "total": 13515320,
+        "type": "Warrior"
+       },
+       {
+        "name": "Masobloom",
+        "total": 5222274,
+        "type": "Druid"
+       },
+       {
+        "name": "Teazy",
+        "total": 2774647,
+        "type": "Shaman"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Displacer Beast",
+        "guid": 102280,
+        "type": 1,
+        "abilityIcon": "spell_druid_displacement.jpg"
+       },
+       {
+        "name": "Ysera's Gift",
+        "guid": 145108,
+        "type": 1,
+        "abilityIcon": "inv_misc_head_dragon_green.jpg"
+       },
+       {
+        "name": "Typhoon",
+        "guid": 132469,
+        "type": 1,
+        "abilityIcon": "ability_druid_typhoon.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 96585,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_leather_raiddruid_m_01.jpg",
+        "name": "Helm of the Haunted Forest",
+        "itemLevel": 543,
+        "gems": [
+         {
+          "id": 95345,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76668,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         }
+        ]
+       },
+       {
+        "id": 96402,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_141.jpg",
+        "name": "Horridon's Tusk Fragment",
+        "itemLevel": 549
+       },
+       {
+        "id": 96588,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_leather_raiddruid_m_01.jpg",
+        "name": "Mantle of the Haunted Forest",
+        "itemLevel": 543,
+        "permanentEnchant": 4806,
+        "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 76668,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         },
+         {
+          "id": 76672,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ]
+     },
+     {
+      "name": "Baximers",
+      "id": 73,
+      "guid": 20882457,
+      "type": "DeathKnight",
+      "icon": "DeathKnight-Unholy",
+      "itemLevel": 557,
+      "total": 1843621,
+      "totalReduced": 569887,
+      "activeTime": 161703,
+      "activeTimeReduced": 2093,
+      "overheal": 1914910,
+      "abilities": [
+       {
+        "guid": 48707,
+        "name": "Anti-Magic Shell",
+        "total": 1273734,
+        "totalReduced": 0,
+        "type": 32,
+        "icon": "spell_shadow_antimagicshell.jpg"
+       },
+       {
+        "guid": 48743,
+        "name": "Death Pact",
+        "total": 323515,
+        "type": 32,
+        "icon": "spell_shadow_deathpact.jpg"
+       },
+       {
+        "guid": 53365,
+        "name": "Unholy Strength",
+        "total": 246372,
+        "type": 1,
+        "icon": "spell_holy_blessingofstrength.jpg"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 144989,
+        "name": "Whirling Corruption",
+        "total": 1157980,
+        "totalReduced": 143895,
+        "type": 32,
+        "icon": "ability_garrosh_whirling_corruption.jpg"
+       },
+       {
+        "guid": 116888,
+        "name": "Shroud of Purgatory",
+        "total": 323515,
+        "type": 32,
+        "icon": "inv_misc_shadowegg.jpg"
+       },
+       {
+        "guid": 144798,
+        "name": "Exploding Iron Star",
+        "total": 171966,
+        "totalReduced": 0,
+        "type": 4,
+        "icon": "spell_sandexplosion.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Baximers",
+        "total": 1843621,
+        "totalReduced": 569887,
+        "type": "DeathKnight"
+       }
+      ],
+      "talents": [
+       {
+        "name": "Roiling Blood",
+        "guid": 108170,
+        "type": 1,
+        "abilityIcon": "ability_deathknight_roilingblood.jpg"
+       },
+       {
+        "name": "Purgatory",
+        "guid": 114556,
+        "type": 1,
+        "abilityIcon": "inv_misc_shadowegg.jpg"
+       },
+       {
+        "name": "Death's Advance",
+        "guid": 96268,
+        "type": 32,
+        "abilityIcon": "spell_shadow_demonicempathy.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 96894,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_plate_deathknight_m_01.jpg",
+        "name": "Crown of the Golden Golem",
+        "itemLevel": 549,
+        "gems": [
+         {
+          "id": 95346,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76661,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         }
+        ]
+       },
+       {
+        "id": 96420,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_139.jpg",
+        "name": "Talisman of Angry Spirits",
+        "itemLevel": 549
+       },
+       {
+        "id": 99059,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_plate_raiddeathknight_n_01.jpg",
+        "name": "Pauldrons of Cyclopean Dread",
+        "itemLevel": 536,
+        "permanentEnchant": 4803,
+        "permanentEnchantName": "+3 Strength and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 76696,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_red.jpg"
+         },
+         {
+          "id": 76696,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_red.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ]
+     },
+     "... 23 more"
+    ],
+    "totalTime": 428415,
+    "logVersion": 17,
+    "gameVersion": 6,
+    "exploitDetails": []
+   }
+  },
+  "damageTaken": {
+   "data": {
+    "entries": [
+     {
+      "name": "Chãos",
+      "id": 5,
+      "guid": 12724562,
+      "type": "Mage",
+      "icon": "Mage-Arcane",
+      "itemLevel": 559,
+      "total": 9870091,
+      "totalReduced": 8011372,
+      "activeTime": 106542,
+      "activeTimeReduced": 98392,
+      "overheal": 3234770,
+      "abilities": [
+       {
+        "guid": 144969,
+        "name": "Annihilate",
+        "total": 4521960,
+        "totalReduced": 4035872,
+        "type": 32,
+        "icon": "sha_spell_fire_bluehellfire.jpg"
+       },
+       {
+        "guid": 144989,
+        "name": "Whirling Corruption",
+        "total": 3681097,
+        "totalReduced": 3121328,
+        "type": 32,
+        "icon": "ability_garrosh_whirling_corruption.jpg"
+       },
+       {
+        "guid": 145275,
+        "name": "Embodied Doubt",
+        "total": 498758,
+        "totalReduced": 277060,
+        "type": 32,
+        "icon": "sha_spell_fire_bluerainoffire.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Garrosh Hellscream",
+        "total": 8308926,
+        "totalReduced": 7263069,
+        "type": "Boss"
+       },
+       {
+        "name": "Embodied Doubt",
+        "total": 498758,
+        "totalReduced": 277060,
+        "type": "NPC"
+       },
+       {
+        "name": "Ko'kron Iron Star",
+        "total": 338232,
+        "totalReduced": 0,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Presence of Mind",
+        "guid": 12043,
+        "type": 1,
+        "abilityIcon": "spell_nature_enchantarmor.jpg"
+       },
+       {
+        "name": "Temporal Shield",
+        "guid": 115610,
+        "type": 64,
+        "abilityIcon": "spell_mage_temporalshield.jpg"
+       },
+       {
+        "name": "Ring of Frost",
+        "guid": 113724,
+        "type": 16,
+        "abilityIcon": "spell_frost_ring-of-frost.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 104424,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_cloth_raidmage_n_01.jpg",
+        "name": "Hood of Swirling Senses",
+        "itemLevel": 580,
+        "gems": [
+         {
+          "id": 95347,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76643,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+         }
+        ]
+       },
+       {
+        "id": 96453,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_126.jpg",
+        "name": "Megaera's Shining Eye",
+        "itemLevel": 549
+       },
+       {
+        "id": 96638,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_cloth_raidmage_m_01.jpg",
+        "name": "Mantle of the Chromatic Hydra",
+        "itemLevel": 543,
+        "permanentEnchant": 4806,
+        "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 76668,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         },
+         {
+          "id": 76699,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ]
+     },
+     {
+      "name": "Masobloom",
+      "id": 11,
+      "guid": 20571379,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "itemLevel": 558,
+      "total": 9908752,
+      "totalReduced": 9048267,
+      "activeTime": 112038,
+      "activeTimeReduced": 110964,
+      "overheal": 4205732,
+      "abilities": [
+       {
+        "guid": 144989,
+        "name": "Whirling Corruption",
+        "total": 3700695,
+        "totalReduced": 3491861,
+        "type": 32,
+        "icon": "ability_garrosh_whirling_corruption.jpg"
+       },
+       {
+        "guid": 144969,
+        "name": "Annihilate",
+        "total": 3266127,
+        "totalReduced": 2902013,
+        "type": 32,
+        "icon": "sha_spell_fire_bluehellfire.jpg"
+       },
+       {
+        "guid": 144758,
+        "name": "Desecrate",
+        "total": 592667,
+        "totalReduced": 529352,
+        "type": 32,
+        "icon": "spell_fire_twilightflamestrike.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Garrosh Hellscream",
+        "total": 7923748,
+        "totalReduced": 7246333,
+        "type": "Boss"
+       },
+       {
+        "name": "Embodied Doubt",
+        "total": 502018,
+        "type": "NPC"
+       },
+       {
+        "name": "Desecrated Weapon",
+        "total": 457452,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Displacer Beast",
+        "guid": 102280,
+        "type": 1,
+        "abilityIcon": "spell_druid_displacement.jpg"
+       },
+       {
+        "name": "Ysera's Gift",
+        "guid": 145108,
+        "type": 1,
+        "abilityIcon": "inv_misc_head_dragon_green.jpg"
+       },
+       {
+        "name": "Typhoon",
+        "guid": 132469,
+        "type": 1,
+        "abilityIcon": "ability_druid_typhoon.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 96585,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_leather_raiddruid_m_01.jpg",
+        "name": "Helm of the Haunted Forest",
+        "itemLevel": 543,
+        "gems": [
+         {
+          "id": 95345,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76668,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         }
+        ]
+       },
+       {
+        "id": 96402,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_141.jpg",
+        "name": "Horridon's Tusk Fragment",
+        "itemLevel": 549
+       },
+       {
+        "id": 96588,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_leather_raiddruid_m_01.jpg",
+        "name": "Mantle of the Haunted Forest",
+        "itemLevel": 543,
+        "permanentEnchant": 4806,
+        "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 76668,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         },
+         {
+          "id": 76672,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ]
+     },
+     {
+      "name": "Baximers",
+      "id": 73,
+      "guid": 20882457,
+      "type": "DeathKnight",
+      "icon": "DeathKnight-Unholy",
+      "itemLevel": 557,
+      "total": 12374967,
+      "totalReduced": 8947391,
+      "activeTime": 171538,
+      "activeTimeReduced": 132971,
+      "overheal": 4382917,
+      "abilities": [
+       {
+        "guid": 144969,
+        "name": "Annihilate",
+        "total": 6629968,
+        "totalReduced": 5181805,
+        "type": 32,
+        "icon": "sha_spell_fire_bluehellfire.jpg"
+       },
+       {
+        "guid": 144989,
+        "name": "Whirling Corruption",
+        "total": 3876791,
+        "totalReduced": 2621821,
+        "type": 32,
+        "icon": "ability_garrosh_whirling_corruption.jpg"
+       },
+       {
+        "guid": 145275,
+        "name": "Embodied Doubt",
+        "total": 498179,
+        "totalReduced": 228057,
+        "type": 32,
+        "icon": "sha_spell_fire_bluerainoffire.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Garrosh Hellscream",
+        "total": 10700342,
+        "totalReduced": 7997209,
+        "type": "Boss"
+       },
+       {
+        "name": "Embodied Doubt",
+        "total": 546533,
+        "totalReduced": 239282,
+        "type": "NPC"
+       },
+       {
+        "name": "Baximers",
+        "total": 393337,
+        "totalReduced": 235193,
+        "type": "DeathKnight"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Roiling Blood",
+        "guid": 108170,
+        "type": 1,
+        "abilityIcon": "ability_deathknight_roilingblood.jpg"
+       },
+       {
+        "name": "Purgatory",
+        "guid": 114556,
+        "type": 1,
+        "abilityIcon": "inv_misc_shadowegg.jpg"
+       },
+       {
+        "name": "Death's Advance",
+        "guid": 96268,
+        "type": 32,
+        "abilityIcon": "spell_shadow_demonicempathy.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 96894,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_plate_deathknight_m_01.jpg",
+        "name": "Crown of the Golden Golem",
+        "itemLevel": 549,
+        "gems": [
+         {
+          "id": 95346,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76661,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         }
+        ]
+       },
+       {
+        "id": 96420,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_139.jpg",
+        "name": "Talisman of Angry Spirits",
+        "itemLevel": 549
+       },
+       {
+        "id": 99059,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_plate_raiddeathknight_n_01.jpg",
+        "name": "Pauldrons of Cyclopean Dread",
+        "itemLevel": 536,
+        "permanentEnchant": 4803,
+        "permanentEnchantName": "+3 Strength and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 76696,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_red.jpg"
+         },
+         {
+          "id": 76696,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_red.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ]
+     },
+     "... 22 more"
+    ],
+    "totalTime": 428415,
+    "logVersion": 17,
+    "gameVersion": 6,
+    "exploitDetails": []
+   }
+  },
+  "deaths": {
+   "data": {
+    "entries": [
+     {
+      "name": "Maari",
+      "id": 14,
+      "guid": 15291180,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "timestamp": 8900258,
+      "fight": 35,
+      "damage": {
+       "total": 1039500,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 2460500,
+       "abilities": [
+        {
+         "guid": 144969,
+         "name": "Annihilate",
+         "total": 1039500,
+         "type": 32,
+         "icon": "sha_spell_fire_bluehellfire.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Garrosh Hellscream",
+         "total": 1039500,
+         "type": "Boss"
+        }
+       ]
+      },
+      "healing": {
+       "total": 0,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [],
+       "damageAbilities": [],
+       "sources": []
+      },
+      "deathWindow": 0,
+      "overkill": 665050,
+      "events": [
+       {
+        "timestamp": 8900205,
+        "type": "damage",
+        "sourceID": 333,
+        "sourceIsFriendly": false,
+        "targetID": 14,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Annihilate",
+         "guid": 144969,
+         "type": 32,
+         "abilityIcon": "sha_spell_fire_bluehellfire.jpg"
+        },
+        "fight": 35,
+        "hitType": 1,
+        "amount": 374450,
+        "mitigated": 2460500,
+        "unmitigatedAmount": 3500000,
+        "overkill": 665050,
+        "isAoE": true
+       }
+      ],
+      "killingBlow": {
+       "name": "Annihilate",
+       "guid": 144969,
+       "type": 32,
+       "abilityIcon": "sha_spell_fire_bluehellfire.jpg"
+      }
+     },
+     {
+      "name": "Baximers",
+      "id": 73,
+      "guid": 20882457,
+      "type": "DeathKnight",
+      "icon": "DeathKnight-Unholy",
+      "timestamp": 8922635,
+      "fight": 35,
+      "damage": {
+       "total": 2089656,
+       "totalReduced": 809083,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 2131872,
+       "abilities": [
+        {
+         "guid": 144969,
+         "name": "Annihilate",
+         "total": 2089656,
+         "totalReduced": 809083,
+         "type": 32,
+         "icon": "sha_spell_fire_bluehellfire.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Garrosh Hellscream",
+         "total": 2089656,
+         "totalReduced": 809083,
+         "type": "Boss"
+        }
+       ]
+      },
+      "healing": {
+       "total": 1442628,
+       "totalReduced": 162055,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 114556,
+         "name": "Purgatory",
+         "total": 1184054,
+         "totalReduced": 0,
+         "type": 1,
+         "icon": "inv_misc_shadowegg.jpg"
+        },
+        {
+         "guid": 114908,
+         "name": "Spirit Shell",
+         "total": 96519,
+         "totalReduced": 0,
+         "type": 2,
+         "icon": "ability_shaman_astralshift.jpg"
+        },
+        {
+         "guid": 81269,
+         "name": "Efflorescence",
+         "total": 76881,
+         "type": 8,
+         "icon": "inv_misc_herb_talandrasrose.jpg"
+        },
+        "... 2 more"
+       ],
+       "damageAbilities": [
+        {
+         "guid": 144969,
+         "name": "Annihilate",
+         "total": 1442628,
+         "totalReduced": 162055,
+         "type": 32,
+         "icon": "sha_spell_fire_bluehellfire.jpg"
+        }
+       ],
+       "sources": [
+        {
+         "name": "Baximers",
+         "total": 1184054,
+         "totalReduced": 0,
+         "type": "DeathKnight"
+        },
+        {
+         "name": "Masobloom",
+         "total": 112099,
+         "type": "Druid"
+        },
+        {
+         "name": "Vedreesh",
+         "total": 96519,
+         "totalReduced": 0,
+         "type": "Priest"
+        },
+        "... 1 more"
+       ]
+      },
+      "deathWindow": 6227,
+      "overkill": 0,
+      "events": [
+       {
+        "timestamp": 8922609,
+        "type": "instakill",
+        "sourceID": 73,
+        "sourceIsFriendly": true,
+        "targetID": 73,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Purgatory",
+         "guid": 123982,
+         "type": 1,
+         "abilityIcon": "inv_misc_shadowegg.jpg"
+        },
+        "fight": 35
+       },
+       {
+        "timestamp": 8919605,
+        "type": "damage",
+        "sourceID": 333,
+        "sourceIsFriendly": false,
+        "targetID": 73,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Annihilate",
+         "guid": 144969,
+         "type": 32,
+         "abilityIcon": "sha_spell_fire_bluehellfire.jpg"
+        },
+        "fight": 35,
+        "hitType": 1,
+        "amount": 0,
+        "mitigated": 184050,
+        "unmitigatedAmount": 364455,
+        "absorbed": 180405,
+        "isAoE": false
+       },
+       {
+        "timestamp": 8919601,
+        "type": "damage",
+        "sourceID": 333,
+        "sourceIsFriendly": false,
+        "targetID": 73,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Annihilate",
+         "guid": 144969,
+         "type": 32,
+         "abilityIcon": "sha_spell_fire_bluehellfire.jpg"
+        },
+        "fight": 35,
+        "hitType": 1,
+        "amount": 632332,
+        "mitigated": 1767500,
+        "unmitigatedAmount": 3500000,
+        "absorbed": 1100168,
+        "isAoE": true
+       }
+      ],
+      "killingBlow": {
+       "name": "Annihilate",
+       "guid": 144969,
+       "type": 32,
+       "abilityIcon": "sha_spell_fire_bluehellfire.jpg"
+      },
+      "deathSaveTime": 8919601,
+      "deathSaveAbility": {
+       "name": "Shroud of Purgatory",
+       "guid": 116888,
+       "type": 32,
+       "abilityIcon": "inv_misc_shadowegg.jpg"
+      }
+     },
+     {
+      "name": "Maari",
+      "id": 14,
+      "guid": 15291180,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "timestamp": 8974147,
+      "fight": 35,
+      "damage": {
+       "total": 957175,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 9661,
+       "abilities": [
+        {
+         "guid": 144989,
+         "name": "Whirling Corruption",
+         "total": 639108,
+         "type": 32,
+         "icon": "ability_garrosh_whirling_corruption.jpg"
+        },
+        {
+         "guid": 145033,
+         "name": "Empowered Whirling Corruption",
+         "total": 199267,
+         "type": 32,
+         "icon": "ability_garrosh_empowered_whirling_corruption.jpg"
+        },
+        {
+         "guid": 145199,
+         "name": "Explosive Despair",
+         "total": 118800,
+         "type": 32,
+         "icon": "ability_deathknight_asphixiate.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Garrosh Hellscream",
+         "total": 838375,
+         "type": "Boss"
+        },
+        {
+         "name": "Environment",
+         "total": 118800,
+         "type": "Boss"
+        }
+       ]
+      },
+      "healing": {
+       "total": 284445,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 73921,
+         "name": "Healing Rain",
+         "total": 89166,
+         "type": 8,
+         "icon": "spell_nature_giftofthewaterspirit.jpg"
+        },
+        {
+         "guid": 15290,
+         "name": "Vampiric Embrace",
+         "total": 88100,
+         "type": 32,
+         "icon": "spell_shadow_unsummonbuilding.jpg"
+        },
+        {
+         "guid": 81269,
+         "name": "Efflorescence",
+         "total": 77991,
+         "type": 8,
+         "icon": "inv_misc_herb_talandrasrose.jpg"
+        },
+        "... 2 more"
+       ],
+       "damageAbilities": [
+        {
+         "guid": 144989,
+         "name": "Whirling Corruption",
+         "total": 269750,
+         "type": 32,
+         "icon": "ability_garrosh_whirling_corruption.jpg"
+        },
+        {
+         "guid": 145033,
+         "name": "Empowered Whirling Corruption",
+         "total": 14695,
+         "type": 32,
+         "icon": "ability_garrosh_empowered_whirling_corruption.jpg"
+        }
+       ],
+       "sources": [
+        {
+         "name": "Maari",
+         "total": 89166,
+         "type": "Shaman"
+        },
+        {
+         "name": "Relaxable",
+         "total": 77991,
+         "type": "Druid"
+        },
+        {
+         "name": "Paxman",
+         "total": 59316,
+         "type": "Priest"
+        },
+        "... 2 more"
+       ]
+      },
+      "deathWindow": 4301,
+      "overkill": 30437,
+      "events": [
+       {
+        "timestamp": 8974136,
+        "type": "damage",
+        "source": {
+         "name": "Environment",
+         "id": -1,
+         "guid": 0,
+         "type": "Boss",
+         "icon": "Boss"
+        },
+        "sourceIsFriendly": false,
+        "targetID": 14,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Explosive Despair",
+         "guid": 145199,
+         "type": 32,
+         "abilityIcon": "ability_deathknight_asphixiate.jpg"
+        },
+        "fight": 35,
+        "hitType": 1,
+        "amount": 88363,
+        "mitigated": 1200,
+        "unmitigatedAmount": 120000,
+        "overkill": 30437,
+        "isAoE": true,
+        "sourceMarker": 2
+       },
+       {
+        "timestamp": 8973837,
+        "type": "damage",
+        "sourceID": 333,
+        "sourceIsFriendly": false,
+        "targetID": 14,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Whirling Corruption",
+         "guid": 144989,
+         "type": 32,
+         "abilityIcon": "ability_garrosh_whirling_corruption.jpg"
+        },
+        "fight": 35,
+        "hitType": 1,
+        "amount": 75537,
+        "mitigated": 762,
+        "unmitigatedAmount": 76299,
+        "isAoE": true
+       },
+       {
+        "timestamp": 8973345,
+        "type": "damage",
+        "sourceID": 333,
+        "sourceIsFriendly": false,
+        "targetID": 14,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Empowered Whirling Corruption",
+         "guid": 145033,
+         "type": 32,
+         "abilityIcon": "ability_garrosh_empowered_whirling_corruption.jpg"
+        },
+        "fight": 35,
+        "hitType": 1,
+        "amount": 199267,
+        "mitigated": 2013,
+        "unmitigatedAmount": 201280,
+        "isAoE": true
+       }
+      ],
+      "killingBlow": {
+       "name": "Explosive Despair",
+       "guid": 145199,
+       "type": 32,
+       "abilityIcon": "ability_deathknight_asphixiate.jpg"
+      }
+     },
+     "... 3 more"
+    ]
+   }
+  },
+  "interrupts": {
+   "data": {
+    "entries": [
+     {
+      "entries": [
+       {
+        "name": "Embodied Doubt",
+        "guid": 145275,
+        "type": 32,
+        "abilityIcon": "sha_spell_fire_bluerainoffire.jpg",
+        "spellsBegun": 7,
+        "spellsCompleted": 5,
+        "spellsInterrupted": 2,
+        "spellChannelsInterrupted": 0,
+        "timestamp": 8876954,
+        "details": [
+         {
+          "name": "Jaiitoo",
+          "id": 15,
+          "guid": 12675938,
+          "type": "Druid",
+          "icon": "Druid",
+          "total": 1,
+          "actors": [
+           {
+            "name": "Embodied Doubt 12",
+            "total": 1,
+            "type": "NPC"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Solar Beam",
+            "total": 1,
+            "type": 8
+           }
+          ]
+         },
+         {
+          "name": "Chãos",
+          "id": 5,
+          "guid": 12724562,
+          "type": "Mage",
+          "icon": "Mage",
+          "total": 1,
+          "actors": [
+           {
+            "name": "Embodied Doubt 13",
+            "total": 1,
+            "type": "NPC"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Counterspell",
+            "total": 1,
+            "type": 64
+           }
+          ]
+         }
+        ],
+        "missedCasts": [
+         {
+          "name": "Embodied Doubt 3",
+          "id": "341.3",
+          "guid": 72236,
+          "type": "NPC",
+          "instance": 3,
+          "icon": "custom-icon-sha_spell_fire_bluerainoffire.jpg",
+          "timestamp": 313163
+         },
+         {
+          "name": "Embodied Doubt 2",
+          "id": "341.2",
+          "guid": 72236,
+          "type": "NPC",
+          "instance": 2,
+          "icon": "custom-icon-sha_spell_fire_bluerainoffire.jpg",
+          "timestamp": 313164
+         },
+         {
+          "name": "Embodied Doubt 1",
+          "id": "341.1",
+          "guid": 72236,
+          "type": "NPC",
+          "instance": 1,
+          "icon": "custom-icon-sha_spell_fire_bluerainoffire.jpg",
+          "timestamp": 313164
+         },
+         "... 2 more"
+        ]
+       },
+       {
+        "name": "Ancestral Chain Heal",
+        "guid": 144583,
+        "type": 8,
+        "abilityIcon": "spell_nature_healingwavelesser.jpg",
+        "spellsBegun": 2,
+        "spellsCompleted": 0,
+        "spellsInterrupted": 2,
+        "spellChannelsInterrupted": 0,
+        "timestamp": 8604789,
+        "details": [
+         {
+          "name": "Bogstrong",
+          "id": 12,
+          "guid": 16067267,
+          "type": "Warrior",
+          "icon": "Warrior",
+          "total": 1,
+          "actors": [
+           {
+            "name": "Farseer Wolf Rider",
+            "total": 1,
+            "type": "NPC"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Pummel",
+            "total": 1,
+            "type": 1
+           }
+          ]
+         },
+         {
+          "name": "Maari",
+          "id": 14,
+          "guid": 15291180,
+          "type": "Shaman",
+          "icon": "Shaman",
+          "total": 1,
+          "actors": [
+           {
+            "name": "Farseer Wolf Rider",
+            "total": 1,
+            "type": "NPC"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Wind Shear",
+            "total": 1,
+            "type": 8
+           }
+          ]
+         }
+        ],
+        "missedCasts": []
+       },
+       {
+        "name": "Chain Lightning",
+        "guid": 144584,
+        "type": 8,
+        "abilityIcon": "spell_nature_chainlightning.jpg",
+        "spellsBegun": 3,
+        "spellsCompleted": 1,
+        "spellsInterrupted": 1,
+        "spellChannelsInterrupted": 0,
+        "timestamp": 8601505,
+        "details": [
+         {
+          "name": "Gradience",
+          "id": 57,
+          "guid": 21200684,
+          "type": "Shaman",
+          "icon": "Shaman",
+          "total": 1,
+          "actors": [
+           {
+            "name": "Farseer Wolf Rider",
+            "total": 1,
+            "type": "NPC"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Wind Shear",
+            "total": 1,
+            "type": 8
+           }
+          ]
+         }
+        ],
+        "missedCasts": [
+         {
+          "name": "Farseer Wolf Rider",
+          "id": 338,
+          "guid": 71983,
+          "type": "NPC",
+          "icon": "custom-icon-spell_nature_chainlightning.jpg",
+          "timestamp": 52842,
+          "target": {
+           "name": "Bogstrong",
+           "id": 12,
+           "guid": 16067267,
+           "type": "Warrior",
+           "icon": "Warrior-Fury",
+           "server": "Arugal(AU)",
+           "region": "US"
+          }
+         }
+        ]
+       },
+       "... 1 more"
+      ]
+     }
+    ],
+    "totalTime": 428415
+   }
+  },
+  "dispels": {
+   "data": {
+    "entries": [
+     {
+      "entries": [
+       {
+        "name": "Frost Fever",
+        "guid": 55095,
+        "type": 16,
+        "abilityIcon": "spell_deathknight_frostfever.jpg",
+        "spellsBegun": 140,
+        "spellsCompleted": 139,
+        "spellsInterrupted": 1,
+        "spellChannelsInterrupted": 0,
+        "timestamp": 8744250,
+        "details": [
+         {
+          "name": "Vedreesh",
+          "id": 78,
+          "guid": 10974697,
+          "type": "Priest",
+          "icon": "Priest",
+          "total": 1,
+          "actors": [
+           {
+            "name": "Mavs",
+            "total": 1,
+            "type": "Hunter"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Purify",
+            "total": 1,
+            "type": 2
+           }
+          ]
+         }
+        ],
+        "missedCasts": [
+         {
+          "name": "Baximers",
+          "id": 73,
+          "guid": 20882457,
+          "type": "DeathKnight",
+          "icon": "DeathKnight-Unholy",
+          "timestamp": 19264,
+          "target": {
+           "name": "Kor'kron Warbringer 3",
+           "id": "334.3",
+           "guid": 71979,
+           "type": "NPC",
+           "instance": 3,
+           "icon": "custom-icon-ability_shockwave.jpg"
+          }
+         },
+         {
+          "name": "Lastdk",
+          "id": 58,
+          "guid": 20812984,
+          "type": "DeathKnight",
+          "icon": "DeathKnight-Unholy",
+          "timestamp": 19264,
+          "target": {
+           "name": "Kor'kron Warbringer 3",
+           "id": "334.3",
+           "guid": 71979,
+           "type": "NPC",
+           "instance": 3,
+           "icon": "custom-icon-ability_shockwave.jpg"
+          }
+         },
+         {
+          "name": "Gripzaa",
+          "id": 4,
+          "guid": 13583278,
+          "type": "DeathKnight",
+          "icon": "DeathKnight-Frost",
+          "timestamp": 19264,
+          "target": {
+           "name": "Kor'kron Warbringer 3",
+           "id": "334.3",
+           "guid": 71979,
+           "type": "NPC",
+           "instance": 3,
+           "icon": "custom-icon-ability_shockwave.jpg"
+          }
+         },
+         "... 136 more"
+        ]
+       },
+       {
+        "name": "Blood Plague",
+        "guid": 55078,
+        "type": 32,
+        "abilityIcon": "spell_deathknight_bloodplague.jpg",
+        "spellsBegun": 101,
+        "spellsCompleted": 100,
+        "spellsInterrupted": 1,
+        "spellChannelsInterrupted": 0,
+        "timestamp": 8744250,
+        "details": [
+         {
+          "name": "Vedreesh",
+          "id": 78,
+          "guid": 10974697,
+          "type": "Priest",
+          "icon": "Priest",
+          "total": 1,
+          "actors": [
+           {
+            "name": "Mavs",
+            "total": 1,
+            "type": "Hunter"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Purify",
+            "total": 1,
+            "type": 2
+           }
+          ]
+         }
+        ],
+        "missedCasts": [
+         {
+          "name": "Baximers",
+          "id": 73,
+          "guid": 20882457,
+          "type": "DeathKnight",
+          "icon": "DeathKnight-Unholy",
+          "timestamp": 19265,
+          "target": {
+           "name": "Kor'kron Warbringer 3",
+           "id": "334.3",
+           "guid": 71979,
+           "type": "NPC",
+           "instance": 3,
+           "icon": "custom-icon-ability_shockwave.jpg"
+          }
+         },
+         {
+          "name": "Lastdk",
+          "id": 58,
+          "guid": 20812984,
+          "type": "DeathKnight",
+          "icon": "DeathKnight-Unholy",
+          "timestamp": 19265,
+          "target": {
+           "name": "Kor'kron Warbringer 3",
+           "id": "334.3",
+           "guid": 71979,
+           "type": "NPC",
+           "instance": 3,
+           "icon": "custom-icon-ability_shockwave.jpg"
+          }
+         },
+         {
+          "name": "Baximers",
+          "id": 73,
+          "guid": 20882457,
+          "type": "DeathKnight",
+          "icon": "DeathKnight-Unholy",
+          "timestamp": 19665,
+          "target": {
+           "name": "Kor'kron Warbringer 1",
+           "id": "334.1",
+           "guid": 71979,
+           "type": "NPC",
+           "instance": 1,
+           "icon": "custom-icon-ability_shockwave.jpg"
+          }
+         },
+         "... 97 more"
+        ]
+       }
+      ]
+     }
+    ],
+    "totalTime": 428415
+   }
+  },
+  "casts": {
+   "data": {
+    "entries": [
+     {
+      "name": "Chãos",
+      "id": 5,
+      "guid": 12724562,
+      "type": "Mage",
+      "icon": "Mage-Arcane",
+      "itemLevel": 559,
+      "total": 446,
+      "activeTime": 402164,
+      "activeTimeReduced": 402164,
+      "abilities": [
+       {
+        "guid": 7268,
+        "name": "Arcane Missiles",
+        "total": 234,
+        "type": 64,
+        "icon": "spell_nature_starfall.jpg"
+       },
+       {
+        "guid": 30451,
+        "name": "Arcane Blast",
+        "total": 107,
+        "type": 64,
+        "icon": "spell_arcane_blast.jpg"
+       },
+       {
+        "guid": 44457,
+        "name": "Living Bomb",
+        "total": 34,
+        "type": 4,
+        "icon": "ability_mage_livingbomb.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Environment",
+        "total": 279,
+        "type": "Boss"
+       },
+       {
+        "name": "Garrosh Hellscream",
+        "total": 155,
+        "type": "Boss"
+       },
+       {
+        "name": "Desecrated Weapon",
+        "total": 9,
+        "type": "NPC"
+       },
+       "... 1 more"
+      ],
+      "talents": [
+       {
+        "name": "Presence of Mind",
+        "guid": 12043,
+        "type": 1,
+        "abilityIcon": "spell_nature_enchantarmor.jpg"
+       },
+       {
+        "name": "Temporal Shield",
+        "guid": 115610,
+        "type": 64,
+        "abilityIcon": "spell_mage_temporalshield.jpg"
+       },
+       {
+        "name": "Ring of Frost",
+        "guid": 113724,
+        "type": 16,
+        "abilityIcon": "spell_frost_ring-of-frost.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 104424,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_cloth_raidmage_n_01.jpg",
+        "name": "Hood of Swirling Senses",
+        "itemLevel": 580,
+        "gems": [
+         {
+          "id": 95347,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76643,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_green.jpg"
+         }
+        ]
+       },
+       {
+        "id": 96453,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_126.jpg",
+        "name": "Megaera's Shining Eye",
+        "itemLevel": 549
+       },
+       {
+        "id": 96638,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_cloth_raidmage_m_01.jpg",
+        "name": "Mantle of the Chromatic Hydra",
+        "itemLevel": 543,
+        "permanentEnchant": 4806,
+        "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 76668,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         },
+         {
+          "id": 76699,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_yellow.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ]
+     },
+     {
+      "name": "Masobloom",
+      "id": 11,
+      "guid": 20571379,
+      "type": "Druid",
+      "icon": "Druid-Restoration",
+      "itemLevel": 558,
+      "total": 259,
+      "activeTime": 416209,
+      "activeTimeReduced": 416209,
+      "abilities": [
+       {
+        "guid": 774,
+        "name": "Rejuvenation",
+        "total": 92,
+        "type": 8,
+        "icon": "spell_nature_rejuvenation.jpg"
+       },
+       {
+        "guid": 8936,
+        "name": "Regrowth",
+        "total": 35,
+        "type": 8,
+        "icon": "spell_nature_resistnature.jpg"
+       },
+       {
+        "guid": 33763,
+        "name": "Lifebloom",
+        "total": 26,
+        "type": 8,
+        "icon": "inv_misc_herb_felblossom.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Yogiqt",
+        "total": 113,
+        "type": "Warrior"
+       },
+       {
+        "name": "Environment",
+        "total": 85,
+        "type": "Boss"
+       },
+       {
+        "name": "Masobloom",
+        "total": 17,
+        "type": "Druid"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Displacer Beast",
+        "guid": 102280,
+        "type": 1,
+        "abilityIcon": "spell_druid_displacement.jpg"
+       },
+       {
+        "name": "Ysera's Gift",
+        "guid": 145108,
+        "type": 1,
+        "abilityIcon": "inv_misc_head_dragon_green.jpg"
+       },
+       {
+        "name": "Typhoon",
+        "guid": 132469,
+        "type": 1,
+        "abilityIcon": "ability_druid_typhoon.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 96585,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helm_leather_raiddruid_m_01.jpg",
+        "name": "Helm of the Haunted Forest",
+        "itemLevel": 543,
+        "gems": [
+         {
+          "id": 95345,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76668,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         }
+        ]
+       },
+       {
+        "id": 96402,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_141.jpg",
+        "name": "Horridon's Tusk Fragment",
+        "itemLevel": 549
+       },
+       {
+        "id": 96588,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_leather_raiddruid_m_01.jpg",
+        "name": "Mantle of the Haunted Forest",
+        "itemLevel": 543,
+        "permanentEnchant": 4806,
+        "permanentEnchantName": "+3 Intellect and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 76668,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         },
+         {
+          "id": 76672,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ]
+     },
+     {
+      "name": "Baximers",
+      "id": 73,
+      "guid": 20882457,
+      "type": "DeathKnight",
+      "icon": "DeathKnight-Unholy",
+      "itemLevel": 557,
+      "total": 274,
+      "activeTime": 399806,
+      "activeTimeReduced": 399806,
+      "abilities": [
+       {
+        "guid": 47541,
+        "name": "Death Coil",
+        "total": 92,
+        "type": 32,
+        "icon": "spell_shadow_deathcoil.jpg"
+       },
+       {
+        "guid": 55090,
+        "name": "Scourge Strike",
+        "total": 52,
+        "type": 1,
+        "icon": "spell_deathknight_scourgestrike.jpg"
+       },
+       {
+        "guid": 85948,
+        "name": "Festering Strike",
+        "total": 31,
+        "type": 1,
+        "icon": "spell_deathknight_festering_strike.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Garrosh Hellscream",
+        "total": 206,
+        "type": "Boss"
+       },
+       {
+        "name": "Environment",
+        "total": 54,
+        "type": "Boss"
+       },
+       {
+        "name": "Kor'kron Warbringer",
+        "total": 5,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Roiling Blood",
+        "guid": 108170,
+        "type": 1,
+        "abilityIcon": "ability_deathknight_roilingblood.jpg"
+       },
+       {
+        "name": "Purgatory",
+        "guid": 114556,
+        "type": 1,
+        "abilityIcon": "inv_misc_shadowegg.jpg"
+       },
+       {
+        "name": "Death's Advance",
+        "guid": 96268,
+        "type": 32,
+        "abilityIcon": "spell_shadow_demonicempathy.jpg"
+       },
+       "... 3 more"
+      ],
+      "gear": [
+       {
+        "id": 96894,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_plate_deathknight_m_01.jpg",
+        "name": "Crown of the Golden Golem",
+        "itemLevel": 549,
+        "gems": [
+         {
+          "id": 95346,
+          "itemLevel": 90,
+          "icon": "inv_legendary_chimeraoffear.jpg"
+         },
+         {
+          "id": 76661,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_orange.jpg"
+         }
+        ]
+       },
+       {
+        "id": 96420,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_139.jpg",
+        "name": "Talisman of Angry Spirits",
+        "itemLevel": 549
+       },
+       {
+        "id": 99059,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_plate_raiddeathknight_n_01.jpg",
+        "name": "Pauldrons of Cyclopean Dread",
+        "itemLevel": 536,
+        "permanentEnchant": 4803,
+        "permanentEnchantName": "+3 Strength and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 76696,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_red.jpg"
+         },
+         {
+          "id": 76696,
+          "itemLevel": 90,
+          "icon": "inv_misc_gem_x4_rare_cut_red.jpg"
+         }
+        ]
+       },
+       "... 15 more"
+      ]
+     },
+     "... 22 more"
+    ],
+    "totalTime": 428415,
+    "logVersion": 17,
+    "gameVersion": 6,
+    "exploitDetails": []
+   }
+  }
+ }
+}

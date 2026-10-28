@@ -1,0 +1,3442 @@
+{
+ "expansion": "cata",
+ "report": "3nwaKdBGpqPYTWgR",
+ "zone": "Firelands",
+ "fight": {
+  "id": 4,
+  "encounterID": 1203,
+  "name": "Ragnaros",
+  "difficulty": 4,
+  "size": 25,
+  "kill": false,
+  "startTime": 636929,
+  "endTime": 876710,
+  "fightPercentage": 62.1,
+  "bossPercentage": 62.1
+ },
+ "players": [
+  {
+   "id": 1,
+   "name": "Húñtard",
+   "server": "Arugal",
+   "subType": "Hunter"
+  },
+  {
+   "id": 4,
+   "name": "Torean",
+   "server": "Arugal",
+   "subType": "DeathKnight"
+  },
+  {
+   "id": 5,
+   "name": "Nototemsforu",
+   "server": "Arugal",
+   "subType": "Shaman"
+  },
+  "... 25 more"
+ ],
+ "tables": {
+  "summary": {
+   "data": {
+    "totalTime": 239781,
+    "itemLevel": 377.8399963378906,
+    "composition": [
+     {
+      "name": "Húñtard",
+      "id": 1,
+      "guid": 19247671,
+      "type": "Hunter",
+      "specs": [
+       {
+        "spec": "Survival",
+        "role": "dps"
+       }
+      ]
+     },
+     {
+      "name": "Nototemsforu",
+      "id": 5,
+      "guid": 11729283,
+      "type": "Shaman",
+      "specs": [
+       {
+        "spec": "Restoration",
+        "role": "healer"
+       }
+      ]
+     },
+     {
+      "name": "Chãos",
+      "id": 15,
+      "guid": 12724562,
+      "type": "Mage",
+      "specs": [
+       {
+        "spec": "Fire",
+        "role": "dps"
+       }
+      ]
+     },
+     "... 22 more"
+    ],
+    "damageDone": [
+     {
+      "name": "Nototemsforu",
+      "id": 5,
+      "guid": 11729283,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "total": 942493
+     },
+     {
+      "name": "Tricks of the Trade (Vyyle)",
+      "id": 10000006,
+      "guid": 29183340,
+      "type": "TricksOfTheTrade",
+      "icon": "TricksOfTheTrade",
+      "total": 71182
+     },
+     {
+      "name": "Vyyle",
+      "id": 6,
+      "guid": 19183340,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "total": 7312067
+     },
+     "... 24 more"
+    ],
+    "healingDone": [
+     {
+      "name": "Nototemsforu",
+      "id": 5,
+      "guid": 11729283,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "total": 3793112
+     },
+     {
+      "name": "Chãos",
+      "id": 15,
+      "guid": 12724562,
+      "type": "Mage",
+      "icon": "Mage-Fire",
+      "total": 893169
+     },
+     {
+      "name": "Vedreesh",
+      "id": 10,
+      "guid": 10974697,
+      "type": "Priest",
+      "icon": "Priest-Discipline",
+      "total": 1420216
+     },
+     "... 15 more"
+    ],
+    "damageTaken": [
+     {
+      "name": "Burning Wound",
+      "guid": 99399,
+      "type": 4,
+      "abilityIcon": "spell_burningsoul.jpg",
+      "total": 981867
+     },
+     {
+      "name": "Wrath of Ragnaros",
+      "guid": 98263,
+      "type": 4,
+      "abilityIcon": "spell_fire_soulburn.jpg",
+      "total": 1557210
+     },
+     {
+      "name": "Falling",
+      "guid": 3,
+      "type": 1,
+      "abilityIcon": "inv_axe_02.jpg",
+      "total": 143665
+     },
+     "... 14 more"
+    ],
+    "deathEvents": [
+     {
+      "name": "Teazy",
+      "id": 18,
+      "guid": 15696991,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "deathTime": 68526,
+      "ability": {
+       "name": "Lava Wave",
+       "guid": 98928,
+       "type": 4,
+       "abilityIcon": "spell_shaman_lavasurge.jpg"
+      }
+     },
+     {
+      "name": "Teazy",
+      "id": 18,
+      "guid": 15696991,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "deathTime": 82272,
+      "ability": {
+       "name": "Wrath of Ragnaros",
+       "guid": 98263,
+       "type": 4,
+       "abilityIcon": "spell_fire_soulburn.jpg"
+      }
+     },
+     {
+      "name": "Vedreesh",
+      "id": 10,
+      "guid": 10974697,
+      "type": "Priest",
+      "icon": "Priest-Discipline",
+      "deathTime": 108604,
+      "ability": {
+       "name": "Wrath of Ragnaros",
+       "guid": 98263,
+       "type": 4,
+       "abilityIcon": "spell_fire_soulburn.jpg"
+      }
+     },
+     "... 24 more"
+    ],
+    "exploitDetails": [],
+    "playerDetails": {
+     "healers": [
+      {
+       "name": "Nototemsforu",
+       "id": 5,
+       "guid": 11729283,
+       "type": "Shaman",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Shaman-Restoration",
+       "specs": [
+        "Restoration"
+       ],
+       "minItemLevel": 382,
+       "maxItemLevel": 382,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 504,
+          "max": 504
+         },
+         "Intellect": {
+          "min": 9381,
+          "max": 9381
+         },
+         "Agility": {
+          "min": 719,
+          "max": 719
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 1479,
+          "max": 1479
+         },
+         "Item Level": {
+          "min": 382,
+          "max": 382
+         },
+         "Spirit": {
+          "min": 1685,
+          "max": 1685
+         },
+         "Strength": {
+          "min": 740,
+          "max": 740
+         },
+         "Stamina": {
+          "min": 7508,
+          "max": 7508
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 1363,
+          "max": 1363
+         }
+        },
+        "talents": [
+         {
+          "name": "Lava",
+          "guid": 6,
+          "type": 4,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Teleport Elwynn",
+          "guid": 35,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 71298,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_mail_raidshaman_j_01.jpg",
+          "name": "Erupting Volcanic Faceguard",
+          "itemLevel": 378,
+          "permanentEnchant": 4207,
+          "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+          "gems": [
+           {
+            "id": 68780,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 52208,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior4.jpg"
+           }
+          ],
+          "setID": 1014
+         },
+         {
+          "id": 71423,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklace_firelands_2.jpg",
+          "name": "Heartstone of Rhyolith",
+          "itemLevel": 391
+         },
+         {
+          "id": 65248,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_mail_raidshaman_i_01.jpg",
+          "name": "Mantle of the Raging Elements",
+          "itemLevel": 372,
+          "permanentEnchant": 4200,
+          "permanentEnchantName": "+3 Intellect and +1 Haste",
+          "gems": [
+           {
+            "id": 52208,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior4.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Maríel",
+       "id": 9,
+       "guid": 15290895,
+       "type": "Paladin",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Paladin-Holy",
+       "specs": [
+        "Holy"
+       ],
+       "minItemLevel": 371,
+       "maxItemLevel": 371,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 1280,
+          "max": 1280
+         },
+         "Intellect": {
+          "min": 6368,
+          "max": 6368
+         },
+         "Agility": {
+          "min": 699,
+          "max": 699
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 675,
+          "max": 675
+         },
+         "Item Level": {
+          "min": 371,
+          "max": 371
+         },
+         "Spirit": {
+          "min": 2674,
+          "max": 2674
+         },
+         "Strength": {
+          "min": 769,
+          "max": 769
+         },
+         "Stamina": {
+          "min": 7030,
+          "max": 7030
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 1655,
+          "max": 1655
+         }
+        },
+        "talents": [
+         {
+          "name": "UseDatabaseForName",
+          "guid": 32,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 5,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 4,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 65221,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_plate_raidpaladin_i_01.jpg",
+          "name": "Reinforced Sapphirium Headguard",
+          "itemLevel": 372,
+          "permanentEnchant": 4207,
+          "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+          "gems": [
+           {
+            "id": 52296,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 52236,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior3.jpg"
+           }
+          ]
+         },
+         {
+          "id": 65134,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklacea7.jpg",
+          "name": "Wyrmbreaker's Amulet",
+          "itemLevel": 372
+         },
+         {
+          "id": 65223,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_plate_raidpaladin_i_01.jpg",
+          "name": "Reinforced Sapphirium Mantle",
+          "itemLevel": 372,
+          "permanentEnchant": 4200,
+          "permanentEnchantName": "+3 Intellect and +1 Haste",
+          "gems": [
+           {
+            "id": 52208,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior4.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Vedreesh",
+       "id": 10,
+       "guid": 10974697,
+       "type": "Priest",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Priest-Discipline",
+       "specs": [
+        "Discipline"
+       ],
+       "minItemLevel": 377,
+       "maxItemLevel": 377,
+       "potionUse": 0,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 0,
+          "max": 0
+         },
+         "Intellect": {
+          "min": 7602,
+          "max": 7602
+         },
+         "Agility": {
+          "min": 656,
+          "max": 656
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 908,
+          "max": 908
+         },
+         "Item Level": {
+          "min": 377,
+          "max": 377
+         },
+         "Spirit": {
+          "min": 1901,
+          "max": 1901
+         },
+         "Strength": {
+          "min": 640,
+          "max": 640
+         },
+         "Stamina": {
+          "min": 7144,
+          "max": 7144
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 1988,
+          "max": 1988
+         }
+        },
+        "talents": [
+         {
+          "name": "Teleport Goldshire",
+          "guid": 31,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 7,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 71421,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_robe_raidwarlock_j_01.jpg",
+          "name": "Flickering Cowl",
+          "itemLevel": 391,
+          "permanentEnchant": 4207,
+          "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+          "gems": [
+           {
+            "id": 68780,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 52239,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior4.jpg"
+           }
+          ]
+         },
+         {
+          "id": 65134,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklacea7.jpg",
+          "name": "Wyrmbreaker's Amulet",
+          "itemLevel": 372
+         },
+         {
+          "id": 71531,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_robe_raidpriest_j_01.jpg",
+          "name": "Mantle of the Cleansing Flame",
+          "itemLevel": 391,
+          "permanentEnchant": 4200,
+          "permanentEnchantName": "+3 Intellect and +1 Haste"
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      "... 1 more"
+     ],
+     "dps": [
+      {
+       "name": "Húñtard",
+       "id": 1,
+       "guid": 19247671,
+       "type": "Hunter",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Hunter-Survival",
+       "specs": [
+        "Survival"
+       ],
+       "minItemLevel": 378,
+       "maxItemLevel": 378,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 961,
+          "max": 961
+         },
+         "Intellect": {
+          "min": 118,
+          "max": 118
+         },
+         "Agility": {
+          "min": 9879,
+          "max": 9879
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 2314,
+          "max": 2314
+         },
+         "Item Level": {
+          "min": 378,
+          "max": 378
+         },
+         "Spirit": {
+          "min": 124,
+          "max": 124
+         },
+         "Strength": {
+          "min": 684,
+          "max": 684
+         },
+         "Stamina": {
+          "min": 7344,
+          "max": 7344
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 773,
+          "max": 773
+         }
+        },
+        "talents": [
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 7,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Teleport Goldshire",
+          "guid": 31,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 71442,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_mail_raidhunter_j_01.jpg",
+          "name": "Scalp of the Bandit Prince",
+          "itemLevel": 391,
+          "permanentEnchant": 4209,
+          "permanentEnchantName": "+3 Agility and +2 Haste",
+          "gems": [
+           {
+            "id": 68778,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 52212,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior6.jpg"
+           }
+          ]
+         },
+         {
+          "id": 69880,
+          "slot": 1,
+          "quality": 4,
+          "icon": "item_icecrownnecklaceb.jpg",
+          "name": "Mistral Pendant",
+          "itemLevel": 372
+         },
+         {
+          "id": 60306,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_mail_raidhunter_i_01.jpg",
+          "name": "Lightning-Charged Spaulders",
+          "itemLevel": 359,
+          "permanentEnchant": 4204,
+          "permanentEnchantName": "+3 Agility and +1 Mastery",
+          "gems": [
+           {
+            "id": 52212,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior6.jpg"
+           }
+          ],
+          "setID": 930
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Chãos",
+       "id": 15,
+       "guid": 12724562,
+       "type": "Mage",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Mage-Fire",
+       "specs": [
+        "Fire"
+       ],
+       "minItemLevel": 384,
+       "maxItemLevel": 384,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 1759,
+          "max": 1759
+         },
+         "Intellect": {
+          "min": 7517,
+          "max": 7517
+         },
+         "Agility": {
+          "min": 645,
+          "max": 645
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 1779,
+          "max": 1779
+         },
+         "Item Level": {
+          "min": 384,
+          "max": 384
+         },
+         "Spirit": {
+          "min": 216,
+          "max": 216
+         },
+         "Strength": {
+          "min": 636,
+          "max": 636
+         },
+         "Stamina": {
+          "min": 7873,
+          "max": 7873
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 2217,
+          "max": 2217
+         }
+        },
+        "talents": [
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Teleport Elwynn",
+          "guid": 35,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         },
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 71287,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_robe_raidmage_j_01.jpg",
+          "name": "Firehawk Hood",
+          "itemLevel": 378,
+          "permanentEnchant": 4207,
+          "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+          "gems": [
+           {
+            "id": 68780,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 52239,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior4.jpg"
+           }
+          ],
+          "setID": 1007
+         },
+         {
+          "id": 71472,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_misc_necklace_firelands_1.jpg",
+          "name": "Flowform Choker",
+          "itemLevel": 391,
+          "gems": [
+           {
+            "id": 52207,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior6.jpg"
+           }
+          ]
+         },
+         {
+          "id": 71511,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_robe_raidmage_j_01.jpg",
+          "name": "Firehawk Mantle",
+          "itemLevel": 391,
+          "permanentEnchant": 4200,
+          "permanentEnchantName": "+3 Intellect and +1 Haste",
+          "gems": [
+           {
+            "id": 52239,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior4.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Notcorbs",
+       "id": 62,
+       "guid": 7896816,
+       "type": "Mage",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Mage-Fire",
+       "specs": [
+        "Fire"
+       ],
+       "minItemLevel": 375,
+       "maxItemLevel": 375,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Hit": {
+          "min": 1743,
+          "max": 1743
+         },
+         "Intellect": {
+          "min": 7498,
+          "max": 7498
+         },
+         "Agility": {
+          "min": 647,
+          "max": 647
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 1264,
+          "max": 1264
+         },
+         "Item Level": {
+          "min": 375,
+          "max": 375
+         },
+         "Spirit": {
+          "min": 210,
+          "max": 210
+         },
+         "Strength": {
+          "min": 631,
+          "max": 631
+         },
+         "Stamina": {
+          "min": 7303,
+          "max": 7303
+         },
+         "Expertise": {
+          "min": 0,
+          "max": 0
+         },
+         "Haste": {
+          "min": 2005,
+          "max": 2005
+         }
+        },
+        "talents": [
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Teleport Elwynn",
+          "guid": 35,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         },
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 60237,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helm_robe_raidmage_i_01.jpg",
+          "name": "Crown of the Twilight Queen",
+          "itemLevel": 379,
+          "permanentEnchant": 4207,
+          "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+          "gems": [
+           {
+            "id": 68780,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 52217,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior3.jpg"
+           }
+          ]
+         },
+         {
+          "id": 69882,
+          "slot": 1,
+          "quality": 4,
+          "icon": "item_icecrownnecklaced.jpg",
+          "name": "Planetary Amulet",
+          "itemLevel": 372
+         },
+         {
+          "id": 71290,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_robe_raidmage_j_01.jpg",
+          "name": "Firehawk Mantle",
+          "itemLevel": 378,
+          "permanentEnchant": 4200,
+          "permanentEnchantName": "+3 Intellect and +1 Haste",
+          "gems": [
+           {
+            "id": 52207,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior6.jpg"
+           }
+          ],
+          "setID": 1007
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      "... 16 more"
+     ],
+     "tanks": [
+      {
+       "name": "Torean",
+       "id": 4,
+       "guid": 13478508,
+       "type": "DeathKnight",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "DeathKnight-Blood",
+       "specs": [
+        "Blood"
+       ],
+       "minItemLevel": 380,
+       "maxItemLevel": 380,
+       "potionUse": 1,
+       "healthstoneUse": 0,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 535,
+          "max": 535
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 62,
+          "max": 62
+         },
+         "Stamina": {
+          "min": 13018,
+          "max": 13018
+         },
+         "Haste": {
+          "min": 1450,
+          "max": 1450
+         },
+         "Hit": {
+          "min": 971,
+          "max": 971
+         },
+         "Intellect": {
+          "min": 33,
+          "max": 33
+         },
+         "Armor": {
+          "min": 41851,
+          "max": 41851
+         },
+         "Agility": {
+          "min": 705,
+          "max": 705
+         },
+         "Crit": {
+          "min": 345,
+          "max": 345
+         },
+         "Item Level": {
+          "min": 380,
+          "max": 380
+         },
+         "Parry": {
+          "min": 1770,
+          "max": 1770
+         },
+         "Strength": {
+          "min": 6359,
+          "max": 6359
+         },
+         "Expertise": {
+          "min": 865,
+          "max": 865
+         }
+        },
+        "talents": [
+         {
+          "name": "Teleport Elwynn",
+          "guid": 35,
+          "type": 1,
+          "abilityIcon": "trade_engineering.jpg"
+         },
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "Falling",
+          "guid": 3,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 71060,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_plate_raiddeathknight_j_01.jpg",
+          "name": "Elementium Deathplate Helmet",
+          "itemLevel": 378,
+          "permanentEnchant": 4206,
+          "permanentEnchantName": "+4 Stamina and +2 Dodge",
+          "gems": [
+           {
+            "id": 52294,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 52221,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior3.jpg"
+           }
+          ],
+          "setID": 1000
+         },
+         {
+          "id": 60227,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_46.jpg",
+          "name": "Caelestrasz's Will",
+          "itemLevel": 379,
+          "gems": [
+           {
+            "id": 52218,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior5.jpg"
+           }
+          ]
+         },
+         {
+          "id": 65183,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_plate_raiddeathknight_i_01.jpg",
+          "name": "Magma Plated Pauldrons",
+          "itemLevel": 372,
+          "permanentEnchant": 4198,
+          "permanentEnchantName": "+3 Stamina and +1 Dodge",
+          "gems": [
+           {
+            "id": 52221,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior3.jpg"
+           }
+          ]
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      },
+      {
+       "name": "Masomum",
+       "id": 14,
+       "guid": 10411207,
+       "type": "Paladin",
+       "server": "Arugal",
+       "region": "US",
+       "icon": "Paladin-Protection",
+       "specs": [
+        "Protection"
+       ],
+       "minItemLevel": 379,
+       "maxItemLevel": 379,
+       "potionUse": 1,
+       "healthstoneUse": 1,
+       "combatantInfo": {
+        "stats": {
+         "Dodge": {
+          "min": 1190,
+          "max": 1190
+         },
+         "Mastery": {
+          "min": 0,
+          "max": 0
+         },
+         "Spirit": {
+          "min": 117,
+          "max": 117
+         },
+         "Stamina": {
+          "min": 12257,
+          "max": 12257
+         },
+         "Haste": {
+          "min": 0,
+          "max": 0
+         },
+         "Hit": {
+          "min": 961,
+          "max": 961
+         },
+         "Intellect": {
+          "min": 111,
+          "max": 111
+         },
+         "Armor": {
+          "min": 41625,
+          "max": 41625
+         },
+         "Agility": {
+          "min": 678,
+          "max": 678
+         },
+         "Block": {
+          "min": 0,
+          "max": 0
+         },
+         "Crit": {
+          "min": 205,
+          "max": 205
+         },
+         "Item Level": {
+          "min": 379,
+          "max": 379
+         },
+         "Parry": {
+          "min": 2185,
+          "max": 2185
+         },
+         "Strength": {
+          "min": 5810,
+          "max": 5810
+         },
+         "Expertise": {
+          "min": 1099,
+          "max": 1099
+         }
+        },
+        "talents": [
+         {
+          "name": "Unknown Ability",
+          "guid": 0,
+          "type": 0,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 32,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         },
+         {
+          "name": "UseDatabaseForName",
+          "guid": 9,
+          "type": 1,
+          "abilityIcon": "inv_axe_02.jpg"
+         }
+        ],
+        "artifact": [],
+        "gear": [
+         {
+          "id": 70948,
+          "slot": 0,
+          "quality": 4,
+          "icon": "inv_helmet_plate_raidpaladin_j_01.jpg",
+          "name": "Immolation Faceguard",
+          "itemLevel": 378,
+          "permanentEnchant": 4206,
+          "permanentEnchantName": "+4 Stamina and +2 Dodge",
+          "gems": [
+           {
+            "id": 52293,
+            "itemLevel": 85,
+            "icon": "inv_misc_metagem_b.jpg"
+           },
+           {
+            "id": 52221,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior3.jpg"
+           }
+          ],
+          "setID": 1013
+         },
+         {
+          "id": 60227,
+          "slot": 1,
+          "quality": 4,
+          "icon": "inv_jewelry_necklace_46.jpg",
+          "name": "Caelestrasz's Will",
+          "itemLevel": 379,
+          "gems": [
+           {
+            "id": 52231,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior5.jpg"
+           }
+          ]
+         },
+         {
+          "id": 70946,
+          "slot": 2,
+          "quality": 4,
+          "icon": "inv_shoulder_plate_raidpaladin_j_01.jpg",
+          "name": "Immolation Shoulderguards",
+          "itemLevel": 378,
+          "permanentEnchant": 4198,
+          "permanentEnchantName": "+3 Stamina and +1 Dodge",
+          "gems": [
+           {
+            "id": 52242,
+            "itemLevel": 85,
+            "icon": "inv_misc_cutgemsuperior2.jpg"
+           }
+          ],
+          "setID": 1013
+         },
+         "... 16 more"
+        ],
+        "specIDs": [
+         0
+        ],
+        "factionID": 1
+       }
+      }
+     ]
+    },
+    "logVersion": 14,
+    "gameVersion": 5,
+    "logFileDetails": ""
+   }
+  },
+  "damageDone": {
+   "data": {
+    "entries": [
+     {
+      "name": "Nototemsforu",
+      "id": 5,
+      "guid": 11729283,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "itemLevel": 382,
+      "total": 942493,
+      "totalReduced": 195020,
+      "activeTime": 202781,
+      "activeTimeReduced": 150132,
+      "blocked": 7369,
+      "abilities": [
+       {
+        "guid": -4,
+        "name": "Melee",
+        "total": 598282,
+        "totalReduced": 0,
+        "type": 4,
+        "icon": "inv_axe_02.jpg",
+        "petName": "Greater Fire Elemental"
+       },
+       {
+        "guid": 8050,
+        "name": "Flame Shock",
+        "total": 130077,
+        "type": 4,
+        "icon": "spell_fire_flameshock.jpg"
+       },
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 83031,
+        "totalReduced": 14168,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Ragnaros",
+        "total": 918104,
+        "totalReduced": 170631,
+        "type": "Boss"
+       },
+       {
+        "name": "Son of Flame",
+        "total": 23871,
+        "type": "NPC"
+       },
+       {
+        "name": "Molten Elemental",
+        "total": 518,
+        "type": "NPC"
+       }
+      ],
+      "talents": [
+       {
+        "name": "Lava",
+        "guid": 6,
+        "type": 4,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Teleport Elwynn",
+        "guid": 35,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 71298,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_mail_raidshaman_j_01.jpg",
+        "name": "Erupting Volcanic Faceguard",
+        "itemLevel": 378,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52208,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior4.jpg"
+         }
+        ],
+        "setID": 1014
+       },
+       {
+        "id": 71423,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace_firelands_2.jpg",
+        "name": "Heartstone of Rhyolith",
+        "itemLevel": 391
+       },
+       {
+        "id": 65248,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_mail_raidshaman_i_01.jpg",
+        "name": "Mantle of the Raging Elements",
+        "itemLevel": 372,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 52208,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior4.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ],
+      "pets": [
+       {
+        "name": "Greater Earth Elemental",
+        "id": 81,
+        "guid": 15352,
+        "type": "Pet",
+        "icon": "abilities/spell_nature_earthelemental_totem.jpg",
+        "total": 68863,
+        "totalReduced": 0,
+        "activeTime": 136268
+       },
+       {
+        "name": "Greater Fire Elemental",
+        "id": 79,
+        "guid": 15438,
+        "type": "Pet",
+        "icon": "abilities/spell_fire_elemental_totem.jpg",
+        "total": 678610,
+        "totalReduced": 0,
+        "activeTime": 137573,
+        "blocked": 7369
+       }
+      ]
+     },
+     {
+      "name": "Tricks of the Trade (Vyyle)",
+      "id": 10000006,
+      "guid": 29183340,
+      "type": "TricksOfTheTrade",
+      "icon": "TricksOfTheTrade",
+      "total": 71182,
+      "activeTime": 42714,
+      "activeTimeReduced": 42714,
+      "abilities": [
+       {
+        "guid": 49998,
+        "name": "Death Strike",
+        "total": 38544,
+        "type": 1,
+        "icon": "spell_deathknight_butcher2.jpg"
+       },
+       {
+        "guid": 56815,
+        "name": "Rune Strike",
+        "total": 11246,
+        "type": 1,
+        "icon": "spell_deathknight_darkconviction.jpg"
+       },
+       {
+        "guid": 52212,
+        "name": "Death and Decay",
+        "total": 6841,
+        "type": 32,
+        "icon": "spell_shadow_deathanddecay.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Ragnaros",
+        "total": 66269,
+        "type": "Boss"
+       },
+       {
+        "name": "Molten Elemental",
+        "total": 4913,
+        "type": "NPC"
+       }
+      ],
+      "talents": [],
+      "gear": []
+     },
+     {
+      "name": "Vyyle",
+      "id": 6,
+      "guid": 19183340,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 383,
+      "total": 7312067,
+      "activeTime": 238422,
+      "activeTimeReduced": 238422,
+      "blocked": 4797,
+      "abilities": [
+       {
+        "guid": 8680,
+        "name": "Wound Poison",
+        "total": 2003086,
+        "type": 8,
+        "icon": "inv_misc_herb_16.jpg"
+       },
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 1463279,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 32645,
+        "name": "Envenom",
+        "total": 1030873,
+        "type": 8,
+        "icon": "ability_rogue_disembowel.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Ragnaros",
+        "total": 6820459,
+        "type": "Boss"
+       },
+       {
+        "name": "Son of Flame",
+        "total": 488524,
+        "type": "NPC"
+       },
+       {
+        "name": "Molten Elemental",
+        "total": 3084,
+        "type": "NPC"
+       }
+      ],
+      "talents": [
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 2,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 71416,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_leather_raidrogue_j_01.jpg",
+        "name": "Hood of Rampant Disdain",
+        "itemLevel": 391,
+        "permanentEnchant": 4209,
+        "permanentEnchantName": "+3 Agility and +2 Haste",
+        "gems": [
+         {
+          "id": 68778,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       {
+        "id": 71354,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_neck_firelands_03.jpg",
+        "name": "Choker of the Vanquished Lord",
+        "itemLevel": 384
+       },
+       {
+        "id": 65243,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_leatherraidrogue_i_01.jpg",
+        "name": "Wind Dancer's Spaulders",
+        "itemLevel": 372,
+        "permanentEnchant": 4204,
+        "permanentEnchantName": "+3 Agility and +1 Mastery",
+        "gems": [
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 24 more"
+    ],
+    "totalTime": 239781,
+    "logVersion": 14,
+    "gameVersion": 5,
+    "exploitDetails": []
+   }
+  },
+  "healing": {
+   "data": {
+    "entries": [
+     {
+      "name": "Nototemsforu",
+      "id": 5,
+      "guid": 11729283,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "itemLevel": 382,
+      "total": 3793112,
+      "activeTime": 220261,
+      "activeTimeReduced": 218982,
+      "overheal": 1843589,
+      "abilities": [
+       {
+        "guid": 73921,
+        "name": "Healing Rain",
+        "total": 935208,
+        "type": 8,
+        "icon": "spell_nature_giftofthewaterspirit.jpg"
+       },
+       {
+        "guid": 61295,
+        "name": "Riptide",
+        "total": 850640,
+        "type": 8,
+        "icon": "spell_nature_riptide.jpg"
+       },
+       {
+        "guid": 51945,
+        "name": "Earthliving",
+        "total": 478927,
+        "type": 8,
+        "icon": "spell_shaman_giftearthmother.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [
+       {
+        "guid": 98981,
+        "name": "Lava Bolt",
+        "total": 1099655,
+        "type": 4,
+        "icon": "spell_fire_ragnaros_lavabolt.jpg"
+       },
+       {
+        "guid": 98175,
+        "name": "Magma Trap Eruption",
+        "total": 634178,
+        "type": 4,
+        "icon": "spell_fire_selfdestruct.jpg"
+       },
+       {
+        "guid": 98237,
+        "name": "Hand of Ragnaros",
+        "total": 529196,
+        "type": 4,
+        "icon": "spell_fire_fireball.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Torean",
+        "total": 367906,
+        "type": "DeathKnight"
+       },
+       {
+        "name": "Nototemsforu",
+        "total": 361970,
+        "type": "Shaman"
+       },
+       {
+        "name": "Sythe",
+        "total": 228397,
+        "type": "Warrior"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Lava",
+        "guid": 6,
+        "type": 4,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Teleport Elwynn",
+        "guid": 35,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 71298,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_mail_raidshaman_j_01.jpg",
+        "name": "Erupting Volcanic Faceguard",
+        "itemLevel": 378,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52208,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior4.jpg"
+         }
+        ],
+        "setID": 1014
+       },
+       {
+        "id": 71423,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace_firelands_2.jpg",
+        "name": "Heartstone of Rhyolith",
+        "itemLevel": 391
+       },
+       {
+        "id": 65248,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_mail_raidshaman_i_01.jpg",
+        "name": "Mantle of the Raging Elements",
+        "itemLevel": 372,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 52208,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior4.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Vyyle",
+      "id": 6,
+      "guid": 19183340,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 383,
+      "total": 17158,
+      "activeTime": 18001,
+      "activeTimeReduced": 6003,
+      "overheal": 19880,
+      "abilities": [
+       {
+        "guid": 73651,
+        "name": "Recuperate",
+        "total": 17158,
+        "type": 1,
+        "icon": "ability_rogue_recuperate.jpg"
+       }
+      ],
+      "damageAbilities": [
+       {
+        "guid": 99224,
+        "name": "Engulfing Flames",
+        "total": 10583,
+        "type": 4,
+        "icon": "inv_summerfest_firespirit.jpg"
+       },
+       {
+        "guid": 98518,
+        "name": "Molten Inferno",
+        "total": 3989,
+        "type": 4,
+        "icon": "spell_fire_ragnaros_molteninferno.jpg"
+       },
+       {
+        "guid": 98981,
+        "name": "Lava Bolt",
+        "total": 2586,
+        "type": 4,
+        "icon": "spell_fire_ragnaros_lavabolt.jpg"
+       }
+      ],
+      "targets": [
+       {
+        "name": "Vyyle",
+        "total": 17158,
+        "type": "Rogue"
+       }
+      ],
+      "talents": [
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 2,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 71416,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_leather_raidrogue_j_01.jpg",
+        "name": "Hood of Rampant Disdain",
+        "itemLevel": 391,
+        "permanentEnchant": 4209,
+        "permanentEnchantName": "+3 Agility and +2 Haste",
+        "gems": [
+         {
+          "id": 68778,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       {
+        "id": 71354,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_neck_firelands_03.jpg",
+        "name": "Choker of the Vanquished Lord",
+        "itemLevel": 384
+       },
+       {
+        "id": 65243,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_leatherraidrogue_i_01.jpg",
+        "name": "Wind Dancer's Spaulders",
+        "itemLevel": 372,
+        "permanentEnchant": 4204,
+        "permanentEnchantName": "+3 Agility and +1 Mastery",
+        "gems": [
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Torean",
+      "id": 4,
+      "guid": 13478508,
+      "type": "DeathKnight",
+      "icon": "DeathKnight-Blood",
+      "itemLevel": 380,
+      "total": 1275412,
+      "totalReduced": 591168,
+      "activeTime": 193676,
+      "activeTimeReduced": 89772,
+      "overheal": 534221,
+      "abilities": [
+       {
+        "guid": 77535,
+        "name": "Blood Shield",
+        "total": 623588,
+        "totalReduced": 0,
+        "type": 32,
+        "icon": "spell_deathknight_butcher2.jpg"
+       },
+       {
+        "guid": 45470,
+        "name": "Death Strike",
+        "total": 528207,
+        "type": 1,
+        "icon": "spell_deathknight_butcher2.jpg"
+       },
+       {
+        "guid": 53365,
+        "name": "Unholy Strength",
+        "total": 62961,
+        "type": 1,
+        "icon": "spell_holy_blessingofstrength.jpg"
+       },
+       "... 1 more"
+      ],
+      "damageAbilities": [
+       {
+        "guid": 1,
+        "name": "Melee",
+        "total": 1089886,
+        "totalReduced": 466298,
+        "type": 1,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 99399,
+        "name": "Burning Wound",
+        "total": 125691,
+        "totalReduced": 87966,
+        "type": 4,
+        "icon": "spell_burningsoul.jpg"
+       },
+       {
+        "guid": 98237,
+        "name": "Hand of Ragnaros",
+        "total": 32545,
+        "totalReduced": 9614,
+        "type": 4,
+        "icon": "spell_fire_fireball.jpg"
+       },
+       "... 2 more"
+      ],
+      "targets": [
+       {
+        "name": "Torean",
+        "total": 1275412,
+        "totalReduced": 591168,
+        "type": "DeathKnight"
+       }
+      ],
+      "talents": [
+       {
+        "name": "Teleport Elwynn",
+        "guid": 35,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "Falling",
+        "guid": 3,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Falling",
+        "guid": 3,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 71060,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_plate_raiddeathknight_j_01.jpg",
+        "name": "Elementium Deathplate Helmet",
+        "itemLevel": 378,
+        "permanentEnchant": 4206,
+        "permanentEnchantName": "+4 Stamina and +2 Dodge",
+        "gems": [
+         {
+          "id": 52294,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52221,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior3.jpg"
+         }
+        ],
+        "setID": 1000
+       },
+       {
+        "id": 60227,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_46.jpg",
+        "name": "Caelestrasz's Will",
+        "itemLevel": 379,
+        "gems": [
+         {
+          "id": 52218,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior5.jpg"
+         }
+        ]
+       },
+       {
+        "id": 65183,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_plate_raiddeathknight_i_01.jpg",
+        "name": "Magma Plated Pauldrons",
+        "itemLevel": 372,
+        "permanentEnchant": 4198,
+        "permanentEnchantName": "+3 Stamina and +1 Dodge",
+        "gems": [
+         {
+          "id": 52221,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior3.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 17 more"
+    ],
+    "totalTime": 239781,
+    "logVersion": 14,
+    "gameVersion": 5,
+    "exploitDetails": []
+   }
+  },
+  "damageTaken": {
+   "data": {
+    "entries": [
+     {
+      "name": "Nototemsforu",
+      "id": 5,
+      "guid": 11729283,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "itemLevel": 382,
+      "total": 785625,
+      "totalReduced": 708880,
+      "activeTime": 17917,
+      "activeTimeReduced": 17911,
+      "overheal": 195201,
+      "abilities": [
+       {
+        "guid": 98928,
+        "name": "Lava Wave",
+        "total": 139294,
+        "type": 4,
+        "icon": "spell_shaman_lavasurge.jpg"
+       },
+       {
+        "guid": 98981,
+        "name": "Lava Bolt",
+        "total": 126160,
+        "totalReduced": 125140,
+        "type": 4,
+        "icon": "spell_fire_ragnaros_lavabolt.jpg"
+       },
+       {
+        "guid": 98237,
+        "name": "Hand of Ragnaros",
+        "total": 99679,
+        "type": 4,
+        "icon": "spell_fire_fireball.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Ragnaros",
+        "total": 293024,
+        "totalReduced": 292004,
+        "type": "Boss"
+       },
+       {
+        "name": "Molten Elemental",
+        "total": 149547,
+        "totalReduced": 73822,
+        "type": "NPC"
+       },
+       {
+        "name": "Lava Wave",
+        "total": 139294,
+        "type": "NPC"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Lava",
+        "guid": 6,
+        "type": 4,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Teleport Elwynn",
+        "guid": 35,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 71298,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_mail_raidshaman_j_01.jpg",
+        "name": "Erupting Volcanic Faceguard",
+        "itemLevel": 378,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52208,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior4.jpg"
+         }
+        ],
+        "setID": 1014
+       },
+       {
+        "id": 71423,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace_firelands_2.jpg",
+        "name": "Heartstone of Rhyolith",
+        "itemLevel": 391
+       },
+       {
+        "id": 65248,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_mail_raidshaman_i_01.jpg",
+        "name": "Mantle of the Raging Elements",
+        "itemLevel": 372,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 52208,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior4.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Vyyle",
+      "id": 6,
+      "guid": 19183340,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 383,
+      "total": 550525,
+      "totalReduced": 460524,
+      "activeTime": 21312,
+      "activeTimeReduced": 21291,
+      "overheal": 313972,
+      "abilities": [
+       {
+        "guid": 98175,
+        "name": "Magma Trap Eruption",
+        "total": 174544,
+        "totalReduced": 168765,
+        "type": 4,
+        "icon": "spell_fire_selfdestruct.jpg"
+       },
+       {
+        "guid": 98237,
+        "name": "Hand of Ragnaros",
+        "total": 116701,
+        "totalReduced": 106234,
+        "type": 4,
+        "icon": "spell_fire_fireball.jpg"
+       },
+       {
+        "guid": 98981,
+        "name": "Lava Bolt",
+        "total": 101044,
+        "totalReduced": 98079,
+        "type": 4,
+        "icon": "spell_fire_ragnaros_lavabolt.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Ragnaros",
+        "total": 217745,
+        "totalReduced": 204313,
+        "type": "Boss"
+       },
+       {
+        "name": "Magma Trap",
+        "total": 174544,
+        "totalReduced": 168765,
+        "type": "NPC"
+       },
+       {
+        "name": "Molten Elemental",
+        "total": 88240,
+        "totalReduced": 17450,
+        "type": "NPC"
+       },
+       "... 1 more"
+      ],
+      "talents": [
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 2,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 71416,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_leather_raidrogue_j_01.jpg",
+        "name": "Hood of Rampant Disdain",
+        "itemLevel": 391,
+        "permanentEnchant": 4209,
+        "permanentEnchantName": "+3 Agility and +2 Haste",
+        "gems": [
+         {
+          "id": 68778,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       {
+        "id": 71354,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_neck_firelands_03.jpg",
+        "name": "Choker of the Vanquished Lord",
+        "itemLevel": 384
+       },
+       {
+        "id": 65243,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_leatherraidrogue_i_01.jpg",
+        "name": "Wind Dancer's Spaulders",
+        "itemLevel": 372,
+        "permanentEnchant": 4204,
+        "permanentEnchantName": "+3 Agility and +1 Mastery",
+        "gems": [
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Timm",
+      "id": 31,
+      "guid": 15838384,
+      "type": "Warrior",
+      "icon": "Warrior-Arms",
+      "itemLevel": 376,
+      "total": 731690,
+      "totalReduced": 619153,
+      "activeTime": 38347,
+      "activeTimeReduced": 38314,
+      "overheal": 258149,
+      "abilities": [
+       {
+        "guid": 98981,
+        "name": "Lava Bolt",
+        "total": 166002,
+        "totalReduced": 159519,
+        "type": 4,
+        "icon": "spell_fire_ragnaros_lavabolt.jpg"
+       },
+       {
+        "guid": -4,
+        "name": "Melee",
+        "total": 163478,
+        "totalReduced": 162878,
+        "type": 4,
+        "icon": "inv_axe_02.jpg"
+       },
+       {
+        "guid": 98175,
+        "name": "Magma Trap Eruption",
+        "total": 146111,
+        "totalReduced": 141622,
+        "type": 4,
+        "icon": "spell_fire_selfdestruct.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "sources": [
+       {
+        "name": "Ragnaros",
+        "total": 287606,
+        "totalReduced": 264266,
+        "type": "Boss"
+       },
+       {
+        "name": "Molten Elemental",
+        "total": 257973,
+        "totalReduced": 177370,
+        "type": "NPC"
+       },
+       {
+        "name": "Magma Trap",
+        "total": 146111,
+        "totalReduced": 141622,
+        "type": "NPC"
+       },
+       "... 1 more"
+      ],
+      "talents": [
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 2,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 65266,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_plate_raidwarrior_i_01.jpg",
+        "name": "Earthen Helmet",
+        "itemLevel": 372,
+        "permanentEnchant": 4208,
+        "permanentEnchantName": "+3 Strength and +2 Mastery",
+        "gems": [
+         {
+          "id": 68779,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52222,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior4.jpg"
+         }
+        ]
+       },
+       {
+        "id": 60227,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_46.jpg",
+        "name": "Caelestrasz's Will",
+        "itemLevel": 379,
+        "gems": [
+         {
+          "id": 52206,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       {
+        "id": 71603,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_plate_raidwarrior_j_01.jpg",
+        "name": "Pauldrons of the Molten Giant",
+        "itemLevel": 391,
+        "permanentEnchant": 4202,
+        "permanentEnchantName": "+3 Strength and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 52206,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 22 more"
+    ],
+    "totalTime": 239781,
+    "logVersion": 14,
+    "gameVersion": 5,
+    "exploitDetails": []
+   }
+  },
+  "deaths": {
+   "data": {
+    "entries": [
+     {
+      "name": "Teazy",
+      "id": 18,
+      "guid": 15696991,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "timestamp": 705455,
+      "fight": 4,
+      "damage": {
+       "total": 163265,
+       "totalReduced": 146940,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 34646,
+       "abilities": [
+        {
+         "guid": 98928,
+         "name": "Lava Wave",
+         "total": 163265,
+         "totalReduced": 146940,
+         "type": 4,
+         "icon": "spell_shaman_lavasurge.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Lava Wave",
+         "total": 163265,
+         "totalReduced": 146940,
+         "type": "NPC"
+        }
+       ]
+      },
+      "healing": {
+       "total": 16962,
+       "totalReduced": 637,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 77830,
+         "name": "Ancestral Resolve",
+         "total": 16325,
+         "totalReduced": 0,
+         "type": 1,
+         "icon": "spell_nature_rune.jpg"
+        },
+        {
+         "guid": 15290,
+         "name": "Vampiric Embrace",
+         "total": 637,
+         "type": 32,
+         "icon": "spell_shadow_unsummonbuilding.jpg"
+        }
+       ],
+       "damageAbilities": [
+        {
+         "guid": 98928,
+         "name": "Lava Wave",
+         "total": 16962,
+         "totalReduced": 637,
+         "type": 4,
+         "icon": "spell_shaman_lavasurge.jpg"
+        }
+       ],
+       "sources": [
+        {
+         "name": "Teazy",
+         "total": 16325,
+         "totalReduced": 0,
+         "type": "Shaman"
+        },
+        {
+         "name": "Paxman",
+         "total": 637,
+         "type": "Priest"
+        }
+       ]
+      },
+      "deathWindow": 997,
+      "overkill": 8778,
+      "events": [
+       {
+        "timestamp": 705424,
+        "type": "damage",
+        "sourceID": 97,
+        "sourceInstance": 2,
+        "sourceIsFriendly": false,
+        "targetID": 18,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Lava Wave",
+         "guid": 98928,
+         "type": 4,
+         "abilityIcon": "spell_shaman_lavasurge.jpg"
+        },
+        "fight": 4,
+        "hitType": 16,
+        "amount": 31199,
+        "mitigated": 4935,
+        "unmitigatedAmount": 49353,
+        "resisted": 4935,
+        "overkill": 8778,
+        "absorbed": 4441,
+        "isAoE": false,
+        "tick": true
+       },
+       {
+        "timestamp": 704427,
+        "type": "damage",
+        "sourceID": 97,
+        "sourceInstance": 2,
+        "sourceIsFriendly": false,
+        "targetID": 18,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Lava Wave",
+         "guid": 98928,
+         "type": 4,
+         "abilityIcon": "spell_shaman_lavasurge.jpg"
+        },
+        "fight": 4,
+        "hitType": 16,
+        "amount": 106963,
+        "mitigated": 29711,
+        "unmitigatedAmount": 148558,
+        "resisted": 29712,
+        "absorbed": 11884,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Lava Wave",
+       "guid": 98928,
+       "type": 4,
+       "abilityIcon": "spell_shaman_lavasurge.jpg"
+      }
+     },
+     {
+      "name": "Teazy",
+      "id": 18,
+      "guid": 15696991,
+      "type": "Shaman",
+      "icon": "Shaman-Elemental",
+      "timestamp": 719201,
+      "fight": 4,
+      "damage": {
+       "total": 76459,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 98263,
+         "name": "Wrath of Ragnaros",
+         "total": 76459,
+         "type": 4,
+         "icon": "spell_fire_soulburn.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Ragnaros",
+         "total": 76459,
+         "type": "Boss"
+        }
+       ]
+      },
+      "healing": {
+       "total": 0,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [],
+       "damageAbilities": [],
+       "sources": []
+      },
+      "deathWindow": 0,
+      "overkill": 45938,
+      "events": [
+       {
+        "timestamp": 719197,
+        "type": "damage",
+        "sourceID": 60,
+        "sourceIsFriendly": false,
+        "targetID": 18,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Wrath of Ragnaros",
+         "guid": 98263,
+         "type": 4,
+         "abilityIcon": "spell_fire_soulburn.jpg"
+        },
+        "fight": 4,
+        "hitType": 1,
+        "amount": 30521,
+        "unmitigatedAmount": 76459,
+        "overkill": 45938,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Wrath of Ragnaros",
+       "guid": 98263,
+       "type": 4,
+       "abilityIcon": "spell_fire_soulburn.jpg"
+      }
+     },
+     {
+      "name": "Vedreesh",
+      "id": 10,
+      "guid": 10974697,
+      "type": "Priest",
+      "icon": "Priest-Discipline",
+      "timestamp": 745533,
+      "fight": 4,
+      "damage": {
+       "total": 201880,
+       "totalReduced": 171583,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "overheal": 35240,
+       "abilities": [
+        {
+         "guid": 98175,
+         "name": "Magma Trap Eruption",
+         "total": 109655,
+         "totalReduced": 79536,
+         "type": 4,
+         "icon": "spell_fire_selfdestruct.jpg"
+        },
+        {
+         "guid": 98263,
+         "name": "Wrath of Ragnaros",
+         "total": 59677,
+         "totalReduced": 59499,
+         "type": 4,
+         "icon": "spell_fire_soulburn.jpg"
+        },
+        {
+         "guid": 98237,
+         "name": "Hand of Ragnaros",
+         "total": 32548,
+         "type": 4,
+         "icon": "spell_fire_fireball.jpg"
+        }
+       ],
+       "damageAbilities": [],
+       "sources": [
+        {
+         "name": "Magma Trap",
+         "total": 109655,
+         "totalReduced": 79536,
+         "type": "NPC"
+        },
+        {
+         "name": "Ragnaros",
+         "total": 92225,
+         "totalReduced": 92047,
+         "type": "Boss"
+        }
+       ]
+      },
+      "healing": {
+       "total": 46061,
+       "totalReduced": 15764,
+       "activeTime": 0,
+       "activeTimeReduced": 0,
+       "abilities": [
+        {
+         "guid": 17,
+         "name": "Power Word: Shield",
+         "total": 30119,
+         "totalReduced": 0,
+         "type": 2,
+         "icon": "spell_holy_powerwordshield.jpg"
+        },
+        {
+         "guid": 81751,
+         "name": "Atonement",
+         "total": 9605,
+         "type": 2,
+         "icon": "spell_holy_circleofrenewal.jpg"
+        },
+        {
+         "guid": 56160,
+         "name": "Glyph of Power Word: Shield",
+         "total": 5723,
+         "type": 2,
+         "icon": "spell_holy_flashheal.jpg"
+        },
+        "... 2 more"
+       ],
+       "damageAbilities": [
+        {
+         "guid": 98175,
+         "name": "Magma Trap Eruption",
+         "total": 39724,
+         "totalReduced": 9605,
+         "type": 4,
+         "icon": "spell_fire_selfdestruct.jpg"
+        },
+        {
+         "guid": 98237,
+         "name": "Hand of Ragnaros",
+         "total": 436,
+         "type": 4,
+         "icon": "spell_fire_fireball.jpg"
+        },
+        {
+         "guid": 98263,
+         "name": "Wrath of Ragnaros",
+         "total": 178,
+         "totalReduced": 0,
+         "type": 4,
+         "icon": "spell_fire_soulburn.jpg"
+        }
+       ],
+       "sources": [
+        {
+         "name": "Vedreesh",
+         "total": 46061,
+         "totalReduced": 15764,
+         "type": "Priest"
+        }
+       ]
+      },
+      "deathWindow": 12850,
+      "overkill": 21388,
+      "events": [
+       {
+        "timestamp": 745502,
+        "type": "damage",
+        "sourceID": 60,
+        "sourceIsFriendly": false,
+        "targetID": 10,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Wrath of Ragnaros",
+         "guid": 98263,
+         "type": 4,
+         "abilityIcon": "spell_fire_soulburn.jpg"
+        },
+        "fight": 4,
+        "hitType": 16,
+        "amount": 38111,
+        "mitigated": 14920,
+        "unmitigatedAmount": 74597,
+        "resisted": 14919,
+        "overkill": 21388,
+        "absorbed": 178,
+        "isAoE": false
+       },
+       {
+        "timestamp": 740225,
+        "type": "damage",
+        "sourceID": 60,
+        "sourceIsFriendly": false,
+        "targetID": 10,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Hand of Ragnaros",
+         "guid": 98237,
+         "type": 4,
+         "abilityIcon": "spell_fire_fireball.jpg"
+        },
+        "fight": 4,
+        "hitType": 16,
+        "amount": 32548,
+        "mitigated": 8137,
+        "unmitigatedAmount": 40685,
+        "resisted": 8137,
+        "isAoE": false
+       },
+       {
+        "timestamp": 734887,
+        "type": "damage",
+        "sourceID": 94,
+        "sourceInstance": 2,
+        "sourceIsFriendly": false,
+        "targetID": 10,
+        "targetIsFriendly": true,
+        "ability": {
+         "name": "Magma Trap Eruption",
+         "guid": 98175,
+         "type": 4,
+         "abilityIcon": "spell_fire_selfdestruct.jpg"
+        },
+        "fight": 4,
+        "hitType": 16,
+        "amount": 79536,
+        "mitigated": 12183,
+        "unmitigatedAmount": 121838,
+        "resisted": 12184,
+        "absorbed": 30119,
+        "isAoE": false
+       }
+      ],
+      "killingBlow": {
+       "name": "Wrath of Ragnaros",
+       "guid": 98263,
+       "type": 4,
+       "abilityIcon": "spell_fire_soulburn.jpg"
+      }
+     },
+     "... 24 more"
+    ]
+   }
+  },
+  "interrupts": {
+   "data": {
+    "entries": [
+     {
+      "entries": []
+     }
+    ],
+    "totalTime": 239781
+   }
+  },
+  "dispels": {
+   "data": {
+    "entries": [
+     {
+      "entries": [
+       {
+        "name": "Lava Wave",
+        "guid": 98928,
+        "type": 4,
+        "abilityIcon": "spell_shaman_lavasurge.jpg",
+        "spellsBegun": 2,
+        "spellsCompleted": 1,
+        "spellsInterrupted": 1,
+        "spellChannelsInterrupted": 0,
+        "timestamp": 676260,
+        "details": [
+         {
+          "name": "Nototemsforu",
+          "id": 5,
+          "guid": 11729283,
+          "type": "Shaman",
+          "icon": "Shaman",
+          "total": 1,
+          "actors": [
+           {
+            "name": "Nototemsforu",
+            "total": 1,
+            "type": "Shaman"
+           }
+          ],
+          "abilities": [
+           {
+            "name": "Cleanse Spirit",
+            "total": 1,
+            "type": 8
+           }
+          ]
+         }
+        ],
+        "missedCasts": [
+         {
+          "name": "Lava Wave 2",
+          "id": "97.2",
+          "guid": 53363,
+          "type": "NPC",
+          "instance": 2,
+          "icon": "custom-icon-spell_shaman_lavasurge.jpg",
+          "timestamp": 68493,
+          "target": {
+           "name": "Teazy",
+           "id": 18,
+           "guid": 15696991,
+           "type": "Shaman",
+           "icon": "Shaman-Elemental",
+           "server": "Arugal",
+           "region": "US"
+          }
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "totalTime": 239781
+   }
+  },
+  "casts": {
+   "data": {
+    "entries": [
+     {
+      "name": "Nototemsforu",
+      "id": 5,
+      "guid": 11729283,
+      "type": "Shaman",
+      "icon": "Shaman-Restoration",
+      "itemLevel": 382,
+      "total": 91,
+      "activeTime": 200510,
+      "activeTimeReduced": 200510,
+      "abilities": [
+       {
+        "guid": 61295,
+        "name": "Riptide",
+        "total": 24,
+        "type": 8,
+        "icon": "spell_nature_riptide.jpg"
+       },
+       {
+        "guid": 1064,
+        "name": "Chain Heal",
+        "total": 13,
+        "type": 8,
+        "icon": "inv_1115_shaman_chainheal.jpg"
+       },
+       {
+        "guid": 8050,
+        "name": "Flame Shock",
+        "total": 9,
+        "type": 4,
+        "icon": "spell_fire_flameshock.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Environment",
+        "total": 14,
+        "type": "NPC"
+       },
+       {
+        "name": "Ragnaros",
+        "total": 12,
+        "type": "Boss"
+       },
+       {
+        "name": "Ragingelf",
+        "total": 8,
+        "type": "Druid"
+       },
+       "... 2 more"
+      ],
+      "talents": [
+       {
+        "name": "Lava",
+        "guid": 6,
+        "type": 4,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Unknown Ability",
+        "guid": 0,
+        "type": 0,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "Teleport Elwynn",
+        "guid": 35,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 71298,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_mail_raidshaman_j_01.jpg",
+        "name": "Erupting Volcanic Faceguard",
+        "itemLevel": 378,
+        "permanentEnchant": 4207,
+        "permanentEnchantName": "+3 Intellect and +2 Critical Strike",
+        "gems": [
+         {
+          "id": 68780,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52208,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior4.jpg"
+         }
+        ],
+        "setID": 1014
+       },
+       {
+        "id": 71423,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_misc_necklace_firelands_2.jpg",
+        "name": "Heartstone of Rhyolith",
+        "itemLevel": 391
+       },
+       {
+        "id": 65248,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_mail_raidshaman_i_01.jpg",
+        "name": "Mantle of the Raging Elements",
+        "itemLevel": 372,
+        "permanentEnchant": 4200,
+        "permanentEnchantName": "+3 Intellect and +1 Haste",
+        "gems": [
+         {
+          "id": 52208,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior4.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Vyyle",
+      "id": 6,
+      "guid": 19183340,
+      "type": "Rogue",
+      "icon": "Rogue-Assassination",
+      "itemLevel": 383,
+      "total": 96,
+      "activeTime": 232500,
+      "activeTimeReduced": 232500,
+      "abilities": [
+       {
+        "guid": 1329,
+        "name": "Mutilate",
+        "total": 60,
+        "type": 1,
+        "icon": "ability_rogue_shadowstrikes.jpg"
+       },
+       {
+        "guid": 1943,
+        "name": "Rupture",
+        "total": 14,
+        "type": 1,
+        "icon": "ability_rogue_rupture.jpg"
+       },
+       {
+        "guid": 82174,
+        "name": "Synapse Springs",
+        "total": 4,
+        "type": 1,
+        "icon": "spell_shaman_elementaloath.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Ragnaros",
+        "total": 75,
+        "type": "Boss"
+       },
+       {
+        "name": "Environment",
+        "total": 11,
+        "type": "NPC"
+       },
+       {
+        "name": "Son of Flame",
+        "total": 8,
+        "type": "NPC"
+       },
+       "... 1 more"
+      ],
+      "talents": [
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 2,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 71416,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_leather_raidrogue_j_01.jpg",
+        "name": "Hood of Rampant Disdain",
+        "itemLevel": 391,
+        "permanentEnchant": 4209,
+        "permanentEnchantName": "+3 Agility and +2 Haste",
+        "gems": [
+         {
+          "id": 68778,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       {
+        "id": 71354,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_neck_firelands_03.jpg",
+        "name": "Choker of the Vanquished Lord",
+        "itemLevel": 384
+       },
+       {
+        "id": 65243,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_leatherraidrogue_i_01.jpg",
+        "name": "Wind Dancer's Spaulders",
+        "itemLevel": 372,
+        "permanentEnchant": 4204,
+        "permanentEnchantName": "+3 Agility and +1 Mastery",
+        "gems": [
+         {
+          "id": 52212,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     {
+      "name": "Timm",
+      "id": 31,
+      "guid": 15838384,
+      "type": "Warrior",
+      "icon": "Warrior-Arms",
+      "itemLevel": 376,
+      "total": 229,
+      "activeTime": 209333,
+      "activeTimeReduced": 209333,
+      "abilities": [
+       {
+        "guid": 1464,
+        "name": "Slam",
+        "total": 38,
+        "type": 1,
+        "icon": "ability_warrior_decisivestrike.jpg"
+       },
+       {
+        "guid": 12294,
+        "name": "Mortal Strike",
+        "total": 36,
+        "type": 1,
+        "icon": "ability_warrior_savageblow.jpg"
+       },
+       {
+        "guid": 78,
+        "name": "Heroic Strike",
+        "total": 28,
+        "type": 1,
+        "icon": "ability_rogue_ambush.jpg"
+       },
+       "... 2 more"
+      ],
+      "damageAbilities": [],
+      "targets": [
+       {
+        "name": "Ragnaros",
+        "total": 136,
+        "type": "Boss"
+       },
+       {
+        "name": "Environment",
+        "total": 86,
+        "type": "NPC"
+       },
+       {
+        "name": "Son of Flame",
+        "total": 7,
+        "type": "NPC"
+       }
+      ],
+      "talents": [
+       {
+        "name": "Teleport Goldshire",
+        "guid": 31,
+        "type": 1,
+        "abilityIcon": "trade_engineering.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 8,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       },
+       {
+        "name": "UseDatabaseForName",
+        "guid": 2,
+        "type": 1,
+        "abilityIcon": "inv_axe_02.jpg"
+       }
+      ],
+      "gear": [
+       {
+        "id": 65266,
+        "slot": 0,
+        "quality": 4,
+        "icon": "inv_helmet_plate_raidwarrior_i_01.jpg",
+        "name": "Earthen Helmet",
+        "itemLevel": 372,
+        "permanentEnchant": 4208,
+        "permanentEnchantName": "+3 Strength and +2 Mastery",
+        "gems": [
+         {
+          "id": 68779,
+          "itemLevel": 85,
+          "icon": "inv_misc_metagem_b.jpg"
+         },
+         {
+          "id": 52222,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior4.jpg"
+         }
+        ]
+       },
+       {
+        "id": 60227,
+        "slot": 1,
+        "quality": 4,
+        "icon": "inv_jewelry_necklace_46.jpg",
+        "name": "Caelestrasz's Will",
+        "itemLevel": 379,
+        "gems": [
+         {
+          "id": 52206,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       {
+        "id": 71603,
+        "slot": 2,
+        "quality": 4,
+        "icon": "inv_shoulder_plate_raidwarrior_j_01.jpg",
+        "name": "Pauldrons of the Molten Giant",
+        "itemLevel": 391,
+        "permanentEnchant": 4202,
+        "permanentEnchantName": "+3 Strength and +1 Critical Strike",
+        "gems": [
+         {
+          "id": 52206,
+          "itemLevel": 85,
+          "icon": "inv_misc_cutgemsuperior6.jpg"
+         }
+        ]
+       },
+       "... 16 more"
+      ]
+     },
+     "... 22 more"
+    ],
+    "totalTime": 239781,
+    "logVersion": 14,
+    "gameVersion": 5,
+    "exploitDetails": []
+   }
+  }
+ }
+}
