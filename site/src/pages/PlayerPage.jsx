@@ -155,11 +155,13 @@ export default function PlayerPage({ data, name, filter }) {
           if (!stat) return null;
           const { row } = result(stat);
           return (
-            <div key={id} className="otile">
-              <span className="olabel">{label}</span>
-              <span className="ovalue">{row ? formatInt(row.value) : '–'}</span>
-              <span className="opct">{row && hasPercentile(stat) ? formatPct(row.pct) : ' '}</span>
-            </div>
+            <article key={id} className="scard big otile">
+              <header><a className="slabel" href={href('stat', stat.id)}>{label}</a><InfoTip stat={stat} meta={meta} /></header>
+              <div className="svalue">{row ? formatInt(row.value) : '–'}</div>
+              {row && hasPercentile(stat) && (
+                <footer className="sfoot"><span className="pct"><PctBar pct={row.pct} /> {formatPct(row.pct)}</span></footer>
+              )}
+            </article>
           );
         })}
       </section>

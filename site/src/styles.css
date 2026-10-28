@@ -172,14 +172,11 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .grad { background: linear-gradient(173deg, #fff 10%, var(--parchment) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 6px 26px var(--alliance-glow)); }
 /* Phones: the six intro tiles fill the screen under the sticky header. */
 .overview { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 10px; min-height: calc(100svh - 150px); }
-.otile, .scard { background: var(--navy-glass); border: 1px solid color-mix(in srgb, var(--tan) 45%, transparent); border-radius: 2px; text-align: center; min-width: 0; }
-.otile { display: grid; grid-template-rows: 1fr auto 1fr; align-items: center; padding: 14px 10px; }
-.otile .olabel { align-self: end; }
-.otile .opct { align-self: start; }
-.olabel, .slabel { font: 600 .82rem/1.3 var(--f-subtitle); text-transform: uppercase; letter-spacing: .16em; color: var(--parchment); text-decoration: none; }
-.ovalue { font: 500 2.9rem/1.1 var(--f-headline); font-variant-numeric: tabular-nums; margin: 4px 0; }
-.otile .olabel { font-size: .9rem; }
-.opct { font-size: .85rem; color: var(--tan); }
+.scard { background: var(--navy-glass); border: 1px solid color-mix(in srgb, var(--tan) 45%, transparent); border-radius: 2px; text-align: center; min-width: 0; }
+.slabel { font: 600 .82rem/1.3 var(--f-subtitle); text-transform: uppercase; letter-spacing: .16em; color: var(--parchment); text-decoration: none; }
+/* Overview tiles are big stat cards, centred in their grid cell. */
+.scard.otile { justify-content: center; }
+.otile .pbar { width: 64px; }
 
 .psec { margin-top: 52px; }
 .bigcards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }
@@ -208,8 +205,9 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .more { display: block; margin: 12px auto 0; font: 600 .9rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .16em; color: var(--cream); background: transparent; border: 1px solid var(--line-strong); border-radius: 2px; padding: 9px 22px; cursor: pointer; }
 .more:hover { border-color: var(--alliance); color: #fff; }
 @media (min-width: 560px) {
-  .overview { grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(150px, auto); min-height: 0; }
-  .ovalue { font-size: 3.4rem; }
+  .overview { grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(170px, auto); min-height: 0; }
+  .scard.otile .svalue { font-size: 3.2rem; }
+  .otile .pbar { width: 120px; }
   .bigcards { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
   .smallcards { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
 }
