@@ -170,13 +170,14 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 
 /* Player page: overview tiles, then stat cards (after the Timewalking tiles: thin tan frame, spaced caps label, big Oswald value). */
 .grad { background: linear-gradient(173deg, #fff 10%, var(--parchment) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 6px 26px var(--alliance-glow)); }
-/* Phones: the six intro tiles fill the screen under the sticky header. */
-.overview { display: grid; grid-template-columns: repeat(2, 1fr); grid-auto-rows: 1fr; gap: 10px; min-height: calc(100svh - 150px); }
+/* Phones: intro cards stacked, each one the full width of the screen. Grid from 560px. */
+.overview { display: flex; flex-direction: column; gap: 10px; }
+.overview > .scard { width: 100%; }
 .scard { background: var(--navy-glass); border: 1px solid color-mix(in srgb, var(--tan) 45%, transparent); border-radius: 2px; text-align: center; min-width: 0; }
 .slabel { font: 600 .82rem/1.3 var(--f-subtitle); text-transform: uppercase; letter-spacing: .16em; color: var(--parchment); text-decoration: none; }
 /* Overview tiles are big stat cards, centred in their grid cell. */
 .scard.otile { justify-content: center; }
-.otile .pbar { width: 64px; }
+.otile .pbar { width: 120px; }
 
 .psec { margin-top: 52px; }
 .bigcards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }
@@ -205,9 +206,8 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .more { display: block; margin: 12px auto 0; font: 600 .9rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .16em; color: var(--cream); background: transparent; border: 1px solid var(--line-strong); border-radius: 2px; padding: 9px 22px; cursor: pointer; }
 .more:hover { border-color: var(--alliance); color: #fff; }
 @media (min-width: 560px) {
-  .overview { grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(170px, auto); min-height: 0; }
+  .overview { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: minmax(170px, auto); }
   .scard.otile .svalue { font-size: 3.2rem; }
-  .otile .pbar { width: 120px; }
   .bigcards { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
   .smallcards { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
 }
