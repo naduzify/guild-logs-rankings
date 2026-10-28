@@ -237,3 +237,16 @@ Une entrée par décision : date, décision, raison, alternatives écartées. La
 **Raison.** La fiche doit raconter le joueur d'un coup d'œil : ses chiffres de base, puis ce qui le distingue, le reste restant accessible sans encombrer le téléphone.
 
 **Écarté.** Liste de lignes par stat (illisible sur mobile, rien ne ressort). Encart séparé des titres gagnés (doublon avec les cartes).
+
+---
+
+## 2026-10-28 — Favicon « F » et ajustements de la fiche joueur
+
+**Décision.**
+- Favicon : un « F » en Cinzel Black, dégradé blanc → parchemin sur fond bleu Alliance, en SVG et en PNG (32, 180, 512). Cinzel (licence OFL) est proche du lettrage du logo du jeu *Fable* qui sert d'icône au Discord de la guilde. Généré par `scripts/make_favicon.py` (fonttools + Pillow dans le venv local).
+- Fiche joueur : les six tuiles d'aperçu sont agrandies et occupent tout l'écran sur téléphone (2 × 3), 3 × 2 sur ordinateur. Les sections de stats n'ont plus de titre, seulement un grand espace entre elles.
+- Info-bulles dans les cartes : le bouton « i » passe dans le coin haut-droit de la carte pour garder le nom centré ; la bulle s'ouvre décalée à côté du bouton, placée en JS et gardée dans l'écran. Sur téléphone, panneau en bas de l'écran comme avant. Le ruban « Earned » passe dans le coin haut-gauche.
+
+**Raison.** Reprendre l'identité visuelle de la guilde sans réutiliser l'artwork du jeu (illisible en 16 px, et propriété de Microsoft). Une fiche plus aérée, qui s'ouvre sur les chiffres clés du joueur.
+
+**Écarté.** L'artwork du Discord tel quel en favicon. Info-bulle qui recouvre la carte.

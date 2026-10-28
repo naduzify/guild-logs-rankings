@@ -88,8 +88,8 @@ function Section({ data, title, kicker, items, open, onToggle }) {
   const small = items.filter(it => !bigIds.has(it.stat.id)).sort((a, b) => rank(b) - rank(a));
   const shown = open ? small : small.slice(0, cfg.visible_small);
   return (
-    <section className="psec">
-      <h2 className="sectitle">{title}{kicker && <small>{kicker}</small>}</h2>
+    // No visible heading: categories are told apart by spacing only.
+    <section className="psec" aria-label={kicker ? `${title}, ${kicker}` : title}>
       {big.length > 0 && <div className="bigcards">{big.map(it => <StatCard key={it.stat.id} data={data} {...it} big />)}</div>}
       <div className="smallcards">{shown.map(it => <StatCard key={it.stat.id} data={data} {...it} />)}</div>
       {small.length > cfg.visible_small && (

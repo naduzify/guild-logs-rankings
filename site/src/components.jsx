@@ -1,25 +1,55 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { CLASS_COLORS, fold } from './lib/format.js';
 import { go, href } from './lib/route.js';
 import { explain } from './lib/stats.js';
 
-// "i" button showing how an achievement is calculated. Hover on desktop; tap on touch screens,
-// where it opens as a sheet at the bottom of the screen (CSS), and closes on any tap outside.
+const WIDE = '(min-width: 720px)';
+const GAP = 12;
+
+// "i" button showing how an achievement is calculated. On wide screens the box opens offset
+// beside the button (placed in JS, clamped to the viewport); on phones it is a sheet at the
+// bottom of the screen (CSS). Hover opens it where hover exists; tap or click toggles it.
 export function InfoTip({ stat, meta }) {
   const [open, setOpen] = useState(false);
+  const [pos, setPos] = useState(null);
   const ref = useRef(null);
+  const box = useRef(null);
+  const hover = useRef(typeof window !== 'undefined' && !!window.matchMedia?.('(hover: hover)').matches);
+
   useEffect(() => {
     if (!open) return;
     const close = e => { if (e.type === 'keydown' ? e.key === 'Escape' : !ref.current?.contains(e.target)) setOpen(false); };
+    const shut = () => setOpen(false);
     document.addEventListener('pointerdown', close);
     document.addEventListener('keydown', close);
-    return () => { document.removeEventListener('pointerdown', close); document.removeEventListener('keydown', close); };
+    window.addEventListener('scroll', shut, { passive: true });
+    return () => {
+      document.removeEventListener('pointerdown', close);
+      document.removeEventListener('keydown', close);
+      window.removeEventListener('scroll', shut);
+    };
   }, [open]);
+
+  useLayoutEffect(() => {
+    if (!open || !window.matchMedia(WIDE).matches) { setPos(null); return; }
+    const b = ref.current.getBoundingClientRect();
+    const { width, height } = box.current.getBoundingClientRect();
+    const vw = document.documentElement.clientWidth, vh = window.innerHeight;
+    // Down and to the right of the button; flip left / up when it would leave the screen.
+    let left = b.right + 6, top = b.top - 6;
+    if (left + width > vw - GAP) left = b.left - width - 6;
+    if (left < GAP) left = Math.min(Math.max(GAP, b.left - width / 2), vw - width - GAP);
+    if (top + height > vh - GAP) top = Math.max(GAP, vh - height - GAP);
+    setPos({ left, top });
+  }, [open]);
+
   return (
-    <span ref={ref} className={'tip' + (open ? ' open' : '')}>
+    <span ref={ref} className={'tip' + (open ? ' open' : '')}
+      onMouseEnter={() => hover.current && setOpen(true)} onMouseLeave={() => hover.current && setOpen(false)}>
       <button type="button" className="tipbtn" aria-label={`How ${stat.title} is calculated`} aria-expanded={open}
-        onClick={e => { e.preventDefault(); e.stopPropagation(); setOpen(o => !o); }}>i</button>
-      <span role="tooltip" className="tipbox">
+        onClick={e => { e.preventDefault(); e.stopPropagation(); setOpen(o => (hover.current ? true : !o)); }}>i</button>
+      <span ref={box} role="tooltip" className="tipbox"
+        style={pos ? { left: pos.left, top: pos.top, right: 'auto', bottom: 'auto' } : undefined}>
         <b>{stat.title}{stat.flip && ` / ${stat.flip}`}</b>
         {explain(stat, meta.settings).map(l => <span key={l}>{l}</span>)}
       </span>
