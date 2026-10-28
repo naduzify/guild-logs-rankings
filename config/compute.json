@@ -148,5 +148,13 @@
     "Garrosh Hellscream"
   ],
   "_night_gap_hours": "Hours in raid: a report is split into raid nights at any gap between boss pulls longer than this.",
-  "night_gap_hours": 3
+  "night_gap_hours": 3,
+  "_overachiever": "Overachiever (DPS and healers, kills): score minus the mean score of other guild players of the same role and expansion whose item level, relative to their pull, is within this tolerance of his. Era item levels are packed tight, hence a narrower window.",
+  "overachiever": {
+    "ilvl_tolerance": {
+      "classic": 1,
+      "default": 2
+    },
+    "min_peers": 20
+  }
 }

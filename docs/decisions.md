@@ -323,3 +323,13 @@ Suite au calcul d'essai (`docs/calcul-essai.md`).
 **Décision.** La règle des 10 % (mêlée du boss ou des adds) ne s'applique qu'aux joueurs que WCL classe DPS ou tank. Un healer WCL reste healer, même s'il a pris beaucoup de coups d'adds.
 
 **Raison.** Au premier export, 89 lignes de druides et paladins healers passaient tank. Après correction : aucune, et chaque pull Classic garde au moins un tank.
+
+---
+
+## 2026-10-28 — Overachiever : comparaison aux joueurs de même niveau d'équipement
+
+**Décision.** Overachiever = moyenne, sur ses kills, de l'écart entre le score base 100 du joueur et la moyenne des scores des **autres joueurs de la guilde** du même rôle et de la même extension dont l'ilvl, **mesuré par rapport à la médiane de son rôle dans le pull**, est à ±1 du sien en Classic Era et à ±2 ensuite. DPS et healers seulement (le score tank n'est pas relatif au pull). Il faut au moins 20 pairs (`config/compute.json` → `overachiever`).
+
+**Raison.** L'ilvl relatif au raid du soir mesure « en avance ou en retard de stuff », sans mélanger les tiers d'une même extension. En Era, les ilvl sont très resserrés : à ±2, un kill se compare à 55 % de tous les kills de son rôle, à ±1 à 31 %, avec encore des milliers de pairs.
+
+**Écarté.** Le percentile WCL par tranche d'ilvl (un parse contre le monde, demande les rankings de chaque rapport). L'ilvl brut (mélange les tiers d'une extension).

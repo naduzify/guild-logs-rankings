@@ -9,6 +9,7 @@ Usage:
     python -m pipeline.export_site            # from the raw crawl cache
 """
 
+import bisect
 import json
 import statistics
 from collections import Counter, defaultdict
@@ -24,7 +25,7 @@ ROLES = ["TANK", "DPS", "HEALER"]
 CLASSES = ["Death Knight", "Druid", "Hunter", "Mage", "Monk", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"]
 CLASS_NAME = {"DeathKnight": "Death Knight"}
 # Stats that need data the crawl does not have yet (docs/stats.md) or a model still to write.
-PENDING = {"overachiever", "the-terrorist", "attention-seeker", "blamed-the-healer", "timekeeper"}
+PENDING = {"the-terrorist", "attention-seeker", "blamed-the-healer", "timekeeper"}
 
 
 def load(name: str) -> dict:
@@ -130,6 +131,46 @@ def base100(rows, metric, group_key):
     return out
 
 
+def ilvl_residuals(kills: list) -> dict:
+    """Overachiever: {id(row): score minus the mean score of other guild players at the same gear level}.
+
+    Gear level = item level minus the median of the same role in the pull. Peers: other players,
+    same expansion and role, within the expansion's ilvl tolerance (config "overachiever").
+    """
+    tol_cfg = CONFIG["overachiever"]["ilvl_tolerance"]
+    by_pull = defaultdict(list)
+    for r in kills:
+        by_pull[(r["source"], r["role"])].append(r["ilvl"])
+    groups = defaultdict(list)
+    for r in kills:
+        rel = r["ilvl"] - statistics.median(by_pull[(r["source"], r["role"])])
+        groups[(r["expansion"], r["role"])].append((rel, r["score"], r["player"], r))
+
+    out = {}
+    for (exp, _), items in groups.items():
+        tol = tol_cfg.get(exp, tol_cfg["default"])
+        items.sort(key=lambda x: x[0])
+        xs = [x[0] for x in items]
+        prefix = [0.0]
+        for x in items:
+            prefix.append(prefix[-1] + x[1])
+        # The same sums per player, to take his own kills out of his peers.
+        mine = defaultdict(lambda: ([], [0.0]))
+        for rel, score, pl, _ in items:
+            xs_p, pre_p = mine[pl]
+            xs_p.append(rel)
+            pre_p.append(pre_p[-1] + score)
+        for rel, score, pl, r in items:
+            lo, hi = bisect.bisect_left(xs, rel - tol), bisect.bisect_right(xs, rel + tol)
+            xs_p, pre_p = mine[pl]
+            plo, phi = bisect.bisect_left(xs_p, rel - tol), bisect.bisect_right(xs_p, rel + tol)
+            n = (hi - lo) - (phi - plo)
+            if n >= CONFIG["overachiever"]["min_peers"]:
+                total = (prefix[hi] - prefix[lo]) - (pre_p[phi] - pre_p[plo])
+                out[id(r)] = score - total / n
+    return out
+
+
 # --- main --------------------------------------------------------------------
 
 def main() -> None:
@@ -219,6 +260,8 @@ def main() -> None:
         r["fiend"] = min(r["avoidable_taken"], r["self_healing"]) if r["role"] == "HEALER" else None
     fiend = base100([r for r in rows if r["role"] == "HEALER"], "fiend", lambda r: r["source"])
     one_button = base100([r for r in kills if r["role"] == "DPS"], "top_ability_share", lambda r: (r["class"], r["e"]))
+    over = ilvl_residuals([r for r in kills if r["role"] in ("DPS", "HEALER") and r["score"] is not None
+                           and r["ilvl"] not in (None, "")])
 
     # Black Cat: wipe rate on a boss when the player is there, vs the guild's rate on that boss without him.
     boss_pulls, boss_wipes = Counter(), Counter()
@@ -287,6 +330,8 @@ def main() -> None:
             cells.top("comfort-boss", k, r["encounter"], score)
             cells.slope("glow-up", k, r["week"], score)
             prog = first_kill.get(bk) == r["source"]
+            if id(r) in over:
+                cells.ratio("overachiever", k, over[id(r)])
             cells.diff("clutch-player", k, score if prog else 0, prog, 0 if prog else score, not prog)
 
         if role == "TANK":
