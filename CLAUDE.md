@@ -67,6 +67,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 
 ### Modèle
 - **Joueur = main + rerolls**, via un fichier de mapping manuel (`{"rerolls": {"Main": ["Reroll1", …]}}`). Un personnage non mappé est un joueur à lui seul. Les noms sont comparés après normalisation Unicode (accents).
+- **Édition du mapping dans un tableur** : `python -m pipeline.rerolls_sheet export` écrit `data/exports/rerolls.csv` (un personnage par ligne, joueurs classés et ghosts, avec classe, rôle, semaines, dates) ; après correction de la colonne Player, `python -m pipeline.rerolls_sheet import <csv>` réécrit `fable_rerolls.json`.
 - Validation au calcul : alerte si un personnage est rattaché à deux joueurs, ou si un reroll listé n'apparaît dans aucun log. Le pipeline sort la liste des personnages non mappés qui passent le seuil.
 - **Seuil d'apparition** dans les classements : **15 semaines de reset distinctes** de présence en raid éligible, tous personnages confondus. Et **10 semaines de reset dans un rôle** (tous personnages) pour être classé sur ce rôle : achievements de rôle, achievements communs sous filtre de rôle, sections de rôle de la fiche (`min_role_weeks`).
 - **Rôle par combat**, tel que donné par WCL (TANK / DPS / HEALER). Les erreurs ponctuelles de catégorisation sont acceptées.

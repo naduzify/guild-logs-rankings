@@ -38,3 +38,6 @@ data/facts/
 
 # Background removal model for portraits (rembg), downloaded on first use
 data/models/
+
+# Spreadsheet exports (pipeline.rerolls_sheet)
+data/exports/
