@@ -28,8 +28,14 @@ export const BASE100 = 'base 100';
 // Warcraft Logs parse colours, lightened where needed to stay readable on the navy table rows.
 const PARSE_COLORS = [[99, '#ee82bd'], [95, '#ff8000'], [75, '#c48af7'], [50, '#4d9bff'], [25, '#1eff00'], [0, '#9d9d9d']];
 export const parseColor = v => PARSE_COLORS.find(([min]) => v >= min)[1];
-// Guild rank band: light gold for #1, else the parse colour of the percentile.
-export const rankColor = row => (row.pos === 1 ? '#f6e7a6' : parseColor(row.pct));
+// Guild rank band: light gold for #1, else parse colours by percentile, with a darker purple than the
+// table's; white text on the purple, dark text on the lighter bands.
+const BAND_COLORS = [[99, '#ee82bd'], [95, '#ff8000'], [75, '#8b3fd9', '#fff'], [50, '#4d9bff'], [25, '#1eff00'], [0, '#9d9d9d']];
+export function rankBand(row) {
+  if (row.pos === 1) return { bg: '#f6e7a6', fg: null };
+  const [, bg, fg = null] = BAND_COLORS.find(([min]) => row.pct >= min);
+  return { bg, fg };
+}
 
 export const formatBig = n => compact.format(n);
 export const formatInt = n => int.format(n);

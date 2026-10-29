@@ -306,9 +306,16 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 
 .psec { margin-top: 52px; }
 /* Career totals under the best friend panel: the guild rank in a corner band, parse-coloured (--band). */
-.highlights { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
-.scard.hcard { border-color: color-mix(in srgb, var(--band, var(--tan)) 70%, transparent); box-shadow: 0 0 22px color-mix(in srgb, var(--band, transparent) 16%, transparent); }
-.ribbon.rankband { top: 12px; left: -34px; padding: 3px 38px; background: var(--band); color: var(--navy-deep); font: 700 .8rem var(--f-headline); letter-spacing: .04em; }
+.highlights { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+.scard.hcard { border-color: color-mix(in srgb, var(--band, var(--tan)) 75%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--band, transparent) 14%, transparent), var(--navy-glass) 75%);
+  box-shadow: 0 0 28px color-mix(in srgb, var(--band, transparent) 30%, transparent), inset 0 0 18px color-mix(in srgb, var(--band, transparent) 10%, transparent); }
+/* Fixed width, text centred: every band crosses the corner at the same place, whatever the rank's length. */
+.ribbon.rankband { top: 16px; left: -34px; width: 120px; padding: 3px 0; text-align: center; transform: rotate(-45deg);
+  background: var(--band); color: var(--band-text, var(--navy-deep)); font: 700 .8rem var(--f-headline); letter-spacing: .04em;
+  box-shadow: 0 2px 6px rgb(0 0 0 / .35); }
+/* Player page headings: the Guild Legends ornament, with room above each section. */
+.ptitlesec { margin: 0 0 18px; }
 .bigcards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }
 .smallcards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .scard { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 24px; }

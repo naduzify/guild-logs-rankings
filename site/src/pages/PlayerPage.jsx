@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FilterBar, InfoTip, PctBar, RankBadge, StatValue, roleLabel } from '../components.jsx';
-import { BASE100, CLASS_COLORS, formatBig, formatInt, formatNumber, formatPct, formatValue, isBase100, rankColor } from '../lib/format.js';
+import { BASE100, CLASS_COLORS, formatBig, formatInt, formatNumber, formatPct, formatValue, isBase100, rankBand } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat, earnedTitle, hasNumber, hasPercentile, isRankable, shareTotal, valueIsNumber } from '../lib/stats.js';
 
@@ -79,7 +79,12 @@ function StatCard({ data, stat, row, total, big }) {
   );
 }
 
-function Section({ data, title, kicker, items, open, onToggle }) {
+// Ornamented heading, as Guild Legends on the home page; nothing when the config has no text.
+function SectionTitle({ text }) {
+  return text ? <h2 className="ornament ptitlesec"><span>{text}</span></h2> : null;
+}
+
+function Section({ data, id, title, kicker, items, open, onToggle }) {
   const cfg = data.meta.player;
   const big = items
     .filter(it => it.note != null && it.note >= cfg.featured_min_pct)
@@ -91,8 +96,8 @@ function Section({ data, title, kicker, items, open, onToggle }) {
   const small = items.filter(it => !bigIds.has(it.stat.id)).sort((a, b) => rank(b) - rank(a));
   const shown = open ? small : small.slice(0, cfg.visible_small);
   return (
-    // No visible heading: categories are told apart by spacing only.
     <section className="psec" aria-label={kicker ? `${title}, ${kicker}` : title}>
+      <SectionTitle text={cfg.section_titles?.[id]} />
       {big.length > 0 && <div className="bigcards">{big.map(it => <StatCard key={it.stat.id} data={data} {...it} big />)}</div>}
       <div className="smallcards">{shown.map(it => <StatCard key={it.stat.id} data={data} {...it} />)}</div>
       {small.length > cfg.visible_small && (
@@ -113,6 +118,7 @@ export default function PlayerPage({ data, name, filter }) {
   const facets = data.facets[p];
   const eff = restrict(filter, facets);
   const overviewIds = new Set(meta.player.overview.map(o => o.stat));
+  const titles = meta.player.section_titles || {};
 
   const result = stat => {
     const { byPlayer, ranked } = computeStat(stat, data.stats[stat.id] || [], eff, meta.settings, data.roleOk);
@@ -153,16 +159,18 @@ export default function PlayerPage({ data, name, filter }) {
         note={`Percentiles compare ${pl.name} with every player under the same filters.`} />
 
       {/* Career totals, with the guild rank in a corner band coloured like a parse. */}
-      <section className="highlights" aria-label="Career totals">
+      <SectionTitle text={titles.highlights} />
+      <section className="highlights" aria-label={titles.highlights || 'Career totals'}>
         {(meta.player.highlights || []).map(({ stat: id, label }) => {
           const stat = data.statById.get(id);
           if (!stat) return null;
           const { row, total } = result(stat);
+          const band = row && rankBand(row);
           return (
-            <article key={id} className="scard big hcard" style={row ? { '--band': rankColor(row) } : undefined}>
+            <article key={id} className="scard big hcard" style={band ? { '--band': band.bg, ...(band.fg && { '--band-text': band.fg }) } : undefined}>
               {row && <span className="ribbonwrap"><span className="ribbon rankband">#{row.pos}</span></span>}
               <header><a className="slabel" href={href('stat', stat.id)}>{label}</a><InfoTip stat={stat} meta={meta} /></header>
-              <div className="svalue">{row ? formatBig(row.value) : '–'}</div>
+              <div className="svalue grad">{row ? formatBig(row.value) : '–'}</div>
               {row && <footer className="sfoot">#{row.pos} of {total} in the guild</footer>}
             </article>
           );
@@ -187,7 +195,7 @@ export default function PlayerPage({ data, name, filter }) {
       </section>
 
       {sections.map(s => (
-        <Section key={s.id} data={data} title={s.title} kicker={s.kicker} items={s.items}
+        <Section key={s.id} data={data} id={s.id} title={s.title} kicker={s.kicker} items={s.items}
           open={!!openSections[s.id]} onToggle={() => setOpenSections(o => ({ ...o, [s.id]: !o[s.id] }))} />
       ))}
     </>

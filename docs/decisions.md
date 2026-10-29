@@ -477,3 +477,9 @@ L'export donne `role_weeks` par joueur ; le site ignore les cellules d'un rôle 
 Un **bandeau en coin** (à gauche) affiche le rang dans la guilde (« #7 ») sous les filtres actifs, coloré comme un parse WCL : jaune clair pour le n°1, puis selon le percentile rose (99+), orange (95+), violet (75+), bleu (50+), vert (25+), gris. Texte du bandeau en marine foncé (fonds clairs). La bordure et le halo de la carte prennent la même couleur.
 
 **Corrigé au passage.** Le seuil de 10 semaines par rôle ne s'applique d'office qu'aux achievements tank / healer / DPS ; il touchait aussi la catégorie `overview` (tuiles d'aperçu), qui ne le subit plus que sous filtre de rôle, comme les communs.
+
+## 2026-10-29 — Fiche joueur : titres de section, cartes de totaux plus visibles
+
+**Décision.**
+- La fiche joueur a maintenant des **titres de section**, ornementés comme « Guild Legends » sur l'accueil : **Player Contribution** au-dessus des trois cartes de totaux, puis **General** (communs), **Damage Dealer**, **Tank**, **Healer** au-dessus des sections de catégorie. Textes dans `config/site.json` → `player.section_titles` ; une clé absente n'affiche pas de titre. Remplace la règle « sections sans titre, séparées par un grand espace ».
+- Cartes de totaux : bandeau de rang à **largeur fixe** et texte centré, à 45° (la largeur variait avec la longueur du rang, d'où un mauvais alignement d'une carte à l'autre) ; **violet plus foncé** (`#8b3fd9`, texte blanc) que celui des parses ; halo et dégradé de la couleur du bandeau sur la carte, halo sur la valeur comme sur les titres ; plus d'espace sous les cartes.
