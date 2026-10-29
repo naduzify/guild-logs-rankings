@@ -25,7 +25,8 @@ GUILDS = {
         "host": "fresh",
         "ids": [773182, 818103],
         "expansion_start": [
-            ("tbc", datetime(2026, 1, 13, tzinfo=timezone.utc)),
+            # First report in a TBC zone on the guild's sheets (2026-10-30 listing).
+            ("tbc", datetime(2026, 2, 19, tzinfo=timezone.utc)),
         ],
     },
 }
