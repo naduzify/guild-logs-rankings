@@ -21,7 +21,7 @@ roles          ["TANK", "DPS", "HEALER"]      (idem)
 rank           {max, names[14]}                ← config/tiers.json
 settings       {title_percentile, flip_percentile, min_den, min_role_weeks}  ← config/site.json
 home           {top_n, pinned[], pinned_title, pinned_top_n, featured_count, records[]}  ← config/site.json
-player         {overview[], featured_per_category, featured_min_pct, visible_small}  ← config/site.json
+player         {overview[], highlights[], featured_per_category, featured_min_pct, visible_small}  ← config/site.json
 stats          [définitions]                   ← config/stats.json
 guild_totals   [[exp, pulls, kills, wipes, damage, boss_seconds, raid_seconds]]  (une ligne par extension)
                boss_seconds = durée cumulée des pulls de boss, kills et wipes (Hours on bosses)

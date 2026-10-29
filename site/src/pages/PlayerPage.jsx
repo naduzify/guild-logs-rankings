@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FilterBar, InfoTip, PctBar, RankBadge, StatValue, roleLabel } from '../components.jsx';
-import { BASE100, CLASS_COLORS, formatInt, formatNumber, formatPct, formatValue, isBase100 } from '../lib/format.js';
+import { BASE100, CLASS_COLORS, formatBig, formatInt, formatNumber, formatPct, formatValue, isBase100, rankColor } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat, earnedTitle, hasNumber, hasPercentile, isRankable, shareTotal, valueIsNumber } from '../lib/stats.js';
 
@@ -151,6 +151,23 @@ export default function PlayerPage({ data, name, filter }) {
       </div>
       <FilterBar meta={meta} filter={eff} available={facets} onChange={f => go('player', pl.name, f)}
         note={`Percentiles compare ${pl.name} with every player under the same filters.`} />
+
+      {/* Career totals, with the guild rank in a corner band coloured like a parse. */}
+      <section className="highlights" aria-label="Career totals">
+        {(meta.player.highlights || []).map(({ stat: id, label }) => {
+          const stat = data.statById.get(id);
+          if (!stat) return null;
+          const { row, total } = result(stat);
+          return (
+            <article key={id} className="scard big hcard" style={row ? { '--band': rankColor(row) } : undefined}>
+              {row && <span className="ribbonwrap"><span className="ribbon rankband">#{row.pos}</span></span>}
+              <header><a className="slabel" href={href('stat', stat.id)}>{label}</a><InfoTip stat={stat} meta={meta} /></header>
+              <div className="svalue">{row ? formatBig(row.value) : '–'}</div>
+              {row && <footer className="sfoot">#{row.pos} of {total} in the guild</footer>}
+            </article>
+          );
+        })}
+      </section>
 
       <section className="overview" aria-label="Overview">
         {meta.player.overview.map(({ stat: id, label, percentile }) => {

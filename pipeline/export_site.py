@@ -392,6 +392,9 @@ def main() -> None:
         cells.sum("hours-played", k, raid_ms[id(r)] / 3_600_000)
         cells.sum("boss-kills", k, kill)
         cells.sum("wipes", k, wipe)
+        cells.sum("damage-done", k, r["damage_done"])
+        cells.sum("damage-taken", k, r["damage_taken"])
+        cells.sum("healing-done", k, r["healing_done"])
         cells.ids("the-gang", k, r["week"])
         cells.ids("the-undecided", k, char_id[r["char"]])
         if kill:

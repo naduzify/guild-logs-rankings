@@ -48,6 +48,7 @@ function passes(f, cell) {
 }
 
 const cache = new Map();
+const ROLE_CATEGORIES = new Set(['tank', 'healer', 'dps']);
 
 // Returns { byPlayer: Map(player -> row), ranked: rows best first }.
 // row = { p, value, number, label, pct, pos } ; pct/pos only for rankable stats.
@@ -58,7 +59,7 @@ export function computeStat(stat, cells, filter, settings, roleOk) {
   if (cache.has(key)) return cache.get(key);
 
   const agg = AGG[stat.agg];
-  const gated = roleOk && (stat.category !== 'common' || filter.role.size > 0);
+  const gated = roleOk && (ROLE_CATEGORIES.has(stat.category) || filter.role.size > 0);
   const accs = new Map();
   for (const cell of cells) {
     if (!passes(filter, cell)) continue;
@@ -116,9 +117,9 @@ const ROLE_SCOPE = {
 export function explain(stat, settings) {
   const lines = [stat.detail, ROLE_SCOPE[stat.category]];
   const w = settings.min_role_weeks;
-  if (w) lines.push(stat.category === 'common'
-    ? `With the role filter set, only players with at least ${w} reset weeks in that role.`
-    : `Only players with at least ${w} reset weeks in the role.`);
+  if (w) lines.push(ROLE_CATEGORIES.has(stat.category)
+    ? `Only players with at least ${w} reset weeks in the role.`
+    : `With the role filter set, only players with at least ${w} reset weeks in that role.`);
   const minDen = stat.min_den ?? settings.min_den;
   if (hasPercentile(stat)) {
     const sample = stat.format === 'parse' ? 'bosses' : stat.agg === 'spread' || stat.agg === 'slope' ? 'kills' : 'pulls';

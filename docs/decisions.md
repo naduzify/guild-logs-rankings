@@ -469,3 +469,11 @@ L'export donne `role_weeks` par joueur ; le site ignore les cellules d'un rôle 
 **Raison.** Les off-specs et rerolls de passage, avec peu de pulls, sortaient en tête de certains classements de rôle (taux sur un petit échantillon).
 
 **Écarté.** Un seuil en nombre de pulls (`min_den`) : il reste, mais 10 pulls se font en une soirée ; les semaines mesurent une vraie présence dans le rôle.
+
+## 2026-10-29 — Fiche joueur : cartes de totaux avec bandeau de rang
+
+**Décision.** Sous « Your best friend », trois cartes mises en avant : **Total damage done**, **Total damage taken**, **Total healing done**, en raid (pulls de boss éligibles, kills et wipes ; soins effectifs, sans le surplus). Ce sont trois stats `sum` de catégorie `overview` (`damage-done`, `damage-taken`, `healing-done`) : elles ont leur page de classement, suivent les filtres, mais restent hors du Hall of fame et du compte des achievements. Réglage : `config/site.json` → `player.highlights`.
+
+Un **bandeau en coin** (à gauche) affiche le rang dans la guilde (« #7 ») sous les filtres actifs, coloré comme un parse WCL : jaune clair pour le n°1, puis selon le percentile rose (99+), orange (95+), violet (75+), bleu (50+), vert (25+), gris. Texte du bandeau en marine foncé (fonds clairs). La bordure et le halo de la carte prennent la même couleur.
+
+**Corrigé au passage.** Le seuil de 10 semaines par rôle ne s'applique d'office qu'aux achievements tank / healer / DPS ; il touchait aussi la catégorie `overview` (tuiles d'aperçu), qui ne le subit plus que sous filtre de rôle, comme les communs.

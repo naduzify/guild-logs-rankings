@@ -50,6 +50,12 @@
         "label": "Characters"
       }
     ],
+    "_highlights": "Highlighted career totals under the best friend panel, with a corner band showing the guild rank, coloured like a parse: light gold for #1, then pink 99+, orange 95+, purple 75+, blue 50+, green 25+, grey (percentile under the current filters).",
+    "highlights": [
+      {"stat": "damage-done", "label": "Total damage done"},
+      {"stat": "damage-taken", "label": "Total damage taken"},
+      {"stat": "healing-done", "label": "Total healing done"}
+    ],
     "featured_per_category": 3,
     "featured_min_pct": 75,
     "visible_small": 6
