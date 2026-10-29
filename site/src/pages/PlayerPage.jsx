@@ -134,6 +134,7 @@ function BestFriend({ data, player, filter }) {
 
 export default function PlayerPage({ data, name, filter }) {
   const [openSections, setOpenSections] = useState({});
+  const [toggles, setToggles] = useState({});
   const p = data.byName.get(name);
   if (p == null) return <p className="empty">No player called “{name}”. Players need 15 reset weeks of raiding to show up.</p>;
   const pl = data.players[p];
@@ -189,18 +190,29 @@ export default function PlayerPage({ data, name, filter }) {
       {/* Career totals, with the guild rank in a corner band coloured like a parse. */}
       <SectionTitle text={titles.highlights} />
       <section className="highlights" aria-label={titles.highlights || 'Career totals'}>
-        {(meta.player.highlights || []).map(({ stat: id, label }) => {
+        {(meta.player.highlights || []).map(({ stat: baseId, label: baseLabel, toggle }) => {
+          // A toggle ("Bosses only") switches the card to another stat.
+          const on = !!(toggle && toggles[baseId] && data.statById.get(toggle.stat));
+          const id = on ? toggle.stat : baseId;
+          const label = on ? toggle.title || baseLabel : baseLabel;
           const stat = data.statById.get(id);
           if (!stat) return null;
           const { row, total } = result(stat);
           const band = row && rankBand(row);
           return (
-            <article key={id} className="scard big hcard" style={band ? { '--band': band.bg, ...(band.fg && { '--band-text': band.fg }) } : undefined}>
+            <article key={baseId} className="scard big hcard" style={band ? { '--band': band.bg, ...(band.fg && { '--band-text': band.fg }) } : undefined}>
               {row && <span className="ribbonwrap"><span className="ribbon rankband">#{row.pos}</span></span>}
               <header><a className="slabel" href={href('stat', stat.id)}>{label}</a><InfoTip stat={stat} meta={meta} /></header>
               <div className="svalue grad">{row ? formatBig(row.value) : '–'}</div>
               {row?.extra && <div className="hactual">{stat.scale_note && <span className="sunit">{stat.scale_note}</span>} <small>({formatBig(row.extra[0])} actual)</small></div>}
               {row && <footer className="sfoot">#{row.pos} of {total} in the guild</footer>}
+              {toggle && data.statById.get(toggle.stat) && (
+                <button type="button" role="switch" className="htoggle" aria-checked={on}
+                  onClick={() => setToggles(t => ({ ...t, [baseId]: !t[baseId] }))}>
+                  <span className="track" aria-hidden="true"><span className="thumb" /></span>
+                  {toggle.label}
+                </button>
+              )}
             </article>
           );
         })}

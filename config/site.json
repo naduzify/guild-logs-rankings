@@ -70,9 +70,13 @@
     ],
     "_section_titles": "Ornamented headings of the player page (like Guild Legends on the home page): highlights above the career totals, then one per category section. A missing key shows no heading.",
     "section_titles": {"highlights": "Player Contribution", "common": "General", "dps": "Damage Dealer", "tank": "Tank", "healer": "Healer"},
-    "_highlights": "Highlighted career totals under the best friend panel, with a corner band showing the guild rank, coloured like a parse: light gold for #1, then pink 99+, orange 95+, purple 75+, blue 50+, green 25+, grey (percentile under the current filters).",
+    "_highlights": "Highlighted career totals under the best friend panel, with a corner band showing the guild rank, coloured like a parse: light gold for #1, then pink 99+, orange 95+, purple 75+, blue 50+, green 25+, grey (percentile under the current filters). A `toggle` adds a switch on the card that switches it to another stat (its label next to the switch, its title on the card).",
     "highlights": [
-      {"stat": "damage-done", "label": "Total damage done"},
+      {
+        "stat": "damage-done",
+        "label": "Total damage done",
+        "toggle": {"stat": "damage-done-bosses", "label": "Bosses only", "title": "Total damage done to bosses"}
+      },
       {"stat": "damage-taken", "label": "Total damage taken"},
       {"stat": "healing-done", "label": "Total healing done"}
     ],

@@ -146,7 +146,8 @@ def tank_deaths_with_cd(events: list, deaths: list, actors: dict, tanks: set) ->
     """Tank name -> deaths (scripted ones excluded) with a defensive cooldown on him at the time of death.
 
     `events` are buff events already filtered on the cooldowns (config/crawl.json extras). A buff counts
-    when applied before the death and not removed before it (buffs drop at the moment of death).
+    when applied before the death and not removed more than cd_death_tolerance_ms before it: WCL logs the
+    removal of the buffs of a dying player 100 to 400 ms before the death itself.
     """
     spans = defaultdict(list)  # (target id, buff) -> [[start, end]], end None while still up
     for e in sorted(events, key=lambda e: e["timestamp"]):
@@ -163,7 +164,8 @@ def tank_deaths_with_cd(events: list, deaths: list, actors: dict, tanks: set) ->
         if name not in tanks or (d.get("killingBlow") or {}).get("name") in scripted:
             continue
         ts = d["timestamp"]
-        if any(tid == d.get("id") and a <= ts and (b is None or b >= ts)
+        tol = CONFIG["cd_death_tolerance_ms"]
+        if any(tid == d.get("id") and a <= ts and (b is None or b >= ts - tol)
                for (tid, _), ss in spans.items() for a, b in ss):
             out[name] += 1
     return out

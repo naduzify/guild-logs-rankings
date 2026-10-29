@@ -11,6 +11,8 @@
   "excluded_encounters": [744, 847],
   "_min_score_peers": "Performance scores (base 100 vs the median of the role in the pull): the median leaves out players at 0 and needs at least this many players of the role above 0, else the pull gets no score.",
   "min_score_peers": 3,
+  "_cd_death_tolerance_ms": "Blamed the Healer: a defensive cooldown removed up to this long before a tank's death still counts as up. WCL logs the removal of a dying player's buffs 100 to 400 ms before the death (500 ms: 62 deaths out of 2,065, 1 s: 71, 2 s: 81 in Era and TBC).",
+  "cd_death_tolerance_ms": 1000,
   "_tank_classes": "Every expansion: a player WCL lists as a tank whose class cannot tank plays DPS (WCL class names).",
   "tank_classes": ["Warrior", "Druid", "Paladin", "DeathKnight", "Monk"],
   "_era_tank": "Classic Era only: WCL lists as tanks only the Protection / Guardian talent builds, so tanks in a DPS build (Feral, fury-prot) are missed. A player of a tanking class is a tank when WCL lists him as one, or when he took at least this share of the boss melee damage of the pull, or of the adds melee damage (off-tanks). 25%: at 10%, fury warriors hit by a cleave or a tank swap counted as tanks. Players WCL lists as healers stay healers.",

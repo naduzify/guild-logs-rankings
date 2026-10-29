@@ -187,18 +187,19 @@ def ilvl_residuals(kills: list) -> dict:
 # Career totals comparable across expansions (compute.json scaled_totals_tier): stat -> (row field, reference
 # players, average). Damage taken uses the raid's mean, not its median: in a 40-man raid the median player
 # takes next to nothing and tanks would be worth huge multiples of it.
-SCALED = {"damage-done": ("damage_done", "DPS", statistics.median), "healing-done": ("healing_done", "HEALER", statistics.median),
+SCALED = {"damage-done-bosses": ("damage_done", "DPS", statistics.median), "healing-done": ("healing_done", "HEALER", statistics.median),
           "damage-taken": ("damage_taken", None, statistics.mean)}
 
 
-def scaled_totals(rows: list, ref_tier: int) -> dict:
+def scaled_totals(rows: list, ref_tier: int) -> tuple[dict, dict, dict]:
     """(id(row), stat) -> the row's amount at the reference tier's level: amount / median rate of the
     reference players of its pull (seconds of an average raider) x the guild's median rate on the
-    reference tier's kills. Pulls without reference players (no healer) or of zero length count 0."""
+    reference tier's kills. Pulls without reference players (no healer) or of zero length count 0.
+    Also returns, per stat, the rate of each pull and the reference rate (trash damage uses them)."""
     by_pull = defaultdict(list)
     for r in rows:
         by_pull[r["source"]].append(r)
-    out = {}
+    out, rates, refs_by_stat = {}, {}, {}
     for sid, (field, role, average) in SCALED.items():
         rate, refs = {}, []
         for src, rs in by_pull.items():
@@ -210,10 +211,43 @@ def scaled_totals(rows: list, ref_tier: int) -> dict:
                 if rs[0]["kill"] and rs[0]["tier"] == ref_tier:
                     refs.append(m)
         ref = statistics.median(refs)
+        rates[sid], refs_by_stat[sid] = rate, ref
         print(f"scaled {sid}: reference {ref:,.0f}/s on {len(refs)} kills")
         for r in rows:
             if r["source"] in rate:
                 out[(id(r), sid)] = r[field] / rate[r["source"]] * ref
+    return out, rates, refs_by_stat
+
+
+def trash_damage(pulls: dict, rate: dict, ref: float, tz) -> list:
+    """Damage Done (bosses and trash): [(boss row of the character that night, scaled trash, actual trash)].
+
+    Trash damage comes from reports/<code>/trash.json (pipeline/crawl_extra.py, one table per report). When a
+    night was logged in several reports, only the one holding the most kept boss pulls counts, so the trash
+    is not counted twice. A character's trash goes to his role and expansion of the night (his most played
+    role in that report's boss pulls) and is scaled like his boss damage: divided by the median of the
+    night's pull rates (median DPS rate of each pull), times the reference rate."""
+    by_night = defaultdict(lambda: defaultdict(list))
+    for src, rs in pulls.items():
+        by_night[raid_night(rs[0]["start_ms"], tz)][rs[0]["report"]].append(src)
+    out = []
+    for reports in by_night.values():
+        code, srcs = max(reports.items(), key=lambda kv: (len(kv[1]), kv[0]))
+        path = CACHE_DIR / "classic" / "reports" / code / "trash.json"
+        night_rates = [rate[s] for s in srcs if s in rate]
+        if not path.exists() or not night_rates:
+            continue
+        factor = ref / statistics.median(night_rates)
+        mine = defaultdict(list)
+        for s in srcs:
+            for r in pulls[s]:
+                mine[r["char"]].append(r)
+        for e in _payload(path)["report"]["trash"]["data"].get("entries", []):
+            rs = mine.get(e.get("name"))
+            if rs and e.get("total"):
+                role = Counter(r["role"] for r in rs).most_common(1)[0][0]
+                row = next(r for r in rs if r["role"] == role)
+                out.append((row, e["total"] * factor, e["total"]))
     return out
 
 
@@ -242,14 +276,17 @@ def raid_time(rows: list) -> dict:
 
 def timekeeper(rows: list, pid: dict, char_class: dict, cells) -> None:
     """Timekeeper / The Tourist: each DPS's share of the raid's trash damage over a report (one night,
-    cache reports/<code>/trash.json from pipeline/crawl_extra.py), base 100 vs the night's DPS median.
-    A character's role and expansion for the night are those of his boss pulls in that report."""
+    cache reports/<code>/trash.json from pipeline/crawl_extra.py), base 100 vs the night's DPS median,
+    then divided by the mean of his class in the expansion (AoE classes do far more trash damage).
+    A character's role and expansion for the night are those of his boss pulls in that report; one who
+    tanked a boss that night is left out (he probably tanked the trash too)."""
     by_report = defaultdict(lambda: defaultdict(Counter))
     exp_of = {}
     for r in rows:
         by_report[r["report"]][r["char"]][r["role"]] += 1
         exp_of[r["report"]] = r["e"]
     owner = {r["char"]: r["player"] for r in rows}
+    values = []  # (character, expansion, base 100 vs the night)
     for code, chars in by_report.items():
         path = CACHE_DIR / "classic" / "reports" / code / "trash.json"
         if not path.exists():
@@ -257,14 +294,22 @@ def timekeeper(rows: list, pid: dict, char_class: dict, cells) -> None:
         entries = _payload(path)["report"]["trash"]["data"].get("entries", [])
         dmg = {e["name"]: e.get("total", 0) for e in entries if e.get("name") in chars}
         total = sum(dmg.values())
-        dps = {ch: d / total for ch, d in dmg.items() if total and chars[ch].most_common(1)[0][0] == "DPS"}
+        dps = {ch: d / total for ch, d in dmg.items()
+               if total and chars[ch].most_common(1)[0][0] == "DPS" and not chars[ch]["TANK"]}
         if len(dps) < CONFIG["min_players"] // 2:
             continue  # no real trash in this report
         med = statistics.median(dps.values())
-        for ch, share in dps.items():
-            if med and owner[ch] in pid and ch in char_class:
-                k = (pid[owner[ch]], exp_of[code], CLASSES.index(char_class[ch]), ROLES.index("DPS"))
-                cells.ratio("timekeeper", k, 100 * share / med)
+        if med:
+            values += [(ch, exp_of[code], 100 * share / med) for ch, share in dps.items() if ch in char_class]
+    by_class = defaultdict(list)
+    for ch, e, v in values:
+        by_class[(e, char_class[ch])].append(v)
+    class_mean = {k: statistics.mean(v) for k, v in by_class.items()}
+    for ch, e, v in values:
+        mean = class_mean[(e, char_class[ch])]
+        if mean and owner[ch] in pid:
+            k = (pid[owner[ch]], e, CLASSES.index(char_class[ch]), ROLES.index("DPS"))
+            cells.ratio("timekeeper", k, 100 * v / mean)
 
 
 def parse_lord(rows: list, pid: dict, char_class: dict, cells) -> None:
@@ -487,6 +532,12 @@ def main() -> None:
     magnet = base100(rows, "avoidable_taken", lambda r: (r["source"], r["role"]))
     healers_k = [r for r in kills if r["role"] == "HEALER"]
     smite = base100(healers_k, "damage_done", lambda r: r["source"])
+    # Sniped / Sniper: overheal share, base 100 vs the healers of the same class and expansion. Overheal depends
+    # mostly on the class (Beacon of Light paladins 73% in WotLK, Discipline priests' shields 23%).
+    for r in rows:
+        done = r["healing_done"] + r["overheal"]
+        r["overheal_share"] = r["overheal"] / done if r["role"] == "HEALER" and done else None
+    sniped = base100([r for r in rows if r["role"] == "HEALER"], "overheal_share", lambda r: (r["e"], r["class"]))
     for r in rows:
         r["fiend"] = min(r["avoidable_taken"], r["self_healing"]) if r["role"] == "HEALER" else None
     fiend = base100([r for r in rows if r["role"] == "HEALER"], "fiend", lambda r: r["source"])
@@ -541,7 +592,7 @@ def main() -> None:
 
     raid_ms = raid_time(rows)
     ref_tier = next(i for i, t in enumerate(tiers_cfg["tiers"]) if t["id"] == CONFIG["scaled_totals_tier"])
-    scaled = scaled_totals(rows, ref_tier)
+    scaled, scaled_rates, scaled_refs = scaled_totals(rows, ref_tier)
 
     cells = Cells()
     for r in rows:
@@ -556,6 +607,7 @@ def main() -> None:
         cells.sum("wipes", k, wipe)
         for sid, (field, _, _) in SCALED.items():
             cells.ratio(sid, k, scaled.get((id(r), sid), 0.0), r[field])  # [scaled, actual]
+        cells.ratio("damage-done", k, scaled.get((id(r), "damage-done-bosses"), 0.0), r["damage_done"])
         cells.ids("the-gang", k, r["week"])
         if len(char_weeks[r["char"]]) >= site_cfg["min_char_weeks"]:  # minor rerolls do not count
             cells.ids("identity-crisis", k, char_id[r["char"]])
@@ -634,9 +686,8 @@ def main() -> None:
         elif role == "HEALER":
             if kill and score is not None:
                 cells.ratio("healing-machine", k, score)
-            done = r["healing_done"] + r["overheal"]
-            if done:
-                cells.ratio("sniper", k, r["overheal"] / done)
+            if id(r) in sniped:
+                cells.ratio("sniped", k, sniped[id(r)])
             if r["healing_done"]:
                 cells.ratio("tanks-personal-nurse", k, r["healing_on_tanks"] / r["healing_done"])
             if id(r) in smite:
@@ -675,6 +726,13 @@ def main() -> None:
             for me, mate in ((a, b), (b, a)):
                 if ranked(me):
                     cells.top("suicide-pact", key_of(me), mate["player"], 1)
+
+    # Damage Done: boss damage (above) plus trash damage, once per character and night.
+    trash = trash_damage(pulls, scaled_rates["damage-done-bosses"], scaled_refs["damage-done-bosses"], tz)
+    for row, sc, actual in trash:
+        if ranked(row):
+            cells.ratio("damage-done", key_of(row), sc, actual)
+    print(f"damage done: trash of {len({r['report'] for r, _, _ in trash})} reports added")
 
     timekeeper(rows, pid, char_class, cells)
     parse_lord(rows, pid, char_class, cells)

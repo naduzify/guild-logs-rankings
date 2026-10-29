@@ -71,7 +71,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 ## Healer (6)
 
 1. **Healing Machine**: Keeps the raid alive. (Effective healing, base 100 vs healers in the pull. N = pulls healed.) [P+N]
-2. **Sniper**: Only heals full-health targets. (Overheal share: overheal / (effective healing + overheal).) [P]
+2. **Sniper** (flip: **Sniped**): Gets there first. Every time. (Overheal share, overheal / (effective healing + overheal), base 100 vs the healers of his class in the expansion; lower is better. Sniper: his heals land first. Sniped: someone else topped the target up first.) [P]
 3. **Tank's Personal Nurse** (flip: **Raid Healer**): Has eyes for the tanks only. (Share of healing done on tanks. The card shows healing on himself, other healers and pets.) [P]
 4. **Smite Lord**: Healer by contract, DPS at heart. (Damage done, base 100 vs healers in the pull.) [P]
 5. **Favorite Patient**: His favourite patient. (Player he healed the most, shown as the share of his healing on other raiders that went to him, total in brackets; only patients healed on at least 10 pulls. Ranked from the highest share. Not in the home Hall of fame.) [N]
@@ -84,7 +84,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 3. **Tunnel Vision** (flip: **Pest Control**): Only sees the boss. (Share of damage done on the boss rather than adds.) [P]
 4. **One Button Wonder** (flip: **Keyboard Pianist**): Found the best button and kept pressing it. (Share of damage from his top ability, compared to his class.) [P]
 5. **Final Boss Energy**: Saves his best for the last boss. (Performance score on final raid bosses — Ragnaros, Illidan, the Lich King, Deathwing, Garrosh… — minus his score on the other bosses.) ⚙️ [P]
-6. **Timekeeper** (flip: **The Tourist**): Keeps the trash moving. (Share of the raid's damage done on trash over the night, base 100 vs DPS. The Tourist has the lowest share and enjoys the scenery.) 🆕 [P]
+6. **Timekeeper** (flip: **The Tourist**): Keeps the trash moving. (Share of the raid's damage done on trash over the night, base 100 vs DPS, then divided by the mean of his class in the expansion; nights where he tanked a boss are left out. The Tourist has the lowest share and enjoys the scenery.) 🆕 [P]
 7. **Engineer's Pride**: Boom goes the dynamite. (Damage from bombs, rockets and sappers. The card shows damage taken from his own sapper.) ⚙️ [N]
 
 ## Données supplémentaires à crawler

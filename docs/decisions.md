@@ -572,3 +572,32 @@ Audit des stats sur les données réelles (8 714 pulls après dédoublonnage). V
 **Raison.** On voyait mal la luciole à 2200 px/s. Une traînée de points espacés ressemblait à un collier de perles ; on voulait un effet de résidu de lumière.
 
 **Écarté.** Une traînée en dégradé orientée selon le chemin (`offset-rotate: auto`) : elle pivote d'un coup aux angles de la découpe, alors que les copies suivent les angles. La propriété `scale` pour rétrécir les copies : elle s'applique aussi au déplacement le long du chemin et les sort de la découpe.
+
+## 2026-10-29 — Damage Done avec le trash, interrupteur « Bosses only »
+
+**Décision.**
+- L'ancienne stat **Damage Done** devient **Damage Done to Bosses** (`damage-done-bosses`), avec le même calcul.
+- Une nouvelle **Damage Done** (`damage-done`) ajoute les dégâts sur le trash des mêmes soirées (`reports/<code>/trash.json`, crawl complémentaire). Une soirée loggée dans plusieurs rapports ne compte que le trash du rapport qui porte le plus de pulls de boss retenus. Le trash d'un personnage va à son rôle principal de la soirée. Il est converti en « BWL terms » au taux de la soirée : la médiane des débits de référence de ses pulls de boss.
+- Sur la fiche joueur, la carte « Total damage done » affiche Damage Done par défaut. Un interrupteur **Bosses only** (rail et curseur, rôle ARIA `switch`, `player.highlights[].toggle`) la bascule vers Damage Done to Bosses : valeur, rang et bandeau suivent.
+
+**Raison.** Le trash est une part réelle de la soirée de raid, mais le total boss seul reste la base de comparaison la plus propre.
+
+**À savoir.** Tant que le crawl complémentaire n'est pas fini, seul le trash des soirées déjà crawlées est compté (67 soirées au 2026-10-29) ; la description de la stat le dit.
+
+## 2026-10-29 — Sniper / Sniped, comparé à la classe
+
+**Décision.** La stat healer `sniper` devient `sniped`. Le titre principal **Sniper** (bleu) va au **moins** d'overheal (`direction: asc`), le revers **Sniped** (rouge) au plus d'overheal. Le taux d'overheal de chaque pull est ramené en base 100 contre la médiane des healers de la même classe dans la même extension, puis moyenné.
+- Haut du classement : ses soins arrivent sur des cibles qu'un autre a déjà remontées.
+- Bas du classement : c'est lui qui passe le premier.
+
+**Raison.** Un fort overheal vient surtout d'un autre healer plus rapide. Dans le jargon, le sniper est celui qui vole le soin, pas celui qui le perd. Surtout, l'overheal dépend d'abord de la classe : 73 % pour les paladins WotLK (Beacon of Light), 23 % pour les prêtres WotLK (boucliers Discipline sans overheal), contre une vingtaine de points d'écart au plus entre joueurs d'une même classe. Avant la correction, la stat classait des classes plutôt que des joueurs. Après, les deux bouts du top 10 mélangent druides, paladins, prêtres et chamans.
+
+**Écarté.** Savoir qui a « snipé » qui : il faut les événements de soin (niveau 3), c'est le True Sniper reporté en V2.
+
+## 2026-10-29 — Blamed the Healer : tolérance d'une seconde ; Timekeeper comparé à la classe
+
+**Blamed the Healer.** Un cooldown défensif retiré jusqu'à 1 s avant la mort d'un tank compte comme actif (`cd_death_tolerance_ms`). WCL enregistre la fin des buffs d'un joueur qui meurt 100 à 400 ms avant sa mort : sans tolérance, aucune mort ne passait (2 sur 2 065 morts de tanks en Era et TBC). Avec 1 s, 52 morts réparties sur 8 tanks classés.
+
+**Timekeeper / The Tourist.** La part des dégâts sur le trash de la soirée, en base 100 contre la médiane des DPS de la soirée, est divisée par la moyenne de sa classe dans l'extension. Un personnage qui a tanké un boss dans la soirée est écarté.
+- **Raison.** Les classes à sorts de zone dominaient (mages 111, druides 73 en moyenne). Des tanks Era joués DPS sur les boss, mais qui tankaient le trash, finissaient en bas.
+- **Écarté : l'activité** (temps actif sur le trash). Elle varie peu (65 à 126), favorise la mêlée grâce à l'attaque automatique et les tanks du trash, ressemble peu aux dégâts (corrélation de rang 0,23) et ferait doublon avec The Sweat.

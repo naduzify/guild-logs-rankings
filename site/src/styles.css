@@ -352,6 +352,17 @@ a.hname:hover { color: var(--parchment); }
   box-shadow: 0 2px 6px rgb(0 0 0 / .35); }
 /* Under a scaled total: its reference ("BWL terms") and the actual total, small. */
 .hactual { display: flex; gap: 6px; align-items: baseline; justify-content: center; flex-wrap: wrap; font-size: .8rem; color: var(--tan); }
+/* Switch of a highlight card to another stat ("Bosses only"). */
+.htoggle { align-self: center; margin-top: 10px; display: inline-flex; align-items: center; gap: 10px; min-height: 34px;
+  background: none; border: 0; padding: 0; color: var(--cream); font: 500 .85rem var(--f-body); cursor: pointer; }
+.htoggle .track { position: relative; width: 38px; height: 22px; border-radius: 999px; border: 1px solid var(--line-strong);
+  background: var(--navy-glass); transition: background .15s, border-color .15s; }
+.htoggle .thumb { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: var(--cream);
+  transition: transform .15s; }
+.htoggle[aria-checked="true"] .track { background: var(--alliance); border-color: var(--alliance); box-shadow: 0 0 10px var(--alliance-glow); }
+.htoggle[aria-checked="true"] .thumb { transform: translateX(16px); background: #fff; }
+.htoggle:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) { .htoggle .track, .htoggle .thumb { transition: none; } }
 /* Player page headings: the Guild Legends ornament, with room above each section. */
 .ptitlesec { margin: 0 0 18px; }
 .bigcards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }
