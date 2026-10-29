@@ -176,6 +176,39 @@ def ilvl_residuals(kills: list) -> dict:
     return out
 
 
+# Career totals comparable across expansions (compute.json scaled_totals_tier): stat -> (row field, reference
+# players, average). Damage taken uses the raid's mean, not its median: in a 40-man raid the median player
+# takes next to nothing and tanks would be worth huge multiples of it.
+SCALED = {"damage-done": ("damage_done", "DPS", statistics.median), "healing-done": ("healing_done", "HEALER", statistics.median),
+          "damage-taken": ("damage_taken", None, statistics.mean)}
+
+
+def scaled_totals(rows: list, ref_tier: int) -> dict:
+    """(id(row), stat) -> the row's amount at the reference tier's level: amount / median rate of the
+    reference players of its pull (seconds of an average raider) x the guild's median rate on the
+    reference tier's kills. Pulls without reference players (no healer) or of zero length count 0."""
+    by_pull = defaultdict(list)
+    for r in rows:
+        by_pull[r["source"]].append(r)
+    out = {}
+    for sid, (field, role, average) in SCALED.items():
+        rate, refs = {}, []
+        for src, rs in by_pull.items():
+            sec = (rs[0]["duration_ms"] or 0) / 1000
+            vals = [r[field] for r in rs if role is None or r["role"] == role]
+            m = average(vals) / sec if vals and sec > 0 else 0
+            if m > 0:
+                rate[src] = m
+                if rs[0]["kill"] and rs[0]["tier"] == ref_tier:
+                    refs.append(m)
+        ref = statistics.median(refs)
+        print(f"scaled {sid}: reference {ref:,.0f}/s on {len(refs)} kills")
+        for r in rows:
+            if r["source"] in rate:
+                out[(id(r), sid)] = r[field] / rate[r["source"]] * ref
+    return out
+
+
 def raid_time(rows: list) -> dict:
     """Hours Raiding: {id(row): ms}. Each raid night of a character counts from his first to his last
     boss pull (same nights as the home page's Hours in raid: a report is cut at gaps longer than
@@ -380,6 +413,9 @@ def main() -> None:
     boss_ids = {}
 
     raid_ms = raid_time(rows)
+    ref_tier = next(i for i, t in enumerate(tiers_cfg["tiers"]) if t["id"] == CONFIG["scaled_totals_tier"])
+    scaled = scaled_totals(rows, ref_tier)
+
 
     cells = Cells()
     for r in rows:
@@ -392,9 +428,8 @@ def main() -> None:
         cells.sum("hours-played", k, raid_ms[id(r)] / 3_600_000)
         cells.sum("boss-kills", k, kill)
         cells.sum("wipes", k, wipe)
-        cells.sum("damage-done", k, r["damage_done"])
-        cells.sum("damage-taken", k, r["damage_taken"])
-        cells.sum("healing-done", k, r["healing_done"])
+        for sid, (field, _, _) in SCALED.items():
+            cells.ratio(sid, k, scaled.get((id(r), sid), 0.0), r[field])  # [scaled, actual]
         cells.ids("the-gang", k, r["week"])
         cells.ids("the-undecided", k, char_id[r["char"]])
         if kill:

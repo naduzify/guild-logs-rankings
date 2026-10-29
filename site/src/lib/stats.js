@@ -14,6 +14,8 @@ const AGG = {
   // Parse Lords, per boss: [(best + median) / 2, 1, best, median]; extra = average best and median.
   parse: { init: () => [0, 0, 0, 0], add: sumInto, den: a => a[1], value: a => a[0] / a[1], extra: a => [a[2] / a[1], a[3] / a[1]] },
   sum: { init: () => [0], add: sumInto, den: () => Infinity, value: a => a[0] },
+  // Career totals in reference-tier terms: [scaled, actual]; ranked on the scaled one, the actual one in brackets.
+  scaled: { init: () => [0, 0], add: sumInto, den: () => Infinity, value: a => a[0], extra: a => [a[1]] },
   distinct: { init: () => new Set(), add: (a, c) => c[V].forEach(x => a.add(x)), den: () => Infinity, value: a => a.size },
   diff: { init: () => [0, 0, 0, 0], add: sumInto, den: a => Math.min(a[1], a[3]), value: a => a[0] / a[1] - a[2] / a[3] },
   spread: { init: () => [0, 0, 0], add: sumInto, den: a => a[0],

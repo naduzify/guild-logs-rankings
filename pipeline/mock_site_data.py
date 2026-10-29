@@ -116,6 +116,9 @@ def cell_values(stat: dict, idx: int, rng: random.Random, player: dict, p: int, 
         best = [min(99.0, max(5.0, 60 + 12 * noise(0.6) + rng.uniform(0, 15))) for _ in range(bosses)]
         med = [max(1.0, b - rng.uniform(3, 20)) for b in best]
         return [round(sum((b + m) / 2 for b, m in zip(best, med)), 1), bosses, round(sum(best), 1), round(sum(med), 1)]
+    if agg == "scaled":
+        actual = max(0, int(50_000_000 * pulls * (1 + e) ** 3 * max(0.1, 1 + 0.4 * noise(0.5))))
+        return [round(actual / (1 + e) ** 3, 1), actual]
     if agg == "sum":
         scale = 2_000_000 if fmt == "big" else 6
         return [max(0, int(scale * pulls / 100 * max(0.0, 1 + 0.5 * noise(0.5))))]

@@ -314,6 +314,8 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .ribbon.rankband { top: 16px; left: -34px; width: 120px; padding: 3px 0; text-align: center; transform: rotate(-45deg);
   background: var(--band); color: var(--band-text, var(--navy-deep)); font: 700 .8rem var(--f-headline); letter-spacing: .04em;
   box-shadow: 0 2px 6px rgb(0 0 0 / .35); }
+/* Under a scaled total: its reference ("SoO terms") and the actual total, small. */
+.hactual { display: flex; gap: 6px; align-items: baseline; justify-content: center; flex-wrap: wrap; font-size: .8rem; color: var(--tan); }
 /* Player page headings: the Guild Legends ornament, with room above each section. */
 .ptitlesec { margin: 0 0 18px; }
 .bigcards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }

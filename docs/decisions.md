@@ -483,3 +483,16 @@ Un **bandeau en coin** (à gauche) affiche le rang dans la guilde (« #7 ») sou
 **Décision.**
 - La fiche joueur a maintenant des **titres de section**, ornementés comme « Guild Legends » sur l'accueil : **Player Contribution** au-dessus des trois cartes de totaux, puis **General** (communs), **Damage Dealer**, **Tank**, **Healer** au-dessus des sections de catégorie. Textes dans `config/site.json` → `player.section_titles` ; une clé absente n'affiche pas de titre. Remplace la règle « sections sans titre, séparées par un grand espace ».
 - Cartes de totaux : bandeau de rang à **largeur fixe** et texte centré, à 45° (la largeur variait avec la longueur du rang, d'où un mauvais alignement d'une carte à l'autre) ; **violet plus foncé** (`#8b3fd9`, texte blanc) que celui des parses ; halo et dégradé de la couleur du bandeau sur la carte, halo sur la valeur comme sur les titres ; plus d'espace sous les cartes.
+
+## 2026-10-29 — Totaux de carrière comparables entre extensions
+
+**Décision.** Les trois totaux de la fiche joueur (dégâts infligés, dégâts subis, soins) sont **classés en « SoO terms »**, le vrai total restant affiché à côté, en petit, entre parenthèses. Pour chaque pull, le montant du joueur est divisé par le débit de référence de ce pull, ce qui donne des « secondes de raideur moyen », puis multiplié par le débit médian de la guilde sur les kills de Siege of Orgrimmar (`config/compute.json` → `scaled_totals_tier`) :
+- dégâts infligés : médiane des DPS du pull ;
+- soins : médiane des healers du pull ;
+- dégâts subis : **moyenne** du raid (en raid de 40, le joueur médian ne prend presque rien et les tanks d'Era valaient des multiples énormes de cette médiane : deux tanks à 30 M de dégâts réels arrivaient 4e et 5e).
+
+Cellules `[converti, réel]`, nouveau mode d'agrégation `scaled` (classé sur le converti, réel dans `extra`).
+
+**Raison.** Les débits explosent d'une extension à l'autre (DPS médian des DPS sur les kills : 426 en Era, 1 423 en TBC, 7 916 en WotLK, 29 042 en Cata, 190 779 en MoP) et au sein d'une extension (MSV 111k, SoO 268k). Le calcul au pull absorbe l'écart entre extensions, la progression du stuff dans un tier et les combats particuliers (buff d'ICC). Comme c'est une somme, il compte à la fois la présence et la performance : voulu pour un total de carrière.
+
+**Écarté.** Un facteur par extension (trop grossier : écart ×2,4 entre MSV et SoO) ; les PV moyens des boss (rien pour les soins et les dégâts subis, adds et phases, taille de raid, stuff qui progresse alors que les PV restent fixes).

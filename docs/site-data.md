@@ -59,6 +59,7 @@ Les valeurs dépendent du mode `agg` de la stat :
 | `ratio` | `num, den` | Σnum / Σden |
 | `parse` | `avg, n, best, median` (un boss par ligne) | Σavg / Σn ; le site affiche aussi Σbest / Σn et Σmedian / Σn (Parse Lords) |
 | `sum` | `n` | Σn |
+| `scaled` | `converti, réel` | Σconverti (totaux de carrière en « SoO terms », `scale_note`) ; le site affiche Σréel entre parenthèses |
 | `distinct` | `[ids]` | taille de l'union des ids (semaines, boss, personnages) |
 | `diff` | `a, ad, b, bd` | Σa/Σad − Σb/Σbd |
 | `spread` | `n, s, ss` | écart-type : √(Σss/Σn − (Σs/Σn)²) |

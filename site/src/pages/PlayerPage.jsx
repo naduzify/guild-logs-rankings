@@ -171,6 +171,7 @@ export default function PlayerPage({ data, name, filter }) {
               {row && <span className="ribbonwrap"><span className="ribbon rankband">#{row.pos}</span></span>}
               <header><a className="slabel" href={href('stat', stat.id)}>{label}</a><InfoTip stat={stat} meta={meta} /></header>
               <div className="svalue grad">{row ? formatBig(row.value) : '–'}</div>
+              {row?.extra && <div className="hactual">{stat.scale_note && <span className="sunit">{stat.scale_note}</span>} <small>({formatBig(row.extra[0])} actual)</small></div>}
               {row && <footer className="sfoot">#{row.pos} of {total} in the guild</footer>}
             </article>
           );
