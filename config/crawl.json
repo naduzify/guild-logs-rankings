@@ -9,6 +9,8 @@
     "Dispels",
     "Casts"
   ],
+  "_excluded_reports": "Guild reports left out of every stat: PTR logs, flagged 'PTR' in their title (2026-10-29 check; no other report predates its raid's live release). The raw cache keeps them; pipeline.crawl_extra skips them. fRQmG7KbT2Cczj4Y 'PTR' (ToGC, 2023-05-21), J3G8bq7NKvHMryp4 'TOGC 10m PTR', bjGfKg4PhFNZr2XH 'PTR - Hyjal' (2022-01-08), Vtjv9AcRyg7fNLpM 'PTR - BT' (2022-01-09), FKM1DkdNRQHLwb8g 'PTR - 17/08/2021', PMRVHgLrFhYAyJzw 'PTR P2 - 10/08/2021'.",
+  "excluded_reports": ["fRQmG7KbT2Cczj4Y", "J3G8bq7NKvHMryp4", "bjGfKg4PhFNZr2XH", "Vtjv9AcRyg7fNLpM", "FKM1DkdNRQHLwb8g", "PMRVHgLrFhYAyJzw"],
   "eligible_size": {
     "classic": 40,
     "tbc": 25,

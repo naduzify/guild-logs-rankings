@@ -448,3 +448,11 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 **Vérifié.** En TBC, le compteur WCL compte bien Haste (28507) et Destruction (28508) : pour chaque joueur dont le tableau Casts montre l'une d'elles, `potionUse` est au moins égal au nombre de lancers (1 412 cas sur 1 412). TBC, Cata et MoP gardent donc les compteurs WCL.
 
 **Écarté.** Filtrer par nom en WotLK : la potion de vitesse se lance sous le nom « Speed », trop ambigu.
+
+## 2026-10-29 — Logs de PTR exclus
+
+**Décision.** Six rapports de la fiche de guilde sont des logs de PTR, tous avec « PTR » dans le titre : ToGC (mai 2023, dont un en 10), Hyjal et BT (8 et 9 janvier 2022), et deux d'août 2021 sans boss. Ils sont exclus de toutes les stats par une liste de codes (`config/crawl.json` → `excluded_reports`) ; le cache brut les garde, le complément au crawl les saute. 37 pulls éligibles retirés (10 kills), 38 personnages vus seulement sur le PTR disparaissent.
+
+**Vérifié.** Aucun autre rapport n'est antérieur à la sortie live de son raid (premiers rapports de chaque zone comparés aux dates de sortie). Les trois rapports « prepatch » de mai 2024 sont le prépatch Cata sur les serveurs live, gardés.
+
+**Écarté.** Filtrer sur le mot « PTR » dans le titre : une liste explicite est plus lisible, et les données ne bougeront plus.

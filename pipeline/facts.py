@@ -81,6 +81,8 @@ def pulls_from_cache(host: str = "classic", limit: int | None = None):
         if not rep_file:
             continue
         rep = _payload(rep_file)["report"]
+        if rep["code"] in CRAWL["excluded_reports"]:
+            continue  # PTR logs
         fights = {f["id"]: f for f in rep["fights"]}
         exp = expansion_of(guild.get(rep["code"], rep))
         for tpath in sorted(rdir.glob("tables_*.json")):

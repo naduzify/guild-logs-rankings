@@ -106,6 +106,8 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
     done = 0
     for i, r in enumerate(reports, 1):
         code, exp = r["code"], expansion_of(r)
+        if code in CONFIG["excluded_reports"]:
+            continue  # PTR logs
         report = cached(code, "report")
         if report is None:
             continue  # not crawled yet by pipeline.crawl

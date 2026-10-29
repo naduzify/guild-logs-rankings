@@ -51,7 +51,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 
 ### Collecte
 - **Crawl unique**, pas de crawl incrémental ni de tâche planifiée. Le crawl doit pouvoir s'interrompre et reprendre grâce au cache.
-- **Sources** : uniquement les rapports rattachés à la fiche de guilde. Pas de rapports perso.
+- **Sources** : uniquement les rapports rattachés à la fiche de guilde. Pas de rapports perso. Les 6 logs de PTR (titre « PTR ») sont exclus au calcul (`config/crawl.json` → `excluded_reports`).
 - **Format** : on garde les combats en **40 en Era** et en **25 de TBC à MoP** (normal et héroïque). Exclus : 20 (ZG, AQ20), 10 (Kara, ZA, versions 10 de Wrath à MoP), LFR, Flex. Le filtre se fait **au niveau du combat** (taille et difficulté WCL), pas sur le nom de zone. La liste des zones et boss éligibles est en config.
 - **Dédoublonnage par pull** : si un même pull de boss apparaît dans plusieurs rapports à des horaires qui se chevauchent, on garde celui du rapport qui contient le plus de boss. On compare des plages horaires, jamais des dates calendaires. Le cache brut garde tout, le dédoublonnage se fait au calcul.
 - **Crawl complet** : `python -m pipeline.crawl`. Seuls les pulls éligibles (taille, difficulté, ≥ 10 joueurs ; `config/crawl.json`) sont crawlés, avec 8 tableaux : Summary, DamageDone, Healing, DamageTaken, Deaths, Interrupts, Dispels, Casts. Pas de Buffs / Debuffs. Échantillons lisibles dans `data/samples/`.
