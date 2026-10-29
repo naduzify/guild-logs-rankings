@@ -13,7 +13,7 @@ Lists: config/crawl.json "extras", compute.json "era_consumable_casts" and "wotl
 filters, so after changing one, re-fetch with --refresh.
 
 Usage:
-    python -m pipeline.crawl_extra [--kinds pull,trash,rankings] [--limit N] [--cost] [--refresh]
+    python -m pipeline.crawl_extra [--guild fable|nightshift] [--kinds pull,trash,rankings] [--limit N] [--cost] [--refresh]
 """
 
 import argparse
@@ -21,7 +21,8 @@ import json
 import time
 
 from pipeline.crawl import CONFIG, is_eligible, log_error
-from pipeline.guild import expansion_of, list_reports
+from pipeline.crawl import unique_reports
+from pipeline.guild import GUILDS, expansion_of
 from pipeline.wcl import CACHE_DIR, ROOT, WCLClient, WCLError
 
 EXTRAS = CONFIG["extras"]
@@ -81,8 +82,12 @@ query($code: String!, $fid: [Int]!, $tf: RankingTimeframeType) {
 RANKINGS_KINDS = {"rankings": "Today", "rankings_historical": "Historical"}
 
 
+# Cache folder of the guild being crawled (its WCL site), set by crawl().
+HOST = "classic"
+
+
 def cached(code: str, name: str) -> dict | None:
-    path = CACHE_DIR / "classic" / "reports" / code / f"{name}.json"
+    path = CACHE_DIR / HOST / "reports" / code / f"{name}.json"
     return json.loads(path.read_text(encoding="utf-8"))["data"] if path.exists() else None
 
 
@@ -113,13 +118,16 @@ class Meter:
             print(f"cost {kind}: {len(xs)} queries, mean {sum(xs) / len(xs):.2f} points, max {max(xs):.2f}")
 
 
-def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
-    client = WCLClient("classic")
+def crawl(guild: str, kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
+    global HOST
+    HOST = GUILDS[guild]["host"]
+    client = WCLClient(HOST)
+    print("guild:", guild, "endpoint:", client.url)
     meter = Meter(client, cost)
-    reports = sorted(list_reports(client), key=lambda r: r["startTime"])
+    reports = unique_reports(client, guild)
     done = 0
     for i, r in enumerate(reports, 1):
-        code, exp = r["code"], expansion_of(r)
+        code, exp = r["code"], expansion_of(r, guild)
         if code in CONFIG["excluded_reports"]:
             continue  # PTR logs
         report = cached(code, "report")
@@ -135,7 +143,7 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
             if "pull" in kinds:
                 for f in eligible:
                     key = f"reports/{code}/extra_{f['id']:03d}"
-                    path = CACHE_DIR / "classic" / f"{key}.json"
+                    path = CACHE_DIR / HOST / f"{key}.json"
                     if refresh and path.exists():
                         path.unlink()
                     if path.exists():
@@ -150,7 +158,7 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
                     n += 1
             if "trash" in kinds:
                 key = f"reports/{code}/trash"
-                path = CACHE_DIR / "classic" / f"{key}.json"
+                path = CACHE_DIR / HOST / f"{key}.json"
                 if refresh and path.exists():
                     path.unlink()
                 if not path.exists():
@@ -159,7 +167,7 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
                     n += 1
             if "trash_extra" in kinds:
                 key = f"reports/{code}/trash_extra"
-                path = CACHE_DIR / "classic" / f"{key}.json"
+                path = CACHE_DIR / HOST / f"{key}.json"
                 if refresh and path.exists():
                     path.unlink()
                 if not path.exists():
@@ -171,7 +179,7 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
                 if kind not in kinds:
                     continue
                 key = f"reports/{code}/{kind}"
-                path = CACHE_DIR / "classic" / f"{key}.json"
+                path = CACHE_DIR / HOST / f"{key}.json"
                 if refresh and path.exists():
                     path.unlink()
                 if not path.exists():
@@ -181,7 +189,7 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
                         meter.run(kind, lambda: client.cached_query(key, RANKINGS_QUERY, variables))
                         n += 1
         except WCLError as e:
-            log_error(code, e)
+            log_error(code, e, HOST)
             print(f"  error on {code}, logged: {str(e)[:200]}")
             continue
         done += 1
@@ -196,11 +204,12 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--kinds", default="pull,trash,trash_extra,rankings,rankings_historical",
                         help="pull, trash, trash_extra, rankings, rankings_historical (comma separated)")
+    parser.add_argument("--guild", choices=sorted(GUILDS), default="fable")
     parser.add_argument("--limit", type=int, help="stop after N reports with eligible pulls (testing)")
     parser.add_argument("--cost", action="store_true", help="measure points spent per query")
     parser.add_argument("--refresh", action="store_true", help="re-fetch what is already cached (after a list change)")
     a = parser.parse_args()
-    crawl(set(a.kinds.split(",")), a.limit, a.cost, a.refresh)
+    crawl(a.guild, set(a.kinds.split(",")), a.limit, a.cost, a.refresh)
 
 
 if __name__ == "__main__":

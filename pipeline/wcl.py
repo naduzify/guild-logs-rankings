@@ -21,6 +21,8 @@ TOKEN_URL = "https://www.warcraftlogs.com/oauth/token"
 HOSTS = {
     "classic": "https://classic.warcraftlogs.com/api/v2",
     "vanilla": "https://vanilla.warcraftlogs.com/api/v2",
+    # Anniversary realms (fresh Classic, then TBC Anniversary).
+    "fresh": "https://fresh.warcraftlogs.com/api/v2",
 }
 # Written by pipeline.auth. When present, queries go to /user, which can read archived reports.
 USER_TOKEN_FILE = ROOT / ".wcl_user_token.json"
