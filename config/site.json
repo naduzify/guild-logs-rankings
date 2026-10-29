@@ -3,12 +3,14 @@
   "title_percentile": 90,
   "flip_percentile": 10,
   "min_den": 10,
+  "_min_weeks": "Reset weeks of raiding (eligible pulls, all characters) a player needs to enter the rankings; below it, a Ghost of Fable.",
+  "min_weeks": 10,
   "_min_role_weeks": "Reset weeks a player needs in a role (all characters) to be ranked on that role: always on tank, healer and DPS achievements, and on common ones when the role filter is set. Keeps off-specs and short-lived rerolls out of the role rankings.",
   "min_role_weeks": 10,
   "_min_char_weeks": "Reset weeks a character needs to count as a real reroll: below it, it is listed on the player page without its class, gives no class dot next to the player's name and does not count for The Undecided.",
   "min_char_weeks": 5,
   "home": {
-    "_doc": "pinned: cards always shown above the Hall of fame, under the pinned_title heading. A string is an achievement id (left out of the Hall of fame draw, top pinned_top_n shown); an object is a hand-made honour with no stat behind it: title, description and ranked entries {name, image, caption}, image relative to the guild page. ghosts: texts of the Ghosts of Fable section (raiders below the 15 reset weeks cut), visible names before a Show all button. Hall of fame: featured_count achievements drawn at random on each page load. Records: big guild cards built from meta.guild_bosses; `kind` is most_kills, most_wipes, fastest_kill or slowest_kill; `exclude` lists bosses left out of a record (Razorgore: the egg phase is not in the fight length).",
+    "_doc": "pinned: cards always shown above the Hall of fame, under the pinned_title heading. A string is an achievement id (left out of the Hall of fame draw, top pinned_top_n shown); an object is a hand-made honour with no stat behind it: title, description and ranked entries {name, image, caption}, image relative to the guild page. ghosts: texts of the Ghosts of Fable section (raiders below the min_weeks cut), visible names before a Show all button. Hall of fame: featured_count achievements drawn at random on each page load. Records: big guild cards built from meta.guild_bosses; `kind` is most_kills, most_wipes, fastest_kill or slowest_kill; `exclude` lists bosses left out of a record (Razorgore: the egg phase is not in the fight length).",
     "top_n": 3,
     "pinned": [
       "the-gang",
@@ -27,7 +29,7 @@
     "featured_count": 8,
     "ghosts": {
       "title": "Ghosts of Fable",
-      "description": "They raided with Fable, but fewer than 15 reset weeks: not enough to enter the rankings. Their pulls still count in the guild totals.",
+      "description": "They raided with Fable, but fewer than 10 reset weeks: not enough to enter the rankings. Their pulls still count in the guild totals.",
       "visible": 60
     },
     "records": [
@@ -52,7 +54,7 @@
     }
   },
   "player": {
-    "_doc": "Player page layout. Overview tiles come first; their stats are left out of the category sections. In each category, up to featured_per_category stats at or above featured_min_pct (or deep in flip territory) get a big card; the rest are small cards, visible_small of them shown before a 'Show more' button. An overview tile shows the percentile bar when its stat is ranked in percentile, unless its `percentile` flag says otherwise. best_friend: texts of the highlighted panel under the overview (players.json friends; {nights} is replaced).",
+    "_doc": "Player page layout. Overview tiles come first; their stats are left out of the category sections. In each category, up to featured_per_category stats at or above featured_min_pct (or deep in flip territory) get a big card; the rest are small cards, visible_small of them shown before a 'Show more' button. An overview tile shows the percentile bar when its stat is ranked in percentile, unless its `percentile` flag says otherwise. best_friend: texts of the highlighted panel under the filters (players.json friends, follows the expansion filter; {nights} is replaced; `none` when nobody shares a night under the filter), candidates = friends exported per player and per expansion.",
     "overview": [
       {
         "stat": "hours-played",
@@ -84,17 +86,18 @@
     ],
     "_section_titles": "Ornamented headings of the player page (like Guild Legends on the home page): highlights above the career totals, then one per category section. A missing key shows no heading.",
     "section_titles": {"highlights": "Player Contribution", "common": "General", "dps": "Damage Dealer", "tank": "Tank", "healer": "Healer"},
-    "_highlights": "Highlighted career totals under the best friend panel, with a corner band showing the guild rank, coloured like a parse: light gold for #1, then pink 99+, orange 95+, purple 75+, blue 50+, green 25+, grey (percentile under the current filters). A `toggle` adds a switch on the card that switches it to another stat (its label next to the switch, its title on the card).",
+    "_highlights": "Highlighted career totals under the best friend panel, with a corner band showing the guild rank, coloured like a parse: light gold for #1, then pink 99+, orange 95+, purple 75+, blue 50+, green 25+, grey (percentile under the current filters). A `toggle` adds a switch on the card that switches it to another stat (its label next to the switch, its title on the card). A common stat listed here (Parse Lord) is left out of the sections; a parse stat is coloured by its value, not by the guild percentile.",
     "highlights": [
       {
         "stat": "damage-done",
         "label": "Total damage done",
         "toggle": {"stat": "damage-done-bosses", "label": "Bosses only", "title": "Total damage done to bosses"}
       },
+      {"stat": "parse-lord", "label": "Parse Lord"},
       {"stat": "damage-taken", "label": "Total damage taken"},
       {"stat": "healing-done", "label": "Total healing done"}
     ],
-    "best_friend": {"title": "Your best friend", "title_plural": "Your best friends", "detail": "{nights} raid nights together"},
+    "best_friend": {"title": "Your best friend", "title_plural": "Your best friends", "detail": "{nights} raid nights together", "none": "No raid night shared with a ranked player", "candidates": 10},
     "featured_per_category": 3,
     "featured_min_pct": 75,
     "visible_small": 6

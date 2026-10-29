@@ -1,7 +1,7 @@
 """Site export: facts table -> site/public/fable/data/{meta,players,stats}.json (docs/site-data.md).
 
 Second and third stages of the compute step: pull dedup across reports, reset weeks,
-15-week qualification, raid tiers and PvP ranks, then every stat as additive cells
+reset-week qualification, raid tiers and PvP ranks, then every stat as additive cells
 (player, expansion, class, role). Stats that need data not crawled yet are exported
 empty and listed in meta.pending.
 
@@ -358,31 +358,41 @@ def timekeeper(rows: list, pid: dict, char_class: dict, cells) -> None:
 
 
 def parse_lord(rows: list, pid: dict, char_class: dict, cells) -> None:
-    """Parse Lord: WCL parses (cache reports/<code>/rankings.json from pipeline/crawl_extra.py), the
-    only stat ranked against the world. Per cell and boss, (best + median parse) / 2; one value per boss."""
-    parses, loaded = {}, set()
+    """Parse Lord: WCL parses (caches from pipeline/crawl_extra.py), the only stat ranked against the world.
+    Per cell and boss, (best + median parse) / 2; one value per boss. The best parse is against today's
+    rankings (rankings.json); the median against the rankings around the date of each fight
+    (rankings_historical.json), so that years of later re-runs do not drag down how he did back then.
+    While the historical parses are not crawled for a report, its today parses stand in for them.
+    Every role counts: tanks have WCL parses too (on their damage done)."""
+    today, historical, loaded = {}, {}, set()
     for r in rows:
         code = r["report"]
         if code in loaded:
             continue
         loaded.add(code)
-        path = CACHE_DIR / "classic" / "reports" / code / "rankings.json"
-        if not path.exists():
-            continue
-        for fight in _payload(path)["report"]["rankings"].get("data", []):
-            for role in (fight.get("roles") or {}).values():
-                for ch in role.get("characters", []):
-                    if ch.get("rankPercent") is not None:
-                        parses[(code, fight["fightID"], ch["name"])] = ch["rankPercent"]
-    groups = defaultdict(list)
+        for name, parses in (("rankings", today), ("rankings_historical", historical)):
+            path = CACHE_DIR / "classic" / "reports" / code / f"{name}.json"
+            if not path.exists():
+                continue
+            for fight in _payload(path)["report"]["rankings"].get("data", []):
+                for role in (fight.get("roles") or {}).values():
+                    for ch in role.get("characters", []):
+                        if ch.get("rankPercent") is not None:
+                            parses[(code, fight["fightID"], ch["name"])] = ch["rankPercent"]
+    groups = defaultdict(lambda: ([], []))
+    stand_in = 0
     for r in rows:
-        x = parses.get((r["report"], r["fight"], r["char"]))
-        if x is None or not r["kill"] or r["role"] not in ("DPS", "HEALER") or r["player"] not in pid or r["char"] not in char_class:
+        key = (r["report"], r["fight"], r["char"])
+        if key not in today or not r["kill"] or r["player"] not in pid or r["char"] not in char_class:
             continue
         k = (pid[r["player"]], r["e"], CLASSES.index(char_class[r["char"]]), ROLES.index(r["role"]))
-        groups[(k, r["encounter_id"], r["difficulty"])].append(x)
-    for (k, _, _), xs in groups.items():
-        cells.parse("parse-lord", k, max(xs), statistics.median(xs))
+        best, mid = groups[(k, r["encounter_id"], r["difficulty"])]
+        best.append(today[key])
+        mid.append(historical.get(key, today[key]))
+        stand_in += key not in historical
+    for (k, _, _), (best, mid) in groups.items():
+        cells.parse("parse-lord", k, max(best), statistics.median(mid))
+    print(f"parse lord: {len(today)} today parses, {len(historical)} historical, {stand_in} kills without a historical one")
 
 
 def raid_night(start_ms: int, tz) -> str:
@@ -490,7 +500,7 @@ def main() -> None:
             tier_weeks[r["player"]][r["tier"]].add(r["week"])
         char_pulls[r["player"]][r["char"]] += 1
         exp_mask[r["player"]] |= 1 << r["e"]
-    qualified = sorted((pl for pl, w in weeks.items() if len(w) >= 15), key=norm)
+    qualified = sorted((pl for pl, w in weeks.items() if len(w) >= site_cfg["min_weeks"]), key=norm)
     pid = {pl: i for i, pl in enumerate(qualified)}
     min_w, max_rank = tiers_cfg["rank"]["min_weeks_per_tier"], tiers_cfg["rank"]["max"]
     players, char_id = [], {}
@@ -504,7 +514,7 @@ def main() -> None:
         players.append({"name": pl, "chars": [[ch, CLASSES.index(char_class[ch]) if ch in char_class else None, len(char_weeks[ch])] for ch in chars],
                         "tiers": tiers, "rank": min(max_rank, len(tiers)),
                         "role_weeks": [len(role_weeks[pl][role]) for role in ROLES]})
-    print(f"players: {len(weeks)} seen, {len(qualified)} qualified (15+ reset weeks)")
+    print(f"players: {len(weeks)} seen, {len(qualified)} qualified ({site_cfg['min_weeks']}+ reset weeks)")
     # Ghosts of Fable: everyone else seen in eligible pulls, [name, reset weeks, expansion mask, class of
     # their most played character]; most weeks first.
     ghosts = []
@@ -515,25 +525,33 @@ def main() -> None:
         ghosts.append([pl, len(weeks[pl]), exp_mask[pl], CLASSES.index(top) if top else None])
     ghosts.sort(key=lambda g: (-g[1], norm(g[0])))
 
-    # Best friend: for each ranked player, the ranked player(s) he shared the most raid nights with. Two
-    # players share a night when they were in at least one same eligible pull that night (a night is the
-    # Sydney date, 6 hours back so that pulls after midnight stay on their evening).
+    # Best friend: raid nights each ranked player shared with each other ranked player, per expansion; the
+    # site picks the best friend(s) under its expansion filter. Two players share a night when they were in
+    # at least one same eligible pull that night (a night is the Sydney date, 6 hours back so that pulls
+    # after midnight stay on their evening); a night belongs to the expansion of its pulls.
     shared = defaultdict(set)
     for rs in pulls.values():
         here = sorted({r["player"] for r in rs if r["player"] in pid})
         if len(here) < 2 or rs[0]["start_ms"] is None:
             continue
-        night = raid_night(rs[0]["start_ms"], tz)
+        night = (rs[0]["e"], raid_night(rs[0]["start_ms"], tz))
         for i, a in enumerate(here):
             for b in here[i + 1:]:
                 shared[(a, b)].add(night)
-    together = defaultdict(Counter)
+    together = defaultdict(dict)  # player -> {friend: [nights per expansion]}
     for (a, b), nights in shared.items():
-        together[a][b] = together[b][a] = len(nights)
+        per_exp = [0] * len(EXP_INDEX)
+        for e, _ in nights:
+            per_exp[e] += 1
+        together[a][b] = together[b][a] = per_exp
+    keep = site_cfg["player"]["best_friend"].get("candidates", 10)
     for pl in players:
         c = together[pl["name"]]
-        best = max(c.values(), default=0)
-        pl["friends"] = {"names": sorted((n for n, k in c.items() if k == best), key=norm), "nights": best} if best else None
+        # Exact for the whole career and for any single expansion: the top `keep` of each are exported.
+        names = set(sorted(c, key=lambda n: -sum(c[n]))[:keep])
+        for e in range(len(EXP_INDEX)):
+            names |= {n for n in sorted(c, key=lambda n: -c[n][e])[:keep] if c[n][e]}
+        pl["friends"] = sorted(([pid[n], *c[n]] for n in names), key=lambda f: (-sum(f[1:]), f[0]))
 
     # Guild-wide references, on every row (qualified or not).
     boss_key = lambda r: (r["encounter_id"], r["difficulty"])
@@ -849,7 +867,7 @@ def main() -> None:
         "classes": CLASSES,
         "roles": ROLES,
         "rank": {"max": max_rank, "names": tiers_cfg["rank"]["names"]},
-        "settings": {k: site_cfg[k] for k in ("title_percentile", "flip_percentile", "min_den", "min_role_weeks", "min_char_weeks")},
+        "settings": {k: site_cfg[k] for k in ("title_percentile", "flip_percentile", "min_den", "min_weeks", "min_role_weeks", "min_char_weeks")},
         "home": {k: v for k, v in site_cfg["home"].items() if not k.startswith("_")},
         "player": {k: v for k, v in site_cfg["player"].items() if not k.startswith("_")},
         "stats": stats_cfg,

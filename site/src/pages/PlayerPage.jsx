@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FilterBar, InfoTip, PctBar, RankBadge, StatValue, roleLabel } from '../components.jsx';
-import { BASE100, CLASS_COLORS, formatBig, formatInt, formatNumber, formatPct, formatValue, isBase100, rankBand } from '../lib/format.js';
+import { BASE100, CLASS_COLORS, formatBig, formatInt, formatNumber, formatPct, formatValue, isBase100, parseBand, rankBand } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat, earnedTitle, hasNumber, hasPercentile, isRankable, shareTotal, valueIsNumber } from '../lib/stats.js';
 
@@ -109,25 +109,27 @@ function Section({ data, id, title, kicker, items, open, onToggle }) {
   );
 }
 
-// "Your best friend(s)": the ranked player(s) he shared the most raid nights with (players.json friends),
-// every name when several are tied. Independent of the filters.
-function BestFriend({ data, player, filter }) {
-  const f = player.friends;
+// "Your best friend(s)": the ranked player(s) he shared the most raid nights with under the expansion
+// filter (players.json friends: [player, nights per expansion]), every name when several are tied.
+function BestFriend({ data, player, exp, filter }) {
   const cfg = data.meta.player.best_friend;
-  if (!f || !f.names.length || !cfg) return null;
-  const plural = f.names.length > 1;
+  if (!cfg) return null;
+  const nights = f => f.slice(1).reduce((n, k, e) => n + (!exp.size || exp.has(e) ? k : 0), 0);
+  const counts = (player.friends || []).map(f => [data.players[f[0]].name, nights(f)]);
+  const best = Math.max(0, ...counts.map(([, n]) => n));
+  const names = counts.filter(([, n]) => best && n === best).map(([name]) => name).sort((x, y) => x.localeCompare(y));
+  const plural = names.length > 1;
   return (
     <section className="bestfriend" aria-label={plural ? cfg.title_plural : cfg.title}>
       <span className="bflabel">{plural ? cfg.title_plural : cfg.title}</span>
-      <p className="bfnames">
-        {f.names.map((n, i) => (
-          <span key={n}>
-            {i > 0 && ', '}
-            {data.byName.has(n) ? <a href={href('player', n, filter)}>{n}</a> : n}
-          </span>
-        ))}
-      </p>
-      <span className="bfdetail">{cfg.detail.replace('{nights}', formatInt(f.nights))}</span>
+      {names.length ? (
+        <>
+          <p className="bfnames">
+            {names.map((n, i) => <span key={n}>{i > 0 && ', '}<a href={href('player', n, filter)}>{n}</a></span>)}
+          </p>
+          <span className="bfdetail">{cfg.detail.replace('{nights}', formatInt(best))}</span>
+        </>
+      ) : <p className="bfdetail bfnone">{cfg.none}</p>}
     </section>
   );
 }
@@ -136,12 +138,13 @@ export default function PlayerPage({ data, name, filter }) {
   const [openSections, setOpenSections] = useState({});
   const [toggles, setToggles] = useState({});
   const p = data.byName.get(name);
-  if (p == null) return <p className="empty">No player called “{name}”. Players need 15 reset weeks of raiding to show up.</p>;
+  if (p == null) return <p className="empty">No player called “{name}”. Players need {data.meta.settings.min_weeks} reset weeks of raiding to show up.</p>;
   const pl = data.players[p];
   const { meta } = data;
   const facets = data.facets[p];
   const eff = restrict(filter, facets);
-  const overviewIds = new Set(meta.player.overview.map(o => o.stat));
+  // Overview tiles and highlighted cards (Parse Lord is a common stat) are left out of the sections.
+  const overviewIds = new Set([...meta.player.overview, ...(meta.player.highlights || [])].map(o => o.stat));
   const titles = meta.player.section_titles || {};
 
   const result = stat => {
@@ -187,8 +190,8 @@ export default function PlayerPage({ data, name, filter }) {
       <FilterBar meta={meta} filter={eff} available={facets} onChange={f => go('player', pl.name, f)}
         note={`Percentiles compare ${pl.name} with every player under the same filters.`} />
 
-      {/* Under the filters, above the overview; it does not depend on the filters. */}
-      <BestFriend data={data} player={pl} filter={filter} />
+      {/* Under the filters, full width; follows the expansion filter. */}
+      <BestFriend data={data} player={pl} exp={eff.exp} filter={filter} />
 
       {/* Career totals, with the guild rank in a corner band coloured like a parse. */}
       <SectionTitle text={titles.highlights} />
@@ -201,14 +204,17 @@ export default function PlayerPage({ data, name, filter }) {
           const stat = data.statById.get(id);
           if (!stat) return null;
           const { row, total } = result(stat);
-          const band = row && rankBand(row);
+          // A parse (Parse Lord) takes the colour of its value, as on Warcraft Logs; the others their guild rank.
+          const parse = stat.format === 'parse';
+          const band = row && (parse ? parseBand(row.value) : rankBand(row));
           return (
             <article key={baseId} className="scard big hcard" style={band ? { '--band': band.bg, ...(band.fg && { '--band-text': band.fg }) } : undefined}>
               {row && <span className="ribbonwrap"><span className="ribbon rankband">#{row.pos}</span></span>}
               <header><a className="slabel" href={href('stat', stat.id)}>{label}</a><InfoTip stat={stat} meta={meta} /></header>
-              <div className="svalue grad">{row ? formatBig(row.value) : '–'}</div>
-              {row?.extra && <div className="hactual">{stat.scale_note && <span className="sunit">{stat.scale_note}</span>} <small>({formatBig(row.extra[0])} actual)</small></div>}
-              {row && <footer className="sfoot">#{row.pos} of {total} in the guild</footer>}
+              <div className="svalue grad">{row ? (parse ? formatValue(stat, row.value) : formatBig(row.value)) : '–'}</div>
+              {parse && row?.extra && <div className="hactual"><small title="best | median">({row.extra[0].toFixed(1)} | {row.extra[1].toFixed(1)})</small></div>}
+              {!parse && row?.extra && <div className="hactual">{stat.scale_note && <span className="sunit">{stat.scale_note}</span>} <small>({formatBig(row.extra[0])} actual)</small></div>}
+              <footer className="sfoot">{row ? `#${row.pos} of ${total} in the guild` : parse ? 'Not enough bosses' : null}</footer>
               {toggle && data.statById.get(toggle.stat) && (
                 <button type="button" role="switch" className="htoggle" aria-checked={on}
                   onClick={() => setToggles(t => ({ ...t, [baseId]: !t[baseId] }))}>

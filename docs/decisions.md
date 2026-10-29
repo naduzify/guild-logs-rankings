@@ -698,4 +698,55 @@ Mogu'shan Vaults, Heart of Fear et Terrace of Endless Spring sont fusionnés en 
 
 **Raison.** Sous un filtre de rôle ou de classe (ex. « Healer », ou « Rogue »), une stat d'un autre rôle n'a personne à classer et laissait une carte vide dans la grille. Les stats communes sont calculées pour tous les rôles et ont toujours des joueurs.
 
-**Écarté.** Masquer les cartes vides après coup : la grille aurait changé de taille selon les filtres.
+Même parmi les communes, certaines ne classent que les DPS et les healers (Overachiever, Metronome, Comfort Boss, Clutch Player, Glow Up) et restent vides sous le filtre Tank ; d'autres sont vides sous certains filtres de classe. Une carte vide pour une combinaison impossible (ex. Era + Death Knight, classe absente d'Era) est normale ; le saut des cartes vides la remplace quand même si le tirage a une autre stat qui classe quelqu'un. Le tirage garde donc l'ordre mélangé de toutes les communes et prend les 8 premières qui classent au moins un joueur sous les filtres actifs. Vérifié sans filtre, avec les filtres Tank, Healer, une classe, classe + rôle, et extension + Tank : aucune carte vide.
+
+**Écarté.** Masquer les cartes vides après coup : la grille aurait eu moins de 8 cartes selon les filtres. Ajouter en config la liste des rôles de chaque stat : une règle de plus à tenir à jour, alors que le site sait déjà si une stat classe quelqu'un.
+
+## 2026-10-29 — Parse Lords compte aussi les tanks
+
+**Décision.** Parse Lords prend les parses WCL de tous les rôles, tanks compris (avant : DPS et healers seulement). WCL donne une parse aux tanks comme aux autres (sur leurs dégâts) ; le rôle retenu reste le nôtre (règle des tanks en Era comprise), et la parse est classée sous ce rôle.
+
+**Raison.** Parse Lords est un achievement commun : il doit avoir des joueurs sous le filtre Tank comme sous les autres.
+
+**À noter.** Le crawl des parses (`crawl_extra`, `rankings`) n'en est qu'à 108 rapports : à l'export du 2026-10-29, 7 tanks passent les seuils (5 boss, 10 semaines dans le rôle) sous le filtre Tank.
+
+## 2026-10-29 — Meilleur ami par extension, à côté de Parse Lords
+
+**Décision.** Sur la fiche joueur, la rangée sous les filtres est coupée en deux (empilée sur téléphone) : à gauche « Your best friend(s) », qui suit désormais le filtre d'extension, à droite la carte Parse Lords (grande carte ; retirée de la section General pour ne pas l'afficher deux fois ; réglage `player.best_friend.beside`). L'export donne, pour chaque joueur, ses soirées partagées par extension avec ses meilleurs candidats (`players.json` → `friends`, les 10 premiers sur la carrière et sur chaque extension) ; le site somme les extensions sélectionnées et garde le ou les maximums. Sans soirée partagée sous le filtre, l'encart l'indique (`best_friend.none`).
+
+**Raison.** Le meilleur ami d'Era n'est pas celui de MoP : ex. Rassaa, Yogiqt sur la carrière, Aye et Solos en Era, Masomum en Cata.
+
+**Écarté.** Exporter toutes les paires (joueur, ami, extension) : exact pour toute combinaison d'extensions mais bien plus lourd ; avec 10 candidats par extension, une combinaison de plusieurs extensions est exacte en pratique. Le filtre de rôle ou de classe : une soirée partagée ne dépend pas du rôle joué.
+
+## 2026-10-29 — Carte Parse Lords de la fiche, couleur de la parse
+
+**Décision.** La carte Parse Lords à droite du meilleur ami prend le style des cartes de totaux (« Player Contribution ») : bandeau « #rang » dans le coin, grande valeur, best | median en petit, « #rang of N in the guild ». Le bandeau, la bordure et le halo prennent la couleur de la **valeur de la parse** avec les paliers WCL (rose 99+, orange 95+, violet 75+, bleu 50+, vert 25+, gris), et non celle du percentile dans la guilde ; pas de jaune réservé au n°1 (`parseBand` dans `site/src/lib/format.js`).
+
+**Raison.** Une parse a déjà sa couleur, connue de tous les joueurs de WCL : 82,6 est violet même pour le n°1 de la guilde.
+
+## 2026-10-29 — Parse Lords rejoint les cartes de totaux, en 2 × 2
+
+**Décision.** Le meilleur ami repasse en pleine largeur. La carte Parse Lords quitte sa place à côté de lui et devient la deuxième carte de « Player Contribution » (`player.highlights` : dégâts infligés, Parse Lords, dégâts subis, soins ; en haut à droite) ; les quatre cartes s'affichent en 2 × 2, empilées sur téléphone. Elle garde sa couleur selon la valeur de la parse. Le réglage `best_friend.beside` disparaît : une stat commune listée dans `highlights` est retirée des sections.
+
+**Remplace** la mise en page « meilleur ami | Parse Lords » de la même journée.
+
+## 2026-10-29 — « Parse Lords » redevient « Parse Lord »
+
+**Décision.** Le titre de l'achievement repasse au singulier, « Parse Lord » (`config/stats.json`, carte de la fiche joueur, docs). Les entrées plus anciennes de ce fichier gardent l'ancien nom.
+
+## 2026-10-29 — Parse Lord : meilleur parse « aujourd'hui », parse médian « historique »
+
+**Décision.** Par boss, Parse Lord fait la moyenne du **meilleur parse contre le classement WCL d'aujourd'hui** (`rankings.json`, `timeframe` par défaut de WCL, `Today`) et du **parse médian contre le classement à la date de chaque kill** (`rankings_historical.json`, `timeframe: Historical`). Le crawl complémentaire a un type `rankings_historical`, lancé après `rankings`. Tant qu'un rapport n'a pas ses parses historiques, ses parses d'aujourd'hui les remplacent.
+
+**Raison.** Choix du propriétaire : le meilleur parse se mesure aux meilleurs de toujours ; le niveau habituel se juge par rapport au monde de l'époque, sans les années de re-runs mieux équipés qui ont suivi.
+
+**Non vérifié.** La valeur par défaut `Today` de `timeframe` n'a pas pu être relue dans le schéma de l'API (requête bloquée par le budget). À vérifier en comparant un même kill dans les deux fichiers une fois `rankings_historical` crawlé.
+
+## 2026-10-29 — Seuil d'apparition : 10 semaines de reset
+
+**Décision.** Le seuil pour entrer dans les classements passe de 15 à **10 semaines de reset** distinctes (tous personnages), réglable dans `config/site.json` → `min_weeks` et exporté dans `meta.settings`. Le seuil par rôle (`min_role_weeks`, 10) ne change pas : un joueur qualifié a donc d'office au moins un rôle classé.
+
+**Raison.** Plus de joueurs classés, notamment ceux qui n'ont fait qu'un ou deux tiers (rangs PvP bas). Effet : 212 joueurs qualifiés au lieu de 154.
+
+**Alternatives écartées.** Garder 15 semaines (trop de raideurs réguliers d'un seul tier passaient en Ghosts of Fable).
+

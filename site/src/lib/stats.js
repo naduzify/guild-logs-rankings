@@ -14,7 +14,7 @@ const AGG = {
   ratio: { init: () => [0, 0, 0], add: (a, c) => { a[0] += c[V]; a[1] += c[V + 1]; a[2] += c[V + 2] ?? 0; },
     den: (a, s) => (s.min_den_on === 'count' ? a[2] : a[1]), value: a => a[0] / a[1],
     number: (a, s) => (s.number === 'den' ? a[1] : a[0]) },
-  // Parse Lords, per boss: [(best + median) / 2, 1, best, median]; extra = average best and median.
+  // Parse Lord, per boss: [(best + median) / 2, 1, best, median]; extra = average best and median.
   parse: { init: () => [0, 0, 0, 0], add: sumInto, den: a => a[1], value: a => a[0] / a[1], extra: a => [a[2] / a[1], a[3] / a[1]] },
   sum: { init: () => [0], add: sumInto, den: () => Infinity, value: a => a[0] },
   // Career totals in reference-tier terms: [scaled, actual]; ranked on the scaled one, the actual one in brackets.

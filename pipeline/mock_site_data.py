@@ -208,7 +208,7 @@ def main() -> None:
         masks[m] = masks.get(m, 0) + 1
     guild_raiders = sorted(masks.items())
 
-    # Ghosts of Fable: raiders below the 15-week cut, [name, reset weeks, expansion mask, class index].
+    # Ghosts of Fable: raiders below the min_weeks cut, [name, reset weeks, expansion mask, class index].
     taken = {pl["name"] for pl in players}
     ghosts = []
     for _ in range(args.players * 2):
@@ -232,7 +232,7 @@ def main() -> None:
         "classes": CLASSES,
         "roles": ROLES,
         "rank": {"max": tiers_cfg["rank"]["max"], "names": tiers_cfg["rank"]["names"]},
-        "settings": {k: site_cfg[k] for k in ("title_percentile", "flip_percentile", "min_den")},
+        "settings": {k: site_cfg[k] for k in ("title_percentile", "flip_percentile", "min_den", "min_weeks")},
         "home": {k: v for k, v in site_cfg["home"].items() if not k.startswith("_")},
         "player": {k: v for k, v in site_cfg["player"].items() if not k.startswith("_")},
         "stats": stats_cfg,
@@ -242,7 +242,9 @@ def main() -> None:
         "ghosts": ghosts,
     }
     for pl in players:
-        pl["friends"] = {"names": pl["_friends"][: rng.choice([1, 1, 1, 2])], "nights": rng.randint(20, 160)}
+        idx = {q["name"]: i for i, q in enumerate(players)}
+        pl["friends"] = sorted(([idx[n], *(rng.randint(0, 40) for _ in range(5))] for n in pl["_friends"] if n in idx),
+                               key=lambda f: -sum(f[1:]))
     public_players = [{k: pl[k] for k in ("name", "chars", "tiers", "rank", "friends")} for pl in players]
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)

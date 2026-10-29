@@ -74,7 +74,7 @@ function drawFeatured(meta) {
       const j = Math.floor(Math.random() * (i + 1));
       [pool[i], pool[j]] = [pool[j], pool[i]];
     }
-    featuredIds = pool.slice(0, meta.home.featured_count);
+    featuredIds = pool;
   }
   return featuredIds;
 }
@@ -176,7 +176,14 @@ export default function Home({ data, filter }) {
   const { meta } = data;
   // Pinned: achievement ids, or hand-made honours (objects).
   const pinned = (meta.home.pinned || []).map(x => (typeof x === 'string' ? data.statById.get(x) : x)).filter(Boolean);
-  const featured = drawFeatured(meta).map(id => data.statById.get(id)).filter(Boolean);
+  // The shuffled pool, in order, keeping the first featured_count that rank someone under the filters: some
+  // common stats rank DPS and healers only (Parse Lord, Glow Up…) and would be empty with the Tank filter.
+  const featured = [];
+  for (const id of drawFeatured(meta)) {
+    if (featured.length >= meta.home.featured_count) break;
+    const s = data.statById.get(id);
+    if (s && computeStat(s, data.stats[s.id], filter, meta.settings, data.roleOk).ranked.length) featured.push(s);
+  }
   return (
     <>
       <section className="hero">

@@ -38,6 +38,12 @@ export function rankBand(row) {
   return { bg, fg };
 }
 
+// Same band colours, picked by the parse value itself (Parse Lord card), not by the guild percentile.
+export function parseBand(v) {
+  const [, bg, fg = null] = BAND_COLORS.find(([min]) => v >= min);
+  return { bg, fg };
+}
+
 export const formatBig = n => compact.format(n);
 export const formatInt = n => int.format(n);
 

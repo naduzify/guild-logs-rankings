@@ -65,9 +65,9 @@ export function InfoTip({ stat, meta }) {
   );
 }
 
-// A ranked value; Parse Lords adds its best and median parse in small: "71.0 (74.5 | 67.5)", scaled
+// A ranked value; Parse Lord adds its best and median parse in small: "71.0 (74.5 | 67.5)", scaled
 // totals their actual total: "1.2B (71.1B)".
-// `parseColors` paints the average in its Warcraft Logs parse colour, in bold (Parse Lords page).
+// `parseColors` paints the average in its Warcraft Logs parse colour, in bold (Parse Lord page).
 export function StatValue({ stat, row, parseColors = false }) {
   const main = formatValue(stat, row.value);
   if (stat.agg === 'scaled' && row.extra) {

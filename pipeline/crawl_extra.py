@@ -72,8 +72,13 @@ query($code: String!, $end: Float!, $ff: String, $taunts: String) { reportData {
 } } }"""
 
 
+# Parse Lord: WCL parses of the kills. "Today" (WCL's default, rankings.json) against today's rankings, for the
+# best parse; "Historical" (rankings_historical.json) against the rankings around the date of the fight, for
+# the median parse.
 RANKINGS_QUERY = """
-query($code: String!, $fid: [Int]!) { reportData { report(code: $code) { rankings(fightIDs: $fid) } } }"""
+query($code: String!, $fid: [Int]!, $tf: RankingTimeframeType) {
+  reportData { report(code: $code) { rankings(fightIDs: $fid, timeframe: $tf) } } }"""
+RANKINGS_KINDS = {"rankings": "Today", "rankings_historical": "Historical"}
 
 
 def cached(code: str, name: str) -> dict | None:
@@ -162,15 +167,18 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
                                  "ff": FILTERS["ff"], "taunts": FILTERS["taunts"]}
                     meter.run("trash_extra", lambda: client.cached_query(key, TRASH_EXTRA_QUERY, variables))
                     n += 1
-            if "rankings" in kinds:
-                key = f"reports/{code}/rankings"
+            for kind, timeframe in RANKINGS_KINDS.items():
+                if kind not in kinds:
+                    continue
+                key = f"reports/{code}/{kind}"
                 path = CACHE_DIR / "classic" / f"{key}.json"
                 if refresh and path.exists():
                     path.unlink()
                 if not path.exists():
                     fids = [f["id"] for f in eligible if f.get("kill")]
                     if fids:
-                        meter.run("rankings", lambda: client.cached_query(key, RANKINGS_QUERY, {"code": code, "fid": fids}))
+                        variables = {"code": code, "fid": fids, "tf": timeframe}
+                        meter.run(kind, lambda: client.cached_query(key, RANKINGS_QUERY, variables))
                         n += 1
         except WCLError as e:
             log_error(code, e)
@@ -186,8 +194,8 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--kinds", default="pull,trash,trash_extra,rankings",
-                        help="pull, trash, trash_extra, rankings (comma separated)")
+    parser.add_argument("--kinds", default="pull,trash,trash_extra,rankings,rankings_historical",
+                        help="pull, trash, trash_extra, rankings, rankings_historical (comma separated)")
     parser.add_argument("--limit", type=int, help="stop after N reports with eligible pulls (testing)")
     parser.add_argument("--cost", action="store_true", help="measure points spent per query")
     parser.add_argument("--refresh", action="store_true", help="re-fetch what is already cached (after a list change)")

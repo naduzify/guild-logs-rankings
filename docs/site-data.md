@@ -22,14 +22,14 @@ rank           {max, names[14]}                ← config/tiers.json
 settings       {title_percentile, flip_percentile, min_den, min_role_weeks, min_char_weeks}  ← config/site.json
 home           {top_n, pinned[], pinned_title, pinned_top_n, featured_count, ghosts, records[], intro}  ← config/site.json
                pinned : id d'achievement, ou distinction faite main {id, title, description, entries: [{name, image, caption}]}
-player         {overview[], highlights[], best_friend, featured_per_category, featured_min_pct, visible_small}  ← config/site.json
+player         {overview[], highlights[], best_friend{…, none, candidates, beside}, featured_per_category, featured_min_pct, visible_small}  ← config/site.json
                highlights : [{stat, label, toggle?: {stat, label, title}}] ; toggle = interrupteur qui bascule la carte vers une autre stat (Damage Done → Bosses only)
 stats          [définitions]                   ← config/stats.json
 guild_totals   [[exp, pulls, kills, wipes, damage, boss_seconds, raid_seconds]]  (une ligne par extension)
                boss_seconds = durée cumulée des pulls de boss, kills et wipes (Hours on bosses)
                raid_seconds = durée cumulée des soirées de raid : pour chaque rapport retenu, du début du premier combat
                               (trash compris) dans une zone éligible à la fin du dernier pull de boss éligible (Hours in raid)
-ghosts         [[name, weeks, mask, class]]  joueurs sous le seuil des 15 semaines de reset (Ghosts of Fable) : semaines de
+ghosts         [[name, weeks, mask, class]]  joueurs sous le seuil de semaines de reset (`settings.min_weeks`, 10) (Ghosts of Fable) : semaines de
                reset distinctes, masque des extensions jouées, classe du personnage le plus joué (null si inconnue) ; tri semaines décroissantes
 guild_raiders  [[mask, count]]  nombre de joueurs (main + rerolls) ayant au moins un pull éligible, par masque de bits
                des extensions où ils ont raidé (bit e = extension e). Le site compte ceux dont le masque croise le filtre.
@@ -38,7 +38,7 @@ guild_bosses   [[exp, boss, heroic, kills, wipes, fastest_kill, slowest_kill]]  
 
 ## `players.json`
 
-Liste des joueurs qualifiés (15 semaines de reset). L'index dans la liste est l'identifiant utilisé partout ailleurs.
+Liste des joueurs qualifiés (`settings.min_weeks` semaines de reset, 10). L'index dans la liste est l'identifiant utilisé partout ailleurs.
 
 ```
 { "name": "Rassaa",                      main du mapping des rerolls
@@ -47,10 +47,13 @@ Liste des joueurs qualifiés (15 semaines de reset). L'index dans la liste est l
   "tiers": [0, 1, 2, 5],                  tiers validés pour le rang (index dans meta.tiers)
   "rank": 4,                              min(rank.max, nombre de tiers validés)
   "role_weeks": [3, 40, 12],              semaines de reset distinctes par rôle (ordre de meta.roles), tous personnages
-  "friends": {"names": ["Yogiqt"], "nights": 112} }
-                                          joueur(s) classé(s) avec qui il a partagé le plus de soirées de raid (au moins
-                                          un même pull éligible ce soir-là ; soirée = date à Sydney − 6 h) ; plusieurs
-                                          noms en cas d'égalité ; null s'il n'a raidé avec aucun joueur classé
+  "friends": [[12, 40, 31, 0, 0, 0], …] }
+                                          soirées de raid partagées avec d'autres joueurs classés : [index du joueur,
+                                          soirées par extension (ordre de meta.expansions)] ; une soirée partagée =
+                                          au moins un même pull éligible ce soir-là (date à Sydney − 6 h). Seuls les
+                                          `best_friend.candidates` premiers (10) sur la carrière et sur chaque extension
+                                          sont exportés : exact pour la carrière et pour une extension seule. Le site
+                                          somme les extensions du filtre et garde le ou les maximums.
 ```
 
 Un tier est validé quand le joueur y a au moins `rank.min_weeks_per_tier` semaines de reset distinctes de présence (config/tiers.json), ou le `min_weeks` propre au tier s'il en a un (Naxx Era : 2). Le rang ne dépend pas des filtres.
@@ -66,7 +69,7 @@ Les valeurs dépendent du mode `agg` de la stat :
 | agg | valeurs | valeur du joueur |
 |---|---|---|
 | `ratio` | `num, den[, count]` | Σnum / Σden ; `count` (nombre de pulls) sert au seuil `min_den` quand la stat a `"min_den_on": "count"` (dénominateur en montant) |
-| `parse` | `avg, n, best, median` (un boss par ligne) | Σavg / Σn ; le site affiche aussi Σbest / Σn et Σmedian / Σn (Parse Lords) |
+| `parse` | `avg, n, best, median` (un boss par ligne) | Σavg / Σn ; le site affiche aussi Σbest / Σn et Σmedian / Σn (Parse Lord) |
 | `sum` | `n` | Σn |
 | `scaled` | `converti, réel` | Σconverti (totaux de carrière en « BWL terms », `scale_note`) ; le site affiche Σréel entre parenthèses |
 | `distinct` | `[ids]` | taille de l'union des ids (semaines, boss, personnages) |

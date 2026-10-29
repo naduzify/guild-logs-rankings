@@ -4,7 +4,7 @@ Liste des stats affichées sur le site, issue de la session Claude Chat du 2026-
 
 ## Conventions
 
-- **Percentile** : rang parmi les joueurs qualifiés (15 semaines de reset ou plus), toujours calculé sur un taux (par pull, par minute, base 100) pour ne pas avantager les vétérans. **Nombre** : total sur la carrière.
+- **Percentile** : rang parmi les joueurs qualifiés (10 semaines de reset ou plus, `min_weeks`), toujours calculé sur un taux (par pull, par minute, base 100) pour ne pas avantager les vétérans. **Nombre** : total sur la carrière.
 - **Stats communes** : calculées par rôle, puis filtrées par TANK / DPS / HEALER sur la fiche joueur.
 - **Stats de rôle** : seuls les combats joués dans ce rôle comptent.
 - **Kills seulement** pour les stats de performance. Kills et wipes pour les stats fun.
@@ -56,7 +56,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 35. **Suicide Pact**: Ride or die. Mostly die. (Raider he died with most often: both dead within 10 seconds, before a fifth of the raid is down.) [T]
 36. **Pioneer**: In the first-kill screenshot. And in every wipe before it. (Guild first kills attended, each boss and difficulty.) [P+N]
 
-37. **Parse Lords**: Purple is a personality. (Warcraft Logs parses on Fable kills: per boss, the average of his best and median parse, then the average over bosses. DPS and healers, at least 5 bosses. The only achievement not measured against the guild.) [P]
+37. **Parse Lord**: Purple is a personality. (Warcraft Logs parses on Fable kills: per boss, the average of his best parse (against today's rankings) and his median parse (against the rankings at the time of each kill), then the average over bosses. Every role, tanks included, at least 5 bosses. The only achievement not measured against the guild.) [P]
 
 ## Tank (7)
 
@@ -94,7 +94,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 - **Attention Seeker** 📋 : Casts filtré sur les taunts, par pull et sur le trash de chaque rapport (`trash_extra.json`, durée du trash = `totalTime`) (le tableau Casts de niveau 2 ne garde que 5 capacités par joueur). En Era et en WotLK, aussi les consommables (The Junky ; en WotLK, filtrés par ID).
 - **Blamed the Healer** 🔬 : événements de buffs des CD défensifs, sur les pulls où un joueur d'une classe tank meurt.
 - **Timekeeper / The Tourist** 🆕 : DamageDone sur le trash (`killType: Trash`), par rapport.
-- **Parse Lords** : parses WCL des kills, par rapport.
+- **Parse Lord** : parses WCL des kills, par rapport, deux fois : `rankings.json` (classement d'aujourd'hui, pour le meilleur parse) et `rankings_historical.json` (`timeframe: Historical`, classement à la date du combat, pour le parse médian).
 
 ## Reportées en V2
 
