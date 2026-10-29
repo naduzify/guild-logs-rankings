@@ -456,3 +456,16 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 **Vérifié.** Aucun autre rapport n'est antérieur à la sortie live de son raid (premiers rapports de chaque zone comparés aux dates de sortie). Les trois rapports « prepatch » de mai 2024 sont le prépatch Cata sur les serveurs live, gardés.
 
 **Écarté.** Filtrer sur le mot « PTR » dans le titre : une liste explicite est plus lisible, et les données ne bougeront plus.
+
+## 2026-10-29 — Seuil par rôle : 10 semaines de reset
+
+**Décision.** En plus des 15 semaines de reset (tous personnages) pour apparaître dans les classements, un joueur doit avoir **au moins 10 semaines de reset dans un rôle**, tous personnages confondus, pour être classé sur ce rôle (`config/site.json` → `min_role_weeks`).
+- Achievements tank, healer et DPS : toujours.
+- Achievements communs : seulement quand le filtre de rôle est actif ; sans filtre, seules les 15 semaines comptent.
+- Fiche joueur : une section de rôle n'apparaît que si le joueur a ses 10 semaines dans ce rôle (règle l'ancien point « seuil minimal pour afficher un rôle sur la fiche »).
+
+L'export donne `role_weeks` par joueur ; le site ignore les cellules d'un rôle sous le seuil. Résultat au 2026-10-29 : 26 tanks classés sur 36, 131 DPS sur 149, 46 healers sur 64.
+
+**Raison.** Les off-specs et rerolls de passage, avec peu de pulls, sortaient en tête de certains classements de rôle (taux sur un petit échantillon).
+
+**Écarté.** Un seuil en nombre de pulls (`min_den`) : il reste, mais 10 pulls se font en une soirée ; les semaines mesurent une vraie présence dans le rôle.

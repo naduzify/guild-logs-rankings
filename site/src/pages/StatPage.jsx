@@ -36,7 +36,7 @@ export function StatsIndex({ data, filter }) {
 export default function StatPage({ data, id, filter }) {
   const stat = data.statById.get(id);
   if (!stat) return <p className="empty">Unknown achievement. <a href={href('stats')}>See all achievements</a>.</p>;
-  const { ranked, byPlayer } = computeStat(stat, data.stats[stat.id], filter, data.meta.settings);
+  const { ranked, byPlayer } = computeStat(stat, data.stats[stat.id], filter, data.meta.settings, data.roleOk);
   const rows = isRankable(stat) ? ranked : [...byPlayer.values()].sort((a, b) => data.players[a.p].name.localeCompare(data.players[b.p].name));
   const showP = hasPercentile(stat), showN = hasNumber(stat);
   const fmt = v => (valueIsNumber(stat) ? formatNumber(stat, v) : formatValue(stat, v));

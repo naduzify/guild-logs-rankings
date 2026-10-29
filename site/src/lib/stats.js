@@ -51,14 +51,19 @@ const cache = new Map();
 
 // Returns { byPlayer: Map(player -> row), ranked: rows best first }.
 // row = { p, value, number, label, pct, pos } ; pct/pos only for rankable stats.
-export function computeStat(stat, cells, filter, settings) {
+// roleOk[player][role]: enough reset weeks in that role. A player's cells in a role he is not ranked on
+// are left out of role achievements, and of common ones when the role filter is set.
+export function computeStat(stat, cells, filter, settings, roleOk) {
   const key = stat.id + '#' + filterKey(filter);
   if (cache.has(key)) return cache.get(key);
 
   const agg = AGG[stat.agg];
+  const gated = roleOk && (stat.category !== 'common' || filter.role.size > 0);
   const accs = new Map();
   for (const cell of cells) {
     if (!passes(filter, cell)) continue;
+    const ok = gated && roleOk[cell[0]];
+    if (ok && !ok[cell[3]]) continue;
     let a = accs.get(cell[0]);
     if (!a) accs.set(cell[0], (a = agg.init()));
     agg.add(a, cell);
@@ -110,6 +115,10 @@ const ROLE_SCOPE = {
 // Plain-English method of an achievement, for its tooltip: what is measured, on which pulls, how it ranks.
 export function explain(stat, settings) {
   const lines = [stat.detail, ROLE_SCOPE[stat.category]];
+  const w = settings.min_role_weeks;
+  if (w) lines.push(stat.category === 'common'
+    ? `With the role filter set, only players with at least ${w} reset weeks in that role.`
+    : `Only players with at least ${w} reset weeks in the role.`);
   const minDen = stat.min_den ?? settings.min_den;
   if (hasPercentile(stat)) {
     const sample = stat.format === 'parse' ? 'bosses' : stat.agg === 'spread' || stat.agg === 'slope' ? 'kills' : 'pulls';

@@ -68,7 +68,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 ### Modèle
 - **Joueur = main + rerolls**, via un fichier de mapping manuel (`{"rerolls": {"Main": ["Reroll1", …]}}`). Un personnage non mappé est un joueur à lui seul. Les noms sont comparés après normalisation Unicode (accents).
 - Validation au calcul : alerte si un personnage est rattaché à deux joueurs, ou si un reroll listé n'apparaît dans aucun log. Le pipeline sort la liste des personnages non mappés qui passent le seuil.
-- **Seuil d'apparition** dans les classements : **15 semaines de reset distinctes** de présence en raid éligible, tous personnages confondus.
+- **Seuil d'apparition** dans les classements : **15 semaines de reset distinctes** de présence en raid éligible, tous personnages confondus. Et **10 semaines de reset dans un rôle** (tous personnages) pour être classé sur ce rôle : achievements de rôle, achievements communs sous filtre de rôle, sections de rôle de la fiche (`min_role_weeks`).
 - **Rôle par combat**, tel que donné par WCL (TANK / DPS / HEALER). Les erreurs ponctuelles de catégorisation sont acceptées.
 - **Grain de la table de stats** : `(joueur, personnage, combat, rôle)`.
 
@@ -124,7 +124,6 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 ## À décider
 
 - Phrase « blague » de chaque stat, seuils précis (ex. capacité « évitable ») et listes en config (taunts, CD défensifs, morts scriptées, boss de fin, objets d'ingénierie, emplacements enchantables).
-- Seuil minimal de combats pour afficher un rôle sur la fiche d'un joueur.
 - Rang PvP : nombre de semaines de présence pour valider un tier (`min_weeks_per_tier`, 4 par défaut dans `config/tiers.json`).
 - Accueil : top 1 ou top 3 par achievement du Hall of fame ; seuil éventuel de pulls pour compter un raideur (aujourd'hui : un seul pull éligible suffit).
 - Seuils d'attribution des titres sur la fiche (90e / 10e percentile par défaut) et dénominateur minimal (`min_den`, 10 par défaut).

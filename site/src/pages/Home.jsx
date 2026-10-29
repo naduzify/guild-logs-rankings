@@ -78,7 +78,7 @@ function drawFeatured(meta) {
 }
 
 function TopCard({ data, stat, filter, legend = false }) {
-  const { ranked } = computeStat(stat, data.stats[stat.id], filter, data.meta.settings);
+  const { ranked } = computeStat(stat, data.stats[stat.id], filter, data.meta.settings, data.roleOk);
   const top = ranked.slice(0, legend ? data.meta.home.pinned_top_n ?? 5 : data.meta.home.top_n);
   // Legend cards (pinned stats) feature every player placed 1st to 3rd (ties included), scaled by place.
   const leaders = legend ? top.filter(r => r.pos <= 3) : [];

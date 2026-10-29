@@ -115,7 +115,7 @@ export default function PlayerPage({ data, name, filter }) {
   const overviewIds = new Set(meta.player.overview.map(o => o.stat));
 
   const result = stat => {
-    const { byPlayer, ranked } = computeStat(stat, data.stats[stat.id] || [], eff, meta.settings);
+    const { byPlayer, ranked } = computeStat(stat, data.stats[stat.id] || [], eff, meta.settings, data.roleOk);
     const row = byPlayer.get(p);
     return { stat, row, total: ranked.length, note: notability(stat, row) };
   };

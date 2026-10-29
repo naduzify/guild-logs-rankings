@@ -303,8 +303,10 @@ def main() -> None:
 
     # Qualification and ranks, on all characters of a player.
     weeks, tier_weeks, char_pulls, exp_mask = defaultdict(set), defaultdict(lambda: defaultdict(set)), defaultdict(Counter), defaultdict(int)
+    role_weeks = defaultdict(lambda: defaultdict(set))
     for r in rows:
         weeks[r["player"]].add(r["week"])
+        role_weeks[r["player"]][r["role"]].add(r["week"])
         if r["tier"] is not None:
             tier_weeks[r["player"]][r["tier"]].add(r["week"])
         char_pulls[r["player"]][r["char"]] += 1
@@ -320,7 +322,8 @@ def main() -> None:
         # A tier may set its own min_weeks (short tiers, e.g. Naxx in Era: 5 weeks of logs before TBC).
         tiers = sorted(t for t, w in tier_weeks[pl].items() if len(w) >= tiers_cfg["tiers"][t].get("min_weeks", min_w))
         players.append({"name": pl, "chars": [[ch, CLASSES.index(char_class[ch])] for ch in chars if ch in char_class],
-                        "tiers": tiers, "rank": min(max_rank, len(tiers))})
+                        "tiers": tiers, "rank": min(max_rank, len(tiers)),
+                        "role_weeks": [len(role_weeks[pl][role]) for role in ROLES]})
     print(f"players: {len(weeks)} seen, {len(qualified)} qualified (15+ reset weeks)")
 
     # Guild-wide references, on every row (qualified or not).
@@ -527,7 +530,7 @@ def main() -> None:
         "classes": CLASSES,
         "roles": ROLES,
         "rank": {"max": max_rank, "names": tiers_cfg["rank"]["names"]},
-        "settings": {k: site_cfg[k] for k in ("title_percentile", "flip_percentile", "min_den")},
+        "settings": {k: site_cfg[k] for k in ("title_percentile", "flip_percentile", "min_den", "min_role_weeks")},
         "home": {k: v for k, v in site_cfg["home"].items() if not k.startswith("_")},
         "player": {k: v for k, v in site_cfg["player"].items() if not k.startswith("_")},
         "stats": stats_cfg,

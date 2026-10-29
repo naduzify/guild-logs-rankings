@@ -28,9 +28,13 @@ export async function loadData() {
   }
   const playedRows = played.map(m => [...m].map(([k, h]) => [...k.split('|').map(Number), h]));
 
+  // Roles each player is ranked on: enough reset weeks in that role (settings.min_role_weeks).
+  // null when the export has no role_weeks (mock data): every role passes.
+  const roleOk = players.map(pl => pl.role_weeks?.map(w => w >= (meta.settings.min_role_weeks ?? 0)) ?? null);
+
   const byName = new Map(players.map((pl, i) => [pl.name, i]));
   const statById = new Map(meta.stats.map(s => [s.id, s]));
-  return { meta, players, stats, facets, played: playedRows, byName, statById };
+  return { meta, players, stats, facets, played: playedRows, roleOk, byName, statById };
 }
 
 // Classes a player played under the active filters, most played first.
