@@ -18,6 +18,8 @@
     ],
     "min_melee_share": 0.1
   },
+  "_wotlk_consumables": "WotLK only: potionUse / healthstoneUse are almost always 0 (365 potions in 2,019 pulls), consumables are counted from a Casts table filtered on these ability IDs (crawl complement). Speed 53908, Wild Magic 53909, Runic Healing Potion 43185, Runic Mana Potion 43186, Indestructible 53762, Runic Healing / Mana Injector 67489 / 67490, Fel Healthstone 47875-47877. A cast whose name holds 'Healthstone' is a healthstone. TBC, Cata and MoP keep WCL's counters (TBC's include Haste and Destruction).",
+  "wotlk_consumable_ids": [53908, 53909, 43185, 43186, 53762, 67489, 67490, 47875, 47876, 47877],
   "_era_consumables": "Classic Era only: potionUse / healthstoneUse are always 0, consumables are counted from the Casts table. Mana potions cast 'Restore Mana', protection potions cast their effect.",
   "era_consumable_casts": [
     "Healing Potion",

@@ -77,7 +77,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 
 `python -m pipeline.crawl_extra`, après le crawl principal (détail dans `docs/decisions.md`) :
 - **The Terrorist** : DamageDone filtré joueur → joueur, par pull.
-- **Attention Seeker** 📋 : Casts filtré sur les taunts, par pull (le tableau Casts de niveau 2 ne garde que 5 capacités par joueur). En Era, aussi les consommables (The Junky).
+- **Attention Seeker** 📋 : Casts filtré sur les taunts, par pull (le tableau Casts de niveau 2 ne garde que 5 capacités par joueur). En Era et en WotLK, aussi les consommables (The Junky ; en WotLK, filtrés par ID).
 - **Blamed the Healer** 🔬 : événements de buffs des CD défensifs, sur les pulls où un joueur d'une classe tank meurt.
 - **Timekeeper / The Tourist** 🆕 : DamageDone sur le trash (`killType: Trash`), par rapport.
 - **Parse Lords** : parses WCL des kills, par rapport.

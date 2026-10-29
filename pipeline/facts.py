@@ -285,6 +285,12 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
             cast = Counter({a["name"]: a.get("total", 0) for a in src.get("abilities", [])})
             stones = sum(n for a, n in cast.items() if "Healthstone" in a and a in CONFIG["era_consumable_casts"])
             potions = sum(cast[a] for a in CONFIG["era_consumable_casts"]) - stones
+        elif pull["expansion"] == "wotlk":
+            # WCL's counters are broken in WotLK: same sources as Era, matched on ability IDs.
+            src = consumables.get(name, {}) if consumables is not None else c
+            used = [a for a in src.get("abilities", []) if a.get("guid") in CONFIG["wotlk_consumable_ids"]]
+            stones = sum(a.get("total", 0) for a in used if "Healthstone" in a.get("name", ""))
+            potions = sum(a.get("total", 0) for a in used) - stones
         else:
             potions, stones = p.get("potionUse", 0), p.get("healthstoneUse", 0)
         ilvl = ((p.get("combatantInfo") or {}).get("stats") or {}).get("Item Level")

@@ -56,13 +56,13 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - **Dédoublonnage par pull** : si un même pull de boss apparaît dans plusieurs rapports à des horaires qui se chevauchent, on garde celui du rapport qui contient le plus de boss. On compare des plages horaires, jamais des dates calendaires. Le cache brut garde tout, le dédoublonnage se fait au calcul.
 - **Crawl complet** : `python -m pipeline.crawl`. Seuls les pulls éligibles (taille, difficulté, ≥ 10 joueurs ; `config/crawl.json`) sont crawlés, avec 8 tableaux : Summary, DamageDone, Healing, DamageTaken, Deaths, Interrupts, Dispels, Casts. Pas de Buffs / Debuffs. Échantillons lisibles dans `data/samples/`.
 - **Niveau de détail** : niveau 2, c'est-à-dire les tableaux agrégés par combat et par joueur (dégâts, soins, dégâts subis, morts, interruptions, dispels…). Le niveau 3 (événements bruts) n'est crawlé que pour des **stats listées à l'avance**, uniquement sur les combats concernés.
-- **Compléments au crawl** : `python -m pipeline.crawl_extra`, une fois le crawl principal fini. Par pull : tirs alliés, taunts, consommables Era (le tableau Casts ne garde que 5 capacités par joueur), buffs de CD défensifs si un tank meurt. Par rapport : dégâts sur le trash, parses WCL. Listes dans `config/crawl.json` → `extras`.
+- **Compléments au crawl** : `python -m pipeline.crawl_extra`, une fois le crawl principal fini. Par pull : tirs alliés, taunts, consommables Era et WotLK (le tableau Casts ne garde que 5 capacités par joueur), buffs de CD défensifs si un tank meurt. Par rapport : dégâts sur le trash, parses WCL. Listes dans `config/crawl.json` → `extras`.
 
 ### Calcul (`pipeline/facts.py`, réglages dans `config/compute.json`)
 - **Pulls retenus** : taille et difficulté éligibles, et au moins 10 joueurs avec un rôle. Les raids incomplets et les splits (ex. Onyxia à 20) **comptent** ; seuls les faux logs évidents sont écartés.
 - **Combats exclus** : Flame Leviathan et Icecrown Gunship Battle (véhicules, canons) ne comptent dans aucune stat ni aucun record (`excluded_encounters`, ID WCL).
 - **Tanks en Classic Era** : le rôle WCL est remplacé. Est tank tout guerrier, druide ou paladin ayant subi au moins 10 % des dégâts de mêlée du boss **ou** 10 % de ceux des adds (off-tanks) dans le pull ; un « tank » WCL qui ne passe pas la règle devient DPS, et un healer WCL reste healer.
-- **Consommables en Era** : comptés depuis le tableau Casts avec une liste de sorts en config (les compteurs WCL valent 0 en Era). Liste non exhaustive, acceptée.
+- **Consommables en Era et en WotLK** : comptés depuis le tableau Casts avec une liste de sorts en config (par nom en Era, par ID en WotLK ; les compteurs WCL y valent 0). Liste non exhaustive, acceptée. TBC, Cata et MoP gardent les compteurs WCL.
 - **Enchantements** : casque, épaules (en Era à partir d'AQ40), cape, torse, poignets, mains, jambes, pieds, armes (main gauche seulement si arme ou bouclier) et arme à distance des chasseurs. En MoP, ni casque ni arme à distance.
 
 ### Modèle

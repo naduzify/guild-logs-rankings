@@ -440,3 +440,11 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 **Raison.** Les dégâts, soins et morts y sont ceux des véhicules et des canons, pas le jeu des joueurs : ils fausseraient la base 100 et les stats de mort.
 
 **Écarté.** Les retirer au crawl (les pulls étaient déjà en cache) ; les garder pour les seules stats de présence (simplicité : une seule règle).
+
+## 2026-10-29 — Consommables en WotLK
+
+**Décision.** En WotLK, The Junky (et The Unprepared) ne lisent plus les compteurs WCL `potionUse` / `healthstoneUse`, presque toujours à 0 (365 potions sur 2 019 pulls, contre ~1 par joueur et par pull en TBC, Cata et MoP). Comme en Era, les consommables sont comptés depuis un tableau Casts filtré, récupéré par le complément au crawl, mais par **ID de capacité** (`config/compute.json` → `wotlk_consumable_ids`) : Speed 53908 (la potion la plus utilisée), Wild Magic 53909, Runic Healing / Mana Potion 43185 / 43186, Indestructible 53762, injecteurs 67489 / 67490, Fel Healthstone 47875-47877. En attendant le complément, le tableau Casts de niveau 2 (5 capacités par joueur) sert de repli.
+
+**Vérifié.** En TBC, le compteur WCL compte bien Haste (28507) et Destruction (28508) : pour chaque joueur dont le tableau Casts montre l'une d'elles, `potionUse` est au moins égal au nombre de lancers (1 412 cas sur 1 412). TBC, Cata et MoP gardent donc les compteurs WCL.
+
+**Écarté.** Filtrer par nom en WotLK : la potion de vitesse se lance sous le nom « Speed », trop ambigu.

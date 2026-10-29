@@ -2,14 +2,14 @@
 
 Runs on reports the main crawl already cached, with the same cache and budget:
 - per eligible pull (reports/<code>/extra_<fight>.json):
-  friendly fire (The Terrorist), taunt casts (Attention Seeker), Era consumable casts (The Unprepared;
-  the level 2 Casts table only keeps 5 abilities per player) and, when a tank-class player died,
+  friendly fire (The Terrorist), taunt casts (Attention Seeker), Era and WotLK consumable casts
+  (The Junky, The Unprepared; the level 2 Casts table only keeps 5 abilities per player) and, when a tank-class player died,
   the buff events of defensive cooldowns (Blamed the Healer);
 - per report (reports/<code>/trash.json): damage done on trash (Timekeeper / The Tourist);
 - per report (reports/<code>/rankings.json): WCL parses of every kill (Parse Lord, ranked against
   the world, not the guild).
 
-Lists: config/crawl.json "extras" and compute.json "era_consumable_casts". They are applied as WCL
+Lists: config/crawl.json "extras", compute.json "era_consumable_casts" and "wotlk_consumable_ids". They are applied as WCL
 filters, so after changing one, re-fetch with --refresh.
 
 Usage:
@@ -36,6 +36,7 @@ FILTERS = {
     "ff": 'source.type = "player" and target.type = "player"',
     "taunts": names_in(EXTRAS["taunts"]),
     "consumables": names_in(COMPUTE["era_consumable_casts"]),
+    "consumables_wotlk": "ability.id in (%s)" % ", ".join(str(i) for i in COMPUTE["wotlk_consumable_ids"]),
     "cds": names_in(EXTRAS["defensive_cds"]),
 }
 
@@ -45,6 +46,10 @@ FIELDS = {
     "consumables": "consumables: table(dataType: Casts, fightIDs: $fid, filterExpression: $consumables)",
     "cds": "cds: events(dataType: Buffs, fightIDs: $fid, filterExpression: $cds, limit: 10000) { data nextPageTimestamp }",
 }
+
+
+# Expansions whose WCL consumable counters are unusable -> their filter.
+CONSUMABLES = {"classic": "consumables", "wotlk": "consumables_wotlk"}
 
 
 def pull_query(parts: list) -> str:
@@ -119,10 +124,12 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
                         path.unlink()
                     if path.exists():
                         continue
-                    parts = ["ff", "taunts"] + (["consumables"] if exp == "classic" else [])
+                    parts = ["ff", "taunts"] + (["consumables"] if exp in CONSUMABLES else [])
                     if tank_died(code, f, actors):
                         parts.append("cds")
                     variables = {"code": code, "fid": [f["id"]], **{k: FILTERS[k] for k in parts}}
+                    if "consumables" in parts:
+                        variables["consumables"] = FILTERS[CONSUMABLES[exp]]
                     meter.run("+".join(parts), lambda: client.cached_query(key, pull_query(parts), variables))
                     n += 1
             if "trash" in kinds:
