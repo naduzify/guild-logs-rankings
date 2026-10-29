@@ -60,6 +60,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 
 ### Calcul (`pipeline/facts.py`, réglages dans `config/compute.json`)
 - **Pulls retenus** : taille et difficulté éligibles, et au moins 10 joueurs avec un rôle. Les raids incomplets et les splits (ex. Onyxia à 20) **comptent** ; seuls les faux logs évidents sont écartés.
+- **Combats exclus** : Flame Leviathan et Icecrown Gunship Battle (véhicules, canons) ne comptent dans aucune stat ni aucun record (`excluded_encounters`, ID WCL).
 - **Tanks en Classic Era** : le rôle WCL est remplacé. Est tank tout guerrier, druide ou paladin ayant subi au moins 10 % des dégâts de mêlée du boss **ou** 10 % de ceux des adds (off-tanks) dans le pull ; un « tank » WCL qui ne passe pas la règle devient DPS, et un healer WCL reste healer.
 - **Consommables en Era** : comptés depuis le tableau Casts avec une liste de sorts en config (les compteurs WCL valent 0 en Era). Liste non exhaustive, acceptée.
 - **Enchantements** : casque, épaules (en Era à partir d'AQ40), cape, torse, poignets, mains, jambes, pieds, armes (main gauche seulement si arme ou bouclier) et arme à distance des chasseurs. En MoP, ni casque ni arme à distance.
@@ -131,7 +132,6 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - Déploiement GitHub Pages : workflow qui lance l'export JSON depuis le Parquet commité, puis le build Vite.
 - Emplacement définitif de l'instantané du cache brut (Release GitHub par défaut).
 
-- Exclusion des combats en véhicules (Flame Leviathan).
 - V2 : méthode d'estimation des PV max des cibles pour Savior / True Sniper (les PV des événements de soin sont en pourcentage, après le soin).
 
 Crawl d'essai fait le 2026-10-28 : résultats dans `docs/crawl-essai.md`.

@@ -432,3 +432,11 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 **Décision.** Un tier peut fixer son propre seuil (`min_weeks` dans `config/tiers.json`, à la place de `rank.min_weeks_per_tier`). Naxx (Era) passe à **2 semaines de reset**.
 
 **Raison.** La guilde n'a que 5 semaines de logs de Naxx en Era avant TBC : avec 4 semaines, une seule absence suffisait à rater le tier (ex. Rassaa, 3 semaines).
+
+## 2026-10-29 — Combats en véhicules exclus
+
+**Décision.** Flame Leviathan (Ulduar, encounter 744) et Icecrown Gunship Battle (ICC, 847) sont retirés de toutes les stats et de tous les records, au calcul (`config/compute.json` → `excluded_encounters`). Le cache brut les garde. 60 pulls de 25 joueurs retirés.
+
+**Raison.** Les dégâts, soins et morts y sont ceux des véhicules et des canons, pas le jeu des joueurs : ils fausseraient la base 100 et les stats de mort.
+
+**Écarté.** Les retirer au crawl (les pulls étaient déjà en cache) ; les garder pour les seules stats de présence (simplicité : une seule règle).

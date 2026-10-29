@@ -200,6 +200,9 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
     if f.get("size") != CRAWL["eligible_size"].get(pull["expansion"]) or f.get("difficulty") not in CRAWL["eligible_difficulties"]:
         issues["pulls dropped: size or difficulty not eligible"] += 1
         return []
+    if f.get("encounterID") in CONFIG["excluded_encounters"]:
+        issues["pulls dropped: excluded encounter (vehicle or cannon fight)"] += 1
+        return []
 
     roles = {}
     if isinstance(details, dict) and details:
