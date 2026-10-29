@@ -119,8 +119,9 @@ def _detail_counts(groups: list) -> Counter:
 
 
 def era_tanks(roles: dict, taken: dict) -> set:
-    """Classic Era tanks: a tanking class that took at least min_melee_share of the boss melee
-    (main tanks) or of the adds melee (off-tanks) in the pull.
+    """Classic Era tanks: a tanking class that WCL lists as a tank (Protection / Guardian talents), or
+    that took at least min_melee_share of the boss melee (main tanks) or of the adds melee (off-tanks)
+    in the pull (tanks in a DPS spec, e.g. Feral or fury-prot).
 
     The DamageTaken table splits damage by ability and by source, not both, so melee is estimated:
     boss melee = min(his "Melee" taken, his damage from Boss sources), adds melee = min(the rest of
@@ -138,7 +139,7 @@ def era_tanks(roles: dict, taken: dict) -> set:
     tb, ta, share = sum(boss.values()), sum(adds.values()), cfg["min_melee_share"]
     # WCL healers stay healers: a healer hit by adds is not an off-tank.
     return {n for n, (role, p) in roles.items() if p.get("type") in cfg["classes"] and role != "HEALER"
-            and ((tb and boss[n] / tb >= share) or (ta and adds[n] / ta >= share))}
+            and (role == "TANK" or (tb and boss[n] / tb >= share) or (ta and adds[n] / ta >= share))}
 
 
 def tank_deaths_with_cd(events: list, deaths: list, actors: dict, tanks: set) -> Counter:
@@ -226,7 +227,7 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
 
     dmg, heal, taken, casts = (_by_name(t[k]["entries"]) for k in ("damageDone", "healing", "damageTaken", "casts"))
     if era:
-        # WCL's Era tank detection is replaced; a WCL tank that fails the rule plays DPS.
+        # WCL's Era tank detection is completed with players tanking in a DPS spec.
         era_tank_set = era_tanks(roles, taken)
         for name, (role, p) in list(roles.items()):
             new = "TANK" if name in era_tank_set else ("DPS" if role == "TANK" else role)
@@ -253,10 +254,13 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
 
     scripted = set(CONFIG["scripted_deaths"])
     deaths = defaultdict(list)
+    overkill = {}  # name -> (biggest overkill of a non-scripted death, killing blow)
     for d in t["deaths"]["entries"]:
         blow = (d.get("killingBlow") or {}).get("name")
         deaths[d["name"]].append((d["timestamp"], blow in scripted, blow))
-    real = sorted((ts, n) for n, ds in deaths.items() for ts, s, _ in ds if not s)
+        if blow not in scripted and d.get("overkill", 0) > overkill.get(d["name"], (0, None))[0]:
+            overkill[d["name"]] = (d["overkill"], blow)
+    real = sorted((ts, n) for n, ds in deaths.items() if n in roles for ts, s, _ in ds if not s)
     first_dead = real[0][1] if real else None
     pull_dead = sum(1 for n in roles if deaths.get(n))  # any death, scripted or battle-rezzed, counts
 
@@ -319,8 +323,11 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
             "top_ability_share": round(max((a.get("total", 0) for a in d.get("abilities", [])), default=0) / d["total"], 4) if d.get("total") else None,
             "engineering_damage": sum(a.get("total", 0) for a in d.get("abilities", []) if a.get("name") in engineering),
             "pull_players": len(roles), "pull_dead": pull_dead,
+            "boss_pct": f.get("fightPercentage"),
             "deaths": sum(1 for _, s, _ in my_deaths if not s), "deaths_scripted": sum(1 for _, s, _ in my_deaths if s),
             "killed_by": next((b for _, s, b in my_deaths if not s), None),
+            "death_times": json.dumps(sorted(ts for ts, s, _ in my_deaths if not s)),
+            "overkill": overkill.get(name, (0, None))[0], "overkill_by": overkill.get(name, (0, None))[1],
             "first_death": name == first_dead,
             "interrupts": interrupts.get(name, 0), "dispels": dispels.get(name, 0),
             "casts": c.get("total", 0), "casts_active_ms": c.get("activeTime", 0),
@@ -339,13 +346,18 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
 
 
 def add_scores(rows: list[dict]) -> None:
-    """score = metric / median of the same role in the same pull x 100 (kills only, docs/decisions.md)."""
+    """score = metric / median of the same role in the same pull x 100 (kills only, docs/decisions.md).
+
+    The median leaves out players at 0 (disconnected, AFK, wrong role) and needs min_score_peers of
+    them: a median of one or two players (a healer next to two "healers" at 0) gave scores in the tens
+    of thousands. Pulls below that get no score."""
     groups = defaultdict(list)
     for r in rows:
         groups[(r["source"], r["role"])].append(r)
     for (_, role), rs in groups.items():
         metric = SCORE_METRIC[role]
-        med = statistics.median(r[metric] for r in rs)
+        active = [r[metric] for r in rs if r[metric] > 0]
+        med = statistics.median(active) if len(active) >= CONFIG["min_score_peers"] else 0
         for r in rs:
             r["score"] = round(100 * r[metric] / med, 1) if med and r["kill"] else None
 

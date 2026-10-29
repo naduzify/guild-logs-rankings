@@ -9,16 +9,18 @@
   "scaled_totals_tier": "bwl",
   "_excluded_encounters": "WCL encounter IDs left out of every stat and record. Vehicle and cannon fights, where damage, healing and deaths do not reflect the players: 744 Flame Leviathan, 847 Icecrown Gunship Battle.",
   "excluded_encounters": [744, 847],
+  "_min_score_peers": "Performance scores (base 100 vs the median of the role in the pull): the median leaves out players at 0 and needs at least this many players of the role above 0, else the pull gets no score.",
+  "min_score_peers": 3,
   "_tank_classes": "Every expansion: a player WCL lists as a tank whose class cannot tank plays DPS (WCL class names).",
   "tank_classes": ["Warrior", "Druid", "Paladin", "DeathKnight", "Monk"],
-  "_era_tank": "Classic Era only: WCL's tank detection is unreliable. A player is a tank when his class can tank and he took at least this share of the boss melee damage of the pull, or of the adds melee damage (off-tanks). Players WCL lists as healers stay healers.",
+  "_era_tank": "Classic Era only: WCL lists as tanks only the Protection / Guardian talent builds, so tanks in a DPS build (Feral, fury-prot) are missed. A player of a tanking class is a tank when WCL lists him as one, or when he took at least this share of the boss melee damage of the pull, or of the adds melee damage (off-tanks). 25%: at 10%, fury warriors hit by a cleave or a tank swap counted as tanks. Players WCL lists as healers stay healers.",
   "era_tank": {
     "classes": [
       "Warrior",
       "Druid",
       "Paladin"
     ],
-    "min_melee_share": 0.1
+    "min_melee_share": 0.25
   },
   "_wotlk_consumables": "WotLK only: potionUse / healthstoneUse are almost always 0 (365 potions in 2,019 pulls), consumables are counted from a Casts table filtered on these ability IDs (crawl complement). Speed 53908, Wild Magic 53909, Runic Healing Potion 43185, Runic Mana Potion 43186, Indestructible 53762, Runic Healing / Mana Injector 67489 / 67490, Fel Healthstone 47875-47877. A cast whose name holds 'Healthstone' is a healthstone. TBC, Cata and MoP keep WCL's counters (TBC's include Haste and Destruction).",
   "wotlk_consumable_ids": [53908, 53909, 43185, 43186, 53762, 67489, 67490, 47875, 47876, 47877],
@@ -94,12 +96,8 @@
   },
   "_reset": "Weekly reset of the Oceanic realms (US region): Tuesday 15:00 UTC. Reset weeks are counted from this anchor.",
   "reset_anchor_utc": "2019-08-27T15:00:00",
-  "_night": "Night Owl: a pull started between these local hours (Sydney time) counts as after midnight.",
-  "night": {
-    "timezone": "Australia/Sydney",
-    "from_hour": 0,
-    "to_hour": 6
-  },
+  "_timezone": "Guild time zone: raid nights (best friend, late arrival, early leaver) and dates shown on the site.",
+  "timezone": "Australia/Sydney",
   "_engineering_abilities": "Engineer's Pride: damage done by these abilities (bombs, grenades, sappers, dynamite).",
   "engineering_abilities": [
     "Goblin Sapper Charge",
@@ -123,11 +121,20 @@
     "Goblin Dragon Gun",
     "Electrostatic Condenser"
   ],
+  "_arch_nemesis_ignore": "Arch-Nemesis: killing blows left out (a quarter of all deaths are 'Melee', which names no boss or mechanic).",
+  "arch_nemesis_ignore": ["Melee"],
+  "_heartbreak_pct": "Heartbreaker: a wipe with the encounter (WCL fightPercentage) below this share of its health.",
+  "heartbreak_pct": 5,
+  "_obliterated": "Obliterated: biggest overkill, as a multiple of the median overkill of the guild's deaths in the expansion. An ability is an instant kill mechanic, left out, when on a boss it has at least min_deaths deaths and its smallest overkill is above instakill_factor times that median (Ethereal Corruption, Rocket Strike, Ascend to the Heavens, Dark Glare, Hand of Death...).",
+  "obliterated": {"min_deaths": 3, "instakill_factor": 30},
+  "_suicide_pact": "Suicide Pact: two players dying within window_s of each other in a pull. Only the deaths before max_dead_share of the raid is down count, else every wipe would pair everyone.",
+  "suicide_pact": {"window_s": 10, "max_dead_share": 0.2},
   "_final_bosses": "Final Boss Energy: last boss of each raid.",
   "final_bosses": [
     "Ragnaros",
     "Onyxia",
     "Nefarian",
+    "Nefarian's End",
     "C'Thun",
     "Kel'Thuzad",
     "Gruul the Dragonkiller",

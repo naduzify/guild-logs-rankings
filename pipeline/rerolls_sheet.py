@@ -40,7 +40,7 @@ def export() -> None:
     rows = [r for rs in dedup(pulls).values() for r in rs]
 
     anchor = datetime.fromisoformat(CONFIG["reset_anchor_utc"]).replace(tzinfo=timezone.utc).timestamp() * 1000
-    tz = ZoneInfo(CONFIG["night"]["timezone"])
+    tz = ZoneInfo(CONFIG["timezone"])
     exps = load("tiers")["expansions"]
     exp_order = {"classic": 0, "tbc": 1, "wotlk": 2, "cata": 3, "mop": 4}
     player_weeks, char_weeks = defaultdict(set), defaultdict(set)

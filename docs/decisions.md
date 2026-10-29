@@ -530,3 +530,45 @@ L'export donne les semaines de chaque personnage (`players.json` → `chars: [no
 
 **Raison.** Un reroll monté pour une soirée ajoutait une puce de classe et un personnage à The Undecided, comme un vrai reroll.
 
+## 2026-10-29 — Audit des stats : corrections et nouvelles stats
+
+Audit des stats sur les données réelles (8 714 pulls après dédoublonnage). Valeurs avant → après sur le classement sans filtre.
+
+**Corrections.**
+- **Scores base 100** (`facts.add_scores` et `export_site.base100`) : la médiane du rôle laisse de côté les joueurs à 0 et demande au moins 3 joueurs au-dessus de 0 (`min_score_peers`), sinon pas de score. Avant : un healer à 40 444 (deux autres « healers » à 0 et 752), un tank à 26 019, un Healers Love Him à 1 110 323 (pull court, médiane de 1).
+- **Stats communes sur le score de performance** (Metronome, Comfort Boss, Clutch Player, Glow Up) : DPS et healers seulement. Le score d'un tank est ses dégâts subis ; les tanks et un healer à 40 444 finissaient derniers de Metronome (σ 909).
+- **Tanks en Era** : WCL ne donne tank que les talents Protection / Guardian. Ceux-là restent tanks ; les autres ne le deviennent qu'à **25 %** de la mêlée du boss ou des adds (au lieu de 10 % pour tous). Avant : 946 lignes tank en spé Fury (Aye n°1 de Secret DPS à 1 170), et de vrais tanks passés DPS en bas de Big Pumper et en haut de One Button Wonder.
+- **Expansion d'un rapport** : `config/crawl.json` → `report_expansion` force l'extension des rapports mal étiquetés. `LKkhdpbfD6Tq41Q3` (Throne of Thunder étiqueté Firelands) mettait 22 pulls de Lei Shen en Cata.
+- **Healers Love Him** : soins reçus des autres (ses propres soins, potions et pierres de soins exclus), base 100 contre le rôle dans le pull, puis divisés par la **moyenne** de sa classe et de son rôle dans l'extension. Avant : les 5 premiers étaient des démonistes (Life Tap). La médiane de classe a été écartée : elle vaut 0 ou presque pour les classes qui ne reçoivent presque jamais de soins.
+- **Final Boss Energy** : score sur les boss de fin **moins** score sur les autres boss (`diff`). Avant, c'était le score sur les boss de fin, avec le même top 3 que Big Pumper. « Nefarian's End » (BWD) ajouté aux boss de fin.
+- **Fishbait** : le premier mort est cherché parmi les joueurs seulement (72 pulls n'avaient pas de premier mort).
+
+**Changements.**
+- **Night Owl supprimé** : 95 pulls sur 8 714 commencent après minuit, maximum 5,9 %. `compute.json` → `night` devient `timezone`.
+- **Arch-Nemesis** sans « Melee » (`arch_nemesis_ignore`) : « Melee » était l'ennemi juré de 131 joueurs sur 155 ; sans lui, il y a 34 ennemis différents.
+- **Glow Up** : seulement les joueurs avec des kills notés dans au moins 3 tiers de raid sous les filtres (`min_tiers`, tiers exportés dans la cellule `slope`).
+- **The Undecided** devient **Identity Crisis** (id `identity-crisis`).
+
+**Nouvelles stats** (communes) : Heartbreaker, Spectator, Iron Man, Comeback Kid, Late Arrival, Early Leaver, Loot Hoarder, Self-Made, Guardian Angel, Personal Hell, Obliterated, Suicide Pact, Pioneer (définitions dans `docs/stats.md`). Nouvelles agrégations `streak` et `gap` (semaines de raid de la guilde numérotées à la suite, les semaines sans raid de guilde ne comptent pas comme absences) et format `times`.
+- **Obliterated** : overkill rapporté à l'overkill médian de l'extension ; les mécaniques d'exécution sont détectées et exclues (capacité dont le plus petit overkill dépasse 30 fois cette médiane, au moins 3 morts : Ethereal Corruption, Rocket Strike, Ascend to the Heavens, Dark Glare, Hand of Death…). **Écarté** : la médiane par boss ou par capacité, trop instable (une médiane de quelques points donnait des valeurs de 500 000).
+- **Suicide Pact** : morts à 10 s d'écart au plus, en ne comptant que les morts d'avant le premier cinquième du raid au sol (sinon chaque wipe associerait tout le monde).
+
+**En question.** Top of the Meters (part des kills finis n°1 des DPS) : corrélation de rang 0,84 avec Big Pumper, mais 3 noms en commun seulement dans les top 10 ; elle récompense les pics plus que la régularité et dépend de la composition du raid.
+
+**Étudié, pas appliqué.** Retirer les boss sans points All Stars sur WCL. Relevé fait avec un DPS de la guilde par zone et difficulté : 34 boss, presque tous en Cata et MoP (Alysrazor, Spine of Deathwing, Lei Shen, Sha of Pride…). Impact : Main Character Moment change beaucoup (le meilleur pull de 41 joueurs sur 144 est sur un de ces boss, dont le top 3 actuel, tous sur Alysrazor) ; Big Pumper et Healing Machine bougent peu (9 noms sur 10 restent dans le top 10) ; les totaux de carrière perdent 25 % de leur volume. La liste MoP reste à vérifier sur le site WCL avant de l'utiliser.
+
+## 2026-10-29 — Illustrations Varian et Garrosh sur le choix de guilde
+
+**Décision.** Sur `/`, chaque moitié porte une illustration à 50 % d'opacité, fondue vers la découpe et vers le haut et le bas : Varian côté Alliance (Fable), mis en miroir pour faire face à Garrosh, et Garrosh côté Horde (NightShift), placé dans le calque rouge pour suivre la découpe. Sur téléphone, Varian occupe la moitié haute de l'écran et Garrosh la moitié basse. Les images sont calées sur l'écran (et non sur le calque de la découpe) grâce aux variables `--screen-top` / `--screen-h` posées par `split.js`.
+
+**Raison.** Donner une identité Alliance contre Horde à la page d'entrée.
+
+**Écarté.** Les images en plein contraste : elles gênaient la lecture des cartes et du titre.
+
+## 2026-10-29 — Luciole plus lente, avec traînée de lumière
+
+**Décision.** La luciole du choix de guilde parcourt la découpe à 1000 px/s au lieu de 2200, soit 18 % du cycle ; la pause reste à peu près aussi longue qu'avant. Elle laisse une traînée continue de 30 images rémanentes : des copies qui suivent le même chemin à 5 ms d'écart (environ 5 px), de plus en plus petites et pâles, dont les halos se fondent en un seul trait de lumière d'environ 150 px. Le halo de la luciole elle-même reste modéré (14 px). Elle alterne le sens à chaque passage : haut → bas, pause, bas → haut, pause (gauche ↔ droite sur téléphone) ; la traînée reste derrière elle dans les deux sens. Couleurs : jaune très pâle, presque blanc (cœur `#fffef5`, halo `#fff7c4` / `#ffef94`) au lieu du jaune-vert. Les copies sont créées par `split.js` ; le chemin et la durée passent par les variables `--fly-path` et `--fly-time` du calque.
+
+**Raison.** On voyait mal la luciole à 2200 px/s. Une traînée de points espacés ressemblait à un collier de perles ; on voulait un effet de résidu de lumière.
+
+**Écarté.** Une traînée en dégradé orientée selon le chemin (`offset-rotate: auto`) : elle pivote d'un coup aux angles de la découpe, alors que les copies suivent les angles. La propriété `scale` pour rétrécir les copies : elle s'applique aussi au déplacement le long du chemin et les sort de la découpe.

@@ -64,7 +64,7 @@
         "percentile": false
       },
       {
-        "stat": "the-undecided",
+        "stat": "identity-crisis",
         "label": "Characters"
       }
     ],

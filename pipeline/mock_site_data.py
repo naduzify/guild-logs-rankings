@@ -122,8 +122,11 @@ def cell_values(stat: dict, idx: int, rng: random.Random, player: dict, p: int, 
     if agg == "sum":
         scale = 2_000_000 if fmt == "big" else 6
         return [max(0, int(scale * pulls / 100 * max(0.0, 1 + 0.5 * noise(0.5))))]
+    if agg in ("streak", "gap"):
+        lo, hi = WEEKS[e]
+        return [sorted(rng.sample(range(lo, hi), min(hi - lo, max(1, int((hi - lo) * min(1.0, pulls / 300) * rng.uniform(0.5, 1.0))))))]
     if agg == "distinct":
-        if stat["id"] == "the-undecided":
+        if stat["id"] == "identity-crisis":
             return [[p * 10 + c for c, _ in enumerate(player["chars"])][: rng.randint(1, len(player["chars"]))]]
         lo, hi = WEEKS[e] if stat["id"] == "the-gang" else (e * 40, e * 40 + len(BOSSES[e]) * 2)
         k = min(hi - lo, max(1, int((hi - lo) * min(1.0, pulls / 300) * rng.uniform(0.5, 1.0))))
@@ -139,17 +142,20 @@ def cell_values(stat: dict, idx: int, rng: random.Random, player: dict, p: int, 
         lo, hi = WEEKS[e]
         xs = [rng.uniform(lo, hi) for _ in range(kills)]
         ys = [100 + 0.05 * trait * (x - 200) + rng.gauss(0, 10) for x in xs]
-        return [kills, round(sum(xs), 1), round(sum(ys), 1), round(sum(x * x for x in xs), 1), round(sum(x * y for x, y in zip(xs, ys)), 1)]
+        tiers = rng.sample(range(e * 4, e * 4 + 4), rng.randint(1, 4))
+        return [kills, round(sum(xs), 1), round(sum(ys), 1), round(sum(x * x for x in xs), 1), round(sum(x * y for x, y in zip(xs, ys)), 1), tiers]
     if agg == "top":
-        if stat["id"] == "favorite-patient":
+        if stat["id"] in ("favorite-patient", "guardian-angel"):
             labels = player["_friends"]
             return [{l: [int(rng.uniform(1e6, 4e7)), rng.randint(5, 60)] for l in rng.sample(labels, 3)}]
-        labels = NEMESES[e] if stat["id"] == "arch-nemesis" else BOSSES[e]
+        labels = NEMESES[e] if stat["id"] == "arch-nemesis" else player["_friends"] if stat["id"] == "suicide-pact" else BOSSES[e]
         if stat["top_by"] == "mean":
             return [{l: [round(n * (100 + 20 * noise(0.8)), 1), n] for l in rng.sample(labels, 3) for n in [rng.randint(1, 12)]}]
         return [{l: [rng.randint(1, 25), 1] for l in rng.sample(labels, 3)}]
     if agg == "max":
         day = EXP_START[e] + timedelta(weeks=rng.randint(0, WEEKS[e][1] - WEEKS[e][0] - 1))
+        if stat["id"] == "obliterated":
+            return [round(400 + 150 * noise(0.7), 1), f"{rng.choice(NEMESES[e])} · {rng.choice(BOSSES[e])} · {day.isoformat()}"]
         return [round(150 + 30 * noise(0.7), 1), f"{rng.choice(BOSSES[e])} · {day.isoformat()}"]
     raise ValueError(f"unknown agg {agg}")
 

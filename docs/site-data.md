@@ -71,7 +71,9 @@ Les valeurs dépendent du mode `agg` de la stat :
 | `distinct` | `[ids]` | taille de l'union des ids (semaines, boss, personnages) |
 | `diff` | `a, ad, b, bd` | Σa/Σad − Σb/Σbd |
 | `spread` | `n, s, ss` | écart-type : √(Σss/Σn − (Σs/Σn)²) |
-| `slope` | `n, sx, sy, sxx, sxy` | pente de régression de y (score) sur x (semaine) |
+| `streak` | `[ids]` (semaines de raid de la guilde, numérotées à la suite) | plus longue suite d'ids consécutifs (Iron Man) |
+| `gap` | `[ids]` (idem) | plus grand trou entre deux ids présents (Comeback Kid) |
+| `slope` | `n, sx, sy, sxx, sxy, [tiers]` | pente de régression de y (score) sur x (semaine) ; `[tiers]` = tiers de raid des points, pour `min_tiers` |
 | `top` | `{label: [num, den]}` | label au plus grand Σnum (`top_by: count`) ou Σnum/Σden (`top_by: mean`) ; `top_by: share` : label au plus grand Σnum parmi ceux qui ont Σden ≥ `min_den`, valeur = sa part de Σnum de tous les labels |
 | `max` | `v, label` | plus grande valeur, avec son label |
 
@@ -86,7 +88,8 @@ Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (régl
 - `display` : `P` percentile, `N` nombre, `PN` les deux, `T` texte, `TN` texte et nombre.
 - `number` : pour `PN` en `ratio`, le nombre de carrière affiché (`num` ou `den`).
 - `direction` : `desc` (défaut, la valeur haute porte le titre) ou `asc`.
-- `format` : `pct`, `score` (base 100), `rate` (+ `rate_unit`), `int`, `big`, `signed`, `pp` (points de %).
+- `format` : `pct`, `score` (base 100), `rate` (+ `rate_unit`), `int`, `big`, `signed`, `pp` (points de %), `times` (multiple, « ×12 »).
+- `min_tiers` (`slope`) : nombre minimal de tiers de raid distincts dans les points, sous les filtres (Glow Up : 3).
 - `min_den`, `top_by`, `unit` : voir plus haut.
 - `hall_of_fame: false` : achievement jamais tiré dans le Hall of fame de l'accueil.
 - `title_percentile` : seuil du titre propre à l'achievement, à la place de celui de `config/site.json`.

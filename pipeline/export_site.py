@@ -93,8 +93,11 @@ class Cells:
     def spread(self, sid, key, x):
         v = self._get(sid, key, lambda: [0, 0.0, 0.0]); v[0] += 1; v[1] += x; v[2] += x * x
 
-    def slope(self, sid, key, x, y):
-        v = self._get(sid, key, lambda: [0, 0.0, 0.0, 0.0, 0.0]); v[0] += 1; v[1] += x; v[2] += y; v[3] += x * x; v[4] += x * y
+    def slope(self, sid, key, x, y, tier=None):
+        """Regression sums, plus the raid tiers of the points (a stat can ask for a minimum of tiers)."""
+        v = self._get(sid, key, lambda: [0, 0.0, 0.0, 0.0, 0.0, set()]); v[0] += 1; v[1] += x; v[2] += y; v[3] += x * x; v[4] += x * y
+        if tier is not None:
+            v[5].add(tier)
 
     def top(self, sid, key, label, num, den=1):
         t = self._get(sid, key, dict).setdefault(label, [0.0, 0])
@@ -115,21 +118,26 @@ class Cells:
                 elif isinstance(v, dict):
                     vals = [{k: [round(a, 1), b] for k, (a, b) in v.items()}]
                 else:
-                    vals = [round(x, 4) if isinstance(x, float) else x for x in v]
+                    vals = [round(x, 4) if isinstance(x, float) else sorted(x) if isinstance(x, set) else x for x in v]
                 cells.append([p, e, c, r, *vals])
             out[sid] = cells
         return out
 
 
 def base100(rows, metric, group_key):
-    """{id(row): 100 * value / median of its group}, groups with a zero median skipped."""
+    """{id(row): 100 * value / median of its group}. As the performance scores (facts.add_scores), the median
+    leaves out the rows at 0 and needs min_score_peers of them: a median of 1 (a short pull where nearly
+    nobody was healed) gave values in the millions. Groups below that are skipped."""
     groups = defaultdict(list)
     for r in rows:
         if r.get(metric) is not None:
             groups[group_key(r)].append(r)
     out = {}
     for rs in groups.values():
-        med = statistics.median(r[metric] for r in rs)
+        active = [r[metric] for r in rs if r[metric] > 0]
+        if len(active) < CONFIG["min_score_peers"]:
+            continue
+        med = statistics.median(active)
         if med:
             for r in rs:
                 out[id(r)] = 100 * r[metric] / med
@@ -287,6 +295,53 @@ def parse_lord(rows: list, pid: dict, char_class: dict, cells) -> None:
         cells.parse("parse-lord", k, max(xs), statistics.median(xs))
 
 
+def raid_night(start_ms: int, tz) -> str:
+    """Raid night of a pull: its local date, 6 hours back so that pulls after midnight stay on their evening."""
+    return (datetime.fromtimestamp(start_ms / 1000, tz) - timedelta(hours=6)).date().isoformat()
+
+
+def late_and_early(pulls: dict, tz) -> dict:
+    """Late Arrival / Early Leaver: {(night, player): (first row, last row, late, early)}.
+
+    A night's first and last bosses are the encounters (with difficulty) of its first and last pulls,
+    across every report of the night. A player is late when he is in none of the pulls of the first
+    boss, early when in none of the last boss's. Nights with a single boss are left out."""
+    nights = defaultdict(list)
+    for rs in pulls.values():
+        nights[raid_night(rs[0]["start_ms"], tz)].append(rs)
+    boss = lambda r: (r["encounter_id"], r["difficulty"])
+    out = {}
+    for night, ps in nights.items():
+        ps.sort(key=lambda rs: rs[0]["start_ms"])
+        first, last = boss(ps[0][0]), boss(ps[-1][0])
+        if first == last:
+            continue
+        mine = defaultdict(list)
+        for rs in ps:
+            for r in rs:
+                mine[r["player"]].append(r)
+        for pl, rs in mine.items():
+            bosses = {boss(r) for r in rs}
+            out[(night, pl)] = (rs[0], rs[-1], first not in bosses, last not in bosses)
+    return out
+
+
+def suicide_pacts(rs: list) -> list:
+    """Suicide Pact: pairs of rows of one pull whose players died within window_s of each other, counting
+    only the deaths before max_dead_share of the raid is down (the wipe itself would pair everyone)."""
+    cfg = CONFIG["suicide_pact"]
+    deaths = sorted((t, r["player"], i) for i, r in enumerate(rs) for t in json.loads(r["death_times"]))
+    deaths = deaths[: int(len(rs) * cfg["max_dead_share"])]
+    pairs = set()
+    for a, (ta, pa, ia) in enumerate(deaths):
+        for tb, pb, ib in deaths[a + 1:]:
+            if tb - ta > cfg["window_s"] * 1000:
+                break
+            if pa != pb:
+                pairs.add((ia, ib))
+    return [(rs[a], rs[b]) for a, b in pairs]
+
+
 # --- main --------------------------------------------------------------------
 
 def main() -> None:
@@ -302,7 +357,7 @@ def main() -> None:
     rows = [r for rs in pulls.values() for r in rs]
 
     anchor = datetime.fromisoformat(CONFIG["reset_anchor_utc"]).replace(tzinfo=timezone.utc).timestamp() * 1000
-    tz = ZoneInfo(CONFIG["night"]["timezone"])
+    tz = ZoneInfo(CONFIG["timezone"])
     exp_ids = [x["id"] for x in tiers_cfg["expansions"]]
     tier_of = {}
     for i, t in enumerate(tiers_cfg["tiers"]):
@@ -378,7 +433,7 @@ def main() -> None:
         here = sorted({r["player"] for r in rs if r["player"] in pid})
         if len(here) < 2 or rs[0]["start_ms"] is None:
             continue
-        night = (datetime.fromtimestamp(rs[0]["start_ms"] / 1000, tz) - timedelta(hours=6)).date()
+        night = raid_night(rs[0]["start_ms"], tz)
         for i, a in enumerate(here):
             for b in here[i + 1:]:
                 shared[(a, b)].add(night)
@@ -411,7 +466,24 @@ def main() -> None:
     tanks_k = [r for r in kills if r["role"] == "TANK"]
     sponge = base100(tanks_k, "tank_share", boss_key)
     secret = base100(tanks_k, "damage_done", boss_key)
-    received = base100(rows, "healing_received", lambda r: (r["source"], r["role"]))
+    # Healers Love Him: healing received from others (self-healing, potions and healthstones left out), base 100
+    # vs the role in the pull, then vs the mean of his class and role in the expansion: warlocks (Life Tap) are
+    # healed far more than other DPS. A mean, not a median: most DPS of some classes get no heal at all.
+    for r in rows:
+        r["received_others"] = r["healing_received"] - r["self_healing"]
+    received = base100(rows, "received_others", lambda r: (r["source"], r["role"]))
+    by_class = defaultdict(list)
+    for r in rows:
+        if id(r) in received:
+            by_class[(r["e"], r["class"], r["role"])].append(received[id(r)])
+    class_med = {k: statistics.mean(v) for k, v in by_class.items()}
+    for r in rows:
+        if id(r) in received:
+            med = class_med[(r["e"], r["class"], r["role"])]
+            if med:
+                received[id(r)] = 100 * received[id(r)] / med
+            else:
+                del received[id(r)]
     magnet = base100(rows, "avoidable_taken", lambda r: (r["source"], r["role"]))
     healers_k = [r for r in kills if r["role"] == "HEALER"]
     smite = base100(healers_k, "damage_done", lambda r: r["source"])
@@ -437,10 +509,34 @@ def main() -> None:
             mine_pulls[(pl, boss_key(r0))] += 1
             mine_wipes[(pl, boss_key(r0))] += not r0["kill"]
 
+    # Iron Man / Comeback Kid: weeks numbered among the weeks the guild raided, so guild breaks are not absences.
+    guild_week = {w: i for i, w in enumerate(sorted({r["week"] for r in rows}))}
+    # Loot Hoarder: item levels of each kill, to count the players he out-gears.
+    ilvls = defaultdict(list)
+    for r in kills:
+        if r["ilvl"] not in (None, ""):
+            ilvls[r["source"]].append(r["ilvl"])
+    for v in ilvls.values():
+        v.sort()
+    # Obliterated: biggest overkill, as a multiple of the median overkill of the expansion (health pools grow
+    # with each one). Instant kill mechanics (every death to them far above that median) are left out.
+    ob_cfg, exp_overkills, ability_overkills = CONFIG["obliterated"], defaultdict(list), defaultdict(list)
+    for r in rows:
+        if r["overkill"]:
+            exp_overkills[r["e"]].append(r["overkill"])
+            ability_overkills[(r["e"], boss_key(r), r["overkill_by"])].append(r["overkill"])
+    med_overkill = {e: statistics.median(v) for e, v in exp_overkills.items()}
+    instakills = {k for k, v in ability_overkills.items()
+                  if len(v) >= ob_cfg["min_deaths"] and min(v) > ob_cfg["instakill_factor"] * med_overkill[k[0]]}
+    print("obliterated: instant kills left out:", ", ".join(sorted({a for _, _, a in instakills})) or "none")
+    row_of = {(r["source"], r["char"]): r for r in rows}
+    ranked = lambda r: r["player"] in pid and r["char"] in char_class
+    key_of = lambda r: (pid[r["player"]], r["e"], CLASSES.index(char_class[r["char"]]), ROLES.index(r["role"]))
+    nemesis_ignore = set(CONFIG["arch_nemesis_ignore"])
+
     interruptible = {src for src, rs in pulls.items() if any(r["interrupts"] for r in rs)}
     raid_taken = {src: sum(r["damage_taken"] for r in rs) for src, rs in pulls.items()}
     final_bosses = set(CONFIG["final_bosses"])
-    night = CONFIG["night"]
     boss_ids = {}
 
     raid_ms = raid_time(rows)
@@ -462,13 +558,25 @@ def main() -> None:
             cells.ratio(sid, k, scaled.get((id(r), sid), 0.0), r[field])  # [scaled, actual]
         cells.ids("the-gang", k, r["week"])
         if len(char_weeks[r["char"]]) >= site_cfg["min_char_weeks"]:  # minor rerolls do not count
-            cells.ids("the-undecided", k, char_id[r["char"]])
-        if kill:
-            cells.ids("kill-collector", k, boss_ids.setdefault(boss_key(r), len(boss_ids)))
-        cells.ratio("the-immortal", k, wipe)
-        local = datetime.fromtimestamp(r["start_ms"] / 1000, tz)
-        cells.ratio("night-owl", k, night["from_hour"] <= local.hour < night["to_hour"])
+            cells.ids("identity-crisis", k, char_id[r["char"]])
+        cells.ids("iron-man", k, guild_week[r["week"]])
+        cells.ids("comeback-kid", k, guild_week[r["week"]])
         bk = boss_key(r)
+        if kill:
+            cells.ids("kill-collector", k, boss_ids.setdefault(bk, len(boss_ids)))
+            if first_kill.get(bk) == r["source"]:
+                cells.ids("pioneer", k, boss_ids[bk])
+            cells.ratio("spectator", k, r["deaths"] > 0)
+            raid = ilvls.get(r["source"], [])
+            if r["ilvl"] not in (None, "") and len(raid) > 1:
+                below = bisect.bisect_left(raid, r["ilvl"])
+                ties = bisect.bisect_right(raid, r["ilvl"]) - below - 1
+                cells.ratio("loot-hoarder", k, (below + ties / 2) / (len(raid) - 1))
+        else:
+            if r["boss_pct"] is not None:
+                cells.ratio("heartbreaker", k, r["boss_pct"] < CONFIG["heartbreak_pct"])
+            cells.top("personal-hell", k, r["encounter"], 1)
+        cells.ratio("the-immortal", k, wipe)
         absent = boss_pulls[bk] - mine_pulls[(r["player"], bk)]
         if absent > 0:
             cells.diff("black-cat", k, wipe, 1, (boss_wipes[bk] - mine_wipes[(r["player"], bk)]) / absent, 1)
@@ -478,8 +586,13 @@ def main() -> None:
             cells.ratio("the-roach", k, not dead)
         if kill and not dead and (r["pull_players"] - r["pull_dead"]) < r["pull_players"] / 2:
             cells.sum("last-stand", k, 1)
-        if r["killed_by"]:
+        if r["killed_by"] and r["killed_by"] not in nemesis_ignore:
             cells.top("arch-nemesis", k, r["killed_by"], 1)
+        if r["overkill"] and (r["e"], bk, r["overkill_by"]) not in instakills:
+            day = datetime.fromtimestamp(r["start_ms"] / 1000, tz).date().isoformat()
+            cells.best("obliterated", k, r["overkill"] / med_overkill[r["e"]], f"{r['overkill_by']} · {r['encounter']} · {day}")
+        if r["healing_received"]:
+            cells.ratio("self-made", k, r["self_healing"] / r["healing_received"])
         if r["friendly_fire"] is not None and raid_taken[r["source"]]:
             cells.ratio("the-terrorist", k, r["friendly_fire"] / raid_taken[r["source"]])
         if id(r) in received:
@@ -494,10 +607,11 @@ def main() -> None:
         cells.ratio("the-janitor", k, r["dispels"])
         if r["duration_ms"]:
             cells.ratio("the-sweat", k, min(1, r["casts_active_ms"] / r["duration_ms"]))
-        if kill and score is not None:
+        # Performance scores of DPS and healers only: a tank's score is his damage taken, not a performance.
+        if kill and score is not None and role != "TANK":
             cells.spread("metronome", k, score)
             cells.top("comfort-boss", k, r["encounter"], score)
-            cells.slope("glow-up", k, r["week"], score)
+            cells.slope("glow-up", k, r["week"], score, r["tier"])
             prog = first_kill.get(bk) == r["source"]
             if id(r) in over:
                 cells.ratio("overachiever", k, over[id(r)])
@@ -531,6 +645,9 @@ def main() -> None:
                 main = owner.get(norm(target), target)
                 if main != r["player"]:
                     cells.top("favorite-patient", k, main, amount)
+                    patient = row_of.get((r["source"], target))
+                    if patient and ranked(patient):
+                        cells.top("guardian-angel", key_of(patient), r["player"], amount)
             if id(r) in fiend:
                 cells.ratio("parse-fiend", k, fiend[id(r)])
         else:
@@ -538,14 +655,26 @@ def main() -> None:
                 cells.ratio("big-pumper", k, score)
                 day = datetime.fromtimestamp(r["start_ms"] / 1000, tz).date().isoformat()
                 cells.best("main-character-moment", k, score, f"{r['encounter']} · {day}")
-                if r["encounter"] in final_bosses:
-                    cells.ratio("final-boss-energy", k, score)
+                fin = r["encounter"] in final_bosses
+                cells.diff("final-boss-energy", k, score if fin else 0, fin, 0 if fin else score, not fin)
             if r["damage_done"]:
                 cells.ratio("tunnel-vision", k, r["damage_boss"] / r["damage_done"])
             if id(r) in one_button:
                 cells.ratio("one-button-wonder", k, one_button[id(r)])
             if r["engineering_damage"]:
                 cells.sum("engineers-pride", k, r["engineering_damage"])
+
+    # Per night and per pair of players: Late Arrival / Early Leaver, Suicide Pact.
+    for (first, last, late, early) in late_and_early(pulls, tz).values():
+        if ranked(first):
+            cells.ratio("late-arrival", key_of(first), late)
+        if ranked(last):
+            cells.ratio("early-leaver", key_of(last), early)
+    for rs in pulls.values():
+        for a, b in suicide_pacts(rs):
+            for me, mate in ((a, b), (b, a)):
+                if ranked(me):
+                    cells.top("suicide-pact", key_of(me), mate["player"], 1)
 
     timekeeper(rows, pid, char_class, cells)
     parse_lord(rows, pid, char_class, cells)

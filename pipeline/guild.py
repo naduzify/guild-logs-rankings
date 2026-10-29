@@ -1,8 +1,9 @@
 """Guild report listing and expansion classification, shared by the probe and the crawl."""
 
+import json
 from datetime import datetime, timezone
 
-from pipeline.wcl import WCLClient
+from pipeline.wcl import ROOT, WCLClient
 
 GUILD_ID = 482770
 EXPANSIONS = ["classic", "tbc", "wotlk", "cata", "mop"]
@@ -13,6 +14,9 @@ EXPANSION_START = [
     ("cata", datetime(2024, 5, 20, tzinfo=timezone.utc)),
     ("mop", datetime(2025, 7, 1, tzinfo=timezone.utc)),
 ]
+
+# Reports whose WCL zone gives the wrong expansion (config/crawl.json).
+FORCED = json.loads((ROOT / "config" / "crawl.json").read_text(encoding="utf-8"))["report_expansion"]
 
 REPORTS_QUERY = """
 query($guild: Int!, $page: Int!) {
@@ -26,6 +30,8 @@ query($guild: Int!, $page: Int!) {
 
 
 def expansion_of(report: dict) -> str:
+    if report.get("code") in FORCED:
+        return FORCED[report["code"]]
     zone = report.get("zone") or {}
     name = ((zone.get("expansion") or {}).get("name") or "").lower()
     for key, needle in [("tbc", "burning"), ("wotlk", "lich"), ("cata", "cataclysm"), ("mop", "pandaria")]:

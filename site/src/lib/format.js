@@ -11,6 +11,7 @@ export function formatValue(stat, v) {
     case 'big': return compact.format(v);
     case 'signed': return `${v >= 0 ? '+' : ''}${v.toFixed(1)}`;
     case 'pp': return `${v >= 0 ? '+' : ''}${(v * 100).toFixed(1)} pts`;
+    case 'times': return `×${int.format(v)}`;
     default: return int.format(v);
   }
 }

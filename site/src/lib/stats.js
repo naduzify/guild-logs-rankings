@@ -17,16 +17,34 @@ const AGG = {
   // Career totals in reference-tier terms: [scaled, actual]; ranked on the scaled one, the actual one in brackets.
   scaled: { init: () => [0, 0], add: sumInto, den: () => Infinity, value: a => a[0], extra: a => [a[1]] },
   distinct: { init: () => new Set(), add: (a, c) => c[V].forEach(x => a.add(x)), den: () => Infinity, value: a => a.size },
+  // Ids are consecutive guild raid weeks: longest run of consecutive ids (Iron Man), longest hole between two (Comeback Kid).
+  streak: { init: () => new Set(), add: (a, c) => c[V].forEach(x => a.add(x)), den: () => Infinity, value: a => runs(a).streak },
+  gap: { init: () => new Set(), add: (a, c) => c[V].forEach(x => a.add(x)), den: () => Infinity, value: a => runs(a).gap },
   diff: { init: () => [0, 0, 0, 0], add: sumInto, den: a => Math.min(a[1], a[3]), value: a => a[0] / a[1] - a[2] / a[3] },
   spread: { init: () => [0, 0, 0], add: sumInto, den: a => a[0],
     value: ([n, s, ss]) => Math.sqrt(Math.max(0, ss / n - (s / n) ** 2)) },
-  slope: { init: () => [0, 0, 0, 0, 0], add: sumInto, den: a => a[0],
+  // [n, sx, sy, sxx, sxy, tiers]: regression sums, plus the raid tiers of the points (`min_tiers`).
+  slope: { init: () => [0, 0, 0, 0, 0, new Set()],
+    add: (a, c) => { for (let i = 0; i < 5; i++) a[i] += c[V + i]; (c[V + 5] || []).forEach(t => a[5].add(t)); },
+    den: a => a[0], tiers: a => a[5].size,
     value: ([n, sx, sy, sxx, sxy]) => { const d = n * sxx - sx * sx; return d ? (n * sxy - sx * sy) / d : 0; } },
   top: { init: () => ({}), den: () => Infinity,
     add: (a, c) => { for (const [k, [n, d]] of Object.entries(c[V])) { const t = a[k] || (a[k] = [0, 0]); t[0] += n; t[1] += d; } } },
   max: { init: () => [-Infinity, null], den: () => Infinity,
     add: (a, c) => { if (c[V] > a[0]) { a[0] = c[V]; a[1] = c[V + 1]; } }, value: a => a[0], label: a => a[1] },
 };
+
+function runs(ids) {
+  const xs = [...ids].sort((a, b) => a - b);
+  let streak = xs.length ? 1 : 0, gap = 0, cur = 1;
+  for (let i = 1; i < xs.length; i++) {
+    const d = xs[i] - xs[i - 1];
+    cur = d === 1 ? cur + 1 : 1;
+    streak = Math.max(streak, cur);
+    gap = Math.max(gap, d - 1);
+  }
+  return { streak, gap };
+}
 
 // `top` picks the label with the highest count, or the highest mean among labels with enough samples.
 // `share` picks the highest count among labels with enough samples, valued as its share of all labels.
@@ -81,6 +99,7 @@ export function computeStat(stat, cells, filter, settings, roleOk) {
       continue;
     }
     if (agg.den(a) < minDen) continue;
+    if (stat.min_tiers && agg.tiers && agg.tiers(a) < stat.min_tiers) continue;
     const value = agg.value(a);
     if (!Number.isFinite(value)) continue;
     byPlayer.set(p, { p, value, number: agg.number ? agg.number(a, stat) : value, label: agg.label?.(a) ?? null, extra: agg.extra?.(a) ?? null });
@@ -104,7 +123,7 @@ export const isRankable = stat => stat.display !== 'T';
 export const hasPercentile = stat => stat.display.includes('P');
 // A separate career number column only makes sense for ratios: elsewhere the number is the value itself.
 export const hasNumber = stat => stat.display.includes('N') && stat.agg === 'ratio';
-export const valueIsNumber = stat => stat.agg === 'sum' || stat.agg === 'distinct';
+export const valueIsNumber = stat => ['sum', 'distinct', 'streak', 'gap'].includes(stat.agg);
 // A `share` top shows its raw total in brackets after the share.
 export const shareTotal = (stat, row) => (stat.top_by === 'share' ? ` (${formatBig(row.number)}${stat.unit ? ' ' + stat.unit : ''})` : '');
 
@@ -125,7 +144,9 @@ export function explain(stat, settings) {
   const minDen = stat.min_den ?? settings.min_den;
   if (hasPercentile(stat)) {
     const sample = stat.format === 'parse' ? 'bosses' : stat.agg === 'spread' || stat.agg === 'slope' ? 'kills' : 'pulls';
-    let rank = `Percentile among players with at least ${minDen} ${sample} under the current filters`;
+    const counted = valueIsNumber(stat) && stat.agg !== 'sum';
+    let rank = counted ? 'Percentile among players under the current filters'
+      : `Percentile among players with at least ${minDen} ${sample} under the current filters`;
     rank += stat.direction === 'asc' ? ' (lower is better).' : '.';
     lines.push(rank);
     let earn = `${formatPct(titlePercentile(stat, settings))} and above earn “${stat.title}”`;
