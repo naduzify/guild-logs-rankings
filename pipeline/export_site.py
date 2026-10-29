@@ -49,7 +49,7 @@ def dedup(pulls: dict) -> dict:
             if it[0] > end and cluster:
                 reports = {c[3] for c in cluster}
                 if len(reports) > 1:
-                    keep = max(reports, key=lambda rep: per_report[rep])
+                    keep = max(sorted(reports), key=lambda rep: per_report[rep])  # ties: first code, for a stable export
                     drop.update(c[2] for c in cluster if c[3] != keep)
                 cluster, end = [], -1
             if it[2] is not None:
@@ -275,11 +275,19 @@ def main() -> None:
     for i, t in enumerate(tiers_cfg["tiers"]):
         for z in t["zones"]:
             tier_of[(exp_ids.index(t["expansion"]), z)] = i
-    unknown_zones = Counter()
+    # The zone is the report's, not the fight's: a report labeled Zul'Aman can hold Sunwell pulls.
+    # So a boss takes the tier its pulls most often have across the guild's logs.
+    boss_tiers = defaultdict(Counter)
     for r in rows:
         r["e"] = EXP_INDEX[r["expansion"]]
+        t = tier_of.get((r["e"], r["zone"]))
+        if t is not None:
+            boss_tiers[(r["e"], r["encounter_id"])][t] += 1
+    boss_tier = {k: c.most_common(1)[0][0] for k, c in boss_tiers.items()}
+    unknown_zones = Counter()
+    for r in rows:
         r["week"] = int((r["start_ms"] - anchor) // WEEK_MS)
-        r["tier"] = tier_of.get((r["e"], r["zone"]))
+        r["tier"] = boss_tier.get((r["e"], r["encounter_id"]))
         if r["tier"] is None:
             unknown_zones[(r["expansion"], r["zone"])] += 1
         r["heal_targets"] = json.loads(r["heal_targets"]) if isinstance(r["heal_targets"], str) else r["heal_targets"]

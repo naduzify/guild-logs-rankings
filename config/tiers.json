@@ -149,6 +149,7 @@
       "expansion": "wotlk",
       "zones": [
         "Icecrown Citadel",
+        "Ruby Sanctum",
         "The Ruby Sanctum"
       ]
     },
@@ -162,6 +163,7 @@
         "Blackwing Descent",
         "Throne of the Four Winds",
         "BWD / BoT / TotFW",
+        "TotFW / BWD / BoT",
         "Bastion / Blackwing / Throne"
       ]
     },
