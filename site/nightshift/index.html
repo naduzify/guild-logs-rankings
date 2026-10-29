@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#1a0507" />
     <meta name="color-scheme" content="dark" />
     <title>NightShift Timewalking</title>
-    <meta name="description" content="NightShift: coming soon." />
+    <meta name="description" content="NightShift raids on Thunderstrike (EU): work in progress." />
     <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="../apple-touch-icon.png" sizes="180x180" />
@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="../src/styles.css" />
   </head>
   <body class="horde">
-    <main class="soon"><p>Coming soon</p></main>
+    <!-- Fixed backdrop, the guild chooser's art on the guild's side; hidden on phones (styles.css). -->
+    <div class="backdrop horde" aria-hidden="true"><img src="../chooser/garrosh.webp" alt="" /></div>
+    <div id="root"></div>
+    <script type="module" src="../src/main.jsx"></script>
   </body>
 </html>

@@ -142,7 +142,7 @@ function HonourCard({ data, honour, filter }) {
   );
 }
 
-// Ghosts of Fable: raiders below the reset weeks cut, most weeks first. Follows the expansion filter.
+// Ghosts of the guild: raiders below the reset weeks cut, most weeks first. Follows the expansion filter.
 function Ghosts({ data, filter }) {
   const { meta } = data;
   const [open, setOpen] = useState(false);
@@ -188,7 +188,7 @@ export default function Home({ data, filter }) {
     <>
       <section className="hero">
         <h1><img className="gicon" src="./guild-icon.png" alt="" width="40" height="40" />{meta.guild.name}<small>{meta.guild.server}</small></h1>
-        <p>Seven years of raiding, from Molten Core to Siege of Orgrimmar. Every pull, every wipe, every questionable decision.</p>
+        {meta.guild.tagline && <p>{meta.guild.tagline}</p>}
       </section>
       <Intro meta={meta} />
       <FilterBar meta={meta} filter={filter} onChange={f => go('home', null, f)} note="Guild totals follow the expansion filter only." />

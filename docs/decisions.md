@@ -750,3 +750,99 @@ Même parmi les communes, certaines ne classent que les DPS et les healers (Over
 
 **Alternatives écartées.** Garder 15 semaines (trop de raideurs réguliers d'un seul tier passaient en Ghosts of Fable).
 
+## 2026-10-29 — Site NightShift : même application, thème Horde, « Work in progress »
+
+**Décision.** `/nightshift/` n'est plus une page « Coming soon » : c'est la même application que `/fable/` (mêmes pages, filtres, achievements), avec la classe `.horde` (thème rouge) et ses propres données dans `site/public/nightshift/data/`. Tant que ses logs ne sont pas crawlés, elle tourne sur des données fictives (`python -m pipeline.mock_site_data --guild nightshift`, noms inventés) et affiche en haut un bandeau **Work in progress** à rayures rouges. Les infos de chaque guilde (nom, serveur, phrase d'accroche, texte du bandeau `wip`) passent dans `config/guilds.json` ; les textes de config écrivent `{guild}` au lieu de « Fable », remplacé au chargement. La distinction faite main Most Soundboard reste propre à Fable.
+
+**Raison.** Montrer dès maintenant à quoi ressemblera le site de NightShift, sans dupliquer le code ni la config.
+
+**Alternatives écartées.** Copier l'application dans un second dossier (deux codes à maintenir) ; réutiliser les données de Fable (noms de vrais joueurs d'une autre guilde). Reste à faire : rangs PvP Horde (Scout → High Warlord), il faut les icônes officielles ; aujourd'hui NightShift affiche les rangs Alliance.
+
+## 2026-10-29 — Infamous en violet côté Horde
+
+**Décision.** Sur le thème Horde (`.horde`), les tokens du revers changent : `--red` devient un violet #9b5de5 (ruban Infamous, bordure de carte, teinte des lignes du bas des classements) et `--flip-text` un violet pâle #d4b8ff (titres de revers). Côté Alliance, rien ne change.
+
+**Raison.** Le rouge du revers disparaissait sur le fond rouge Horde. Le violet tranche sur le rouge et le texte pâle reste très lisible (plus de 9:1).
+
+**Alternatives écartées.** Vert gangrène (vert sur rouge, peu lisible pour les daltoniens, et proche de la couleur de parse 25+) ; orange (couleur de parse 95+, trop proche du rouge).
+
+## 2026-10-29 — NightShift limité à Era et TBC, cartes Horde plus claires
+
+**Décision.** `config/guilds.json` donne à chaque guilde ses `expansions` raidées (NightShift : `era`, `tbc` ; Fable : toutes, clé absente). Les données fictives ne couvrent que ces extensions et leurs tiers (`meta.expansions` et `meta.tiers` réduits aux premiers, les index restent les mêmes). Côté site, les filtres n'affichent que les extensions, rôles et classes joués par au moins un joueur de la guilde (`meta.present`, calculé au chargement) : sur NightShift, ni WotLK, Cata, MoP, ni Death Knight, ni Monk. Le fond des cartes Horde passe de #4a0d128c à #6a1a22a6.
+
+**Raison.** NightShift n'a pas encore commencé WotLK : des filtres vides n'ont pas de sens. Le filtrage se fait selon les données, donc il suivra tout seul quand NightShift avancera, et ne change rien pour Fable. Le rouge des cartes était trop sombre.
+
+**Alternatives écartées.** Retirer Death Knight et Monk de `meta.classes` (décale les index de classe des cellules) ; liste de classes en dur par guilde.
+
+## 2026-10-30 — Rouge Horde plus vif, rangs sur fond rouge, image de fond des pages de guilde
+
+**Décision.**
+- Cartes Horde en rouge vif (`--navy-glass` #a3192aa6) ; le texte secondaire Horde passe de #c6af8d à #e2cba8 (`--tan`) : tous les textes restent à 5,8:1 ou plus sur les cartes (calcul sur la couleur réelle, carte semi-transparente sur le fond).
+- `config/guilds.json` → `faction` (`alliance`, `horde`). Côté Horde, les macarons de rang viennent de `site/public/ranks/horde/` : mêmes icônes Alliance, dont le bleu (champ et bord, teinte entre 170° et 280°, saturées) passe au rouge, sur un fond radial rouge (`scripts/make_ranks.py`, qui sort les deux jeux).
+- Image de fond fixe sur les pages de guilde (`.backdrop`, dans le HTML de la page) : l'illustration du choix de guilde, en fondu vers le centre, opacité 0,4. Varian à gauche pour Fable, Garrosh à droite pour NightShift. Masquée sous 900 px de large.
+
+**Raison.** Le rouge des cartes était terne ; les rangs bleus juraient sur le thème rouge ; l'image de fond donne une identité à chaque page. Sur téléphone, elle passerait derrière toutes les cartes et chargerait l'écran.
+
+**Alternatives écartées.** Icônes officielles de rang Horde (on ne les a pas) ; image de fond aussi sur mobile.
+
+## 2026-10-30 — Lignes du haut et du bas des classements plus visibles
+
+**Décision.** Dans les classements, les lignes qui portent le titre (top 10 %) et le revers (bottom 10 %) sont teintées plus fort (couleur d'accent à 30 %, couleur du revers à 28 %, contre 24-26 % et 18 % avant) et ont un liseré de 3 px à gauche de la même couleur. Côté Horde, le fond du tableau passe du rouge vif des cartes à un rouge sombre (#2e080ce6).
+
+**Raison.** Le surlignage était trop discret, surtout côté Horde où la teinte rouge se perdait dans le rouge vif du tableau.
+
+**Alternatives écartées.** Une autre couleur de surlignage (blanc, or) : elle aurait concurrencé le surlignage parchemin de la recherche et l'or réservé aux n°1.
+
+## 2026-10-30 — Cartes moins transparentes
+
+**Décision.** Le fond des cartes, tuiles, puces et champs (`--navy-glass`) passe à 85 % d'opacité : Alliance #0b2a4e8c → #0b2a4ed9, Horde #a3192aa6 → #a3192ad9. Contrastes recalculés : texte secondaire Horde 5,5:1 et plus, revers 4,9:1 et plus ; Alliance 6,8:1 et plus.
+
+**Raison.** L'image de fond (Varian, Garrosh) transparaissait sous les cartes et détournait l'œil du contenu.
+
+**Alternatives écartées.** Baisser l'opacité de l'image de fond (elle ne se verrait presque plus dans les marges, où elle a sa place).
+
+## 2026-10-30 — Textes beiges plus clairs côté Horde
+
+**Décision.** Sur le thème Horde, `--tan` (texte secondaire) passe de #e2cba8 à #f2dfc2 et `--parchment` (titres de cartes, libellés) de #eccaa1 à #fbe8cc. Contrastes : titres 7,2:1, texte secondaire 6,6:1 sur les cartes ; 5,8:1 et 5,3:1 sur le panneau Guild Legends (reflet parchemin), 6,2:1 et 5,7:1 sur les cartes mises en avant (halo rouge). Avant : 4,6:1 à 5,5:1. L'écart avec le crème (#fff2df) des valeurs reste visible.
+
+**Raison.** Le beige sur rouge vif, deux teintes chaudes, se lisait mal malgré un contraste juste au-dessus du minimum de 4,5:1.
+
+**Alternatives écartées.** Foncer les cartes (on vient de choisir un rouge plus vif) ; passer les textes en crème (plus de hiérarchie entre titres, libellés et valeurs).
+
+## 2026-10-30 — Cartes Horde un peu plus sombres
+
+**Décision.** Le rouge des cartes Horde passe de #a3192a à #8e1624 (opacité 85 % inchangée). Écart de luminosité carte / fond de page : 2,16 → 1,86. Le texte y gagne : texte secondaire 7,6:1 sur les cartes, 6:1 au plus clair (panneau Guild Legends), titres de revers 5,7:1.
+
+**Raison.** Les cartes rouge vif tranchaient trop sur le fond sombre de la page.
+
+**Alternatives écartées.** Revenir au rouge terne d'avant (#6a1a22, jugé trop sombre) ; éclaircir le fond de page (l'image de fond et le dégradé perdraient leur relief).
+
+## 2026-10-30 — Transition de page au choix de la guilde
+
+**Décision.** Un clic sur une carte de guilde (page `/`) lance une transition avant d'ouvrir la page de guilde (`site/src/chooser.js`, styles dans `styles.css`) :
+1. la carte pulse une fois (420 ms) ;
+2. la découpe Alliance / Horde glisse hors de l'écran du côté de l'autre guilde (850 ms, accélération puis freinage ; 1 100 ms au départ, accélérée le même jour), la ligne blanche avec elle ; l'autre carte s'efface ; la carte choisie vient se poser au milieu de l'écran, plus lentement (1 100 ms en freinant ; 750 ms au départ), et l'effacement attend que les deux soient finis. Les illustrations (Varian, Garrosh) ne bougent pas : seule la découpe du calque rouge se déplace (`slide()` dans `site/src/split.js`) ;
+3. l'écran entier à la couleur de la guilde, la carte et le titre s'effacent (380 ms), puis la page de guilde s'ouvre et son contenu apparaît en fondu (450 ms, drapeau `clt:enter` en sessionStorage, lu dans `main.jsx`).
+
+La carte ne se déplace que sur un axe : à l'horizontale quand les cartes sont côte à côte (sinon elle recouvrait « Pick a guild »), à la verticale quand elles sont empilées (téléphone). Pas d'animation avec « réduire les animations » ni pour un clic d'ouverture dans un nouvel onglet ; au retour arrière (page restaurée par le navigateur), tout revient à l'état de départ. Le ruban de la carte NightShift passe de « Coming soon » à « Work in progress ».
+
+**Raison.** Donner un passage marquant de la page de choix à la guilde, dans l'esprit de la découpe et de la luciole.
+
+**Alternatives écartées.** View Transitions API entre documents (support encore incomplet, moins de contrôle sur l'ordre des étapes) ; carte centrée sur les deux axes (recouvrait le titre).
+
+## 2026-10-30 — L'image de fond reste en place pendant la transition
+
+**Décision.** L'image de fond des pages de guilde (`.backdrop`) reprend exactement la géométrie de l'illustration de la page de choix en grand écran : moitié de l'écran (50vw, Garrosh calé à 50vw et non sur le bord droit, que la barre de défilement décalerait), pleine hauteur, mêmes fondus horizontal et vertical, même cadrage (30 % 30 %, 60 % 30 %), opacité 0,5 (au lieu de 55vw, 0,4 et un fondu horizontal seul). Elle n'a plus de fondu d'entrée : seul le contenu apparaît en fondu. Vérifié au pixel près sur les deux pages. Sous 900 px, où la page de guilde n'a pas d'image de fond, l'illustration de la page de choix s'efface avec la carte et le titre.
+
+**Raison.** L'image devait rester immobile pendant la transition ; elle disparaissait puis réapparaissait en fondu, à une autre taille.
+
+**Alternatives écartées.** Garder l'ancien cadrage de la page de guilde et faire glisser l'image de l'un à l'autre (contraire à « l'image ne bouge pas »).
+
+## 2026-10-30 — La découpe se courbe pendant la transition
+
+**Décision.** Pendant le glissement de la transition, la découpe est déformée : chaque point est décalé en plus dans le sens du glissement selon une cloche centrée sur le milieu de l'écran (écart type 40 % de la hauteur d'écran en grand écran, de la largeur sur téléphone), d'au plus un cinquième de l'écran (22 % de la hauteur sur téléphone). L'amplitude suit sin(πt) : nulle au départ et à l'arrivée, maximale à mi-course, pour que la découpe reparte droite et sorte bien de l'écran. Pendant l'animation, la découpe est rééchantillonnée (un point tous les 16 px, `densify()` dans `site/src/split.js`) pour se courber sans perdre ses dents.
+
+**Raison.** Donner l'impression que la découpe est tirée par le milieu, là où se trouve la carte choisie.
+
+**Alternatives écartées.** Courbe qui reste jusqu'à la fin (la découpe ne sortirait pas d'un bloc) ; déformation en SVG / filtre (la découpe du calque rouge est un clip-path, elle doit suivre les mêmes points).
+

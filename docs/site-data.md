@@ -1,8 +1,8 @@
 # Contrat de données pipeline → site
 
-Le pipeline écrit trois fichiers JSON dans `site/public/fable/data/` (dossier ignoré par git, régénéré au build). Le site les charge au démarrage et ne fait que **filtrer, sommer et classer** : aucune règle de stat n'est codée côté React.
+Le pipeline écrit trois fichiers JSON dans `site/public/<guilde>/data/` (`fable`, `nightshift`) (dossier ignoré par git, régénéré au build). Le site les charge au démarrage et ne fait que **filtrer, sommer et classer** : aucune règle de stat n'est codée côté React.
 
-Tant que l'étape de calcul n'existe pas, `python -m pipeline.mock_site_data` écrit des données fictives au même format (`meta.mock = true`, le site affiche alors un bandeau).
+`python -m pipeline.mock_site_data [--guild nightshift]` écrit des données fictives au même format (`meta.mock = true`, le site affiche alors un bandeau, ou le bandeau Work in progress si la guilde a un `wip`).
 
 ## Pourquoi des « cellules additives »
 
@@ -13,8 +13,9 @@ Chaque stat se filtre par extension × classe × rôle, en multi-sélection (com
 ```
 generated      date ISO de l'export
 mock           true si données fictives
-guild          {name, server}
-expansions     [{id, label, short}]            ← config/tiers.json
+guild          {name, server, faction, tagline, wip?}  ← config/guilds.json ; faction = alliance | horde (jeu de macarons de rang) ; wip = texte du bandeau Work in progress
+               les textes de home, player et stats peuvent contenir {guild}, remplacé par name au chargement
+expansions     [{id, label, short}]            ← config/tiers.json (réduites aux premières si la guilde a des `expansions` dans config/guilds.json ; tiers aussi)
 tiers          [{id, name, short, expansion}]  ← config/tiers.json
 classes        ["Death Knight", "Druid", …]    (ordre = index utilisé dans les cellules)
 roles          ["TANK", "DPS", "HEALER"]      (idem)
@@ -22,7 +23,7 @@ rank           {max, names[14]}                ← config/tiers.json
 settings       {title_percentile, flip_percentile, min_den, min_role_weeks, min_char_weeks}  ← config/site.json
 home           {top_n, pinned[], pinned_title, pinned_top_n, featured_count, ghosts, records[], intro}  ← config/site.json
                pinned : id d'achievement, ou distinction faite main {id, title, description, entries: [{name, image, caption}]}
-player         {overview[], highlights[], best_friend{…, none, candidates, beside}, featured_per_category, featured_min_pct, visible_small}  ← config/site.json
+player         {overview[], highlights[], best_friend{…, none, candidates}, featured_per_category, featured_min_pct, visible_small}  ← config/site.json
                highlights : [{stat, label, toggle?: {stat, label, title}}] ; toggle = interrupteur qui bascule la carte vers une autre stat (Damage Done → Bosses only)
 stats          [définitions]                   ← config/stats.json
 guild_totals   [[exp, pulls, kills, wipes, damage, boss_seconds, raid_seconds]]  (une ligne par extension)

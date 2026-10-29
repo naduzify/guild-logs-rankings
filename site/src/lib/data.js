@@ -1,6 +1,6 @@
 // Loads the three pipeline exports (docs/site-data.md) and derives lookups the pages share.
 
-// Relative to the guild page (/fable/), in dev and in the build alike.
+// Relative to the guild page (/fable/, /nightshift/), in dev and in the build alike.
 const url = name => `./data/${name}.json`;
 
 export async function loadData() {
@@ -11,6 +11,12 @@ export async function loadData() {
     })),
   );
 
+  // Config texts name the guild as {guild} (config/guilds.json): one config serves every guild page.
+  const named = x => (typeof x === 'string' ? x.replaceAll('{guild}', meta.guild.name)
+    : Array.isArray(x) ? x.map(named)
+    : x && typeof x === 'object' ? Object.fromEntries(Object.entries(x).map(([k, v]) => [k, named(v)])) : x);
+  for (const k of ['home', 'player', 'stats']) meta[k] = named(meta[k]);
+
   // Expansions, classes and roles each player actually played, from every stat's cells.
   const facets = players.map(() => ({ exp: new Set(), cls: new Set(), role: new Set() }));
   for (const cells of Object.values(stats)) {
@@ -19,6 +25,10 @@ export async function loadData() {
       f.exp.add(e); f.cls.add(c); f.role.add(r);
     }
   }
+  // What anyone in the guild played: the filters leave out the rest (NightShift, Era and TBC only: no WotLK
+  // and later, no Death Knight or Monk).
+  meta.present = { exp: new Set(), cls: new Set(), role: new Set() };
+  for (const f of facets) for (const k of ['exp', 'cls', 'role']) for (const v of f[k]) meta.present[k].add(v);
 
   // Time played per (expansion, class, role), for the class dots next to a name: [[e, c, r, hours], …].
   const played = players.map(() => new Map());

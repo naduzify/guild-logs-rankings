@@ -1,5 +1,5 @@
 // Guild chooser split: the cut between Alliance blue (Fable) and Horde red (NightShift), the white line
-// drawn on it, and the firefly path along it.
+// drawn on it, the firefly path along it, and the slide of the cut when a guild is picked.
 // The .split layer spans 100vh above the card grid, the grid itself, and 100vh below it, so a point is
 // written as [x, y] with y = { pct, vh, px } of that box. Near the cards the cut stays inside the gap
 // between them (72px on phones, 96px wide); away from them it takes a few broad bites.
@@ -21,11 +21,12 @@ const PHONE = [[100, -6], [74, 22], [48, -22], [22, 18], [0, -4]];
 
 const resolveY = (y, h, vh) => (y.pct || 0) * h + (y.vh || 0) * vh + (y.px || 0);
 
-function seam(box, wide) {
+// `shift` slides the whole cut (px, along x from 560px, along y on phones): the page transition (slide()).
+function seam(box, wide, shift = 0) {
   const vh = window.innerHeight;
   return wide
-    ? WIDE.map(([x, y]) => [box.width / 2 + x, resolveY(y, box.height, vh)])
-    : PHONE.map(([x, y]) => [(x / 100) * box.width, box.height / 2 + y]);
+    ? WIDE.map(([x, y]) => [box.width / 2 + x + shift, resolveY(y, box.height, vh)])
+    : PHONE.map(([x, y]) => [(x / 100) * box.width, box.height / 2 + y + shift]);
 }
 
 // Part of the cut inside [lo, hi] along `axis` (0 = x, 1 = y), cut at the edges.
@@ -41,11 +42,22 @@ function clip(points, axis, lo, hi) {
   return out.sort((a, b) => a[axis] - b[axis]);
 }
 
+// More points along the cut (one every `step` px), so it can bend smoothly without losing its teeth.
+function densify(pts, step = 16) {
+  const out = [pts[0]];
+  for (let i = 1; i < pts.length; i++) {
+    const [a, b] = [pts[i - 1], pts[i]];
+    const n = Math.max(1, Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / step));
+    for (let k = 1; k <= n; k++) out.push([a[0] + (b[0] - a[0]) * k / n, a[1] + (b[1] - a[1]) * k / n]);
+  }
+  return out;
+}
+
 const length = pts => pts.slice(1).reduce((n, p, i) => n + Math.hypot(p[0] - pts[i][0], p[1] - pts[i][1]), 0);
 const fmt = pts => pts.map(([x, y]) => `${x.toFixed(1)}px ${y.toFixed(1)}px`).join(', ');
 
 export function mountSplit(split) {
-  if (!split) return;
+  if (!split) return null;
   const red = split.querySelector('.split-horde');
   const fly = split.querySelector('.firefly');
   // After-images: copies of the firefly that run the same path a few ms behind, fainter and smaller.
@@ -61,12 +73,33 @@ export function mountSplit(split) {
   }
   const line = split.querySelector('.split-line');
   const wideQuery = window.matchMedia('(min-width: 560px)');
+  // Slide of the cut: 0 at rest; -1 hands the screen to the red side (NightShift), +1 to the blue side (Fable).
+  // `bend` (same sign, 0 at both ends of the slide, full in the middle) pulls the middle of the cut ahead of
+  // its ends, as if dragged by the centre of the screen.
+  let slid = 0, bend = 0;
+
+  // Shift (px) that pushes the cut just past the screen edge, toward the losing side.
+  function reach(box, wide, dir) {
+    const margin = 90; // the cut's broadest bite (64px) plus the line's glow
+    if (wide) return dir * (box.width / 2 + margin);
+    const top = -box.top, mid = box.height / 2;
+    return dir > 0 ? top + window.innerHeight - mid + margin : top - mid - margin;
+  }
 
   function render() {
     const box = split.getBoundingClientRect();
     const wide = wideQuery.matches;
-    const pts = seam(box, wide);
     const { width: w, height: h } = box;
+    let pts = seam(box, wide, slid && reach(box, wide, Math.sign(slid)) * Math.abs(slid));
+    if (bend) {
+      // A bell around the middle of the screen (along the cut), up to a fifth of the screen ahead.
+      const vh = window.innerHeight;
+      const [mid, spread, lead] = wide ? [-box.top + vh / 2, vh * 0.4, w * 0.2] : [w / 2, w * 0.4, vh * 0.22];
+      pts = densify(pts).map(([x, y]) => {
+        const d = lead * bend * Math.exp(-((((wide ? y : x) - mid) / spread) ** 2));
+        return wide ? [x + d, y] : [x, y + d];
+      });
+    }
     // Where the screen sits in the layer: the side art (Varian, Garrosh) is laid on the screen, not the layer.
     split.style.setProperty('--screen-top', `${-box.top}px`);
     split.style.setProperty('--screen-h', `${window.innerHeight}px`);
@@ -91,4 +124,26 @@ export function mountSplit(split) {
   window.addEventListener('resize', schedule);
   window.addEventListener('scroll', schedule, { passive: true });
   wideQuery.addEventListener('change', schedule);
+
+  return {
+    // Slides the cut off the screen toward the losing side (dir: +1 Fable wins, -1 NightShift wins), easing
+    // in and out over `ms`; resolves when the winning colour fills the screen. The side art does not move:
+    // only the clip of the red layer and the line follow the cut.
+    slide(dir, ms) {
+      split.classList.add('sliding');
+      return new Promise(done => {
+        const start = performance.now();
+        const step = now => {
+          const t = Math.min(1, (now - start) / ms);
+          slid = dir * (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2);
+          bend = dir * Math.sin(Math.PI * t);
+          render();
+          if (t < 1) requestAnimationFrame(step); else done();
+        };
+        requestAnimationFrame(step);
+      });
+    },
+    // Back to rest (page restored from the back-forward cache after a transition).
+    reset() { slid = 0; bend = 0; split.classList.remove('sliding'); render(); },
+  };
 }

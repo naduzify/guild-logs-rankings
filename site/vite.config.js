@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 // Relative base + hash routing: the build works on any GitHub Pages path.
-// One page per guild: / picks a guild, /fable/ is the Fable site, /nightshift/ is a placeholder.
+// One page per guild: / picks a guild, /fable/ and /nightshift/ are the guild sites (same app, own data).
 export default defineConfig({
   base: './',
   plugins: [react()],

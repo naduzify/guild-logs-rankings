@@ -1,0 +1,17 @@
+{
+  "_doc": "One entry per guild page (/fable/, /nightshift/): name and server shown on the site, faction (alliance or horde: PvP rank badges in ranks/ or ranks/horde/), tagline under the name on the home page. wip: text of the Work in progress banner, for a guild whose logs are not crawled yet (mock data, python -m pipeline.mock_site_data --guild nightshift). expansions: the expansions a guild has raided so far (the first ones, in order; all of them when absent): the other expansions, their tiers and the classes they bring (Death Knight, Monk) leave the filters. Site texts may use {guild}, replaced by the name when the data loads.",
+  "fable": {
+    "name": "Fable",
+    "server": "Arugal (AU)",
+    "faction": "alliance",
+    "tagline": "Seven years of raiding, from Molten Core to Siege of Orgrimmar. Every pull, every wipe, every questionable decision."
+  },
+  "nightshift": {
+    "name": "NightShift",
+    "server": "Thunderstrike (EU)",
+    "faction": "horde",
+    "expansions": ["era", "tbc"],
+    "tagline": "Every pull, every wipe, every questionable decision. For the Horde.",
+    "wip": "NightShift's logs are not crawled yet: every name and number on this page is a placeholder."
+  }
+}

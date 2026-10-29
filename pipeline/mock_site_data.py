@@ -1,11 +1,12 @@
 """Fake site data in the pipeline -> site format (docs/site-data.md).
 
 Stand-in until the compute step exists: lets the site be built against the
-real contract. Player names come from the reroll mapping, plus random filler
-players; every number is random (seeded, so the output is stable).
+real contract, and fills the guild pages whose logs are not crawled yet
+(NightShift). Fable's player names come from the reroll mapping, other guilds
+get filler names only; every number is random (seeded, so the output is stable).
 
 Usage:
-    python -m pipeline.mock_site_data [--players N] [--seed S]
+    python -m pipeline.mock_site_data [--guild fable|nightshift] [--players N] [--seed S]
 """
 
 import argparse
@@ -16,7 +17,6 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT_DIR = ROOT / "site" / "public" / "fable" / "data"
 
 CLASSES = ["Death Knight", "Druid", "Hunter", "Mage", "Monk", "Paladin", "Priest", "Rogue", "Shaman", "Warlock", "Warrior"]
 ROLES = ["TANK", "DPS", "HEALER"]
@@ -55,8 +55,9 @@ def filler_name(rng: random.Random, taken: set) -> str:
             return name
 
 
-def make_players(rng: random.Random, count: int, ntiers_by_exp: list) -> list:
-    rerolls = json.loads((ROOT / "fable_rerolls.json").read_text(encoding="utf-8"))["rerolls"]
+def make_players(rng: random.Random, count: int, ntiers_by_exp: list, guild: str, nexp: int) -> list:
+    path = ROOT / f"{guild}_rerolls.json"
+    rerolls = json.loads(path.read_text(encoding="utf-8"))["rerolls"] if path.exists() else {}
     taken = {n for main, alts in rerolls.items() for n in [main, *alts]}
     roster = list(rerolls.items())
     while len(roster) < count:
@@ -64,8 +65,8 @@ def make_players(rng: random.Random, count: int, ntiers_by_exp: list) -> list:
 
     players = []
     for main, alts in roster[:count]:
-        first = rng.choices(range(5), weights=[6, 3, 3, 2, 2])[0]
-        last = rng.randint(first, min(4, first + rng.choice([0, 1, 2, 4])))
+        first = rng.choices(range(nexp), weights=[6, 3, 3, 2, 2][:nexp])[0]
+        last = rng.randint(first, min(nexp - 1, first + rng.choice([0, 1, 2, 4])))
         chars = []
         for name in [main, *alts]:
             options = [c for c in CLASSES if CLASS_FROM.get(c, 0) <= last]
@@ -162,6 +163,7 @@ def cell_values(stat: dict, idx: int, rng: random.Random, player: dict, p: int, 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--guild", default="fable", help="guild page to fill (config/guilds.json)")
     parser.add_argument("--players", type=int, default=140)
     parser.add_argument("--seed", type=int, default=7)
     args = parser.parse_args()
@@ -170,11 +172,18 @@ def main() -> None:
     tiers_cfg = json.loads((ROOT / "config" / "tiers.json").read_text(encoding="utf-8"))
     stats_cfg = json.loads((ROOT / "config" / "stats.json").read_text(encoding="utf-8"))["stats"]
     site_cfg = json.loads((ROOT / "config" / "site.json").read_text(encoding="utf-8"))
-    exp_ids = [x["id"] for x in tiers_cfg["expansions"]]
-    tiers = [{k: t[k] for k in ("id", "name", "short", "expansion")} for t in tiers_cfg["tiers"]]
+    guild = json.loads((ROOT / "config" / "guilds.json").read_text(encoding="utf-8"))[args.guild]
+    # A guild that has not raided every expansion yet (NightShift: Era and TBC) keeps the first ones only.
+    # Expansions and tiers are in order, so the kept ones are a prefix and keep their indices.
+    played = guild.pop("expansions", None)
+    expansions = [x for x in tiers_cfg["expansions"] if played is None or x["id"] in played]
+    exp_ids = [x["id"] for x in expansions]
+    assert exp_ids == [x["id"] for x in tiers_cfg["expansions"]][:len(exp_ids)], "guild expansions must be the first ones"
+    tiers = [{k: t[k] for k in ("id", "name", "short", "expansion")} for t in tiers_cfg["tiers"] if t["expansion"] in exp_ids]
     ntiers_by_exp = [[i for i, t in enumerate(tiers) if t["expansion"] == x] for x in exp_ids]
 
-    players = make_players(rng, args.players, ntiers_by_exp)
+    out_dir = ROOT / "site" / "public" / args.guild / "data"
+    players = make_players(rng, args.players, ntiers_by_exp, args.guild, len(exp_ids))
     names = [pl["name"] for pl in players]
     for pl in players:
         pl["_friends"] = rng.sample([n for n in names if n != pl["name"]], 8)
@@ -208,16 +217,17 @@ def main() -> None:
         masks[m] = masks.get(m, 0) + 1
     guild_raiders = sorted(masks.items())
 
-    # Ghosts of Fable: raiders below the min_weeks cut, [name, reset weeks, expansion mask, class index].
+    # Ghosts of the guild: raiders below the min_weeks cut, [name, reset weeks, expansion mask, class index].
     taken = {pl["name"] for pl in players}
     ghosts = []
     for _ in range(args.players * 2):
         e = rng.randrange(len(exp_ids))
-        ghosts.append([filler_name(rng, taken), rng.randint(1, 14), 1 << e, rng.randrange(len(CLASSES))])
+        cls = rng.choice([c for c in CLASSES if CLASS_FROM.get(c, 0) <= e])
+        ghosts.append([filler_name(rng, taken), rng.randint(1, 14), 1 << e, CLASSES.index(cls)])
     ghosts.sort(key=lambda g: (-g[1], g[0]))
 
     guild_bosses = []
-    for e, bosses in enumerate(BOSSES):
+    for e, bosses in enumerate(BOSSES[:len(exp_ids)]):
         for boss in bosses:
             for heroic in ([0, 1] if e >= 2 else [0]):
                 fastest = rng.randint(40, 300)
@@ -226,8 +236,8 @@ def main() -> None:
     meta = {
         "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "mock": True,
-        "guild": {"name": "Fable", "server": "Arugal (AU)"},
-        "expansions": tiers_cfg["expansions"],
+        "guild": guild,
+        "expansions": expansions,
         "tiers": tiers,
         "classes": CLASSES,
         "roles": ROLES,
@@ -243,15 +253,19 @@ def main() -> None:
     }
     for pl in players:
         idx = {q["name"]: i for i, q in enumerate(players)}
-        pl["friends"] = sorted(([idx[n], *(rng.randint(0, 40) for _ in range(5))] for n in pl["_friends"] if n in idx),
+        pl["friends"] = sorted(([idx[n], *(rng.randint(0, 40) for _ in exp_ids)] for n in pl["_friends"] if n in idx),
                                key=lambda f: -sum(f[1:]))
     public_players = [{k: pl[k] for k in ("name", "chars", "tiers", "rank", "friends")} for pl in players]
 
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    if args.guild != "fable":
+        # Hand-made honours (Most Soundboard) name Fable players, with their portraits: Fable only.
+        meta["home"]["pinned"] = [x for x in meta["home"].get("pinned", []) if isinstance(x, str)]
+
+    out_dir.mkdir(parents=True, exist_ok=True)
     for name, payload in (("meta", meta), ("players", public_players), ("stats", stats)):
-        (OUT_DIR / f"{name}.json").write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    size = sum(f.stat().st_size for f in OUT_DIR.glob("*.json"))
-    print(f"{len(players)} players, {sum(len(c) for c in stats.values())} cells, {size / 1e6:.1f} MB -> {OUT_DIR}")
+        (out_dir / f"{name}.json").write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    size = sum(f.stat().st_size for f in out_dir.glob("*.json"))
+    print(f"{len(players)} players, {sum(len(c) for c in stats.values())} cells, {size / 1e6:.1f} MB -> {out_dir}")
 
 
 if __name__ == "__main__":

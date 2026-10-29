@@ -16,4 +16,12 @@ class Fallback extends Component {
   }
 }
 
+// Coming from the guild chooser's transition (chooser.js): the content fades in on the guild's colour.
+try {
+  if (sessionStorage.getItem('clt:enter')) {
+    sessionStorage.removeItem('clt:enter');
+    document.body.classList.add('enter');
+  }
+} catch { /* storage blocked: no fade-in */ }
+
 createRoot(document.getElementById('root')).render(<StrictMode><Fallback><App /></Fallback></StrictMode>);

@@ -92,7 +92,7 @@ export function RankBadge({ player, meta, size = 22 }) {
   const tiers = player.tiers.length;
   const tip = `Rank ${player.rank} · ${name} · ${tiers} raid tier${tiers > 1 ? 's' : ''}`;
   return (
-    <img className="rank" src={`../ranks/${player.rank}.jpg`} width={size} height={size}
+    <img className="rank" src={`../ranks/${meta.guild.faction === 'horde' ? 'horde/' : ''}${player.rank}.jpg`} width={size} height={size}
       alt={tip} title={tip} loading="lazy" />
   );
 }
@@ -131,7 +131,7 @@ export function FilterBar({ meta, filter, onChange, available, note }) {
     onChange(next);
   };
   const [open, setOpen] = useState(false);
-  const show = (k, i) => !available || available[k].has(i);
+  const show = (k, i) => (!available || available[k].has(i)) && (!meta.present || meta.present[k].has(i));
   const any = filter.exp.size + filter.cls.size + filter.role.size;
   return (
     <div className={'filters' + (open ? ' open' : '')}>

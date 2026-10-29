@@ -3,7 +3,7 @@
 :root {
   --navy-deep: #061529;
   --navy: #0b2a4e;
-  --navy-glass: #0b2a4e8c;
+  --navy-glass: #0b2a4ed9;
   --alliance: #2f6fd8;
   --alliance-deep: #1c4f9e;
   --alliance-glow: color-mix(in srgb, var(--alliance) 24%, transparent);
@@ -30,10 +30,18 @@
 .horde {
   --navy-deep: #1a0507;
   --navy: #4a0d12;
-  --navy-glass: #4a0d128c;
+  /* Vivid card red, a step darker than the Horde accent so cards don't jump off the page; beige texts lighter than
+     the Alliance ones (warm on warm reads softer): 7.6:1 and more on the cards, 6:1 and more on the lightest spots
+     (Guild Legends panel, highlighted cards). */
+  --navy-glass: #8e1624d9;
+  --tan: #f2dfc2;
+  --parchment: #fbe8cc;
   --alliance: #d4252c;
   --alliance-deep: #8f1218;
   --alliance-glow: color-mix(in srgb, var(--alliance) 26%, transparent);
+  /* Infamous (flip side) can't be red on red: void purple instead, its pale text 9:1 and more on Horde red. */
+  --red: #9b5de5;
+  --flip-text: #d4b8ff;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -60,6 +68,15 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 
 /* Header */
 .mockbar { background: var(--red-glow); color: var(--red); text-align: center; font-size: .78rem; padding: 4px 14px; }
+/* Work in progress (a guild whose logs are not crawled yet): hazard stripes in the accent colour, the text on a
+   solid plate so it keeps its contrast over the stripes. Stacked on phones, one line from 720px. */
+.wipbar { display: flex; justify-content: center; padding: 8px 14px; border-bottom: 1px solid var(--line-strong);
+  background: repeating-linear-gradient(-45deg, var(--alliance) 0 14px, var(--navy-deep) 14px 28px); }
+.wipplate { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 14px; border-radius: 3px;
+  background: var(--navy-deep); text-align: center; }
+.wipplate strong { font: 700 1.05rem var(--f-headline); letter-spacing: .16em; text-transform: uppercase; color: var(--accent-text); }
+.wipplate span { font-size: .8rem; color: var(--cream); }
+@media (min-width: 720px) { .wipplate { flex-direction: row; gap: 14px; } }
 .top { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--navy-deep) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-strong); }
 .topin { display: flex; align-items: center; gap: 8px 16px; padding-block: 10px; flex-wrap: wrap; }
 .brand { font: 700 1.45rem/1 var(--f-headline); text-decoration: none; text-transform: uppercase; letter-spacing: .02em; color: var(--parchment); }
@@ -100,6 +117,21 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 /* Side art: Varian on Fable's side (mirrored to face the cut), Garrosh on NightShift's, inside the red layer so
    the cut clips him. Each covers the screen on its side and fades towards the middle and the top and bottom.
    Phones: Varian on the top half, Garrosh on the bottom half. --screen-top / --screen-h come from split.js. */
+/* Guild page backdrop: Varian on the left for Fable, Garrosh on the right for NightShift, fixed, fading toward
+   the middle. Same size, place, fades and opacity as the chooser's side art (.art, wide layout), so it does not
+   move or flash when the chooser hands over to the guild page (Garrosh anchored at 50vw, not the right edge,
+   which the guild page's scrollbar would shift). Wide screens only: on a phone it would sit
+   behind every card (the chooser fades its art out instead, below). */
+.backdrop { display: none; }
+@media (min-width: 900px) {
+  .backdrop { display: block; position: fixed; top: 0; bottom: 0; width: 50vw; z-index: -1; pointer-events: none; opacity: .5;
+    --fade: linear-gradient(to bottom, transparent, #000 18%, #000 78%, transparent); -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .backdrop img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .backdrop.alliance { left: 0; -webkit-mask-image: linear-gradient(to right, #000 25%, transparent 95%), var(--fade); mask-image: linear-gradient(to right, #000 25%, transparent 95%), var(--fade); }
+  .backdrop.alliance img { object-position: 30% 30%; }
+  .backdrop.horde { left: 50vw; -webkit-mask-image: linear-gradient(to left, #000 25%, transparent 95%), var(--fade); mask-image: linear-gradient(to left, #000 25%, transparent 95%), var(--fade); }
+  .backdrop.horde img { object-position: 60% 30%; }
+}
 .art { position: absolute; left: 0; width: 100%; height: calc(var(--screen-h, 100vh) / 2); opacity: .5; }
 .art.alliance { top: var(--screen-top, 100vh); }
 .art.horde { top: calc(var(--screen-top, 100vh) + var(--screen-h, 100vh) / 2); }
@@ -150,8 +182,25 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .scard.guild:hover { border-color: var(--alliance); box-shadow: 0 0 24px var(--alliance-glow); }
 .scard.guild .slabel { font: 700 1.9rem var(--f-headline); letter-spacing: .06em; }
 .scard.guild .gicon { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
-.soon { min-height: 100vh; display: grid; place-items: center; }
-.soon p { font: 700 clamp(2.2rem, 9vw, 5rem) var(--f-headline); letter-spacing: .12em; text-transform: uppercase; color: var(--parchment); margin: 0; }
+/* Transition to a guild page (src/chooser.js; durations match PULSE, CARD and FADE there): the chosen card
+   pulses once, glides to the middle of the screen while the cut slides the other guild away (the other card
+   fades with it), then the card and the title fade out. The guild page fades its content in (body.enter). */
+.leaving .guilds { pointer-events: none; }
+.scard.guild.chosen { z-index: 2; animation: guild-pulse 420ms ease-in-out;
+  transition: translate 1100ms cubic-bezier(.22, .8, .3, 1) 0ms, opacity 380ms ease; }
+.scard.guild.dropped { opacity: 0; transition: opacity 450ms ease; }
+@keyframes guild-pulse {
+  0%, 100% { scale: 1; }
+  45% { scale: 1.07; box-shadow: 0 0 40px var(--alliance-glow), 0 0 0 2px var(--alliance); }
+}
+.split.sliding .firefly { display: none; }
+.chooser .hero { transition: opacity 380ms ease; }
+.faded .chooser .hero, .faded .scard.guild.chosen { opacity: 0; }
+/* The backdrop does not fade: it is already on screen, the chooser's art in the same place. */
+body.enter #root { animation: guild-enter 450ms ease both; }
+/* Below 900px the guild page has no backdrop: the art fades out with the card rather than vanishing. */
+@media (max-width: 899px) { .art { transition: opacity 380ms ease; } .faded .art { opacity: 0; } }
+@keyframes guild-enter { from { opacity: 0; } }
 
 /* "How to read this site": dismissible panel on the guild home, parchment wash like the best friend panel. */
 .intro { position: relative; margin: 14px 0 6px; padding: 18px 20px 16px; border-radius: 8px; border: 1px solid var(--line-strong);
@@ -335,8 +384,13 @@ a.hname:hover { color: var(--parchment); }
 .board .pname .pn { grid-area: name; }
 .board .pname .cdots { grid-area: dots; }
 .board .n { color: var(--tan); width: 2.5em; }
-.board tr.hi td { background: var(--alliance-glow); }
-.board tr.lo td { background: var(--red-glow); }
+/* Top and bottom of a ranking (title, flip title): a clear tint plus an edge line in the same colour. */
+.board tr.hi td { background: color-mix(in srgb, var(--alliance) 30%, transparent); }
+.board tr.lo td { background: color-mix(in srgb, var(--red) 28%, transparent); }
+.board tr.hi td:first-child { box-shadow: inset 3px 0 0 var(--alliance); }
+.board tr.lo td:first-child { box-shadow: inset 3px 0 0 var(--red); }
+/* Horde: the vivid card red would swallow the red title rows, so the table itself sits on a dark red. */
+.horde .tablebox { background: #2e080ce6; }
 /* Row matched by the highlight box in the Player header: parchment wash, over the title/flip tints. */
 .board tr.found td { background: color-mix(in srgb, var(--parchment) 22%, transparent); }
 .board tr.found td:first-child { box-shadow: inset 3px 0 0 var(--parchment); }

@@ -861,7 +861,7 @@ def main() -> None:
         "mock": False,
         "partial": True,
         "pending": sorted(PENDING | set(empty)),
-        "guild": {"name": "Fable", "server": "Arugal (AU)"},
+        "guild": json.loads((ROOT / "config" / "guilds.json").read_text(encoding="utf-8"))["fable"],
         "expansions": tiers_cfg["expansions"],
         "tiers": [{k: t[k] for k in ("id", "name", "short", "expansion")} for t in tiers_cfg["tiers"]],
         "classes": CLASSES,

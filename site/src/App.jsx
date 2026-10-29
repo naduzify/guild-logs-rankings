@@ -41,7 +41,9 @@ export default function App() {
 
   return (
     <>
-      {data.meta.mock && <div className="mockbar">Mock data: every number on this page is random.</div>}
+      {data.meta.guild.wip
+        ? <div className="wipbar" role="note"><p className="wipplate"><strong>Work in progress</strong><span>{data.meta.guild.wip}</span></p></div>
+        : data.meta.mock && <div className="mockbar">Mock data: every number on this page is random.</div>}
       <button type="button" className="skip" onClick={() => main.current?.focus()}>Skip to content</button>
       <header className="top">
         <div className="wrap topin">
