@@ -6,12 +6,28 @@
   "_min_role_weeks": "Reset weeks a player needs in a role (all characters) to be ranked on that role: always on tank, healer and DPS achievements, and on common ones when the role filter is set. Keeps off-specs and short-lived rerolls out of the role rankings.",
   "min_role_weeks": 10,
   "home": {
-    "_doc": "pinned: achievements always shown above the Hall of fame, left out of its draw, under the pinned_title heading, with their top pinned_top_n (the first one featured). Hall of fame: featured_count achievements drawn at random on each page load. Records: big guild cards built from meta.guild_bosses; `kind` is most_kills, most_wipes, fastest_kill or slowest_kill; `exclude` lists bosses left out of a record (Razorgore: the egg phase is not in the fight length).",
+    "_doc": "pinned: cards always shown above the Hall of fame, under the pinned_title heading. A string is an achievement id (left out of the Hall of fame draw, top pinned_top_n shown); an object is a hand-made honour with no stat behind it: title, description and ranked entries {name, image, caption}, image relative to the guild page. ghosts: texts of the Ghosts of Fable section (raiders below the 15 reset weeks cut), visible names before a Show all button. Hall of fame: featured_count achievements drawn at random on each page load. Records: big guild cards built from meta.guild_bosses; `kind` is most_kills, most_wipes, fastest_kill or slowest_kill; `exclude` lists bosses left out of a record (Razorgore: the egg phase is not in the fight length).",
     "top_n": 3,
-    "pinned": ["the-gang", "parse-lord"],
+    "pinned": [
+      "the-gang",
+      {
+        "id": "most-soundboard",
+        "title": "Most Soundboard",
+        "description": "The loudest voices of the raid, by popular acclaim.",
+        "entries": [
+          {"name": "Rassaa", "image": "legends/rassaa.webp", "caption": "Kendo lover, brain smasher, beloved raid leader."},
+          {"name": "Yogiqt", "image": "legends/yogiqt.webp", "caption": "Dwarf heart, orc brain, charismatic leader."}
+        ]
+      }
+    ],
     "pinned_title": "Guild Legends",
     "pinned_top_n": 5,
     "featured_count": 8,
+    "ghosts": {
+      "title": "Ghosts of Fable",
+      "description": "They raided with Fable, but fewer than 15 reset weeks: not enough to enter the rankings. Their pulls still count in the guild totals.",
+      "visible": 60
+    },
     "records": [
       {"kind": "most_kills", "title": "Loot Pinata", "description": "Most killed boss."},
       {"kind": "most_wipes", "title": "Guild Nemesis", "description": "Most wiped boss."},
@@ -20,7 +36,7 @@
     ]
   },
   "player": {
-    "_doc": "Player page layout. Overview tiles come first; their stats are left out of the category sections. In each category, up to featured_per_category stats at or above featured_min_pct (or deep in flip territory) get a big card; the rest are small cards, visible_small of them shown before a 'Show more' button. An overview tile shows the percentile bar when its stat is ranked in percentile, unless its `percentile` flag says otherwise.",
+    "_doc": "Player page layout. Overview tiles come first; their stats are left out of the category sections. In each category, up to featured_per_category stats at or above featured_min_pct (or deep in flip territory) get a big card; the rest are small cards, visible_small of them shown before a 'Show more' button. An overview tile shows the percentile bar when its stat is ranked in percentile, unless its `percentile` flag says otherwise. best_friend: texts of the highlighted panel under the overview (players.json friends; {nights} is replaced).",
     "overview": [
       {
         "stat": "hours-played",
@@ -58,6 +74,7 @@
       {"stat": "damage-taken", "label": "Total damage taken"},
       {"stat": "healing-done", "label": "Total healing done"}
     ],
+    "best_friend": {"title": "Your best friend", "title_plural": "Your best friends", "detail": "{nights} raid nights together"},
     "featured_per_category": 3,
     "featured_min_pct": 75,
     "visible_small": 6

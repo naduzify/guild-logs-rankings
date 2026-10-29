@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { FilterBar, InfoTip, PlayerName, StatValue } from '../components.jsx';
-import { BASE100, formatInt, isBase100 } from '../lib/format.js';
+import { BASE100, CLASS_COLORS, formatInt, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat } from '../lib/stats.js';
 
@@ -66,7 +67,7 @@ function GuildRecords({ data, filter }) {
 let featuredIds = null;
 function drawFeatured(meta) {
   if (!featuredIds) {
-    const pinned = new Set(meta.home.pinned || []);
+    const pinned = new Set((meta.home.pinned || []).filter(x => typeof x === 'string'));
     const pool = meta.stats.filter(s => s.category !== 'overview' && s.hall_of_fame !== false && !pinned.has(s.id)).map(s => s.id);
     for (let i = pool.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -115,9 +116,65 @@ function TopCard({ data, stat, filter, legend = false }) {
   );
 }
 
+// Hand-made honour of the Guild Legends (no stat behind it): a portrait on the left, the name on the right,
+// no position and no rank badge. A name that is a ranked player links to his page; a missing portrait hides.
+function HonourCard({ data, honour, filter }) {
+  return (
+    <article className="card legend honour">
+      <div className="cname"><span className="ctitle">{honour.title}</span></div>
+      <p className="cdesc">{honour.description}</p>
+      {honour.entries.map((e, i) => {
+        const p = data.byName.get(e.name);
+        return (
+          <div key={e.name} className={`honoree h${i + 1}`}>
+            {e.image && <img className="portrait" src={e.image} alt="" onError={ev => { ev.currentTarget.hidden = true; }} />}
+            <div className="htext">
+              {p != null
+                ? <a className="hname" href={href('player', e.name, filter)}>{e.name}</a>
+                : <span className="hname">{e.name}</span>}
+              {e.caption && <p className="hcaption">{e.caption}</p>}
+            </div>
+          </div>
+        );
+      })}
+    </article>
+  );
+}
+
+// Ghosts of Fable: raiders below the reset weeks cut, most weeks first. Follows the expansion filter.
+function Ghosts({ data, filter }) {
+  const { meta } = data;
+  const [open, setOpen] = useState(false);
+  const cfg = meta.home.ghosts;
+  if (!cfg || !meta.ghosts) return null;
+  const want = filter.exp.size ? [...filter.exp].reduce((m, e) => m | 1 << e, 0) : -1;
+  const ghosts = meta.ghosts.filter(([, , mask]) => mask & want);
+  const shown = open ? ghosts : ghosts.slice(0, cfg.visible);
+  return (
+    <section className="ghosts" aria-labelledby="ghosts-title">
+      <div className="sechead"><h2 id="ghosts-title">{cfg.title}</h2><span className="muted">{formatInt(ghosts.length)} raiders</span></div>
+      <p className="cdesc">{cfg.description}</p>
+      <ul className="ghostlist">
+        {shown.map(([name, weeks, , c]) => (
+          <li key={name} title={`${weeks} reset week${weeks > 1 ? 's' : ''}${c != null ? ' · ' + meta.classes[c] : ''}`}>
+            {c != null && <i style={{ background: CLASS_COLORS[meta.classes[c]] }} />}
+            {name}<small>{weeks}w</small>
+          </li>
+        ))}
+      </ul>
+      {ghosts.length > cfg.visible && (
+        <button type="button" className="more" onClick={() => setOpen(!open)} aria-expanded={open}>
+          {open ? 'Show fewer' : `Show all ${formatInt(ghosts.length)}`}
+        </button>
+      )}
+    </section>
+  );
+}
+
 export default function Home({ data, filter }) {
   const { meta } = data;
-  const pinned = (meta.home.pinned || []).map(id => data.statById.get(id)).filter(Boolean);
+  // Pinned: achievement ids, or hand-made honours (objects).
+  const pinned = (meta.home.pinned || []).map(x => (typeof x === 'string' ? data.statById.get(x) : x)).filter(Boolean);
   const featured = drawFeatured(meta).map(id => data.statById.get(id)).filter(Boolean);
   return (
     <>
@@ -132,7 +189,8 @@ export default function Home({ data, filter }) {
         <section className="legends" aria-label={meta.home.pinned_title || 'Guild Legends'}>
           <h2 className="ornament"><span>{meta.home.pinned_title || 'Guild Legends'}</span></h2>
           <div className="cards pinned">
-            {pinned.map(s => <TopCard key={s.id} data={data} stat={s} filter={filter} legend />)}
+            {pinned.map(x => (x.entries ? <HonourCard key={x.id} data={data} honour={x} filter={filter} />
+              : <TopCard key={x.id} data={data} stat={x} filter={filter} legend />))}
           </div>
         </section>
       )}
@@ -143,6 +201,7 @@ export default function Home({ data, filter }) {
       <section className="cards">
         {featured.map(s => <TopCard key={s.id} data={data} stat={s} filter={filter} />)}
       </section>
+      <Ghosts data={data} filter={filter} />
     </>
   );
 }

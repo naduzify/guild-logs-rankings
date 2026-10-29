@@ -35,3 +35,6 @@ site/public/*/data/
 
 # Tables intermédiaires du calcul (régénérées depuis le cache)
 data/facts/
+
+# Background removal model for portraits (rembg), downloaded on first use
+data/models/

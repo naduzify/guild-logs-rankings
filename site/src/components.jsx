@@ -79,7 +79,7 @@ export function StatValue({ stat, row, parseColors = false }) {
 const ROLE_LABELS = { TANK: 'Tank', DPS: 'DPS', HEALER: 'Healer' };
 export const roleLabel = r => ROLE_LABELS[r] || r;
 
-export function RankBadge({ player, meta, size = 20 }) {
+export function RankBadge({ player, meta, size = 22 }) {
   if (!player.rank) return null;
   const name = meta.rank.names[player.rank - 1];
   const tiers = player.tiers.length;

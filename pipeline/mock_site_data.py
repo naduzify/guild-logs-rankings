@@ -202,6 +202,14 @@ def main() -> None:
         masks[m] = masks.get(m, 0) + 1
     guild_raiders = sorted(masks.items())
 
+    # Ghosts of Fable: raiders below the 15-week cut, [name, reset weeks, expansion mask, class index].
+    taken = {pl["name"] for pl in players}
+    ghosts = []
+    for _ in range(args.players * 2):
+        e = rng.randrange(len(exp_ids))
+        ghosts.append([filler_name(rng, taken), rng.randint(1, 14), 1 << e, rng.randrange(len(CLASSES))])
+    ghosts.sort(key=lambda g: (-g[1], g[0]))
+
     guild_bosses = []
     for e, bosses in enumerate(BOSSES):
         for boss in bosses:
@@ -225,8 +233,11 @@ def main() -> None:
         "guild_totals": guild_totals,
         "guild_bosses": guild_bosses,
         "guild_raiders": guild_raiders,
+        "ghosts": ghosts,
     }
-    public_players = [{k: pl[k] for k in ("name", "chars", "tiers", "rank")} for pl in players]
+    for pl in players:
+        pl["friends"] = {"names": pl["_friends"][: rng.choice([1, 1, 1, 2])], "nights": rng.randint(20, 160)}
+    public_players = [{k: pl[k] for k in ("name", "chars", "tiers", "rank", "friends")} for pl in players]
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for name, payload in (("meta", meta), ("players", public_players), ("stats", stats)):

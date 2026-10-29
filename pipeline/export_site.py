@@ -13,7 +13,7 @@ import bisect
 import json
 import statistics
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
 from pipeline.facts import CACHE_DIR, CONFIG, ROOT, _payload, add_scores, load_mapping, norm, pull_rows, pulls_from_cache
@@ -358,6 +358,35 @@ def main() -> None:
                         "tiers": tiers, "rank": min(max_rank, len(tiers)),
                         "role_weeks": [len(role_weeks[pl][role]) for role in ROLES]})
     print(f"players: {len(weeks)} seen, {len(qualified)} qualified (15+ reset weeks)")
+    # Ghosts of Fable: everyone else seen in eligible pulls, [name, reset weeks, expansion mask, class of
+    # their most played character]; most weeks first.
+    ghosts = []
+    for pl in weeks:
+        if pl in pid:
+            continue
+        top = next((char_class[ch] for ch, _ in char_pulls[pl].most_common() if char_class.get(ch) in CLASSES), None)
+        ghosts.append([pl, len(weeks[pl]), exp_mask[pl], CLASSES.index(top) if top else None])
+    ghosts.sort(key=lambda g: (-g[1], norm(g[0])))
+
+    # Best friend: for each ranked player, the ranked player(s) he shared the most raid nights with. Two
+    # players share a night when they were in at least one same eligible pull that night (a night is the
+    # Sydney date, 6 hours back so that pulls after midnight stay on their evening).
+    shared = defaultdict(set)
+    for rs in pulls.values():
+        here = sorted({r["player"] for r in rs if r["player"] in pid})
+        if len(here) < 2 or rs[0]["start_ms"] is None:
+            continue
+        night = (datetime.fromtimestamp(rs[0]["start_ms"] / 1000, tz) - timedelta(hours=6)).date()
+        for i, a in enumerate(here):
+            for b in here[i + 1:]:
+                shared[(a, b)].add(night)
+    together = defaultdict(Counter)
+    for (a, b), nights in shared.items():
+        together[a][b] = together[b][a] = len(nights)
+    for pl in players:
+        c = together[pl["name"]]
+        best = max(c.values(), default=0)
+        pl["friends"] = {"names": sorted((n for n, k in c.items() if k == best), key=norm), "nights": best} if best else None
 
     # Guild-wide references, on every row (qualified or not).
     boss_key = lambda r: (r["encounter_id"], r["difficulty"])
@@ -415,7 +444,6 @@ def main() -> None:
     raid_ms = raid_time(rows)
     ref_tier = next(i for i, t in enumerate(tiers_cfg["tiers"]) if t["id"] == CONFIG["scaled_totals_tier"])
     scaled = scaled_totals(rows, ref_tier)
-
 
     cells = Cells()
     for r in rows:
@@ -575,6 +603,7 @@ def main() -> None:
         "guild_totals": guild_totals,
         "guild_bosses": guild_bosses,
         "guild_raiders": guild_raiders,
+        "ghosts": ghosts,
     }
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     for name, payload in (("meta", meta), ("players", players), ("stats", stats)):

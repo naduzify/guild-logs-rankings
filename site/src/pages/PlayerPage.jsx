@@ -109,6 +109,29 @@ function Section({ data, id, title, kicker, items, open, onToggle }) {
   );
 }
 
+// "Your best friend(s)": the ranked player(s) he shared the most raid nights with (players.json friends),
+// every name when several are tied. Independent of the filters.
+function BestFriend({ data, player, filter }) {
+  const f = player.friends;
+  const cfg = data.meta.player.best_friend;
+  if (!f || !f.names.length || !cfg) return null;
+  const plural = f.names.length > 1;
+  return (
+    <section className="bestfriend" aria-label={plural ? cfg.title_plural : cfg.title}>
+      <span className="bflabel">{plural ? cfg.title_plural : cfg.title}</span>
+      <p className="bfnames">
+        {f.names.map((n, i) => (
+          <span key={n}>
+            {i > 0 && ', '}
+            {data.byName.has(n) ? <a href={href('player', n, filter)}>{n}</a> : n}
+          </span>
+        ))}
+      </p>
+      <span className="bfdetail">{cfg.detail.replace('{nights}', formatInt(f.nights))}</span>
+    </section>
+  );
+}
+
 export default function PlayerPage({ data, name, filter }) {
   const [openSections, setOpenSections] = useState({});
   const p = data.byName.get(name);
@@ -157,6 +180,9 @@ export default function PlayerPage({ data, name, filter }) {
       </div>
       <FilterBar meta={meta} filter={eff} available={facets} onChange={f => go('player', pl.name, f)}
         note={`Percentiles compare ${pl.name} with every player under the same filters.`} />
+
+      {/* Under the filters, above the overview; it does not depend on the filters. */}
+      <BestFriend data={data} player={pl} filter={filter} />
 
       {/* Career totals, with the guild rank in a corner band coloured like a parse. */}
       <SectionTitle text={titles.highlights} />

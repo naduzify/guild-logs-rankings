@@ -183,6 +183,32 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .champion.c1 .pn { font-size: 1.6rem; }
 .champion.c1 .val { font-size: 1.4rem; color: var(--gold-text); }
 .legend .podium .pos { color: var(--tan); }
+/* Hand-made honours: a cut-out portrait on the left, the name on the right. The portrait gets a soft
+   shadow and a warm parchment glow so it sits in the panel rather than on it. The first is bigger. */
+.honoree { display: flex; align-items: center; gap: 18px; padding: 12px 0; border-top: 1px solid var(--line); min-width: 0; }
+.honoree .portrait { height: 88px; width: auto; flex: none;
+  filter: drop-shadow(0 10px 14px rgb(0 0 0 / .45)) drop-shadow(0 0 22px color-mix(in srgb, var(--parchment) 16%, transparent)); }
+.honoree .hname { font: 700 1.25rem/1.1 var(--f-headline); letter-spacing: .02em; color: var(--cream); text-decoration: none; overflow-wrap: anywhere; }
+a.hname:hover { color: var(--parchment); }
+.htext { min-width: 0; }
+.hcaption { margin: 6px 0 0; color: var(--tan); font-style: italic; font-size: .86rem; line-height: 1.35; }
+.honoree.h1 .hcaption { font-size: .94rem; }
+/* Name and caption sit centred in the space beside the portrait; the second honoree mirrors the first
+   (portrait on the right), so the two read as a pair. */
+.honoree .htext { flex: 1; text-align: center; }
+.honoree.h2 { flex-direction: row-reverse; }
+/* Second portrait (a wide cut-out): a little smaller than the first. */
+.honoree.h2 .portrait { height: 106px; }
+.honoree.h1 .portrait { height: 136px; }
+.honoree.h1 .hname { font-size: 1.8rem; color: var(--gold-text); }
+/* Ghosts of Fable: a quiet wall of names under the Hall of fame. */
+.ghosts { margin-bottom: 36px; }
+.ghosts .sechead .muted { font-size: .9rem; }
+.ghostlist { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.ghostlist li { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--navy-glass); color: var(--tan); font-size: .85rem; }
+.ghostlist li i { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.ghostlist li small { color: color-mix(in srgb, var(--tan) 70%, transparent); font-size: .72rem; }
 /* A slow shine across the number one's name, like a legendary item: a short sweep, then a long rest. */
 .champion.c1 .pn { background: linear-gradient(110deg, var(--cream) 42%, #fff6d8 50%, var(--cream) 58%) 100% 0 / 250% 100% no-repeat;
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: legend-shine 7s ease-in-out infinite; }
@@ -305,6 +331,15 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .otile .pbar { width: 120px; }
 
 .psec { margin-top: 52px; }
+/* "Your best friend": a highlighted panel under the filters, above the overview tiles, with the
+   warm parchment wash of the Guild Legends; names in big Oswald, commas between ties. */
+.bestfriend { margin-bottom: 16px; padding: 22px 20px; text-align: center; border-radius: 8px;
+  background: radial-gradient(80% 140% at 50% 0%, color-mix(in srgb, var(--parchment) 11%, transparent), transparent 70%), var(--navy-glass); }
+.bflabel { font: 600 .9rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .26em; color: var(--gold-text); }
+.bfnames { margin: 8px 0 4px; font: 700 2rem/1.15 var(--f-headline); color: var(--cream); overflow-wrap: anywhere; }
+.bfnames a { color: inherit; text-decoration: none; }
+.bfnames a:hover { color: var(--parchment); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.bfdetail { font-size: .9rem; color: var(--tan); }
 /* Career totals under the best friend panel: the guild rank in a corner band, parse-coloured (--band). */
 .highlights { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
 .scard.hcard { border-color: color-mix(in srgb, var(--band, var(--tan)) 75%, transparent);

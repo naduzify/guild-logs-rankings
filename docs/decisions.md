@@ -433,6 +433,22 @@ Assets partagés (favicon, icônes de rang) à la racine de `site/public/`, ceux
 
 **Raison.** La guilde n'a que 5 semaines de logs de Naxx en Era avant TBC : avec 4 semaines, une seule absence suffisait à rater le tier (ex. Rassaa, 3 semaines).
 
+## 2026-10-28 — Most Soundboard dans Guild Legends, section Ghosts of Fable
+
+**Décision.**
+- Guild Legends : Parse Lords cède sa place à **Most Soundboard**, une distinction faite main, sans stat ni page : 1. Rassaa, 2. Yogiqt, chacun avec un portrait détouré (ours couronné pour Rassaa, nain guerrier couronné pour Yogiqt ; `site/public/fable/legends/`, WebP transparent recadré, 400 px de haut). Pas de numéro ni de macaron de rang : portrait à gauche, nom à droite, le premier en plus grand et en or. Le portrait garde son détourage d'origine (retirer son halo sombre trouait la fourrure) et s'intègre par une ombre portée et un léger halo parchemin en CSS. Le portrait de Yogiqt (illustration sur fond de lave) est détouré avec `rembg` (modèle `u2net`, plus net que `isnet-general-use` sur l'armure), installé dans le `.venv` avec le modèle dans `data/models/` (ignoré par git, `U2NET_HOME`), recadré sur le buste, bas fondu en dégradé (le personnage sort du cadre), affiché un peu plus petit que l'ours. Le nom et la légende du premier sont centrés à droite du portrait. Une entrée de `home.pinned` peut donc être un objet `{id, title, description, entries}` au lieu d'un id de stat. Parse Lords retourne dans le tirage du Hall of fame ; sa suppression reste ouverte (proche de Big Pumper).
+- **Ghosts of Fable**, sous le Hall of fame : tous les raideurs vus dans des pulls éligibles qui n'ont pas les 15 semaines de reset, en pastilles (classe la plus jouée, nombre de semaines), du plus de semaines au moins ; les 60 premiers, puis « Show all ». Suit le filtre d'extension. Données : `meta.ghosts`, calculé par l'export.
+
+**Raison.** Honorer les membres pour autre chose que les logs ; donner une place à ceux qui sont passés par la guilde sans y rester assez pour les classements.
+
+## 2026-10-28 — Fiche joueur : « Your best friend » ; macarons de rang recadrés
+
+**Décision.**
+- Encart **Your best friend** de la fiche joueur, sous les filtres et au-dessus de l'aperçu : le joueur classé avec qui il a partagé le plus de soirées de raid. Une soirée partagée = au moins un même pull éligible ce soir-là (soirée = date à Sydney − 6 h, pour garder les pulls d'après minuit sur leur soirée). En cas d'égalité : « Your best friends » et tous les noms séparés par des virgules. Indépendant des filtres. Calculé par l'export (`players.json` → `friends: {names, nights}`), textes dans `config/site.json` → `player.best_friend`.
+- **Macarons de rang** : la découpe ronde coupait les coins des emblèmes. Les icônes sont réduites à 70 % et posées sur un fond bleu radial dans leurs propres tons, bords fondus (`scripts/make_ranks.py`, originaux dans `site/assets-src/ranks/`, sortie 112 px). Taille par défaut du macaron passée de 20 à 22 px pour garder l'emblème lisible.
+
+**Écarté.** Compter les semaines de reset partagées (trop large : deux groupes d'une même semaine ne raident pas ensemble).
+
 ## 2026-10-29 — Combats en véhicules exclus
 
 **Décision.** Flame Leviathan (Ulduar, encounter 744) et Icecrown Gunship Battle (ICC, 847) sont retirés de toutes les stats et de tous les records, au calcul (`config/compute.json` → `excluded_encounters`). Le cache brut les garde. 60 pulls de 25 joueurs retirés.
