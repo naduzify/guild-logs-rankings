@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FilterBar, InfoTip, PlayerName, StatValue } from '../components.jsx';
+import { FilterBar, InfoTip, Intro, PlayerName, StatValue } from '../components.jsx';
 import { BASE100, CLASS_COLORS, formatInt, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat } from '../lib/stats.js';
@@ -68,7 +68,8 @@ let featuredIds = null;
 function drawFeatured(meta) {
   if (!featuredIds) {
     const pinned = new Set((meta.home.pinned || []).filter(x => typeof x === 'string'));
-    const pool = meta.stats.filter(s => s.category !== 'overview' && s.hall_of_fame !== false && !pinned.has(s.id)).map(s => s.id);
+    // Common stats only: a tank, healer or DPS stat would leave an empty card under a role or class filter.
+    const pool = meta.stats.filter(s => s.category === 'common' && s.hall_of_fame !== false && !pinned.has(s.id)).map(s => s.id);
     for (let i = pool.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -158,7 +159,7 @@ function Ghosts({ data, filter }) {
         {shown.map(([name, weeks, , c]) => (
           <li key={name} title={`${weeks} reset week${weeks > 1 ? 's' : ''}${c != null ? ' · ' + meta.classes[c] : ''}`}>
             {c != null && <i style={{ background: CLASS_COLORS[meta.classes[c]] }} />}
-            {name}<small>{weeks}w</small>
+            {name}{c != null && <span className="sr-only">, {meta.classes[c]},</span>}<small>{weeks}w</small>
           </li>
         ))}
       </ul>
@@ -182,6 +183,7 @@ export default function Home({ data, filter }) {
         <h1><img className="gicon" src="./guild-icon.png" alt="" width="40" height="40" />{meta.guild.name}<small>{meta.guild.server}</small></h1>
         <p>Seven years of raiding, from Molten Core to Siege of Orgrimmar. Every pull, every wipe, every questionable decision.</p>
       </section>
+      <Intro meta={meta} />
       <FilterBar meta={meta} filter={filter} onChange={f => go('home', null, f)} note="Guild totals follow the expansion filter only." />
       <GuildTotals data={data} filter={filter} />
       <GuildRecords data={data} filter={filter} />

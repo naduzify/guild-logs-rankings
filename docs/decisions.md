@@ -530,6 +530,34 @@ L'export donne les semaines de chaque personnage (`players.json` → `chars: [no
 
 **Raison.** Un reroll monté pour une soirée ajoutait une puce de classe et un personnage à The Undecided, comme un vrai reroll.
 
+
+## 2026-10-29 — Surlignage d'un joueur dans le classement d'une stat
+
+**Décision.** Sur la page d'une stat, un champ « Highlight… » à côté de l'en-tête Player surligne en direct les lignes dont le main ou un reroll contient le texte tapé (accents ignorés) : fond parchemin et trait à gauche, par-dessus les teintes de titre et de revers. Le classement n'est pas filtré. Entrée fait défiler la page jusqu'à la première ligne surlignée, centrée à l'écran.
+
+**Raison.** Retrouver un joueur dans un long classement en gardant son rang et ses voisins.
+
+**Écarté.** Filtrer les lignes : on perdrait le contexte du classement. Réutiliser le fond bleu des titres gagnés : on confondrait les deux.
+
+## 2026-10-29 — Audit sécurité et accessibilité
+
+**Décision.**
+- **Vite 6.4.5** (au lieu de 5.4.11) : les failles du serveur de dev (lecture de fichiers hors du dossier servi, requêtes d'autres sites) ne sont corrigées qu'à partir de 6.4.4. `npm audit` : 0 faille. Versions Python figées dans `requirements.txt`.
+- Lien de hash mal formé (`%E0`) : décodé sans planter ; une erreur de rendu affiche un lien de retour au lieu d'une page blanche.
+- Accessibilité : recherche en combobox ARIA, lien « Skip to content », titre d'onglet par page, focus sur le `<h1>` à chaque changement de page, info-bulles « i » décrites (`aria-describedby`) et refermables au clavier, texte pour lecteur d'écran (`.sr-only`) là où seule la couleur parlait (puces de classe, tiers validés, lignes de titre gagné, classe des fantômes), anneau de focus blanc (l'accent seul fait 3:1 sur `--navy`).
+
+**Raison.** Audit du code du 2026-10-29.
+
+**Pas encore tranché.** Héberger les polices au lieu de Google Fonts (IP des visiteurs envoyée à Google) ; accord des membres pour les titres moqueurs et les portraits avant la mise en ligne publique.
+
+## 2026-10-29 — Classements sans défilement horizontal sur téléphone
+
+**Décision.** Sous 560 px, la table d'un classement tient dans la largeur de l'écran : la colonne Player prend la place laissée par les autres (au moins 112 px, 90 px sous 360 px) et tronque les noms trop longs avec « … » ; le champ Highlight passe sous « Player » ; l'en-tête Percentile devient « Pctl » ; les en-têtes et les libellés longs (boss · date) passent à la ligne ; le tag de revers passe sous la barre. Vérifié sur toutes les stats à 320, 360 et 390 px.
+
+**Raison.** Le défilement horizontal cachait la colonne des percentiles.
+
+**Écarté.** Masquer la colonne des percentiles sur téléphone : c'est l'information principale du classement.
+
 ## 2026-10-29 — Audit des stats : corrections et nouvelles stats
 
 Audit des stats sur les données réelles (8 714 pulls après dédoublonnage). Valeurs avant → après sur le classement sans filtre.
@@ -584,6 +612,22 @@ Audit des stats sur les données réelles (8 714 pulls après dédoublonnage). V
 
 **À savoir.** Tant que le crawl complémentaire n'est pas fini, seul le trash des soirées déjà crawlées est compté (67 soirées au 2026-10-29) ; la description de la stat le dit.
 
+## 2026-10-29 — Surlignage d'un achievement dans la liste, parse en gras
+
+**Décision.** La page « All achievements » a un champ « Highlight an achievement… » sous le titre : il surligne en direct (même fond parchemin et trait à gauche que les lignes de joueur) les achievements dont le titre ou le titre de revers contient le texte, accents ignorés ; Entrée fait défiler jusqu'au premier. La liste n'est pas filtrée. Sur la page Parse Lords, la moyenne colorée selon la parse WCL passe en gras.
+
+**Raison.** Retrouver vite un achievement parmi les 45 sans perdre sa catégorie ; mieux faire ressortir la couleur de parse.
+
+**Écarté.** Chercher aussi dans les descriptions : trop de résultats pour des mots courants.
+
+## 2026-10-29 — Encart « How to read this site » plutôt qu'un tutoriel
+
+**Décision.** En haut de l'accueil de guilde, un encart fermable explique la lecture des chiffres en six lignes : base 100, percentiles, Earned / Infamous, filtres (valables partout et gardés dans le lien), macaron de rang PvP et puces de classe, noms cliquables et recherche. Textes dans `config/site.json` → `home.intro`. Le bouton « Got it » le cache ; le choix est gardé dans le `localStorage`, clé `clt:<guilde>:intro-dismissed` (préfixée, car tous les sites d'un compte GitHub Pages partagent la même origine). Si le stockage est bloqué (navigation privée), l'encart s'affiche à chaque visite. Un lien « How to read this site » du pied de page efface le choix et ramène à l'accueil, encart ouvert.
+
+**Raison.** La navigation est simple (trois pages, une recherche, des noms cliquables) ; le vrai risque est de mal lire les chiffres. Le public arrive par un lien Discord, souvent sur téléphone, et ferme une visite guidée sans la lire.
+
+**Écarté.** Une visite guidée pas à pas, qui bloque l'écran et pointe des éléments, pénible sur mobile (filtres repliés, éléments hors écran) et coûteuse à maintenir. Un cookie : il partirait avec chaque requête pour rien sur un site statique. Un bandeau de consentement : inutile pour une préférence purement fonctionnelle, sans suivi.
+
 ## 2026-10-29 — Sniper / Sniped, comparé à la classe
 
 **Décision.** La stat healer `sniper` devient `sniped`. Le titre principal **Sniper** (bleu) va au **moins** d'overheal (`direction: asc`), le revers **Sniped** (rouge) au plus d'overheal. Le taux d'overheal de chaque pull est ramené en base 100 contre la médiane des healers de la même classe dans la même extension, puis moyenné.
@@ -593,6 +637,12 @@ Audit des stats sur les données réelles (8 714 pulls après dédoublonnage). V
 **Raison.** Un fort overheal vient surtout d'un autre healer plus rapide. Dans le jargon, le sniper est celui qui vole le soin, pas celui qui le perd. Surtout, l'overheal dépend d'abord de la classe : 73 % pour les paladins WotLK (Beacon of Light), 23 % pour les prêtres WotLK (boucliers Discipline sans overheal), contre une vingtaine de points d'écart au plus entre joueurs d'une même classe. Avant la correction, la stat classait des classes plutôt que des joueurs. Après, les deux bouts du top 10 mélangent druides, paladins, prêtres et chamans.
 
 **Écarté.** Savoir qui a « snipé » qui : il faut les événements de soin (niveau 3), c'est le True Sniper reporté en V2.
+
+## 2026-10-29 — Classement d'une stat à revers : les deux titres affichés
+
+**Décision.** Sur la page d'une stat qui a un revers, les joueurs au-dessus de `title_percentile` portent le titre de la stat (en blanc, `--accent-text`), à côté de leur percentile, comme ceux sous `flip_percentile` portent déjà le titre de revers (en rose clair, `--flip-text`). Pour une stat sans revers, rien ne change : le fond bleu suffit.
+
+**Raison.** Seul le revers était nommé, alors que le haut du classement gagne aussi un titre.
 
 ## 2026-10-29 — Blamed the Healer : tolérance d'une seconde ; Timekeeper comparé à la classe
 
@@ -625,3 +675,27 @@ Audit des stats sur les données réelles (8 714 pulls après dédoublonnage). V
 ## 2026-10-29 — MoP : Mogu'shan, Heart of Fear et Terrace forment un seul tier
 
 Mogu'shan Vaults, Heart of Fear et Terrace of Endless Spring sont fusionnés en un tier `t14` (« MSV / HoF / ToES ») dans `config/tiers.json` : c'est le même tier d'équipement (T14), sorti en une seule phase en MoP Classic. 18 tiers au lieu de 19. Effet : rang PvP (un tier validé de moins possible en MoP) et Glow Up (au moins 3 tiers).
+
+## 2026-10-29 — Une seule phrase drôle par achievement
+
+**Décision.** La `description` de chaque stat est une phrase drôle d'une ligne ; le champ `joke` est supprimé (config, page de stat, styles). Ce qui est mesuré reste dans `detail` (info-bulle « comment c'est calculé »). Les 64 phrases ont été choisies avec le propriétaire.
+
+**Raison.** Description et blague étaient deux phrases drôles redondantes, alors que la mesure est déjà expliquée précisément dans l'info-bulle.
+
+**Écarté.** Une description factuelle plus une blague : doublon avec `detail`.
+
+## 2026-10-29 — Blamed the Healer en part des morts ; Dancing Rune Weapon retiré
+
+**Décision.** Blamed the Healer devient la **part de ses morts en tank** avec un CD défensif actif (et non plus leur total), à partir de **30 morts en tank** (`min_den` de la stat). Le nombre total de morts en tank est affiché à côté du pourcentage. Dancing Rune Weapon est retiré des CD défensifs (crawl et `cd_ignored_ids`) : c'est surtout un CD offensif.
+
+**Raison.** Le total classait surtout ceux qui avaient le plus tanké en Cata et MoP, où les tanks ont plus de CD, plus courts (Rassaa 510, Yogiqt 276, Masomum 239, le suivant à 60). En part, ils reviennent autour de 10 %. Le seuil de 30 morts écarte les échantillons de 2 à 4 morts.
+
+**Limite connue.** Mourir avec un CD actif est rare en Era et TBC (2 à 5 % des morts de tank, contre 11 à 17 % ensuite) : le filtre d'extension permet de comparer à périmètre égal.
+
+## 2026-10-29 — Hall of fame de l'accueil : achievements communs seulement
+
+**Décision.** Le tirage au hasard du Hall of fame ne prend que les achievements de catégorie `common` (36 éligibles aujourd'hui), plus les stats tank, healer ou DPS.
+
+**Raison.** Sous un filtre de rôle ou de classe (ex. « Healer », ou « Rogue »), une stat d'un autre rôle n'a personne à classer et laissait une carte vide dans la grille. Les stats communes sont calculées pour tous les rôles et ont toujours des joueurs.
+
+**Écarté.** Masquer les cartes vides après coup : la grille aurait changé de taille selon les filtres.

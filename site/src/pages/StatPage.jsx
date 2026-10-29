@@ -1,5 +1,6 @@
+import { useRef, useState } from 'react';
 import { FilterBar, InfoTip, PctBar, PlayerName, StatValue } from '../components.jsx';
-import { BASE100, formatNumber, formatPct, formatValue, isBase100 } from '../lib/format.js';
+import { BASE100, fold, formatNumber, formatPct, formatValue, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
 import { computeStat, explain, hasNumber, hasPercentile, isRankable, shareTotal, titlePercentile, valueIsNumber } from '../lib/stats.js';
 
@@ -11,15 +12,27 @@ export const CATEGORIES = [
 ];
 
 export function StatsIndex({ data, filter }) {
+  // Highlights the achievements whose title (or flip title) contains the text, accents ignored; Enter scrolls to the first.
+  const [find, setFind] = useState('');
+  const list = useRef(null);
+  const k = fold(find.trim());
+  const found = s => k && [s.title, s.flip].some(t => t && fold(t).includes(k));
+  const jump = e => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    list.current?.querySelector('li.found')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
   return (
-    <>
+    <div ref={list} className="statsindex">
       <h1 className="ptitle">All achievements</h1>
+      <input className="findbox" type="search" placeholder="Highlight an achievement…" value={find} aria-label="Highlight an achievement"
+        onChange={e => setFind(e.target.value)} onKeyDown={jump} />
       {CATEGORIES.map(c => (
         <section key={c.id}>
           <h2 className="cat">{c.label}</h2>
           <ul className="statlist">
             {data.meta.stats.filter(s => s.category === c.id).map(s => (
-              <li key={s.id}>
+              <li key={s.id} className={found(s) ? 'found' : undefined}>
                 <a href={href('stat', s.id, filter)}>{s.title}</a>
                 {s.flip && <span className="flipname"> / {s.flip}</span>}
                 <InfoTip stat={s} meta={data.meta} />
@@ -29,11 +42,20 @@ export function StatsIndex({ data, filter }) {
           </ul>
         </section>
       ))}
-    </>
+    </div>
   );
 }
 
 export default function StatPage({ data, id, filter }) {
+  // Highlights rows as the player types (main or alt, accents ignored); it filters nothing.
+  const [find, setFind] = useState('');
+  const board = useRef(null);
+  // Enter: bring the first highlighted row into view.
+  const jump = e => {
+    if (e.key !== 'Enter') return;
+    e.preventDefault();
+    board.current?.querySelector('tr.found')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
   const stat = data.statById.get(id);
   if (!stat) return <p className="empty">Unknown achievement. <a href={href('stats')}>See all achievements</a>.</p>;
   const { ranked, byPlayer } = computeStat(stat, data.stats[stat.id], filter, data.meta.settings, data.roleOk);
@@ -42,6 +64,8 @@ export default function StatPage({ data, id, filter }) {
   const fmt = v => (valueIsNumber(stat) ? formatNumber(stat, v) : formatValue(stat, v));
   const { flip_percentile } = data.meta.settings;
   const title_percentile = titlePercentile(stat, data.meta.settings);
+  const k = fold(find.trim());
+  const found = p => k && data.players[p].chars.some(([n]) => fold(n).includes(k));
 
   return (
     <>
@@ -52,32 +76,39 @@ export default function StatPage({ data, id, filter }) {
         <ul className="method" aria-label="How it is calculated">
           {explain(stat, data.meta.settings).map(l => <li key={l}>{l}</li>)}
         </ul>
-        {stat.joke && <p className="joke">{stat.joke}</p>}
       </header>
       <FilterBar meta={data.meta} filter={filter} onChange={f => go('stat', stat.id, f)} />
       {rows.length === 0 ? <p className="empty">Nobody qualifies with these filters.</p> : (
         <div className="tablebox">
-          <table className="board">
+          <table className="board" ref={board}>
             <thead>
               <tr>
                 {isRankable(stat) && <th className="n">#</th>}
-                <th className="l">Player</th>
+                <th className="l">
+                  <span className="thfind">Player
+                    <input type="search" placeholder="Highlight…" value={find} aria-label="Highlight a player"
+                      onChange={e => setFind(e.target.value)} onKeyDown={jump} />
+                  </span>
+                </th>
                 <th>{stat.agg === 'top' ? stat.title : isBase100(stat) ? 'Score (base 100)' : 'Value'}</th>
                 {showN && <th className="hide-sm">Career</th>}
-                {showP && <th className="l">Percentile</th>}
+                {showP && <th className="l"><span className="lg">Percentile</span><abbr className="sm" title="Percentile">Pctl</abbr></th>}
               </tr>
             </thead>
             <tbody>
               {rows.map(r => {
                 const tag = showP && (r.pct >= title_percentile ? 'hi' : stat.flip && r.pct <= flip_percentile ? 'lo' : '');
                 return (
-                  <tr key={r.p} className={tag || undefined}>
+                  <tr key={r.p} className={[tag, found(r.p) && 'found'].filter(Boolean).join(' ') || undefined}>
                     {isRankable(stat) && <td className="n">{r.pos}</td>}
                     <td className="l"><PlayerName data={data} p={r.p} filter={filter} /></td>
-                    <td className="v">{r.label ? <>{r.label} <span className="muted">{formatValue(stat, r.value)}{isBase100(stat) && ` ${BASE100}`}{shareTotal(stat, r)}</span></> : valueIsNumber(stat) ? fmt(r.value) : <StatValue stat={stat} row={r} parseColors />}</td>
+                    <td className={r.label ? 'v lbl' : 'v'}>{r.label ? <>{r.label} <span className="muted">{formatValue(stat, r.value)}{isBase100(stat) && ` ${BASE100}`}{shareTotal(stat, r)}</span></> : valueIsNumber(stat) ? fmt(r.value) : <StatValue stat={stat} row={r} parseColors />}</td>
                     {showN && <td className="v muted hide-sm">{formatNumber(stat, r.number)}</td>}
                     {showP && <td className="l"><PctBar pct={r.pct} /> <span className={r.pct >= 75 ? 'muted pctxt glow' : 'muted pctxt'}>{formatPct(r.pct, true)}</span>
-                      {tag === 'lo' && <span className="fliptag">{stat.flip}</span>}</td>}
+                      {/* A stat with a flip names both ends: its title at the top, its flip title at the bottom. */}
+                      {tag === 'lo' && <span className="fliptag">{stat.flip}</span>}
+                      {tag === 'hi' && stat.flip && <span className="fliptag earned">{stat.title}</span>}
+                      {tag === 'hi' && <span className="sr-only">, {stat.title} title earned</span>}</td>}
                   </tr>
                 );
               })}

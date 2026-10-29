@@ -5,6 +5,11 @@ import { useEffect, useState } from 'react';
 
 const SETS = ['exp', 'cls', 'role'];
 
+// A truncated shared link ("%E0") would throw and blank the page: keep the raw text instead.
+function safeDecode(s) {
+  try { return decodeURIComponent(s); } catch { return s; }
+}
+
 export function parseHash(hash = window.location.hash) {
   const [path, query = ''] = hash.replace(/^#/, '').split('?');
   const params = new URLSearchParams(query);
@@ -13,7 +18,7 @@ export function parseHash(hash = window.location.hash) {
     const raw = params.get(k);
     filter[k] = new Set(raw ? raw.split(',').map(Number).filter(Number.isInteger) : []);
   }
-  const parts = (path || '/').split('/').filter(Boolean).map(decodeURIComponent);
+  const parts = (path || '/').split('/').filter(Boolean).map(safeDecode);
   return { page: parts[0] || 'home', arg: parts[1] ?? null, filter };
 }
 

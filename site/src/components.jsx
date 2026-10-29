@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { playedClasses } from './lib/data.js';
 import { CLASS_COLORS, fold, formatValue, parseColor } from './lib/format.js';
 import { go, href } from './lib/route.js';
@@ -9,12 +9,13 @@ const GAP = 12;
 
 // "i" button showing how an achievement is calculated. On wide screens the box opens offset
 // beside the button (placed in JS, clamped to the viewport); on phones it is a sheet at the
-// bottom of the screen (CSS). Hover opens it where hover exists; tap or click toggles it.
+// bottom of the screen (CSS). Hover opens it where hover exists; tap, click or keyboard toggles it.
 export function InfoTip({ stat, meta }) {
   const [open, setOpen] = useState(false);
   const [pos, setPos] = useState(null);
   const ref = useRef(null);
   const box = useRef(null);
+  const id = useId();
   const hover = useRef(typeof window !== 'undefined' && !!window.matchMedia?.('(hover: hover)').matches);
 
   useEffect(() => {
@@ -48,8 +49,14 @@ export function InfoTip({ stat, meta }) {
     <span ref={ref} className={'tip' + (open ? ' open' : '')}
       onMouseEnter={() => hover.current && setOpen(true)} onMouseLeave={() => hover.current && setOpen(false)}>
       <button type="button" className="tipbtn" aria-label={`How ${stat.title} is calculated`} aria-expanded={open}
-        onClick={e => { e.preventDefault(); e.stopPropagation(); setOpen(o => (hover.current ? true : !o)); }}>i</button>
-      <span ref={box} role="tooltip" className="tipbox"
+        aria-describedby={id}
+        onClick={e => {
+          e.preventDefault(); e.stopPropagation();
+          // A mouse click lands while hover has already opened the box: keep it open. Keyboard (detail 0) toggles.
+          const keep = hover.current && e.detail > 0;
+          setOpen(o => keep || !o);
+        }}>i</button>
+      <span ref={box} id={id} role="tooltip" className="tipbox"
         style={pos ? { left: pos.left, top: pos.top, right: 'auto', bottom: 'auto' } : undefined}>
         <b>{stat.title}{stat.flip && ` / ${stat.flip}`}</b>
         {explain(stat, meta.settings).map(l => <span key={l}>{l}</span>)}
@@ -60,7 +67,7 @@ export function InfoTip({ stat, meta }) {
 
 // A ranked value; Parse Lords adds its best and median parse in small: "71.0 (74.5 | 67.5)", scaled
 // totals their actual total: "1.2B (71.1B)".
-// `parseColors` paints the average in its Warcraft Logs parse colour (Parse Lords page).
+// `parseColors` paints the average in its Warcraft Logs parse colour, in bold (Parse Lords page).
 export function StatValue({ stat, row, parseColors = false }) {
   const main = formatValue(stat, row.value);
   if (stat.agg === 'scaled' && row.extra) {
@@ -70,7 +77,7 @@ export function StatValue({ stat, row, parseColors = false }) {
   const [best, median] = row.extra;
   return (
     <>
-      {parseColors ? <span style={{ color: parseColor(row.value) }}>{main}</span> : main}{' '}
+      {parseColors ? <strong style={{ color: parseColor(row.value) }}>{main}</strong> : main}{' '}
       <small className="vdetail" title="best | median">({best.toFixed(1)} | {median.toFixed(1)})</small>
     </>
   );
@@ -99,7 +106,7 @@ export function PlayerName({ data, p, filter, badge }) {
       <RankBadge player={pl} meta={data.meta} size={badge} />
       <span className="pn">{pl.name}</span>
       {classes.length > 0 && (
-        <span className="cdots" title={classes.join(', ')} aria-label={classes.join(', ')}>
+        <span className="cdots" role="img" title={classes.join(', ')} aria-label={classes.join(', ')}>
           {classes.map(c => <i key={c} style={{ background: CLASS_COLORS[c] }} />)}
         </span>
       )}
@@ -158,6 +165,7 @@ export function Search({ data, filter }) {
   const [open, setOpen] = useState(false);
   const [sel, setSel] = useState(0);
   const input = useRef(null);
+  const id = useId();
   const index = useMemo(() => data.players.map((pl, p) => ({ p, keys: pl.chars.map(([n]) => fold(n)) })), [data]);
 
   const hits = useMemo(() => {
@@ -182,18 +190,21 @@ export function Search({ data, filter }) {
     else if (e.key === 'Escape') setOpen(false);
   };
 
+  const shown = open && hits.length > 0;
   return (
     <div className="search">
       <input ref={input} type="search" placeholder="Find a player or an alt…" value={q} aria-label="Search players"
+        role="combobox" aria-autocomplete="list" aria-expanded={shown} aria-controls={shown ? id + 'hits' : undefined}
+        aria-activedescendant={shown ? `${id}hit${sel}` : undefined}
         onChange={e => { setQ(e.target.value); setSel(0); setOpen(true); }}
         onFocus={() => setOpen(true)} onBlur={() => setTimeout(() => setOpen(false), 150)} onKeyDown={onKey} />
-      {open && hits.length > 0 && (
-        <ul className="hits" role="listbox">
+      {shown && (
+        <ul className="hits" id={id + 'hits'} role="listbox" aria-label="Players">
           {hits.map((p, i) => {
             const pl = data.players[p];
             const alts = pl.chars.slice(1).map(c => c[0]);
             return (
-              <li key={p} role="option" aria-selected={i === sel} onMouseDown={() => pick(p)} onMouseEnter={() => setSel(i)}>
+              <li key={p} id={`${id}hit${i}`} role="option" aria-selected={i === sel} onMouseDown={() => pick(p)} onMouseEnter={() => setSel(i)}>
                 <RankBadge player={pl} meta={data.meta} />
                 <span className="hn">{pl.name}</span>
                 {alts.length > 0 && <span className="ha">{alts.join(', ')}</span>}
@@ -208,4 +219,40 @@ export function Search({ data, filter }) {
 
 export function PctBar({ pct }) {
   return <span className="pbar" aria-hidden="true"><span style={{ width: `${Math.max(2, pct)}%` }} /></span>;
+}
+
+// "How to read this site" panel (texts in meta.home.intro). Shown on the guild home until dismissed; the
+// choice is kept in localStorage per guild (a preference of this browser only, sent nowhere). Storage can
+// be blocked (private window): the panel then simply shows on every visit.
+const introKey = meta => `clt:${meta.guild.name.toLowerCase()}:intro-dismissed`;
+const store = {
+  get: k => { try { return localStorage.getItem(k); } catch { return null; } },
+  set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch { /* blocked */ } },
+};
+export const INTRO_EVENT = 'clt:show-intro';
+// Footer link: forget the dismissal, then show the panel (the caller goes to the home page).
+export function reopenIntro(meta) {
+  store.set(introKey(meta), null);
+  window.dispatchEvent(new Event(INTRO_EVENT));
+}
+
+export function Intro({ meta }) {
+  const cfg = meta.home.intro;
+  const [open, setOpen] = useState(() => !store.get(introKey(meta)));
+  useEffect(() => {
+    const show = () => setOpen(true);
+    window.addEventListener(INTRO_EVENT, show);
+    return () => window.removeEventListener(INTRO_EVENT, show);
+  }, []);
+  if (!cfg || !open) return null;
+  const close = () => { store.set(introKey(meta), '1'); setOpen(false); };
+  return (
+    <section className="intro" aria-labelledby="intro-title">
+      <h2 id="intro-title">{cfg.title}</h2>
+      <ul>
+        {cfg.items.map(([term, text]) => <li key={term}><strong>{term}</strong> {text}</li>)}
+      </ul>
+      <button type="button" className="introok" onClick={close}>{cfg.dismiss}</button>
+    </section>
+  );
 }

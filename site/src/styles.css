@@ -47,7 +47,16 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .wrap { max-width: 1120px; margin: 0 auto; padding-inline: max(14px, env(safe-area-inset-left)) max(14px, env(safe-area-inset-right)); }
 .muted { color: var(--tan); }
 .empty { color: var(--tan); padding: 32px 0; text-align: center; }
-:focus-visible { outline: 2px solid var(--alliance); outline-offset: 2px; }
+/* White ring: the accent alone is only 3:1 on --navy (Alliance and Horde alike). */
+:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; }
+/* Headings focused on a page change (App): no ring around a title. */
+[tabindex="-1"]:focus { outline: none; }
+/* Read by screen readers, not shown: what colour alone says elsewhere. */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+/* Skip link: hidden until focused from the keyboard. */
+.skip { position: absolute; left: 12px; top: -60px; z-index: 50; padding: 8px 14px; border: 0; border-radius: 4px;
+  background: var(--alliance); color: var(--accent-text); font: 600 .95rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .08em; cursor: pointer; }
+.skip:focus-visible { top: 12px; }
 
 /* Header */
 .mockbar { background: var(--red-glow); color: var(--red); text-align: center; font-size: .78rem; padding: 4px 14px; }
@@ -88,20 +97,42 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .split-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible;
   filter: drop-shadow(0 0 2px rgb(255 255 255 / .8)) drop-shadow(0 0 6px rgb(255 255 255 / .35)); }
 .split-line polyline { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linejoin: miter; }
-/* The firefly: a warm speck with a soft halo. It dashes along the cut (top to bottom, left to right on
-   phones), fades out, waits, and goes again. --fly-time is set from the path length by split.js. */
-.firefly { position: absolute; top: 0; left: 0; width: 7px; height: 7px; border-radius: 50%; background: #fbffd0; display: none;
-  box-shadow: 0 0 6px 2px #f4ff8a, 0 0 18px 6px color-mix(in srgb, #d8ff4f 45%, transparent);
-  offset-rotate: 0deg; offset-anchor: center; opacity: 0;
+/* Side art: Varian on Fable's side (mirrored to face the cut), Garrosh on NightShift's, inside the red layer so
+   the cut clips him. Each covers the screen on its side and fades towards the middle and the top and bottom.
+   Phones: Varian on the top half, Garrosh on the bottom half. --screen-top / --screen-h come from split.js. */
+.art { position: absolute; left: 0; width: 100%; height: calc(var(--screen-h, 100vh) / 2); opacity: .5; }
+.art.alliance { top: var(--screen-top, 100vh); }
+.art.horde { top: calc(var(--screen-top, 100vh) + var(--screen-h, 100vh) / 2); }
+.art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.art.alliance img { object-position: 30% 30%; }
+.art.horde img { object-position: 60% 30%; }
+.art.alliance { -webkit-mask-image: linear-gradient(to bottom, #000 35%, transparent 100%); mask-image: linear-gradient(to bottom, #000 35%, transparent 100%); }
+.art.horde { -webkit-mask-image: linear-gradient(to top, #000 35%, transparent 100%); mask-image: linear-gradient(to top, #000 35%, transparent 100%); }
+/* The firefly: a bright speck with a soft halo. It travels along the cut, top to bottom (left to right on
+   phones), fades out, waits, then comes back the other way, and so on. --fly-path and --fly-time are set by split.js, which also adds
+   the after-images (.ghost): copies running the same path 5 ms apart (about 5px), smaller and fainter, whose
+   halos overlap into one continuous streak of light left behind it. */
+.firefly { position: absolute; top: 0; left: 0; width: 6px; height: 6px; border-radius: 50%; background: #fffef5; display: none;
+  box-shadow: 0 0 4px 2px #fff7c4, 0 0 14px 5px color-mix(in srgb, #ffef94 50%, transparent);
+  offset-path: var(--fly-path); offset-rotate: 0deg; offset-anchor: center; opacity: 0;
   animation: firefly-fly var(--fly-time, 3s) linear infinite; }
+.firefly.ghost { width: calc(2px + 4px * var(--k)); height: calc(2px + 4px * var(--k)); animation-delay: calc(var(--i) * 5ms);
+  background: color-mix(in srgb, #fff8cc calc(var(--k) * 70%), transparent);
+  box-shadow: 0 0 5px 2px color-mix(in srgb, #fff3b0 calc(var(--k) * 45%), transparent),
+    0 0 12px 3px color-mix(in srgb, #ffec8a calc(var(--k) * 18%), transparent); }
 .firefly.on { display: block; }
-/* First 9.9% of the cycle: the dash, at constant speed; the rest: the pause (about 9 times the dash). */
+/* Two runs per cycle, at constant speed, each followed by a pause (about 4.5 times the run):
+   0-9% forth (top to bottom), 9-50% pause, 50-59% back (bottom to top), 59-100% pause. */
 @keyframes firefly-fly {
   0% { offset-distance: 0%; opacity: 0; }
-  0.6% { opacity: 1; }
-  9.3% { opacity: 1; }
-  9.9% { offset-distance: 100%; opacity: 0; }
-  100% { offset-distance: 100%; opacity: 0; }
+  0.5% { opacity: 1; }
+  8.6% { opacity: 1; }
+  9% { offset-distance: 100%; opacity: 0; }
+  50% { offset-distance: 100%; opacity: 0; }
+  50.5% { opacity: 1; }
+  58.6% { opacity: 1; }
+  59% { offset-distance: 0%; opacity: 0; }
+  100% { offset-distance: 0%; opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) { .firefly { display: none; } }
 /* Content centred on the screen, both ways. */
@@ -121,6 +152,18 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
 .scard.guild .gicon { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
 .soon { min-height: 100vh; display: grid; place-items: center; }
 .soon p { font: 700 clamp(2.2rem, 9vw, 5rem) var(--f-headline); letter-spacing: .12em; text-transform: uppercase; color: var(--parchment); margin: 0; }
+
+/* "How to read this site": dismissible panel on the guild home, parchment wash like the best friend panel. */
+.intro { position: relative; margin: 14px 0 6px; padding: 18px 20px 16px; border-radius: 8px; border: 1px solid var(--line-strong);
+  background: radial-gradient(120% 140% at 0% 0%, color-mix(in srgb, var(--parchment) 12%, transparent), transparent 70%), var(--navy-glass); }
+.intro h2 { font: 700 1.05rem var(--f-headline); text-transform: uppercase; letter-spacing: .06em; color: var(--parchment); margin: 0 0 10px; }
+.intro ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; color: var(--cream); font-size: .92rem; line-height: 1.45; }
+.intro li::marker { color: var(--alliance); }
+.intro strong { color: var(--parchment); }
+.introok { margin-top: 14px; min-height: 34px; padding: 6px 18px; border-radius: 4px; border: 1px solid var(--alliance); background: var(--alliance-deep);
+  color: var(--accent-text); font: 600 .95rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .08em; cursor: pointer; }
+.introok:hover { background: var(--alliance); }
+@media (min-width: 720px) { .intro ul { grid-template-columns: 1fr 1fr; column-gap: 32px; } }
 
 /* Filters: collapsed behind a button on phones, always open from 720px. */
 .filters { border-block: 1px solid var(--line); margin-block: 14px 18px; padding-block: 8px; }
@@ -223,7 +266,7 @@ a.hname:hover { color: var(--parchment); }
 .cmore { margin-top: auto; align-self: flex-end; display: inline-flex; align-items: center; min-height: 34px; padding-top: 8px;
   font: 600 .8rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .12em; color: var(--accent-text); text-decoration: none; }
 .cmore:hover { text-decoration: underline; }
-.cmore:focus-visible { outline: 2px solid var(--alliance); outline-offset: 2px; border-radius: 2px; }
+.cmore:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px; border-radius: 2px; }
 .cdesc { margin: 2px 0 10px; color: var(--tan); font-size: .85rem; }
 .podium { list-style: none; margin: 0; padding: 0; }
 .podium li { display: flex; align-items: center; gap: 8px; padding: 7px 0; border-top: 1px solid var(--line); min-width: 0; }
@@ -262,21 +305,30 @@ a.hname:hover { color: var(--parchment); }
 .pname:hover .pn { color: var(--parchment); }
 /* Class dots after the name: the classes played under the active filters, most played first. */
 .cdots { display: inline-flex; gap: 3px; flex: none; }
-.cdots i { width: 8px; height: 8px; border-radius: 50%; }
+.cdots i { flex: none; width: 8px; height: 8px; border-radius: 50%; }
 
 /* Stat page */
 .stathead { padding-top: 22px; }
+/* All achievements: the title gets the same room under the header as the hero and a stat page. */
+.statsindex { padding-top: 28px; }
 .kicker { font: 600 .85rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .14em; color: var(--accent-text); }
 .flipname { color: var(--tan); font-weight: 400; }
 .lead { font-size: 1.1rem; margin: 6px 0 2px; }
 .detail { color: var(--tan); margin: 0; max-width: 70ch; }
-.joke { font-style: italic; color: var(--parchment); }
 .tablebox { overflow-x: auto; background: var(--navy-glass); border: 1px solid var(--line); border-radius: 6px; margin-bottom: 36px; }
 .board { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
-.board th, .board td { padding: 9px 8px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+.board th, .board td { padding: 9px 6px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
 .board th { font: 600 .85rem var(--f-subtitle); text-transform: uppercase; letter-spacing: .08em; color: var(--tan); }
 .board .l { text-align: left; }
-.board td.l:has(.pname) { max-width: 46vw; }
+/* Inline blocks (name with badge, percentile bar) sit on the text middle, not its baseline, so each row reads centred. */
+.board td { vertical-align: middle; }
+.board .pname, .board .pbar { vertical-align: middle; }
+/* Phones: the player column takes what the other columns leave (width 100% + max-width 0) and long names
+   end in an ellipsis, so the table fits the screen without scrolling sideways. */
+.board td.l:has(.pname) { width: 100%; max-width: 0; min-width: 112px; }
+/* Long labels (boss · date) wrap on phones instead of widening the table. */
+.board td.lbl, .board th { white-space: normal; }
+.board .pname { max-width: 100%; }
 /* Phones: in rankings the class dots go under the name, leaving the width to the other columns. */
 .board .pname { display: inline-grid; grid-template: "badge name" auto "badge dots" auto / auto minmax(0, 1fr); column-gap: 7px; row-gap: 3px; align-items: center; }
 .board .pname .rank { grid-area: badge; }
@@ -285,8 +337,17 @@ a.hname:hover { color: var(--parchment); }
 .board .n { color: var(--tan); width: 2.5em; }
 .board tr.hi td { background: var(--alliance-glow); }
 .board tr.lo td { background: var(--red-glow); }
+/* Row matched by the highlight box in the Player header: parchment wash, over the title/flip tints. */
+.board tr.found td { background: color-mix(in srgb, var(--parchment) 22%, transparent); }
+.board tr.found td:first-child { box-shadow: inset 3px 0 0 var(--parchment); }
+.thfind { display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
+.thfind input { width: 100%; min-width: 0; font: 400 13px var(--f-body); text-transform: none; letter-spacing: 0; padding: 3px 8px; height: 26px;
+  border: 1px solid var(--line-strong); border-radius: 4px; background: var(--navy-glass); color: var(--cream); }
+.thfind input::placeholder { color: var(--tan); }
+.thfind input:focus { border-color: var(--alliance); box-shadow: 0 0 0 3px var(--alliance-glow); outline: none; }
 .board .hide-sm, .board .pctxt { display: none; }
-.fliptag { margin-left: 8px; font-size: .75rem; color: var(--flip-text); font-weight: 600; }
+.fliptag { display: block; margin-top: 2px; font-size: .75rem; color: var(--flip-text); font-weight: 600; }
+.fliptag.earned { color: var(--accent-text); }
 .pbar { display: inline-block; width: 56px; height: 6px; border-radius: 3px; background: var(--line-strong); vertical-align: middle; overflow: hidden; }
 .pbar span { display: block; height: 100%; background: linear-gradient(90deg, var(--alliance-deep), var(--alliance)); }
 
@@ -294,6 +355,12 @@ a.hname:hover { color: var(--parchment); }
 .statlist li { padding: 8px 0; border-bottom: 1px solid var(--line); }
 .statlist a { font-weight: 600; text-decoration: none; color: var(--parchment); }
 .statlist a:hover { color: var(--cream); }
+/* Achievement matched by the highlight box above the list: same parchment wash as a highlighted player row. */
+.statlist li.found { background: color-mix(in srgb, var(--parchment) 22%, transparent); box-shadow: inset 3px 0 0 var(--parchment); margin-inline: -10px; padding-inline: 10px; }
+.findbox { display: block; width: 100%; max-width: 340px; margin: 14px 0 4px; font: 400 16px var(--f-body); padding: 7px 12px;
+  border: 1px solid var(--line-strong); border-radius: 4px; background: var(--navy-glass); color: var(--cream); }
+.findbox::placeholder { color: var(--tan); }
+.findbox:focus { border-color: var(--alliance); box-shadow: 0 0 0 3px var(--alliance-glow); outline: none; }
 .sdesc { display: block; color: var(--tan); font-size: .85rem; }
 
 /* Player page */
@@ -406,6 +473,9 @@ a.hname:hover { color: var(--parchment); }
 
 
 .foot { color: var(--tan); font-size: .78rem; padding-block: 22px max(36px, env(safe-area-inset-bottom)); border-top: 1px solid var(--line); margin-top: 24px; }
+.foot .linkbtn { display: block; margin-top: 8px; padding: 8px 0; min-height: 34px; border: 0; background: none; color: var(--parchment);
+  font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.foot .linkbtn:hover { color: var(--cream); }
 
 /* Wider screens */
 @media (min-width: 560px) {
@@ -419,6 +489,12 @@ a.hname:hover { color: var(--parchment); }
   .ornament { font-size: 1.15rem; }
   .records { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
   .guilds { grid-template-columns: 1fr 1fr; gap: 96px; }
+  .art { top: var(--screen-top, 100vh); width: 50%; height: var(--screen-h, 100vh); }
+  .art.horde { top: var(--screen-top, 100vh); left: auto; right: 0; }
+  .art.alliance, .art.horde { --fade: linear-gradient(to bottom, transparent, #000 18%, #000 78%, transparent);
+    -webkit-mask-composite: source-in; mask-composite: intersect; }
+  .art.alliance { -webkit-mask-image: linear-gradient(to right, #000 25%, transparent 95%), var(--fade); mask-image: linear-gradient(to right, #000 25%, transparent 95%), var(--fade); }
+  .art.horde { -webkit-mask-image: linear-gradient(to left, #000 25%, transparent 95%), var(--fade); mask-image: linear-gradient(to left, #000 25%, transparent 95%), var(--fade); }
   .split-horde { background: radial-gradient(60% 40% at 75% 30%, #4a0d12 0%, #1a0507 75%); clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%); }
   .board .pctxt { display: inline; }
   .pbar { width: 90px; }
@@ -436,8 +512,18 @@ a.hname:hover { color: var(--parchment); }
   .btn { min-height: 0; align-self: auto; }
   .board .hide-sm { display: table-cell; }
   .board .pname { display: inline-flex; }
+  .board td.l:has(.pname) { width: auto; max-width: none; min-width: 0; }
+  .board td.lbl, .board th { white-space: nowrap; }
+  .thfind { display: inline-flex; flex-direction: row; align-items: center; gap: 12px; }
+  .thfind input { width: 11em; }
+  .fliptag { display: inline; margin: 0 0 0 8px; }
   .board th, .board td { padding: 7px 12px; }
   .tierstrip { flex-wrap: wrap; }
   .phead .rank { width: 64px; height: 64px; }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+/* Column headers with a short form on phones. */
+.board th .lg { display: none; }
+.board th abbr.sm { text-decoration: none; }
+@media (min-width: 560px) { .board th .lg { display: inline; } .board th .sm { display: none; } }
+@media (max-width: 359px) { .board td.l:has(.pname) { min-width: 90px; } .board th, .board td { padding-left: 4px; padding-right: 4px; } }

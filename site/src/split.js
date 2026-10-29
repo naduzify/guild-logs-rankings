@@ -48,6 +48,17 @@ export function mountSplit(split) {
   if (!split) return;
   const red = split.querySelector('.split-horde');
   const fly = split.querySelector('.firefly');
+  // After-images: copies of the firefly that run the same path a few ms behind, fainter and smaller.
+  const TRAIL = 30;
+  const flies = [fly];
+  for (let i = 1; i <= TRAIL; i++) {
+    const ghost = fly.cloneNode();
+    ghost.classList.add('ghost');
+    ghost.style.setProperty('--i', i);
+    ghost.style.setProperty('--k', 1 - i / (TRAIL + 1));
+    fly.before(ghost);
+    flies.push(ghost);
+  }
   const line = split.querySelector('.split-line');
   const wideQuery = window.matchMedia('(min-width: 560px)');
 
@@ -56,19 +67,22 @@ export function mountSplit(split) {
     const wide = wideQuery.matches;
     const pts = seam(box, wide);
     const { width: w, height: h } = box;
+    // Where the screen sits in the layer: the side art (Varian, Garrosh) is laid on the screen, not the layer.
+    split.style.setProperty('--screen-top', `${-box.top}px`);
+    split.style.setProperty('--screen-h', `${window.innerHeight}px`);
     // Red side (NightShift, second card): right of the cut from 560px, below it on phones.
     red.style.clipPath = wide
       ? `polygon(${w}px 0px, ${fmt(pts)}, ${w}px ${h}px)`
       : `polygon(${w}px ${h}px, 0px ${h}px, ${fmt([...pts].reverse())}, ${w}px ${h}px)`;
     line.setAttribute('viewBox', `0 0 ${w} ${h}`);
     line.firstElementChild.setAttribute('points', pts.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' '));
-    // The firefly only travels the part of the cut on screen, top to bottom (left to right on phones).
-    // Dash at 2200px/s; the dash is 9.9% of the animation cycle (styles.css), the rest is the pause.
+    // The firefly only travels the part of the cut on screen, top to bottom and back (left to right on phones).
+    // Run at 1000px/s; each run (forth, then back) is 9% of the animation cycle (styles.css), each followed by a pause.
     const path = wide ? clip(pts, 1, -box.top, -box.top + window.innerHeight) : clip(pts, 0, 0, w);
-    if (path.length < 2) { fly.classList.remove('on'); return; }
-    fly.style.offsetPath = `path('M ${path.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(' L ')}')`;
-    fly.style.setProperty('--fly-time', `${Math.max(1, length(path) / 2200 / 0.099).toFixed(2)}s`);
-    fly.classList.add('on');
+    if (path.length < 2) { flies.forEach(f => f.classList.remove('on')); return; }
+    split.style.setProperty('--fly-path', `path('M ${path.map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`).join(' L ')}')`);
+    split.style.setProperty('--fly-time', `${Math.max(2, length(path) / 1000 / 0.09).toFixed(2)}s`);
+    flies.forEach(f => f.classList.add('on'));
   }
 
   let queued = false;

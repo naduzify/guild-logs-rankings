@@ -20,7 +20,7 @@ classes        ["Death Knight", "Druid", …]    (ordre = index utilisé dans le
 roles          ["TANK", "DPS", "HEALER"]      (idem)
 rank           {max, names[14]}                ← config/tiers.json
 settings       {title_percentile, flip_percentile, min_den, min_role_weeks, min_char_weeks}  ← config/site.json
-home           {top_n, pinned[], pinned_title, pinned_top_n, featured_count, ghosts, records[]}  ← config/site.json
+home           {top_n, pinned[], pinned_title, pinned_top_n, featured_count, ghosts, records[], intro}  ← config/site.json
                pinned : id d'achievement, ou distinction faite main {id, title, description, entries: [{name, image, caption}]}
 player         {overview[], highlights[], best_friend, featured_per_category, featured_min_pct, visible_small}  ← config/site.json
                highlights : [{stat, label, toggle?: {stat, label, title}}] ; toggle = interrupteur qui bascule la carte vers une autre stat (Damage Done → Bosses only)
@@ -85,7 +85,7 @@ Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (régl
 ## Champs d'une stat (`config/stats.json`)
 
 - `category` : `common`, `tank`, `healer`, `dps`. Les cellules des stats de rôle n'existent que pour ce rôle. `overview` : stats génériques (heures, kills, wipes) affichées en tuiles en tête de fiche joueur, pas des achievements. `hours-played` sert aussi à déterminer le rôle principal.
-- `title`, `flip` (titre du bas du classement), `description`, `detail`, `joke` : textes du site.
+- `title`, `flip` (titre du bas du classement), `description` (phrase drôle), `detail` (ce qui est mesuré, info-bulle) : textes du site.
 - `display` : `P` percentile, `N` nombre, `PN` les deux, `T` texte, `TN` texte et nombre.
 - `number` : pour `PN` en `ratio`, le nombre de carrière affiché (`num` ou `den`).
 - `direction` : `desc` (défaut, la valeur haute porte le titre) ou `asc`.

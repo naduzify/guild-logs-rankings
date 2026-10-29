@@ -35,7 +35,21 @@
       {"kind": "most_wipes", "title": "Guild Nemesis", "description": "Most wiped boss."},
       {"kind": "fastest_kill", "title": "Fastest Finish", "description": "Fastest kill recorded.", "exclude": ["Razorgore the Untamed"]},
       {"kind": "slowest_kill", "title": "Bring a Snack", "description": "Slowest kill recorded."}
-    ]
+    ],
+    "intro": {
+      "_doc": "Dismissible 'how to read' panel at the top of the guild home, shown until the viewer clicks dismiss (remembered in localStorage). The footer link reopens it. items: [term, text].",
+      "title": "How to read this site",
+      "items": [
+        ["Base 100", "scores compare you with the median player of your role on the same pull, who scores 100: 120 is 20% above, so Molten Core and Siege of Orgrimmar compare fairly."],
+        ["Percentiles", "rank you against the guild: 90th means better than 90% of the raiders under the same filters."],
+        ["Earned and Infamous", "mark the two ends of an achievement: its title for the top, its flip title for the bottom."],
+        ["Filters", "(expansion, role, class) work on every page and stay in the link you share."],
+        ["The round badge", "is a PvP rank: one rank per raid tier cleared. The coloured dots are the classes played."],
+        ["Names", "open a player's page. The search at the top finds a main or any of their alts."]
+      ],
+      "dismiss": "Got it",
+      "reopen": "How to read this site"
+    }
   },
   "player": {
     "_doc": "Player page layout. Overview tiles come first; their stats are left out of the category sections. In each category, up to featured_per_category stats at or above featured_min_pct (or deep in flip territory) get a big card; the rest are small cards, visible_small of them shown before a 'Show more' button. An overview tile shows the percentile bar when its stat is ranked in percentile, unless its `percentile` flag says otherwise. best_friend: texts of the highlighted panel under the overview (players.json friends; {nights} is replaced).",

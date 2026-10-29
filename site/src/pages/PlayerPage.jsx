@@ -178,7 +178,10 @@ export default function PlayerPage({ data, name, filter }) {
       </header>
       <div className="tierstrip" aria-label="Raid tiers">
         {meta.tiers.map((t, i) => (
-          <span key={t.id} className={'tier' + (pl.tiers.includes(i) ? ' on' : '')} title={t.name}>{t.short}</span>
+          <span key={t.id} className={'tier' + (pl.tiers.includes(i) ? ' on' : '')} title={t.name}>
+            <span aria-hidden="true">{t.short}</span>
+            <span className="sr-only">{t.name}, {pl.tiers.includes(i) ? 'validated' : 'not validated'}</span>
+          </span>
         ))}
       </div>
       <FilterBar meta={meta} filter={eff} available={facets} onChange={f => go('player', pl.name, f)}

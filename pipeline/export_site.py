@@ -729,8 +729,8 @@ def main() -> None:
                 cells.ratio("add-wrangler", k, r["damage_taken_adds"] / r["damage_taken"])
             if r["taunts"] is not None:
                 cells.ratio("attention-seeker", k, r["taunts"], r["duration_ms"] / 60000)
-            if r["deaths_with_cd"]:
-                cells.sum("blamed-the-healer", k, r["deaths_with_cd"])
+            if r["deaths_with_cd"] is not None and r["deaths"]:
+                cells.ratio("blamed-the-healer", k, r["deaths_with_cd"], r["deaths"])
             if kill and med_duration.get(bk):
                 cells.ratio("pacemaker", k, 100 * r["duration_ms"] / med_duration[bk])
         elif role == "HEALER":
