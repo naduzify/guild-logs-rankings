@@ -6,7 +6,7 @@
   "_min_players": "Pulls with fewer players holding a role are fake logs (e.g. a 1-player Onyxia) and are dropped. Raid splits stay.",
   "min_players": 10,
   "_scaled_totals": "Career totals (damage done, damage taken, healing done) ranked across expansions: each pull's amount is divided by the median rate of the reference players in that pull (median of the DPS for damage done, of the healers for healing; mean of the whole raid for damage taken, since in 40-man raids the median player takes next to nothing), giving seconds of a median raider, then multiplied by the guild's median rate on the kills of this tier (id in config/tiers.json). The actual total is shown next to it.",
-  "scaled_totals_tier": "soo",
+  "scaled_totals_tier": "bwl",
   "_excluded_encounters": "WCL encounter IDs left out of every stat and record. Vehicle and cannon fights, where damage, healing and deaths do not reflect the players: 744 Flame Leviathan, 847 Icecrown Gunship Battle.",
   "excluded_encounters": [744, 847],
   "_tank_classes": "Every expansion: a player WCL lists as a tank whose class cannot tank plays DPS (WCL class names).",

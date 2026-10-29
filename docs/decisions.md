@@ -496,3 +496,9 @@ Cellules `[converti, réel]`, nouveau mode d'agrégation `scaled` (classé sur l
 **Raison.** Les débits explosent d'une extension à l'autre (DPS médian des DPS sur les kills : 426 en Era, 1 423 en TBC, 7 916 en WotLK, 29 042 en Cata, 190 779 en MoP) et au sein d'une extension (MSV 111k, SoO 268k). Le calcul au pull absorbe l'écart entre extensions, la progression du stuff dans un tier et les combats particuliers (buff d'ICC). Comme c'est une somme, il compte à la fois la présence et la performance : voulu pour un total de carrière.
 
 **Écarté.** Un facteur par extension (trop grossier : écart ×2,4 entre MSV et SoO) ; les PV moyens des boss (rien pour les soins et les dégâts subis, adds et phases, taille de raid, stuff qui progresse alors que les PV restent fixes).
+
+## 2026-10-29 — Totaux de carrière : référence BWL (Era) au lieu de SoO
+
+**Décision.** Les totaux de carrière sont exprimés en « BWL terms » : débit médian de la guilde sur les kills de Blackwing Lair en Classic Era (`scaled_totals_tier: "bwl"`), au lieu de Siege of Orgrimmar. L'ordre des classements ne change pas (la référence n'est qu'un facteur commun), seule l'échelle affichée change.
+
+**Raison.** Classic Era a connu très peu de powercreep au cours de l'extension : BWL est une référence stable et parlante pour la guilde, là où SoO est le sommet d'une montée rapide (MSV 111k → SoO 268k de DPS médian).
