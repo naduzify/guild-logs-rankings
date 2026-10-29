@@ -104,7 +104,7 @@ def cell_values(stat: dict, idx: int, rng: random.Random, player: dict, p: int, 
         if fmt == "pct":
             rate = min(0.98, max(0.0, 0.25 + 0.1 * noise(0.5)))
             den = pulls
-            return [round(rate * den, 2), den]
+            return [round(rate * den, 2), den] + ([den] if stat.get("min_den_on") == "count" else [])
         if fmt == "score":
             return [round(kills * max(20, 100 + 18 * noise(0.6)), 1), kills]
         if fmt == "signed":

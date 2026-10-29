@@ -62,6 +62,15 @@ query($code: String!, $end: Float!) { reportData { report(code: $code) {
   trash: table(dataType: DamageDone, killType: Trash, startTime: 0, endTime: $end)
 } } }"""
 
+# The Terrorist, Attention Seeker and The Nut Crusher on trash: friendly fire, taunts and interrupts over all
+# trash fights of a report.
+TRASH_EXTRA_QUERY = """
+query($code: String!, $end: Float!, $ff: String, $taunts: String) { reportData { report(code: $code) {
+  friendlyFire: table(dataType: DamageDone, killType: Trash, startTime: 0, endTime: $end, filterExpression: $ff)
+  taunts: table(dataType: Casts, killType: Trash, startTime: 0, endTime: $end, filterExpression: $taunts)
+  interrupts: table(dataType: Interrupts, killType: Trash, startTime: 0, endTime: $end)
+} } }"""
+
 
 RANKINGS_QUERY = """
 query($code: String!, $fid: [Int]!) { reportData { report(code: $code) { rankings(fightIDs: $fid) } } }"""
@@ -143,6 +152,16 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
                     end = report["endTime"] - report["startTime"]
                     meter.run("trash", lambda: client.cached_query(key, TRASH_QUERY, {"code": code, "end": end}))
                     n += 1
+            if "trash_extra" in kinds:
+                key = f"reports/{code}/trash_extra"
+                path = CACHE_DIR / "classic" / f"{key}.json"
+                if refresh and path.exists():
+                    path.unlink()
+                if not path.exists():
+                    variables = {"code": code, "end": report["endTime"] - report["startTime"],
+                                 "ff": FILTERS["ff"], "taunts": FILTERS["taunts"]}
+                    meter.run("trash_extra", lambda: client.cached_query(key, TRASH_EXTRA_QUERY, variables))
+                    n += 1
             if "rankings" in kinds:
                 key = f"reports/{code}/rankings"
                 path = CACHE_DIR / "classic" / f"{key}.json"
@@ -167,7 +186,8 @@ def crawl(kinds: set, limit: int | None, cost: bool, refresh: bool) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--kinds", default="pull,trash,rankings", help="pull, trash, rankings (comma separated)")
+    parser.add_argument("--kinds", default="pull,trash,trash_extra,rankings",
+                        help="pull, trash, trash_extra, rankings (comma separated)")
     parser.add_argument("--limit", type=int, help="stop after N reports with eligible pulls (testing)")
     parser.add_argument("--cost", action="store_true", help="measure points spent per query")
     parser.add_argument("--refresh", action="store_true", help="re-fetch what is already cached (after a list change)")

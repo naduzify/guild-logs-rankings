@@ -16,7 +16,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 from zoneinfo import ZoneInfo
 
-from pipeline.facts import CACHE_DIR, CONFIG, ROOT, _payload, add_scores, load_mapping, norm, pull_rows, pulls_from_cache
+from pipeline.facts import CACHE_DIR, CONFIG, ROOT, _detail_counts, _payload, add_scores, load_mapping, norm, pull_rows, pulls_from_cache
 
 OUT_DIR = ROOT / "site" / "public" / "fable" / "data"
 WEEK_MS = 7 * 24 * 3600 * 1000
@@ -73,8 +73,12 @@ class Cells:
             d[key] = init()
         return d[key]
 
-    def ratio(self, sid, key, num, den=1):
-        a = self._get(sid, key, lambda: [0.0, 0.0]); a[0] += num; a[1] += den
+    def ratio(self, sid, key, num, den=1, count=None):
+        """[num, den], plus a count when den is an amount (stat "min_den_on": "count", min_den applies to it)."""
+        if count is None:
+            a = self._get(sid, key, lambda: [0.0, 0.0]); a[0] += num; a[1] += den
+        else:
+            a = self._get(sid, key, lambda: [0.0, 0.0, 0]); a[0] += num; a[1] += den; a[2] += count
 
     def parse(self, sid, key, best, median):
         """One boss of Parse Lord: (best + median) / 2, plus best and median themselves."""
@@ -219,36 +223,77 @@ def scaled_totals(rows: list, ref_tier: int) -> tuple[dict, dict, dict]:
     return out, rates, refs_by_stat
 
 
-def trash_damage(pulls: dict, rate: dict, ref: float, tz) -> list:
-    """Damage Done (bosses and trash): [(boss row of the character that night, scaled trash, actual trash)].
+def trash_nights(pulls: dict, tz) -> list:
+    """[(report code, its kept boss pulls, {character: his boss rows in it})], one report per raid night.
 
-    Trash damage comes from reports/<code>/trash.json (pipeline/crawl_extra.py, one table per report). When a
-    night was logged in several reports, only the one holding the most kept boss pulls counts, so the trash
-    is not counted twice. A character's trash goes to his role and expansion of the night (his most played
-    role in that report's boss pulls) and is scaled like his boss damage: divided by the median of the
-    night's pull rates (median DPS rate of each pull), times the reference rate."""
+    Trash tables are per report (pipeline/crawl_extra.py). When a night was logged in several reports, only
+    the one holding the most kept boss pulls counts, so the trash is not counted twice. A character's trash
+    goes to his role and expansion of the night (night_row)."""
     by_night = defaultdict(lambda: defaultdict(list))
     for src, rs in pulls.items():
         by_night[raid_night(rs[0]["start_ms"], tz)][rs[0]["report"]].append(src)
     out = []
     for reports in by_night.values():
         code, srcs = max(reports.items(), key=lambda kv: (len(kv[1]), kv[0]))
+        mine = defaultdict(list)
+        for s in srcs:
+            for r in pulls[s]:
+                mine[r["char"]].append(r)
+        out.append((code, srcs, mine))
+    return out
+
+
+def night_row(rs: list) -> dict:
+    """The boss row standing for a character's trash of the night: one of his most played role."""
+    role = Counter(r["role"] for r in rs).most_common(1)[0][0]
+    return next(r for r in rs if r["role"] == role)
+
+
+def trash_damage(nights: list, rate: dict, ref: float) -> list:
+    """Damage Done (bosses and trash): [(night row of the character, scaled trash, actual trash)], from
+    reports/<code>/trash.json. Trash is scaled like boss damage: divided by the median of the night's pull
+    rates (median DPS rate of each pull), times the reference rate."""
+    out = []
+    for code, srcs, mine in nights:
         path = CACHE_DIR / "classic" / "reports" / code / "trash.json"
         night_rates = [rate[s] for s in srcs if s in rate]
         if not path.exists() or not night_rates:
             continue
         factor = ref / statistics.median(night_rates)
-        mine = defaultdict(list)
-        for s in srcs:
-            for r in pulls[s]:
-                mine[r["char"]].append(r)
         for e in _payload(path)["report"]["trash"]["data"].get("entries", []):
             rs = mine.get(e.get("name"))
             if rs and e.get("total"):
-                role = Counter(r["role"] for r in rs).most_common(1)[0][0]
-                row = next(r for r in rs if r["role"] == role)
-                out.append((row, e["total"] * factor, e["total"]))
+                out.append((night_row(rs), e["total"] * factor, e["total"]))
     return out
+
+
+def trash_extras(nights: list) -> tuple[list, list, list]:
+    """The Terrorist, Attention Seeker and The Nut Crusher on trash, from reports/<code>/trash_extra.json.
+
+    Friendly fire: [(night row, his friendly damage, the raid's)] on the night's trash, for every character of
+    the night, when the raid did any. Taunts: [(night row, taunts, trash minutes)] for the characters who
+    tanked that night. Interrupts: [(night row, interrupts, trash hours)] for every character of the night,
+    when the raid interrupted anything on the trash."""
+    ff, taunts, kicks = [], [], []
+    for code, _, mine in nights:
+        path = CACHE_DIR / "classic" / "reports" / code / "trash_extra.json"
+        if not path.exists():
+            continue
+        x = _payload(path)["report"]
+        done = {e.get("name"): e.get("total", 0) for e in x["friendlyFire"]["data"].get("entries", [])}
+        total = sum(done.values())
+        cast = {e.get("name"): e.get("total", 0) for e in x["taunts"]["data"].get("entries", [])}
+        minutes = x["taunts"]["data"].get("totalTime", 0) / 60000
+        kicked = _detail_counts(x["interrupts"]["data"].get("entries", [])) if "interrupts" in x else Counter()
+        for ch, rs in mine.items():
+            row = night_row(rs)
+            if total:
+                ff.append((row, done.get(ch, 0), total))
+            if row["role"] == "TANK" and minutes:
+                taunts.append((row, cast.get(ch, 0), minutes))
+            if sum(kicked.values()) and minutes:
+                kicks.append((row, kicked.get(ch, 0), minutes / 60))
+    return ff, taunts, kicks
 
 
 def raid_time(rows: list) -> dict:
@@ -512,21 +557,26 @@ def main() -> None:
     sponge = base100(tanks_k, "tank_share", boss_key)
     secret = base100(tanks_k, "damage_done", boss_key)
     # Healers Love Him: healing received from others (self-healing, potions and healthstones left out), base 100
-    # vs the role in the pull, then vs the mean of his class and role in the expansion: warlocks (Life Tap) are
-    # healed far more than other DPS. A mean, not a median: most DPS of some classes get no heal at all.
+    # vs his role on the same boss (all pulls: healers get so little from others that a pull's median could be
+    # tiny, and a WotLK shaman healer reached 1,370), then vs his class and role in the expansion: warlocks
+    # (Life Tap) are healed far more than other DPS. The class reference is the median of its players' means
+    # (a mean per player: most DPS of some classes get no heal at all), one vote per player with min_den rows,
+    # so that one player with most of the pulls does not set it alone. Under min_score_peers voters, no class step.
     for r in rows:
         r["received_others"] = r["healing_received"] - r["self_healing"]
-    received = base100(rows, "received_others", lambda r: (r["source"], r["role"]))
-    by_class = defaultdict(list)
+    received = base100(rows, "received_others", lambda r: (boss_key(r), r["role"]))
+    by_class = defaultdict(lambda: defaultdict(list))
     for r in rows:
         if id(r) in received:
-            by_class[(r["e"], r["class"], r["role"])].append(received[id(r)])
-    class_med = {k: statistics.mean(v) for k, v in by_class.items()}
+            by_class[(r["e"], r["class"], r["role"])][r["player"]].append(received[id(r)])
+    voters = {k: [statistics.mean(v) for v in by_player.values() if len(v) >= site_cfg["min_den"]]
+              for k, by_player in by_class.items()}
+    class_ref = {k: statistics.median(v) for k, v in voters.items() if len(v) >= CONFIG["min_score_peers"]}
     for r in rows:
         if id(r) in received:
-            med = class_med[(r["e"], r["class"], r["role"])]
-            if med:
-                received[id(r)] = 100 * received[id(r)] / med
+            ref = class_ref.get((r["e"], r["class"], r["role"]), 100)
+            if ref:
+                received[id(r)] = 100 * received[id(r)] / ref
             else:
                 del received[id(r)]
     magnet = base100(rows, "avoidable_taken", lambda r: (r["source"], r["role"]))
@@ -586,7 +636,7 @@ def main() -> None:
     nemesis_ignore = set(CONFIG["arch_nemesis_ignore"])
 
     interruptible = {src for src, rs in pulls.items() if any(r["interrupts"] for r in rs)}
-    raid_taken = {src: sum(r["damage_taken"] for r in rs) for src, rs in pulls.items()}
+    raid_ff = {src: sum(r["friendly_fire"] or 0 for r in rs) for src, rs in pulls.items()}
     final_bosses = set(CONFIG["final_bosses"])
     boss_ids = {}
 
@@ -645,8 +695,8 @@ def main() -> None:
             cells.best("obliterated", k, r["overkill"] / med_overkill[r["e"]], f"{r['overkill_by']} · {r['encounter']} · {day}")
         if r["healing_received"]:
             cells.ratio("self-made", k, r["self_healing"] / r["healing_received"])
-        if r["friendly_fire"] is not None and raid_taken[r["source"]]:
-            cells.ratio("the-terrorist", k, r["friendly_fire"] / raid_taken[r["source"]])
+        if r["friendly_fire"] is not None and raid_ff[r["source"]]:
+            cells.ratio("the-terrorist", k, r["friendly_fire"], raid_ff[r["source"]], 1)
         if id(r) in received:
             cells.ratio("healers-love-him", k, received[id(r)])
         if id(r) in magnet:
@@ -655,7 +705,7 @@ def main() -> None:
         if kill and r["enchantable_slots"]:
             cells.ratio("the-unprepared", k, 1 - r["enchanted_slots"] / r["enchantable_slots"])
         if r["source"] in interruptible:
-            cells.ratio("the-nut-crusher", k, r["interrupts"])
+            cells.ratio("the-nut-crusher", k, r["interrupts"], r["duration_ms"] / 3_600_000, 1)
         cells.ratio("the-janitor", k, r["dispels"])
         if r["duration_ms"]:
             cells.ratio("the-sweat", k, min(1, r["casts_active_ms"] / r["duration_ms"]))
@@ -728,11 +778,24 @@ def main() -> None:
                     cells.top("suicide-pact", key_of(me), mate["player"], 1)
 
     # Damage Done: boss damage (above) plus trash damage, once per character and night.
-    trash = trash_damage(pulls, scaled_rates["damage-done-bosses"], scaled_refs["damage-done-bosses"], tz)
+    nights = trash_nights(pulls, tz)
+    trash = trash_damage(nights, scaled_rates["damage-done-bosses"], scaled_refs["damage-done-bosses"])
     for row, sc, actual in trash:
         if ranked(row):
             cells.ratio("damage-done", key_of(row), sc, actual)
     print(f"damage done: trash of {len({r['report'] for r, _, _ in trash})} reports added")
+    # The Terrorist, Attention Seeker and The Nut Crusher: the night's trash too.
+    ff, taunts, kicks = trash_extras(nights)
+    for row, mine, raid in ff:
+        if ranked(row):
+            cells.ratio("the-terrorist", key_of(row), mine, raid, 1)
+    for row, n, minutes in taunts:
+        if ranked(row):
+            cells.ratio("attention-seeker", key_of(row), n, minutes)
+    for row, n, hours in kicks:
+        if ranked(row):
+            cells.ratio("the-nut-crusher", key_of(row), n, hours, 1)
+    print(f"terrorist / attention seeker / nut crusher: trash of {len({r['report'] for r, _, _ in ff + taunts + kicks})} reports added")
 
     timekeeper(rows, pid, char_class, cells)
     parse_lord(rows, pid, char_class, cells)

@@ -4,7 +4,7 @@ const int = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
 export function formatValue(stat, v) {
   if (v == null) return '–';
   switch (stat.format) {
-    case 'pct': return `${(v * 100).toFixed(1)}%`;
+    case 'pct': return `${(v * 100).toFixed(Math.abs(v) < 0.01 ? 2 : 1)}%`; // two decimals under 1% (The Terrorist)
     case 'score': return int.format(v);
     case 'parse': return v.toFixed(1);
     case 'rate': return `${v.toFixed(2)} ${stat.rate_unit || ''}`.trim();

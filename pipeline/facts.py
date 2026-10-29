@@ -150,7 +150,10 @@ def tank_deaths_with_cd(events: list, deaths: list, actors: dict, tanks: set) ->
     removal of the buffs of a dying player 100 to 400 ms before the death itself.
     """
     spans = defaultdict(list)  # (target id, buff) -> [[start, end]], end None while still up
+    ignored = set(CONFIG["cd_ignored_ids"])
     for e in sorted(events, key=lambda e: e["timestamp"]):
+        if e.get("abilityGameID") in ignored:
+            continue
         key = (e.get("targetID"), e.get("abilityGameID"))
         if e["type"] in ("applybuff", "refreshbuff", "applybuffstack"):
             if not spans[key] or spans[key][-1][1] is not None:

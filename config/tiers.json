@@ -186,20 +186,12 @@
       ]
     },
     {
-      "id": "msv",
-      "name": "Mogu'shan Vaults",
-      "short": "Mogu'shan",
+      "id": "t14",
+      "name": "Mogu'shan Vaults / Heart of Fear / Terrace",
+      "short": "MSV / HoF / ToES",
       "expansion": "mop",
       "zones": [
-        "Mogu'shan Vaults"
-      ]
-    },
-    {
-      "id": "hof",
-      "name": "Heart of Fear / Terrace",
-      "short": "HoF / ToES",
-      "expansion": "mop",
-      "zones": [
+        "Mogu'shan Vaults",
         "Heart of Fear",
         "Terrace of Endless Spring",
         "HoF / ToES"

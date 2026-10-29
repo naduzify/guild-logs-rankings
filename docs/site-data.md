@@ -65,7 +65,7 @@ Les valeurs dépendent du mode `agg` de la stat :
 
 | agg | valeurs | valeur du joueur |
 |---|---|---|
-| `ratio` | `num, den` | Σnum / Σden |
+| `ratio` | `num, den[, count]` | Σnum / Σden ; `count` (nombre de pulls) sert au seuil `min_den` quand la stat a `"min_den_on": "count"` (dénominateur en montant) |
 | `parse` | `avg, n, best, median` (un boss par ligne) | Σavg / Σn ; le site affiche aussi Σbest / Σn et Σmedian / Σn (Parse Lords) |
 | `sum` | `n` | Σn |
 | `scaled` | `converti, réel` | Σconverti (totaux de carrière en « BWL terms », `scale_note`) ; le site affiche Σréel entre parenthèses |
@@ -80,7 +80,7 @@ Les valeurs dépendent du mode `agg` de la stat :
 
 Les cellules d'un rôle où le joueur a moins de `min_role_weeks` semaines (`role_weeks`) sont ignorées : toujours pour les achievements tank / healer / DPS, et pour les communs quand le filtre de rôle est actif. Sans `role_weeks` (données fictives), tout passe.
 
-Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (réglage global de `config/site.json`, surchargé par stat) : `den` pour `ratio`, le plus petit de `ad` et `bd` pour `diff`, `n` pour `spread` et `slope`.
+Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (réglage global de `config/site.json`, surchargé par stat) : `den` pour `ratio` (ou `count` avec `"min_den_on": "count"`), le plus petit de `ad` et `bd` pour `diff`, `n` pour `spread` et `slope`.
 
 ## Champs d'une stat (`config/stats.json`)
 

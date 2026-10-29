@@ -601,3 +601,27 @@ Audit des stats sur les données réelles (8 714 pulls après dédoublonnage). V
 **Timekeeper / The Tourist.** La part des dégâts sur le trash de la soirée, en base 100 contre la médiane des DPS de la soirée, est divisée par la moyenne de sa classe dans l'extension. Un personnage qui a tanké un boss dans la soirée est écarté.
 - **Raison.** Les classes à sorts de zone dominaient (mages 111, druides 73 en moyenne). Des tanks Era joués DPS sur les boss, mais qui tankaient le trash, finissaient en bas.
 - **Écarté : l'activité** (temps actif sur le trash). Elle varie peu (65 à 126), favorise la mêlée grâce à l'attaque automatique et les tanks du trash, ressemble peu aux dégâts (corrélation de rang 0,23) et ferait doublon avec The Sweat.
+
+## 2026-10-29 — Trash dans The Terrorist, Attention Seeker et The Nut Crusher ; Healers Love Him par boss ; Divine Sacrifice retiré
+
+**The Terrorist.** Part du joueur dans le friendly fire total du raid, au lieu de ses dégâts alliés rapportés aux dégâts subis par le raid : Σ ses dégâts alliés ÷ Σ ceux du raid, sur les pulls de boss (kills et wipes) et le trash des soirées où il était. Le seuil `min_den` porte sur le nombre de pulls (ou soirées de trash) où le raid a fait du friendly fire : troisième valeur de la cellule, `"min_den_on": "count"`. Le nombre affiché est la somme de ses dégâts alliés. Avant, ce nombre était une somme de parts : 0 pour tout le monde.
+- **Écarté : la moyenne des parts par pull.** Le friendly fire est rare (4 % des pulls WotLK, presque tous sur Yogg-Saron) : un Kel'Thuzad à 30 000 de friendly fire de raid, dont un joueur fait la moitié, pesait autant qu'un Yogg à 377 000. Kosmo (13,6 % du friendly fire de ses pulls) passait derrière Tenzin (12,1 %).
+- **Écarté : la part sur toute l'extension ou par tier**, présent ou non : elle revient à classer sur le total, donc sur le temps de jeu, déjà affiché en nombre.
+
+**The Nut Crusher.** Interruptions **par heure** (et non plus par pull) sur les pulls de boss et le trash des soirées où le raid a interrompu quelque chose : le trash d'une soirée ne peut pas compter comme un pull. Seuil `min_den` sur le nombre de pulls (`"min_den_on": "count"`). Troisième tableau de `trash_extra`.
+
+**Attention Seeker.** Les taunts sur le trash comptent, avec la durée du trash du rapport (`totalTime`), pour les personnages qui ont tanké les boss ce soir-là.
+
+**Crawl.** Nouveau type `trash_extra` dans `pipeline.crawl_extra` : une requête par rapport, deux tableaux sur le trash (`killType: Trash`), les dégâts entre joueurs et les taunts, mêmes filtres que par pull. Le trash d'une soirée enregistrée dans plusieurs rapports ne compte qu'une fois : on garde le rapport qui contient le plus de pulls retenus, comme pour Damage Done.
+
+**Healers Love Him.** Deux changements :
+- base 100 contre la médiane du **rôle sur le même boss** (tous les pulls de l'histoire), et non plus du rôle dans le pull ;
+- référence de classe = médiane des moyennes de ses joueurs (une voix par joueur ayant au moins `min_den` pulls dans la classe), sans correction de classe sous 3 votants (`min_score_peers`).
+- **Raison.** Un healer Chaman WotLK montait à 1 370 alors qu'il recevait des autres autant que ses collègues (33 000 par pull contre 26 000 à 69 000). Les healers reçoivent si peu de soins des autres que la médiane d'un pull était parfois minuscule, et quelques pulls donnaient des scores énormes. La moyenne de classe par ligne était aussi dominée par le joueur aux 1 233 pulls sur 1 413.
+- **Essayé** : la voix par joueur seule, en gardant la médiane du pull. Pire (2 371), et elle faisait monter les tanks Era dont la classe compte beaucoup de petits off-tanks.
+
+**Blamed the Healer.** Divine Sacrifice retiré des CD défensifs : c'est un CD de raid lancé par un paladin healer, pas un CD du tank (21 morts de tank en WotLK). Il est retiré de la liste du crawl, et son ID (64205) est ignoré au calcul pour les données déjà crawlées (`cd_ignored_ids`). Anti-Magic Shell reste.
+
+## 2026-10-29 — MoP : Mogu'shan, Heart of Fear et Terrace forment un seul tier
+
+Mogu'shan Vaults, Heart of Fear et Terrace of Endless Spring sont fusionnés en un tier `t14` (« MSV / HoF / ToES ») dans `config/tiers.json` : c'est le même tier d'équipement (T14), sorti en une seule phase en MoP Classic. 18 tiers au lieu de 19. Effet : rang PvP (un tier validé de moins possible en MoP) et Glow Up (au moins 3 tiers).

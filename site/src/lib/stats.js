@@ -9,7 +9,10 @@ const V = 4; // index of the first value in a cell
 const sumInto = (acc, cell) => { for (let i = 0; i < acc.length; i++) acc[i] += cell[V + i]; };
 
 const AGG = {
-  ratio: { init: () => [0, 0], add: sumInto, den: a => a[1], value: a => a[0] / a[1],
+  // [num, den] or [num, den, count]: with "min_den_on": "count", min_den applies to the count (number of
+  // pulls) instead of den, for a den that is an amount (The Terrorist: the raid's friendly fire).
+  ratio: { init: () => [0, 0, 0], add: (a, c) => { a[0] += c[V]; a[1] += c[V + 1]; a[2] += c[V + 2] ?? 0; },
+    den: (a, s) => (s.min_den_on === 'count' ? a[2] : a[1]), value: a => a[0] / a[1],
     number: (a, s) => (s.number === 'den' ? a[1] : a[0]) },
   // Parse Lords, per boss: [(best + median) / 2, 1, best, median]; extra = average best and median.
   parse: { init: () => [0, 0, 0, 0], add: sumInto, den: a => a[1], value: a => a[0] / a[1], extra: a => [a[2] / a[1], a[3] / a[1]] },
@@ -98,7 +101,7 @@ export function computeStat(stat, cells, filter, settings, roleOk) {
       if (t) byPlayer.set(p, { p, value: t.value, number: t.number, label: t.label });
       continue;
     }
-    if (agg.den(a) < minDen) continue;
+    if (agg.den(a, stat) < minDen) continue;
     if (stat.min_tiers && agg.tiers && agg.tiers(a) < stat.min_tiers) continue;
     const value = agg.value(a);
     if (!Number.isFinite(value)) continue;

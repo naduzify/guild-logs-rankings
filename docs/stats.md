@@ -28,17 +28,17 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 8. **The Roach**: The raid wiped. He didn't. (Wipes he survived: no death recorded for him by the end of the pull, whether by Feign Death, Vanish or a strategic run out of range.) [P+N]
 9. **Last Stand**: Still standing when half the raid isn't. (Kills where fewer than half the raid was alive at the end, him included. Battle-rezzed players count as dead.) [N]
 10. **Arch-Nemesis**: There's always that one spell. (Ability that killed him most often, with the count, melee hits left out: « Melee » était l'ennemi juré de 131 joueurs sur 155. Falling and lava deaths are listed on the card.) [T]
-11. **Healers Love Him** (flip: **Left to Die**): The healers' favourite. (Healing received from other players, his own heals, potions and healthstones left out; base 100 vs his role in the pull, then divided by the mean of his class and role in the expansion: warlocks, with Life Tap, are healed far more than other DPS.) [P]
+11. **Healers Love Him** (flip: **Left to Die**): The healers' favourite. (Healing received from other players, his own heals, potions and healthstones left out; base 100 vs his role on the same boss, then divided by the reference of his class and role in the expansion, the median of its players' averages (one vote per player with at least 10 pulls; no class step under 3 such players): warlocks, with Life Tap, are healed far more than other DPS.) [P]
 12. **Mechanic Magnet**: If it can be stood in, he's in it. (Damage taken from "avoidable" abilities, base 100 vs his role. Avoidable means a non-melee enemy ability that hit less than half the raid in that pull.) [P]
 13. **The Junky**: Can quit anytime he wants. (Potions and healthstones used per pull.) [P+N]
 14. **The Unprepared**: Enchants are for tryhards. (Share of enchantable slots left without an enchant, per kill.) ⚙️ [P]
 15. **Overachiever**: Punches above his item level. (Performance score compared to what his ilvl, relative to the pull, would predict.) [P]
 16. **Metronome** (flip: **Rollercoaster**): You always know what you get. (How much his performance score swings from one kill to the next, standard deviation; lower is better.) [P]
-17. **The Nut Crusher**: Kicks where it hurts. (Interrupts per pull, counting only pulls where something could be interrupted.) [P+N]
+17. **The Nut Crusher**: Kicks where it hurts. (Interrupts per hour, on boss pulls and nights' trash where the raid interrupted something; at least 10 such pulls, a night's trash counting as one.) [P+N]
 18. **The Janitor**: Cleans up every debuff. (Dispels per pull.) [P+N]
 19. **The Sweat** (flip: **Snoozer**): Never stops pressing buttons. (Active time as a share of the pull. The card shows casts per minute compared to his class.) [P]
 20. **Comfort Boss**: His favourite punching bag. (Boss where his average performance score is highest.) [T]
-21. **The Terrorist**: Friendly fire isn't. (Damage he dealt to other raid members, self-damage excluded, as a share of the raid's damage taken in the pull. Kills and wipes.) [P+N]
+21. **The Terrorist**: Friendly fire isn't. (His share of the raid's friendly fire, self-damage excluded: his friendly damage divided by the raid's, over the boss pulls (kills and wipes) and the nights' trash he was in. At least 10 pulls or nights with friendly fire.) [P+N]
 22. **Clutch Player**: Shows up when it matters. (Average performance score on the guild's first kills of each boss, compared to his score on farm kills.) [P]
 23. **Glow Up**: Look at him now. (Trend of his performance score over the weeks, as the slope of a regression. Only players with scored kills in at least 3 raid tiers under the filters.) [P]
 
@@ -65,8 +65,8 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 3. **Secret DPS**: Tanking is optional, pumping is not. (Damage done, base 100 vs tanks on the same boss.) [P]
 4. **Add Wrangler** (flip: **Boss Hugger**): Collector of adds. (Share of damage taken from adds rather than the boss.) [P]
 5. **Pacemaker**: Sets the pace of the kill. (Kill duration when he tanks, compared to the median duration for that boss.) [P]
-6. **Attention Seeker**: Look at me. No, ME. (Taunts per minute.) 📋⚙️ [P]
-7. **Blamed the Healer**: Had a cooldown up and still died. Must be the healers. (Tank deaths with a defensive cooldown active, such as Shield Wall, Survival Instincts or Icebound Fortitude.) 🔬⚙️ [N]
+6. **Attention Seeker**: Look at me. No, ME. (Taunts per minute, boss pulls and the trash of the nights he tanked.) 📋⚙️ [P]
+7. **Blamed the Healer**: Had a cooldown up and still died. Must be the healers. (Tank deaths with a defensive cooldown active, such as Shield Wall, Survival Instincts or Icebound Fortitude; not Divine Sacrifice, a healer's raid cooldown.) 🔬⚙️ [N]
 
 ## Healer (6)
 
@@ -90,8 +90,8 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 ## Données supplémentaires à crawler
 
 `python -m pipeline.crawl_extra`, après le crawl principal (détail dans `docs/decisions.md`) :
-- **The Terrorist** : DamageDone filtré joueur → joueur, par pull.
-- **Attention Seeker** 📋 : Casts filtré sur les taunts, par pull (le tableau Casts de niveau 2 ne garde que 5 capacités par joueur). En Era et en WotLK, aussi les consommables (The Junky ; en WotLK, filtrés par ID).
+- **The Terrorist** : DamageDone filtré joueur → joueur, par pull, et sur le trash de chaque rapport (`trash_extra.json`).
+- **Attention Seeker** 📋 : Casts filtré sur les taunts, par pull et sur le trash de chaque rapport (`trash_extra.json`, durée du trash = `totalTime`) (le tableau Casts de niveau 2 ne garde que 5 capacités par joueur). En Era et en WotLK, aussi les consommables (The Junky ; en WotLK, filtrés par ID).
 - **Blamed the Healer** 🔬 : événements de buffs des CD défensifs, sur les pulls où un joueur d'une classe tank meurt.
 - **Timekeeper / The Tourist** 🆕 : DamageDone sur le trash (`killType: Trash`), par rapport.
 - **Parse Lords** : parses WCL des kills, par rapport.
