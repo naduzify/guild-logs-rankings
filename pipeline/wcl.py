@@ -61,19 +61,29 @@ class WCLClient:
 
     def query(self, query: str, variables: dict | None = None) -> dict:
         """Run a GraphQL query, retrying on rate limit and transient errors."""
-        for attempt in range(6):
-            resp = self.session.post(
-                self.url,
-                json={"query": query, "variables": variables or {}},
-                headers={"Authorization": f"Bearer {self._get_token()}"},
-                timeout=120,
-            )
+        attempt = 0
+        while attempt < 6:
+            try:
+                resp = self.session.post(
+                    self.url,
+                    json={"query": query, "variables": variables or {}},
+                    headers={"Authorization": f"Bearer {self._get_token()}"},
+                    timeout=120,
+                )
+            except (requests.ConnectionError, requests.Timeout) as e:
+                attempt += 1
+                print(f"  network error ({type(e).__name__}), retry {attempt}/6")
+                time.sleep(30 * attempt)
+                continue
             self.requests_made += 1
             if resp.status_code == 429:
-                wait = int(resp.headers.get("Retry-After", 60))
+                # Rate limits do not count as failed attempts. Retry-After can be 0
+                # right at the hourly reset, so always wait a little.
+                wait = max(int(resp.headers.get("Retry-After", 60)), 30)
                 print(f"  rate limited, sleeping {wait}s")
                 time.sleep(wait)
                 continue
+            attempt += 1
             if resp.status_code >= 500:
                 time.sleep(5 * (attempt + 1))
                 continue
@@ -82,7 +92,7 @@ class WCLClient:
             if body.get("errors"):
                 raise WCLError(json.dumps(body["errors"])[:1000])
             return body["data"]
-        raise WCLError(f"giving up after retries: {resp.status_code} {resp.text[:300]}")
+        raise WCLError("giving up after 6 attempts (network or server errors)")
 
     def cached_query(self, cache_key: str, query: str, variables: dict | None = None) -> dict:
         """Return the cached response for cache_key, fetching it if missing."""
