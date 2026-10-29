@@ -4,24 +4,30 @@
  "rerolls": {
   "Rassaa": [
    "Torean",
-   "Couladin"
+   "Couladin",
+   "Tymoth"
   ],
   "Greenparse": [
-   "Nuhno"
+   "Nuhno",
+   "Nanoparse",
+   "Noparse",
+   "Zephraa"
   ],
   "Menghao": [
    "Tupil",
    "Notmeng",
    "Meng",
    "Mengweaver",
-   "Asellus"
+   "Asellus",
+   "Teachermao"
   ],
   "Kerrod": [
    "Kezza"
   ],
   "Vedreesh": [
    "Whitetrout",
-   "Vedriesh"
+   "Vedriesh",
+   "Vedpal"
   ],
   "Yogiqt": [
    "Medousa",
@@ -39,10 +45,12 @@
   "Masomum": [
    "Masobloom",
    "Masö",
-   "Màsosir"
+   "Màsosir",
+   "Masotank"
   ],
   "Soroes": [
-   "Sorosen"
+   "Sorosen",
+   "Sorsara"
   ],
   "Lorik": [
    "Notlorik",
@@ -52,7 +60,9 @@
    "Chàos"
   ],
   "Recoome": [
-   "Stompyz"
+   "Stompyz",
+   "Stompyx",
+   "Standardgirl"
   ],
   "Hipy": [
    "Bogstrong"
@@ -62,10 +72,12 @@
   ],
   "Dyne": [
    "Imposterdyne",
-   "Amarranth"
+   "Amarranth",
+   "Virtuedyne"
   ],
   "Jaiitoo": [
-   "Jaiiquintus"
+   "Jaiiquintus",
+   "Jaiiyroblast"
   ],
   "Lovefist": [
    "Musthaverole",
@@ -78,7 +90,8 @@
    "Tronsi"
   ],
   "Kapouss": [
-   "Kapx"
+   "Kapx",
+   "Kapz"
   ],
   "Hoa": [
    "Doan",
@@ -93,7 +106,8 @@
   "Billybooms": [
    "Onebillion",
    "Billycannon",
-   "Billysncones"
+   "Billysncones",
+   "Billyshocks"
   ],
   "Thrusting": [
    "Thrustank",
@@ -107,14 +121,16 @@
    "Solod",
    "Solor",
    "Solix",
-   "Sosolo"
+   "Sosolo",
+   "Sollass"
   ],
   "Illumi": [
    "Rayzah",
    "Illuki"
   ],
   "Kitanaf": [
-   "Maidkit"
+   "Maidkit",
+   "Papatte"
   ],
   "Robrochicken": [
    "Robotchicken"
@@ -124,6 +140,30 @@
   ],
   "Mxc": [
    "Shampewpew"
+  ],
+  "Smitty": [
+   "Crampus"
+  ],
+  "Relaxable": [
+   "Relazak",
+   "Reliability"
+  ],
+  "Sythe": [
+   "Sythedk",
+   "Sythes"
+  ],
+  "Oorbituary": [
+   "Orbiting"
+  ],
+  "Tenzin": [
+   "Tenzinx",
+   "Tenz"
+  ],
+  "Notcorbs": [
+   "Notcorbecj"
+  ],
+  "Cluckor": [
+   "Thickcluck"
   ]
  }
 }
