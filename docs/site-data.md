@@ -100,6 +100,6 @@ Percentile = part des joueurs classés derrière lui (sens `direction`), de 0 à
 Pendant le crawl, l'export réel (`python -m pipeline.export_site`) ajoute à `meta.json` :
 
 ```
-partial        true tant que le crawl n'est pas fini (bandeau « Incomplete data » sur le site)
+partial        true tant que le crawl n'est pas fini (plus affiché sur le site)
 pending        [ids] des stats pas encore calculées : leurs cellules sont vides
 ```
