@@ -167,8 +167,10 @@ export default function PlayerPage({ data, name, filter }) {
           <h1 className="ptitle grad">{pl.name}</h1>
           {rankName && <p className="rankline">{rankName} · rank {pl.rank} · {pl.tiers.length} raid tier{pl.tiers.length > 1 ? 's' : ''}</p>}
           <p className="chars">
-            {pl.chars.map(([n, c]) => (
-              <span key={n} className="char" style={{ '--cls': CLASS_COLORS[meta.classes[c]] }}>{n} <small>{meta.classes[c]}</small></span>
+            {/* Every character; minor rerolls (few reset weeks) without their class. */}
+            {pl.chars.map(ch => (data.isMain(ch)
+              ? <span key={ch[0]} className="char" style={{ '--cls': CLASS_COLORS[meta.classes[ch[1]]] }}>{ch[0]} <small>{meta.classes[ch[1]]}</small></span>
+              : <span key={ch[0]} className="char minor" title={ch[2] != null ? `${ch[2]} reset week${ch[2] > 1 ? 's' : ''}` : undefined}>{ch[0]}</span>
             ))}
           </p>
         </div>

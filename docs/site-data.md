@@ -19,7 +19,7 @@ tiers          [{id, name, short, expansion}]  ← config/tiers.json
 classes        ["Death Knight", "Druid", …]    (ordre = index utilisé dans les cellules)
 roles          ["TANK", "DPS", "HEALER"]      (idem)
 rank           {max, names[14]}                ← config/tiers.json
-settings       {title_percentile, flip_percentile, min_den, min_role_weeks}  ← config/site.json
+settings       {title_percentile, flip_percentile, min_den, min_role_weeks, min_char_weeks}  ← config/site.json
 home           {top_n, pinned[], pinned_title, pinned_top_n, featured_count, ghosts, records[]}  ← config/site.json
                pinned : id d'achievement, ou distinction faite main {id, title, description, entries: [{name, image, caption}]}
 player         {overview[], highlights[], best_friend, featured_per_category, featured_min_pct, visible_small}  ← config/site.json
@@ -41,7 +41,8 @@ Liste des joueurs qualifiés (15 semaines de reset). L'index dans la liste est l
 
 ```
 { "name": "Rassaa",                      main du mapping des rerolls
-  "chars": [["Rassaa", 1], ["Torean", 6]],  personnage, index de classe
+  "chars": [["Rassaa", 1, 123], ["Tymoth", 8, 1]],  personnage, index de classe (null si inconnue), semaines de reset ;
+                                          tous les personnages, ceux sous min_char_weeks sans classe ni puce
   "tiers": [0, 1, 2, 5],                  tiers validés pour le rang (index dans meta.tiers)
   "rank": 4,                              min(rank.max, nombre de tiers validés)
   "role_weeks": [3, 40, 12],              semaines de reset distinctes par rôle (ordre de meta.roles), tous personnages

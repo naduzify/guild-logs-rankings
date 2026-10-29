@@ -518,3 +518,15 @@ Cellules `[converti, réel]`, nouveau mode d'agrégation `scaled` (classé sur l
 **Décision.** Les totaux de carrière sont exprimés en « BWL terms » : débit médian de la guilde sur les kills de Blackwing Lair en Classic Era (`scaled_totals_tier: "bwl"`), au lieu de Siege of Orgrimmar. L'ordre des classements ne change pas (la référence n'est qu'un facteur commun), seule l'échelle affichée change.
 
 **Raison.** Classic Era a connu très peu de powercreep au cours de l'extension : BWL est une référence stable et parlante pour la guilde, là où SoO est le sommet d'une montée rapide (MSV 111k → SoO 268k de DPS médian).
+
+## 2026-10-29 — Rerolls mineurs : sous 5 semaines de reset
+
+**Décision.** Un personnage joué moins de **5 semaines de reset** (`config/site.json` → `min_char_weeks`) est un reroll mineur :
+- il reste **listé sur la fiche joueur** (tous les rerolls le sont, y compris ceux de classe inconnue), mais sans sa classe ni sa pastille de couleur ;
+- sa classe ne donne **pas de puce** à côté du nom du joueur (sauf si un autre personnage de cette classe a ses 5 semaines) ;
+- il ne compte **pas pour The Undecided**.
+
+L'export donne les semaines de chaque personnage (`players.json` → `chars: [nom, classe, semaines]`).
+
+**Raison.** Un reroll monté pour une soirée ajoutait une puce de classe et un personnage à The Undecided, comme un vrai reroll.
+

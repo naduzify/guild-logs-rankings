@@ -32,9 +32,14 @@ export async function loadData() {
   // null when the export has no role_weeks (mock data): every role passes.
   const roleOk = players.map(pl => pl.role_weeks?.map(w => w >= (meta.settings.min_role_weeks ?? 0)) ?? null);
 
+  // Classes of each player's real characters (settings.min_char_weeks reset weeks; no weeks given = mock data):
+  // a class played only on a minor reroll gives no dot next to the name.
+  const isMain = ch => ch[1] != null && (ch[2] ?? Infinity) >= (meta.settings.min_char_weeks ?? 0);
+  const mainClasses = players.map(pl => new Set(pl.chars.filter(isMain).map(ch => ch[1])));
+
   const byName = new Map(players.map((pl, i) => [pl.name, i]));
   const statById = new Map(meta.stats.map(s => [s.id, s]));
-  return { meta, players, stats, facets, played: playedRows, roleOk, byName, statById };
+  return { meta, players, stats, facets, played: playedRows, mainClasses, isMain, roleOk, byName, statById };
 }
 
 // Classes a player played under the active filters, most played first.
@@ -44,6 +49,7 @@ export function playedClasses(data, p, filter) {
     if (filter.exp.size && !filter.exp.has(e)) continue;
     if (filter.role.size && !filter.role.has(r)) continue;
     if (filter.cls.size && !filter.cls.has(c)) continue;
+    if (!data.mainClasses[p].has(c)) continue;
     hours.set(c, (hours.get(c) || 0) + h);
   }
   return [...hours].sort((a, b) => b[1] - a[1]).map(([c]) => data.meta.classes[c]);

@@ -303,6 +303,7 @@ a.hname:hover { color: var(--parchment); }
 .chars { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 4px 0 0; }
 .char { border-left: 3px solid var(--cls); padding-left: 6px; font-weight: 600; }
 .char small { color: var(--tan); font-weight: 400; }
+.char.minor { border-left-color: transparent; padding-left: 0; color: var(--tan); font-weight: 400; }
 /* One scrollable line on phones instead of three wrapped rows. */
 .tierstrip { display: flex; gap: 4px; margin-top: 14px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
 .tier { flex: none; font-size: .75rem; padding: 3px 8px; border-radius: 3px; border: 1px dashed var(--line-strong); color: var(--tan); }
