@@ -92,6 +92,13 @@ class WCLClient:
             resp.raise_for_status()
             body = resp.json()
             if body.get("errors"):
+                if any("points remaining" in e.get("message", "") for e in body["errors"]):
+                    # Budget exhausted, sometimes reported as a GraphQL error instead of a 429:
+                    # wait for the hourly reset, like a rate limit.
+                    print("  out of points, sleeping 120s")
+                    time.sleep(120)
+                    attempt -= 1
+                    continue
                 raise WCLError(json.dumps(body["errors"])[:1000])
             return body["data"]
         raise WCLError("giving up after 6 attempts (network or server errors)")
