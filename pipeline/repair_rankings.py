@@ -7,9 +7,11 @@ fight). A kill that still fails on its own is left out and listed at the end.
 
 Only reports listed in the guild's crawl_errors.jsonl, with eligible kills and no cache file for the kind,
 are touched, so it can run alongside pipeline.crawl_extra (which never goes back to a report it has passed).
+With --all, every report missing the file is fetched this way (instead of pipeline.crawl_extra), which
+avoids the failed whole-report attempts on expansions where many reports are too big.
 
 Usage:
-    python -m pipeline.repair_rankings [--guild fable|nightshift] [--kinds rankings_historical] [--chunk 4]
+    python -m pipeline.repair_rankings [--guild fable|nightshift] [--kinds rankings_historical] [--chunk 4] [--all]
 """
 
 import argparse
@@ -35,7 +37,7 @@ def fetch(client: WCLClient, code: str, fids: list, timeframe: str, failed: list
         return fetch(client, code, fids[:half], timeframe, failed) + fetch(client, code, fids[half:], timeframe, failed)
 
 
-def repair(guild: str, kinds: list, chunk: int) -> None:
+def repair(guild: str, kinds: list, chunk: int, everything: bool) -> None:
     host = GUILDS[guild]["host"]
     client = WCLClient(host)
     errors = CACHE_DIR / host / "crawl_errors.jsonl"
@@ -43,7 +45,7 @@ def repair(guild: str, kinds: list, chunk: int) -> None:
     failed, done = [], 0
     for r in unique_reports(client, guild):
         code = r["code"]
-        if code in CONFIG["excluded_reports"] or code not in erred:
+        if code in CONFIG["excluded_reports"] or (code not in erred and not everything):
             continue
         rdir = CACHE_DIR / host / "reports" / code
         if not (rdir / "report.json").exists():
@@ -78,8 +80,9 @@ def main() -> None:
     parser.add_argument("--guild", choices=sorted(GUILDS), default="fable")
     parser.add_argument("--kinds", default="rankings_historical", help="rankings, rankings_historical (comma separated)")
     parser.add_argument("--chunk", type=int, default=4, help="kills per query")
+    parser.add_argument("--all", action="store_true", help="every report missing the file, not only those in crawl_errors")
     a = parser.parse_args()
-    repair(a.guild, a.kinds.split(","), a.chunk)
+    repair(a.guild, a.kinds.split(","), a.chunk, a.all)
 
 
 if __name__ == "__main__":
