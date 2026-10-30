@@ -1,7 +1,9 @@
 {
   "_doc": "Compute step settings (pipeline/facts.py). Lists are matched on WCL ability names. Decisions: docs/decisions.md.",
+  "_scripted_deaths": "Deaths left out of the death stats (Fishbait, Floor Inspector, Spectator...). Fury of Frostmourne: the Lich King kills the whole raid. Divine Intervention: a paladin sacrificing himself on purpose, mostly at a wipe call (713 deaths, 178 on the Lich King).",
   "scripted_deaths": [
-    "Fury of Frostmourne"
+    "Fury of Frostmourne",
+    "Divine Intervention"
   ],
   "_min_players": "Pulls with fewer players holding a role are fake logs (e.g. a 1-player Onyxia) and are dropped. Raid splits stay.",
   "min_players": 10,
@@ -132,8 +134,8 @@
     "Goblin Dragon Gun",
     "Electrostatic Condenser"
   ],
-  "_arch_nemesis_ignore": "Arch-Nemesis: killing blows left out (a quarter of all deaths are 'Melee', which names no boss or mechanic).",
-  "arch_nemesis_ignore": ["Melee"],
+  "_arch_nemesis_ignore": "Arch-Nemesis: killing blows left out (a quarter of all deaths are 'Melee', which names no boss or mechanic), and the players' own spells that land the last blow: Cauterize (the mage burns after a lethal hit), Shadow Word: Death (backlash), Blessing of Sacrifice and Divine Sacrifice (damage taken for someone else); Sacrifice (spell 140271, MoP: kills mostly two-handed warriors and death knights on every boss, at the end of wipes: an item effect, not a boss mechanic).",
+  "arch_nemesis_ignore": ["Melee", "Cauterize", "Shadow Word: Death", "Blessing of Sacrifice", "Divine Sacrifice", "Sacrifice"],
   "_heartbreak_pct": "Heartbreaker: a wipe with the encounter (WCL fightPercentage) below this share of its health.",
   "heartbreak_pct": 5,
   "_obliterated": "Obliterated: biggest overkill, as a multiple of the median overkill of the guild's deaths in the expansion. An ability is an instant kill mechanic, left out, when on a boss it has at least min_deaths deaths and its smallest overkill is above instakill_factor times that median (Ethereal Corruption, Rocket Strike, Ascend to the Heavens, Dark Glare, Hand of Death...).",

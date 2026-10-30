@@ -403,6 +403,13 @@ a.hname:hover { color: var(--parchment); }
 /* Row matched by the highlight box in the Player header: parchment wash, over the title/flip tints. */
 .board tr.found td { background: color-mix(in srgb, var(--parchment) 22%, transparent); }
 .board tr.found td:first-child { box-shadow: inset 3px 0 0 var(--parchment); }
+/* Breakdown pages: labels under min_den, listed but not ranked; expansions after the boss or ability. */
+.bdexp { margin-left: 8px; font-size: .8rem; white-space: nowrap; }
+/* Arch-Nemesis: the bosses of the ability, on a line under it. */
+.bdsub { display: block; color: var(--tan); font-size: .8rem; margin-top: 2px; }
+.board tr.dim td { opacity: .55; }
+.board td.lbl a, .kicker a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, currentColor 40%, transparent); }
+.board td.lbl a:hover, .kicker a:hover { color: var(--parchment); }
 .thfind { display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
 .thfind input { width: 100%; min-width: 0; font: 400 13px var(--f-body); text-transform: none; letter-spacing: 0; padding: 3px 8px; height: 26px;
   border: 1px solid var(--line-strong); border-radius: 4px; background: var(--navy-glass); color: var(--cream); }

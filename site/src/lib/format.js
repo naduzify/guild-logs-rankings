@@ -53,10 +53,11 @@ const ordinal = n => {
   return n + ({ 1: 'st', 2: 'nd', 3: 'rd' }[n % 10] || 'th');
 };
 
-// "96th percentile" (higher is better), kept within 1st..99th. `short` drops the word, for the Percentile column.
-export function formatPct(pct, short = false) {
+// "96th percentile" (higher is better), kept within 1st..99th; the number one (pos 1, ties included) is the
+// 100th. `short` drops the word, for the Percentile column.
+export function formatPct(pct, short = false, pos = null) {
   if (pct == null) return '';
-  const p = ordinal(Math.min(99, Math.max(1, Math.round(pct))));
+  const p = ordinal(pos === 1 ? 100 : Math.min(99, Math.max(1, Math.round(pct))));
   return short ? p : `${p} percentile`;
 }
 

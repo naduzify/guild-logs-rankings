@@ -1,5 +1,5 @@
 {
-  "_doc": "One entry per guild page (/fable/, /nightshift/): name and server shown on the site, faction (alliance or horde: PvP rank badges in ranks/ or ranks/horde/), tagline under the name on the home page. settings: overrides of config/site.json settings (min_weeks, min_role_weeks...); rank: overrides of config/tiers.json rank (weeks_per_rank: one PvP rank per that many reset weeks instead of per tier); home: overrides of config/site.json home for this guild (e.g. pinned_top_n, pinned_columns: the Guild Legends top in two columns). wip: text of the Work in progress banner, for a guild whose page is not final yet (crawl or reroll mapping in progress). expansions: the expansions a guild has raided so far (the first ones, in order; all of them when absent): the other expansions, their tiers and the classes they bring (Death Knight, Monk) leave the filters. Site texts may use {guild}, replaced by the name when the data loads.",
+  "_doc": "One entry per guild page (/fable/, /nightshift/): name and server shown on the site, faction (alliance or horde: PvP rank badges in ranks/ or ranks/horde/), tagline under the name on the home page. settings: overrides of config/site.json settings (min_weeks, min_role_weeks...); rank: overrides of config/tiers.json rank (weeks_per_rank: one PvP rank per that many reset weeks instead of per tier); home: overrides of config/site.json home for this guild (e.g. pinned_top_n, pinned_columns: the Guild Legends top in two columns). partial: crawl not finished (meta.partial, not shown on the site). wip: text of the Work in progress banner, for a guild whose page is not final yet (crawl or reroll mapping in progress). expansions: the expansions a guild has raided so far (the first ones, in order; all of them when absent): the other expansions, their tiers and the classes they bring (Death Knight, Monk) leave the filters. Site texts may use {guild}, replaced by the name when the data loads.",
   "fable": {
     "name": "Fable",
     "server": "Arugal (AU)",
@@ -10,6 +10,7 @@
     "name": "NightShift",
     "server": "Thunderstrike (EU)",
     "faction": "horde",
+    "partial": true,
     "expansions": ["era", "tbc"],
     "home": {"pinned_top_n": 10, "pinned_columns": 2, "pinned_left": 4},
     "settings": {"min_weeks": 5, "min_role_weeks": 5},

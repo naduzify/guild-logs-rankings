@@ -14,7 +14,8 @@ const AGG = {
   ratio: { init: () => [0, 0, 0], add: (a, c) => { a[0] += c[V]; a[1] += c[V + 1]; a[2] += c[V + 2] ?? 0; },
     den: (a, s) => (s.min_den_on === 'count' ? a[2] : a[1]), value: a => a[0] / a[1],
     number: (a, s) => (s.number === 'den' ? a[1] : a[0]) },
-  // Parse Lord, per boss: [(best + median) / 2, 1, best, median]; extra = average best and median.
+  // Parse Lord, per boss and weighted by its kills: [(best + median) / 2 × kills, kills, best × kills, median × kills];
+  // extra = average best and median.
   parse: { init: () => [0, 0, 0, 0], add: sumInto, den: a => a[1], value: a => a[0] / a[1], extra: a => [a[2] / a[1], a[3] / a[1]] },
   sum: { init: () => [0], add: sumInto, den: () => Infinity, value: a => a[0] },
   // Career totals in reference-tier terms: [scaled, actual]; ranked on the scaled one, the actual one in brackets.
@@ -105,7 +106,7 @@ export function computeStat(stat, cells, filter, settings, roleOk) {
     if (stat.min_tiers && agg.tiers && agg.tiers(a) < stat.min_tiers) continue;
     const value = agg.value(a);
     if (!Number.isFinite(value)) continue;
-    byPlayer.set(p, { p, value, number: agg.number ? agg.number(a, stat) : value, label: agg.label?.(a) ?? null, extra: agg.extra?.(a) ?? null });
+    byPlayer.set(p, { p, value, number: agg.number ? agg.number(a, stat) : value, label: agg.label?.(a) ?? null, extra: agg.extra?.(a) ?? null, den: agg.den(a, stat) });
   }
 
   const asc = stat.direction === 'asc';
@@ -120,6 +121,41 @@ export function computeStat(stat, cells, filter, settings, roleOk) {
   const out = { byPlayer, ranked };
   cache.set(key, out);
   return out;
+}
+
+// One player's whole `top` breakdown (Arch-Nemesis, Personal Hell…: stats with a `breakdown`), under the same
+// filters and role gating as computeStat. Rows { label, n, d, value } best first: by count, or by mean for a
+// `mean` top (labels under min_den come last, with no value: too few samples to rank). exps: the expansion
+// indices the label was met in (a boss or an ability can exist in several: Kel'Thuzad in Era and WotLK).
+// subs: [[name, n]] most first, when the cells carry them (Arch-Nemesis: the bosses of each ability).
+export function playerBreakdown(stat, cells, filter, settings, roleOk, p) {
+  const gated = roleOk && (ROLE_CATEGORIES.has(stat.category) || filter.role.size > 0);
+  const acc = {}, exps = {}, subs = {};
+  for (const cell of cells) {
+    if (cell[0] !== p || !passes(filter, cell)) continue;
+    if (gated && roleOk[p] && !roleOk[p][cell[3]]) continue;
+    AGG.top.add(acc, cell);
+    for (const [label, t] of Object.entries(cell[V])) {
+      (exps[label] || (exps[label] = new Set())).add(cell[1]);
+      if (t[2]) {
+        const s = subs[label] || (subs[label] = {});
+        for (const [name, n] of Object.entries(t[2])) s[name] = (s[name] || 0) + n;
+      }
+    }
+  }
+  const minDen = stat.min_den ?? settings.min_den;
+  const rows = Object.entries(acc).map(([label, [n, d]]) => ({
+    label, n, d, value: stat.top_by === 'mean' ? (d >= minDen ? n / d : null) : n, exps: [...exps[label]].sort((a, b) => a - b),
+    subs: Object.entries(subs[label] || {}).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])),
+  }));
+  rows.sort((a, b) => (b.value ?? -Infinity) - (a.value ?? -Infinity) || b.d - a.d || a.label.localeCompare(b.label));
+  let pos = 0;
+  rows.forEach((r, i) => {
+    if (r.value == null) return;
+    if (i === 0 || r.value !== rows[i - 1].value) pos = i + 1;
+    r.pos = pos;
+  });
+  return rows;
 }
 
 export const isRankable = stat => stat.display !== 'T';
@@ -146,7 +182,7 @@ export function explain(stat, settings) {
     : `With the role filter set, only players with at least ${w} reset weeks in that role.`);
   const minDen = stat.min_den ?? settings.min_den;
   if (hasPercentile(stat)) {
-    const sample = stat.format === 'parse' ? 'bosses' : stat.agg === 'spread' || stat.agg === 'slope' ? 'kills' : 'pulls';
+    const sample = stat.agg === 'spread' || stat.agg === 'slope' ? 'kills' : 'pulls';
     const counted = valueIsNumber(stat) && stat.agg !== 'sum';
     let rank = counted ? 'Percentile among players under the current filters'
       : `Percentile among players with at least ${minDen} ${sample} under the current filters`;

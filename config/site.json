@@ -33,7 +33,7 @@
     "featured_count": 8,
     "ghosts": {
       "title": "Ghosts of {guild}",
-      "description": "They raided with {guild}, but fewer than 10 reset weeks: not enough to enter the rankings. Their pulls still count in the guild totals.",
+      "description": "They raided with {guild}, but fewer than {min_weeks} reset weeks: not enough to enter the rankings. Their pulls still count in the guild totals.",
       "visible": 60
     },
     "records": [

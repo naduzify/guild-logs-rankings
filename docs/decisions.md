@@ -893,3 +893,66 @@ Premier mapping des rerolls dans `nightshift_rerolls.json` (23 joueurs, le premi
 
 **Raison.** Demande du propriétaire : voir tout le classement des boss derrière chaque record, pas seulement le premier.
 
+
+## 2026-10-30 — Seuil de semaines dans les textes : `{min_weeks}`
+
+**Décision.** Les textes de config peuvent écrire `{min_weeks}`, remplacé au chargement par le seuil de semaines de reset de la guilde (`settings.min_weeks` : 10 pour Fable, 5 pour NightShift). La description de Ghosts of {guild} l'utilise au lieu d'un « 10 » en dur.
+
+**Raison.** NightShift a un seuil de 5 semaines : le texte disait 10.
+
+## 2026-10-30 — Pages personnelles des achievements « top »
+
+**Décision.** Arch-Nemesis, Comfort Boss, Personal Hell et Suicide Pact (`breakdown` dans `config/stats.json`) sortent du Hall of fame (`hall_of_fame: false`) et ont, en plus du classement de tous les joueurs (page de stat), une page personnelle par joueur (`#/stat/<id>/<joueur>`) : toutes les capacités qui l'ont tué, tous les boss sur lesquels il a wipé, tous les raideurs avec qui il est mort, ses scores moyens sur chaque boss tué (Comfort Boss : classés à partir de `min_den` kills, les autres listés en grisé). Colonnes : nombre et part du total, ou score moyen et kills. Mêmes filtres que le reste du site. On y arrive par le libellé de la ligne du joueur dans le classement, ou par le titre de la carte sur sa fiche.
+
+**Raison.** Demande du propriétaire : chacun peut voir tout son classement, pas seulement le premier. Les cellules exportées contenaient déjà toute la liste par joueur : rien à recalculer côté pipeline.
+
+## 2026-10-30 — Pages personnelles : extension et boss
+
+**Décision.** Sur les pages personnelles de Comfort Boss, Personal Hell et Arch-Nemesis, chaque ligne affiche les extensions où le joueur a croisé ce boss ou cette capacité (plusieurs possibles : Ragnaros en Era et en Cata, Cleave dans trois extensions), sans scinder la ligne, pour rester cohérent avec le classement. Arch-Nemesis affiche en plus, sous la capacité, les boss qui l'ont lancée (les trois plus fréquents avec leur nombre, puis « +N more »). Pour ça, les cellules d'Arch-Nemesis portent un troisième élément par capacité, `{boss: morts}` (contrat `top` étendu dans `docs/site-data.md`) ; le classement n'en tient pas compte. Effet : `stats.json` de Fable passe de 2,6 à 3,1 Mo.
+
+**Raison.** Demande du propriétaire : savoir d'où vient chaque boss ou mécanique.
+
+
+## 2026-10-30 — Parse Lord : moyenne sur les kills, pas sur les boss
+
+- **Décision** : la valeur (meilleur + médian) / 2 de chaque boss est pondérée par son nombre de kills, dans chaque cellule (joueur, extension, classe, rôle). La moyenne porte donc sur les combats, quel que soit le personnage joué.
+- **Raison** : avant, chaque boss de chaque classe comptait pour un. Un reroll tué une fois sur un boss pesait autant que le main et ses 30 kills, ce qui tirait la moyenne vers les rerolls.
+- **Conséquence** : un boss souvent tué pèse aussi plus lourd pour un joueur à un seul personnage. Le seuil `min_den` (5) compte désormais des kills, plus des boss.
+- **Écarté** : calculer meilleur et médian par boss sur tous les personnages réunis. Ce n'est pas additif, donc incompatible avec le filtre de classe des cellules.
+
+## 2026-10-30 — Parse Lord : 50 kills minimum
+
+- **Décision** : il faut au moins 50 kills avec un parse, sous les filtres actifs, pour figurer au classement de Parse Lord (`min_den` 50 dans `config/stats.json`).
+- **Raison** : avec 5 kills, un joueur passé quelques soirées pouvait finir en tête sur une poignée de bons parses.
+
+## 2026-10-30 — Bandeau de Parse Lord : le meilleur de la parse et du percentile
+
+**Décision.** Sur la fiche joueur, le bandeau de rang de la carte Parse Lord prend la couleur du percentile dans la guilde (comme les autres cartes de totaux, jaune clair pour le n°1 compris) quand ce percentile est plus haut que la valeur de la parse ; sinon, la couleur de la parse, comme avant.
+
+**Raison.** Un joueur qui parse 60 mais se classe dans les meilleurs de la guilde avait un bandeau bleu qui ne reflétait pas son rang.
+
+## 2026-10-30 — Percentile dans la guilde sur les cartes de totaux
+
+**Décision.** Sur la fiche joueur, les quatre cartes de « Player Contribution » (Damage Done, Damage Taken, Healing Done, Parse Lord) affichent sous la valeur le percentile dans la guilde, à côté du rang (« #4 of 212 in the guild », « 99th percentile »), sous les filtres actifs.
+
+**Raison.** Le rang seul se lit mal sans le nombre de joueurs ; le percentile est la mesure utilisée partout ailleurs sur le site.
+
+## 2026-10-30 — Le n°1 est au 100e percentile
+
+**Décision.** Partout où un percentile s'affiche (classements, cartes et tuiles de la fiche joueur), le joueur classé n°1 (ex aequo compris) affiche « 100th percentile ». Les autres restent bornés entre le 1er et le 99e.
+
+**Raison.** Le n°1 affichait « 99th », comme le n°2 ou le n°3 : la première place ne se distinguait pas.
+
+## 2026-10-30 — Relecture avant mise en ligne
+
+- **Divine Intervention** devient une mort scriptée (`scripted_deaths`) : le paladin se sacrifie volontairement, presque toujours à l'appel du wipe (713 morts, dont 178 sur le Roi-liche). Elle ne compte plus dans les stats de mort (Fishbait, Floor Inspector, Spectator…), ni dans Arch-Nemesis, où elle arrivait en tête pour Masomum.
+- **Arch-Nemesis** ignore aussi les sorts du joueur qui portent le dernier coup : Cauterize (609 morts : le mage brûle après le coup fatal, il était en tête pour Chãos et Notcorbs), Shadow Word: Death, Blessing of Sacrifice, Divine Sacrifice, et « Sacrifice » (sort 140271 en MoP : tue surtout des guerriers et DK à deux mains, sur tous les boss, en fin de wipe ; effet d'objet, pas mécanique de boss ; Hipy en avait 103).
+- **`meta.partial`** : lu dans `config/guilds.json` (`partial`), faux par défaut. Fable est complet : il manque les extras de 41 pulls sur 9 926, et 9 kills seulement tombent sur le parse d'aujourd'hui. NightShift reste `partial`.
+- Vérifié sans changement : aucune stat vide, aucune valeur hors bornes ni non finie, sous chaque filtre d'extension et de rôle. Valeurs extrêmes relues et jugées correctes : Obliterated (mêlée du Roi-liche héroïque, plus de 1 000 fois l'overkill médian de WotLK), Glow Up de Kelcie (3 tiers TBC en 13 semaines), joueurs à presque 0 dégât (healers purs).
+
+## 2026-10-30 — Mise en ligne : JSON commités, déploiement GitHub Pages
+
+- **Décision** : les exports JSON du site (`site/public/fable/data/`, `site/public/nightshift/data/`, environ 4 Mo) sont commités. Le workflow `.github/workflows/pages.yml` build le site Vite à chaque push sur `main` et le publie sur GitHub Pages. NightShift est publié en l'état (crawl pas fini, parses absents, bandeau Work in progress) et sera mis à jour à la fin des crawls.
+- **Raison** : la CI n'a ni le cache brut ni les identifiants WCL. Commiter le résultat final est le plus court chemin vers la mise en ligne.
+- **Écarté pour l'instant** : l'étage Parquet commité, avec un export JSON lancé en CI. Il demanderait de recalculer les stats depuis le Parquet au lieu du cache brut. Il reste possible plus tard.
+- **Attention** : `pipeline.mock_site_data` écrit au même endroit que l'export réel. Ne jamais commiter des données fictives.

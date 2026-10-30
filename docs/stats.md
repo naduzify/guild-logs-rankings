@@ -56,7 +56,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 35. **Suicide Pact**: Ride or die. Mostly die. (Raider he died with most often: both dead within 10 seconds, before a fifth of the raid is down.) [T]
 36. **Pioneer**: In the first-kill screenshot. And in every wipe before it. (Guild first kills attended, each boss and difficulty.) [P+N]
 
-37. **Parse Lord**: Purple is a personality. (Warcraft Logs parses on Fable kills: per boss, the average of his best and his median parse (both against the rankings at the time of each kill), then the average over bosses. Every role, tanks included, at least 5 bosses. The only achievement not measured against the guild.) [P]
+37. **Parse Lord**: Purple is a personality. (Warcraft Logs parses on Fable kills: per boss, the average of his best and his median parse (both against the rankings at the time of each kill), then the average over his kills (each boss weighs its number of kills, whichever character played them). Every role, tanks included, at least 50 kills. The only achievement not measured against the guild.) [P]
 
 ## Tank (7)
 
@@ -94,7 +94,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 - **Attention Seeker** 📋 : Casts filtré sur les taunts, par pull et sur le trash de chaque rapport (`trash_extra.json`, durée du trash = `totalTime`) (le tableau Casts de niveau 2 ne garde que 5 capacités par joueur). En Era et en WotLK, aussi les consommables (The Junky ; en WotLK, filtrés par ID).
 - **Blamed the Healer** 🔬 : événements de buffs des CD défensifs, sur les pulls où un joueur d'une classe tank meurt.
 - **Timekeeper / The Tourist** 🆕 : DamageDone sur le trash (`killType: Trash`), par rapport.
-- **Parse Lord** : parses WCL des kills, par rapport, deux fois : `rankings.json` (classement d'aujourd'hui, pour le meilleur parse) et `rankings_historical.json` (`timeframe: Historical`, classement à la date du combat, pour le parse médian).
+- **Parse Lord** : parses WCL des kills, par rapport, deux fois : `rankings_historical.json` (`timeframe: Historical`, classement à la date du combat, pour le meilleur et le parse médian) et `rankings.json` (classement d'aujourd'hui, en secours pour un kill sans parse historique).
 
 ## Reportées en V2
 

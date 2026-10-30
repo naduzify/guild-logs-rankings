@@ -81,10 +81,11 @@ class Cells:
         else:
             a = self._get(sid, key, lambda: [0.0, 0.0, 0]); a[0] += num; a[1] += den; a[2] += count
 
-    def parse(self, sid, key, best, median):
-        """One boss of Parse Lord: (best + median) / 2, plus best and median themselves."""
+    def parse(self, sid, key, best, median, kills):
+        """One boss of Parse Lord: (best + median) / 2, plus best and median themselves, each weighted by its
+        kills, so that the average runs over fights: a reroll's single kill does not weigh a whole boss."""
         v = self._get(sid, key, lambda: [0.0, 0, 0.0, 0.0])
-        v[0] += (best + median) / 2; v[1] += 1; v[2] += best; v[3] += median
+        v[0] += (best + median) / 2 * kills; v[1] += kills; v[2] += best * kills; v[3] += median * kills
 
     def sum(self, sid, key, n):
         self._get(sid, key, lambda: [0.0])[0] += n
@@ -104,9 +105,14 @@ class Cells:
         if tier is not None:
             v[5].add(tier)
 
-    def top(self, sid, key, label, num, den=1):
+    def top(self, sid, key, label, num, den=1, sub=None):
+        """{label: [num, den]}, plus {sub: num} when given (Arch-Nemesis: the bosses of each ability)."""
         t = self._get(sid, key, dict).setdefault(label, [0.0, 0])
         t[0] += num; t[1] += den
+        if sub is not None:
+            if len(t) == 2:
+                t.append({})
+            t[2][sub] = t[2].get(sub, 0) + num
 
     def best(self, sid, key, v, label):
         cur = self._get(sid, key, lambda: [float("-inf"), None])
@@ -121,7 +127,7 @@ class Cells:
                 if isinstance(v, set):
                     vals = [sorted(v)]
                 elif isinstance(v, dict):
-                    vals = [{k: [round(a, 1), b] for k, (a, b) in v.items()}]
+                    vals = [{k: [round(t[0], 1), *t[1:]] for k, t in v.items()}]  # t[2]: sub-labels, if any
                 else:
                     vals = [round(x, 4) if isinstance(x, float) else sorted(x) if isinstance(x, set) else x for x in v]
                 cells.append([p, e, c, r, *vals])
@@ -360,7 +366,8 @@ def timekeeper(rows: list, pid: dict, char_class: dict, cells) -> None:
 
 def parse_lord(rows: list, pid: dict, char_class: dict, cells) -> None:
     """Parse Lord: WCL parses (caches from pipeline/crawl_extra.py), the only stat ranked against the world.
-    Per cell and boss, (best + median parse) / 2; one value per boss. Both against the rankings around the
+    Per cell and boss, (best + median parse) / 2, weighted by the kills of that cell on that boss: the
+    average runs over fights, whichever character played them (a reroll's few kills weigh little). Both against the rankings around the
     date of each fight (rankings_historical.json), so that years of later re-runs do not drag down how he did
     back then. Where a kill has no historical parse, its parse against today's rankings (rankings.json) stands in.
     Every role counts: tanks have WCL parses too (on their damage done)."""
@@ -392,7 +399,7 @@ def parse_lord(rows: list, pid: dict, char_class: dict, cells) -> None:
         mid.append(x)
         stand_in += key not in historical
     for (k, _, _), (best, mid) in groups.items():
-        cells.parse("parse-lord", k, max(best), statistics.median(mid))
+        cells.parse("parse-lord", k, max(best), statistics.median(mid), len(mid))
     print(f"parse lord: {len(today)} today parses, {len(historical)} historical, {stand_in} kills on a today parse")
 
 
@@ -720,7 +727,7 @@ def main() -> None:
         if kill and not dead and (r["pull_players"] - r["pull_dead"]) < r["pull_players"] / 2:
             cells.sum("last-stand", k, 1)
         if r["killed_by"] and r["killed_by"] not in nemesis_ignore:
-            cells.top("arch-nemesis", k, r["killed_by"], 1)
+            cells.top("arch-nemesis", k, r["killed_by"], 1, sub=r["encounter"])
         if r["overkill"] and (r["e"], bk, r["overkill_by"]) not in instakills:
             day = datetime.fromtimestamp(r["start_ms"] / 1000, tz).date().isoformat()
             cells.best("obliterated", k, r["overkill"] / med_overkill[r["e"]], f"{r['overkill_by']} · {r['encounter']} · {day}")
@@ -878,7 +885,7 @@ def main() -> None:
     meta = {
         "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "mock": False,
-        "partial": True,
+        "partial": guild_cfg.pop("partial", False),
         "pending": sorted(PENDING | set(empty)),
         "guild": guild_cfg,
         "expansions": expansions,

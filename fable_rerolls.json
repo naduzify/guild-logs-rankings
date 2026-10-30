@@ -82,10 +82,6 @@
    "Jaiiquintus",
    "Jaiiyroblast"
   ],
-  "Lovefist": [
-   "Musthaverole",
-   "Faust"
-  ],
   "Loveling": [
    "Lovelain"
   ],
@@ -101,7 +97,8 @@
    "Doanchainsaw"
   ],
   "Wilkypal": [
-   "Layonwilky"
+   "Layonwilky",
+   "Nototemsforu"
   ],
   "Heejuno": [
    "Biris"
@@ -115,7 +112,10 @@
   "Thrusting": [
    "Thrustank",
    "Thrustlock",
-   "Thrustsir"
+   "Thrustsir",
+   "Lovefist",
+   "Musthaverole",
+   "Faust"
   ],
   "Thondros": [
    "Shamfu"
@@ -173,6 +173,14 @@
   ],
   "Webb": [
    "Shamanofsexi"
+  ],
+  "Syf": [
+   "Syfbb",
+   "Syff"
+  ],
+  "Bubblin": [
+   "Húñtard",
+   "Beefyboom"
   ]
  }
 }

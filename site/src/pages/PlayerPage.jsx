@@ -65,13 +65,14 @@ function StatCard({ data, stat, row, total, big }) {
   return (
     <article className={'scard ' + (big ? 'big' : 'small') + tone}>
       {v.earned && <span className="ribbonwrap"><span className="ribbon">{v.earned.flip ? 'Infamous' : 'Earned'}</span></span>}
-      <header><a className="slabel" href={href('stat', stat.id)}>{v.label}</a><InfoTip stat={stat} meta={data.meta} /></header>
+      {/* A breakdown stat (Arch-Nemesis, Personal Hell…) opens the player's own list rather than the ranking. */}
+      <header><a className="slabel" href={stat.breakdown ? href('stat', [stat.id, data.players[row.p].name]) : href('stat', stat.id)}>{v.label}</a><InfoTip stat={stat} meta={data.meta} /></header>
       <div className="svalue">{v.main}</div>
       {v.base100 && <div className="sunit">{BASE100}</div>}
       {v.sub && <div className="ssub">{v.sub}</div>}
       {big && <p className="sdesc">{v.desc}</p>}
       <footer className="sfoot">
-        {v.pct != null && <span className="pct stacked"><span className={v.pct >= 75 ? 'ptext glow' : 'ptext'}>{formatPct(v.pct)}</span><PctBar pct={v.pct} /></span>}
+        {v.pct != null && <span className="pct stacked"><span className={v.pct >= 75 ? 'ptext glow' : 'ptext'}>{formatPct(v.pct, false, row.pos)}</span><PctBar pct={v.pct} /></span>}
         {big && v.pos && <span>{v.pos}</span>}
         {big && v.number && <span>{v.number}</span>}
       </footer>
@@ -204,9 +205,10 @@ export default function PlayerPage({ data, name, filter }) {
           const stat = data.statById.get(id);
           if (!stat) return null;
           const { row, total } = result(stat);
-          // A parse (Parse Lord) takes the colour of its value, as on Warcraft Logs; the others their guild rank.
+          // A parse (Parse Lord) takes the colour of its value, as on Warcraft Logs, or of its guild percentile
+          // when that is higher; the others their guild rank.
           const parse = stat.format === 'parse';
-          const band = row && (parse ? parseBand(row.value) : rankBand(row));
+          const band = row && (parse && row.value >= row.pct ? parseBand(row.value) : rankBand(row));
           return (
             <article key={baseId} className="scard big hcard" style={band ? { '--band': band.bg, ...(band.fg && { '--band-text': band.fg }) } : undefined}>
               {row && <span className="ribbonwrap"><span className="ribbon rankband">#{row.pos}</span></span>}
@@ -214,7 +216,7 @@ export default function PlayerPage({ data, name, filter }) {
               <div className="svalue grad">{row ? (parse ? formatValue(stat, row.value) : formatBig(row.value)) : '–'}</div>
               {parse && row?.extra && <div className="hactual"><small title="best | median">({row.extra[0].toFixed(1)} | {row.extra[1].toFixed(1)})</small></div>}
               {!parse && row?.extra && <div className="hactual">{stat.scale_note && <span className="sunit">{stat.scale_note}</span>} <small>({formatBig(row.extra[0])} actual)</small></div>}
-              <footer className="sfoot">{row ? `#${row.pos} of ${total} in the guild` : parse ? 'Not enough bosses' : null}</footer>
+              <footer className="sfoot">{row ? <><span>#{row.pos} of {total} in the guild</span><span>{formatPct(row.pct, false, row.pos)}</span></> : parse ? 'Not enough kills' : null}</footer>
               {toggle && data.statById.get(toggle.stat) && (
                 <button type="button" role="switch" className="htoggle" aria-checked={on}
                   onClick={() => setToggles(t => ({ ...t, [baseId]: !t[baseId] }))}>
@@ -237,7 +239,7 @@ export default function PlayerPage({ data, name, filter }) {
               <header><a className="slabel" href={href('stat', stat.id)}>{label}</a><InfoTip stat={stat} meta={meta} /></header>
               <div className="svalue">{row ? formatInt(row.value) : '–'}</div>
               {row && (percentile ?? hasPercentile(stat)) && (
-                <footer className="sfoot"><span className="pct stacked"><span className={row.pct >= 75 ? 'ptext glow' : 'ptext'}>{formatPct(row.pct)}</span><PctBar pct={row.pct} /></span></footer>
+                <footer className="sfoot"><span className="pct stacked"><span className={row.pct >= 75 ? 'ptext glow' : 'ptext'}>{formatPct(row.pct, false, row.pos)}</span><PctBar pct={row.pct} /></span></footer>
               )}
             </article>
           );

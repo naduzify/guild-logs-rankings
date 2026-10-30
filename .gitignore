@@ -29,9 +29,8 @@ data/cache/
 # Jeton OAuth utilisateur WCL
 .wcl_user_token.json
 
-# Site : cache npm local, données générées par le pipeline
+# Site : cache npm local (les données site/public/<guilde>/data/ sont commitées : le déploiement les publie)
 site/.npm-cache/
-site/public/*/data/
 
 # Tables intermédiaires du calcul (régénérées depuis le cache)
 data/facts/

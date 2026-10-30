@@ -11,8 +11,9 @@ export async function loadData() {
     })),
   );
 
-  // Config texts name the guild as {guild} (config/guilds.json): one config serves every guild page.
-  const named = x => (typeof x === 'string' ? x.replaceAll('{guild}', meta.guild.name)
+  // Config texts name the guild as {guild} (config/guilds.json) and its reset weeks cut as {min_weeks}
+  // (settings, per guild): one config serves every guild page.
+  const named = x => (typeof x === 'string' ? x.replaceAll('{guild}', meta.guild.name).replaceAll('{min_weeks}', meta.settings.min_weeks)
     : Array.isArray(x) ? x.map(named)
     : x && typeof x === 'object' ? Object.fromEntries(Object.entries(x).map(([k, v]) => [k, named(v)])) : x);
   for (const k of ['home', 'player', 'stats']) meta[k] = named(meta[k]);
