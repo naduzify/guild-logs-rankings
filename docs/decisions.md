@@ -740,7 +740,7 @@ Même parmi les communes, certaines ne classent que les DPS et les healers (Over
 
 **Raison.** Choix du propriétaire : le meilleur parse se mesure aux meilleurs de toujours ; le niveau habituel se juge par rapport au monde de l'époque, sans les années de re-runs mieux équipés qui ont suivi.
 
-**Non vérifié.** La valeur par défaut `Today` de `timeframe` n'a pas pu être relue dans le schéma de l'API (requête bloquée par le budget). À vérifier en comparant un même kill dans les deux fichiers une fois `rankings_historical` crawlé.
+**Vérifié le 2026-10-30.** La valeur par défaut de `timeframe` est bien `Today` : sur les 55 premiers rapports crawlés en `Historical`, 7 476 parses sur 9 770 diffèrent de `rankings.json` (les historiques sont plus hauts). WCL renvoie `"-"` quand il n'y a pas de classement pour la spé (ex. druide feral tank) : ces valeurs sont ignorées.
 
 ## 2026-10-29 — Seuil d'apparition : 10 semaines de reset
 
@@ -845,4 +845,51 @@ La carte ne se déplace que sur un axe : à l'horizontale quand les cartes sont 
 **Raison.** Donner l'impression que la découpe est tirée par le milieu, là où se trouve la carte choisie.
 
 **Alternatives écartées.** Courbe qui reste jusqu'à la fin (la découpe ne sortirait pas d'un bloc) ; déformation en SVG / filtre (la découpe du calque rouge est un clip-path, elle doit suivre les mêmes points).
+
+## 2026-10-30 — Parse Lord : classement historique pour le meilleur parse aussi
+
+**Décision.** Remplace l'entrée du 2026-10-29 : le meilleur parse et le parse médian se calculent tous deux contre le **classement à la date de chaque kill** (`rankings_historical.json`). Les parses contre le classement d'aujourd'hui (`rankings.json`) ne servent plus qu'en secours pour un kill sans parse historique. Le crawl complémentaire ne lance plus `rankings` par défaut (toujours possible avec `--kinds rankings`).
+
+**Raison.** Choix du propriétaire : plus juste (un kill se juge contre le monde de son époque) et plus flatteur (les re-runs des années suivantes, mieux équipés, ne tirent plus les parses vers le bas).
+
+## 2026-10-30 — Export réel de NightShift
+
+**Décision.** `export_site` et `rerolls_sheet` prennent `--guild` (Fable par défaut). Pour NightShift : cache `fresh`, mapping `nightshift_rerolls.json` (absent au départ : chaque personnage est un joueur), extensions limitées à celles de `config/guilds.json` (Era, TBC), reset hebdomadaire EU (mercredi 04:00 UTC) et fuseau Europe/Paris (`config/compute.json` → `guild_time`). Les distinctions faites main (Most Soundboard) restent propres à Fable. Le bandeau « Work in progress » reste, avec un texte qui dit que le crawl et le mapping des rerolls sont en cours.
+
+**Raison.** Donner au propriétaire de vraies données pour faire un premier mapping des rerolls de NightShift, pendant que le crawl continue.
+
+**Non vérifié.** L'heure exacte du reset EU (04:00 UTC) : sans effet sur des raids du soir.
+
+## 2026-10-30 — NightShift : seuils et rangs adaptés, premier mapping des rerolls
+
+**Décision.** Pour NightShift seulement (`config/guilds.json` → `settings` et `rank`, qui surchargent `config/site.json` et `config/tiers.json`) :
+- seuil d'apparition dans les classements à **5 semaines de reset** (`min_weeks`), et 5 semaines par rôle (`min_role_weeks`), pour qu'un joueur classé ait toujours un rôle classé ;
+- rang PvP : **un rang par 8 semaines de reset** (`weeks_per_rank`, d'abord 5, passé à 8 le même jour), plafonné à 14, au lieu d'un rang par tier validé.
+
+Premier mapping des rerolls dans `nightshift_rerolls.json` (23 joueurs, le premier nom de chaque ligne est le main). `Rïse` n'apparaît pas encore dans les logs crawlés.
+
+**Raison.** NightShift a bien moins de logs que Fable (Era et début de TBC) : avec les règles de Fable, peu de joueurs seraient classés et presque tous auraient un rang bas. Effet : 135 joueurs classés.
+
+
+## 2026-10-30 — The Gang en deux colonnes : podium à gauche, suite à droite
+
+**Décision.** Quand une carte de Guild Legends passe sur deux colonnes (`pinned_columns`, NightShift), les places 1 à 3 (ex aequo compris) occupent la colonne de gauche et la suite (4 à 10) celle de droite, à partir de 720 px. Chaque place du podium s'étire à part égale sur la hauteur de la liste de droite : les deux colonnes commencent et finissent au même niveau. Sur téléphone, une seule colonne comme avant.
+
+**Raison.** Avant, le podium et les places 4-5 étaient à gauche et les places 6 à 10 à droite : les deux colonnes n'avaient ni la même hauteur ni des lignes alignées.
+
+**Écarté.** Podium côte à côte sur toute la largeur, puis la suite en deux colonnes aux lignes alignées : essayé, pas retenu (rendu jugé moins bon).
+
+**Ajusté le même jour.** La 4e ligne passe sous le podium, à gauche : 4 lignes à gauche, 6 à droite, plus équilibré. Nombre de lignes à gauche dans `pinned_left` (`config/site.json`, 4 pour NightShift dans `config/guilds.json` → `home`), au moins tout le podium (ex aequo compris). Le podium s'étire pour finir au niveau de la colonne de droite.
+
+## 2026-10-30 — Noms alignés pour les joueurs sans rang
+
+**Décision.** Dans les classements, les listes de l'accueil et la recherche, un joueur sans rang (NightShift : moins de 5 semaines par rang) a un emplacement vide de la taille du macaron (`RankBadge` avec `blank`), au lieu de rien. Sur la fiche joueur, pas d'emplacement vide.
+
+**Raison.** Sans macaron, le nom se décalait vers la gauche et cassait l'alignement de la colonne Player.
+
+## 2026-10-30 — Pages des records de guilde
+
+**Décision.** Loot Pinata, Guild Nemesis, Fastest Finish et Bring a Snack ont chacun une page (`#/record/<kind>`, ouverte par le titre de la carte de l'accueil ou par « View more »). Une ligne par boss (héroïque à part), aucun joueur cité, classée sur le record (kills, wipes, kill le plus rapide, le plus lent ; ex aequo à la même place), avec les trois autres valeurs en colonnes secondaires (masquées sur téléphone). Seul le filtre d'extension s'applique : le rôle et la classe n'ont pas de sens pour un boss. Les boss de `exclude` (Razorgore pour Fastest Finish) restent exclus et sont nommés sous le titre. La carte de l'accueil montre le premier de ce même classement (`site/src/lib/records.js`).
+
+**Raison.** Demande du propriétaire : voir tout le classement des boss derrière chaque record, pas seulement le premier.
 

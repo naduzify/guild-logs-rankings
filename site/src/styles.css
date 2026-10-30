@@ -275,6 +275,14 @@ body.enter #root { animation: guild-enter 450ms ease both; }
 .champion.c1 .pn { font-size: 1.6rem; }
 .champion.c1 .val { font-size: 1.4rem; color: var(--gold-text); }
 .legend .podium .pos { color: var(--tan); }
+/* Two-column legend top (pinned_columns): one column on phones. From 720px the first pinned_left rows take
+   the left column, the leaders stretched to an equal share of what the rest on the right leaves: both end level. */
+.lcols > * { min-width: 0; }
+@media (min-width: 720px) {
+  .lcols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 32px; }
+  .lcols .lleft { display: flex; flex-direction: column; }
+  .lcols .champions { flex: 1; display: grid; grid-auto-rows: 1fr; }
+}
 /* Hand-made honours: a cut-out portrait on the left, the name on the right. The portrait gets a soft
    shadow and a warm parchment glow so it sits in the panel rather than on it. The first is bigger. */
 .honoree { display: flex; align-items: center; gap: 18px; padding: 12px 0; border-top: 1px solid var(--line); min-width: 0; }
@@ -327,6 +335,7 @@ a.hname:hover { color: var(--parchment); }
 /* Player names and rank badges */
 /* Round, borderless: the circle crops the square frame baked into the game icons. */
 .rank { vertical-align: middle; flex: none; border-radius: 50%; object-fit: cover; clip-path: circle(46%); }
+.rank.blank { display: inline-block; }
 
 /* Achievement method tooltip */
 .cname { display: flex; align-items: center; gap: 6px; }
@@ -448,6 +457,7 @@ a.hname:hover { color: var(--parchment); }
 .overview > .scard { width: 100%; }
 .scard { background: var(--navy-glass); border: 1px solid color-mix(in srgb, var(--tan) 45%, transparent); border-radius: 2px; text-align: center; min-width: 0; }
 .slabel { font: 600 .82rem/1.3 var(--f-subtitle); text-transform: uppercase; letter-spacing: .16em; color: var(--parchment); text-decoration: none; }
+a.slabel:hover { text-decoration: underline; }
 /* Overview tiles are big stat cards, centred in their grid cell. */
 .scard.otile { justify-content: center; }
 .otile .pbar { width: 120px; }

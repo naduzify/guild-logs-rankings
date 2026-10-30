@@ -259,6 +259,7 @@ def main() -> None:
 
     if args.guild != "fable":
         # Hand-made honours (Most Soundboard) name Fable players, with their portraits: Fable only.
+        meta["home"].update(meta["guild"].pop("home", {}))
         meta["home"]["pinned"] = [x for x in meta["home"].get("pinned", []) if isinstance(x, str)]
 
     out_dir.mkdir(parents=True, exist_ok=True)

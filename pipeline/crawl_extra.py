@@ -73,9 +73,9 @@ query($code: String!, $end: Float!, $ff: String, $taunts: String) { reportData {
 } } }"""
 
 
-# Parse Lord: WCL parses of the kills. "Today" (WCL's default, rankings.json) against today's rankings, for the
-# best parse; "Historical" (rankings_historical.json) against the rankings around the date of the fight, for
-# the median parse.
+# Parse Lord: WCL parses of the kills. "Historical" (rankings_historical.json) against the rankings around the
+# date of the fight, used for both the best and the median parse; "Today" (WCL's default, rankings.json) against
+# today's rankings, only a stand-in for kills without a historical parse (no longer crawled by default).
 RANKINGS_QUERY = """
 query($code: String!, $fid: [Int]!, $tf: RankingTimeframeType) {
   reportData { report(code: $code) { rankings(fightIDs: $fid, timeframe: $tf) } } }"""
@@ -202,7 +202,7 @@ def crawl(guild: str, kinds: set, limit: int | None, cost: bool, refresh: bool) 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--kinds", default="pull,trash,trash_extra,rankings,rankings_historical",
+    parser.add_argument("--kinds", default="pull,trash,trash_extra,rankings_historical",
                         help="pull, trash, trash_extra, rankings, rankings_historical (comma separated)")
     parser.add_argument("--guild", choices=sorted(GUILDS), default="fable")
     parser.add_argument("--limit", type=int, help="stop after N reports with eligible pulls (testing)")

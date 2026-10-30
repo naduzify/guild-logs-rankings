@@ -18,6 +18,7 @@ import unicodedata
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 SAMPLES_DIR = ROOT / "data" / "samples"
@@ -38,8 +39,16 @@ def norm(name: str) -> str:
     return unicodedata.normalize("NFC", name).casefold()
 
 
-def load_mapping() -> dict:
-    rerolls = json.loads((ROOT / "fable_rerolls.json").read_text(encoding="utf-8"))["rerolls"]
+def guild_time(guild: str = "fable") -> tuple[float, ZoneInfo]:
+    """The guild's weekly reset anchor (ms) and time zone: compute.json, with guild_time overrides."""
+    cfg = {**CONFIG, **CONFIG.get("guild_time", {}).get(guild, {})}
+    anchor = datetime.fromisoformat(cfg["reset_anchor_utc"]).replace(tzinfo=timezone.utc).timestamp() * 1000
+    return anchor, ZoneInfo(cfg["timezone"])
+
+
+def load_mapping(guild: str = "fable") -> dict:
+    path = ROOT / f"{guild}_rerolls.json"  # no file yet: every character is a player of his own
+    rerolls = json.loads(path.read_text(encoding="utf-8"))["rerolls"] if path.exists() else {}
     owner, clashes = {}, []
     for main, alts in rerolls.items():
         for char in [main, *alts]:
@@ -67,13 +76,14 @@ def _payload(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))["data"]["reportData"]
 
 
-def pulls_from_cache(host: str = "classic", limit: int | None = None):
-    from pipeline.guild import expansion_of  # needs requests/dotenv: only for the cache source
+def pulls_from_cache(guild: str = "fable", limit: int | None = None):
+    from pipeline.guild import GUILDS, expansion_of  # needs requests/dotenv: only for the cache source
 
-    guild = {}
+    host = GUILDS[guild]["host"]
+    listing = {}
     for page in sorted((CACHE_DIR / host / "guild").glob("reports_page_*.json")):
         for r in _payload(page)["reports"]["data"]:
-            guild[r["code"]] = r
+            listing[r["code"]] = r
     done = 0
     for rdir in sorted((CACHE_DIR / host / "reports").iterdir()):
         # The trial crawl (pipeline/probe.py) named the fight list fights.json; same content as report.json.
@@ -84,7 +94,7 @@ def pulls_from_cache(host: str = "classic", limit: int | None = None):
         if rep["code"] in CRAWL["excluded_reports"]:
             continue  # PTR logs
         fights = {f["id"]: f for f in rep["fights"]}
-        exp = expansion_of(guild.get(rep["code"], rep))
+        exp = expansion_of(listing.get(rep["code"], rep), guild)
         for tpath in sorted(rdir.glob("tables_*.json")):
             fight = fights.get(int(tpath.stem.split("_")[1]))
             if not fight:

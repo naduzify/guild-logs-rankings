@@ -56,7 +56,7 @@ LÃ©gende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. â
 35. **Suicide Pact**: Ride or die. Mostly die. (Raider he died with most often: both dead within 10 seconds, before a fifth of the raid is down.) [T]
 36. **Pioneer**: In the first-kill screenshot. And in every wipe before it. (Guild first kills attended, each boss and difficulty.) [P+N]
 
-37. **Parse Lord**: Purple is a personality. (Warcraft Logs parses on Fable kills: per boss, the average of his best parse (against today's rankings) and his median parse (against the rankings at the time of each kill), then the average over bosses. Every role, tanks included, at least 5 bosses. The only achievement not measured against the guild.) [P]
+37. **Parse Lord**: Purple is a personality. (Warcraft Logs parses on Fable kills: per boss, the average of his best and his median parse (both against the rankings at the time of each kill), then the average over bosses. Every role, tanks included, at least 5 bosses. The only achievement not measured against the guild.) [P]
 
 ## Tank (7)
 

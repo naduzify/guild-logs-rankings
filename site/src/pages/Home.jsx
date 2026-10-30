@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FilterBar, InfoTip, Intro, PlayerName, StatValue } from '../components.jsx';
 import { BASE100, CLASS_COLORS, formatInt, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
+import { rankBosses, RECORDS } from '../lib/records.js';
 import { computeStat } from '../lib/stats.js';
 
 function GuildTotals({ data, filter }) {
@@ -26,36 +27,21 @@ function GuildTotals({ data, filter }) {
   );
 }
 
-const duration = s => `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}`;
-
-// Each record picks one boss row: [exp, boss, heroic, kills, wipes, fastest, slowest].
-const RECORDS = {
-  most_kills: { pick: rows => maxBy(rows, r => r[3]), value: r => `${formatInt(r[3])} kills` },
-  most_wipes: { pick: rows => maxBy(rows, r => r[4]), value: r => `${formatInt(r[4])} wipes` },
-  fastest_kill: { pick: rows => maxBy(rows.filter(r => r[5] != null), r => -r[5]), value: r => duration(r[5]) },
-  slowest_kill: { pick: rows => maxBy(rows.filter(r => r[6] != null), r => r[6]), value: r => duration(r[6]) },
-};
-
-function maxBy(rows, key) {
-  let best = null;
-  for (const r of rows) if (best === null || key(r) > key(best)) best = r;
-  return best;
-}
-
+// Each record card shows the first boss of its ranking; the title and "View more" open the full list.
 function GuildRecords({ data, filter }) {
   const { meta } = data;
-  const rows = (meta.guild_bosses || []).filter(([e]) => !filter.exp.size || filter.exp.has(e));
   return (
     <section className="records">
       {meta.home.records.map(rec => {
         const kind = RECORDS[rec.kind];
-        const r = kind && kind.pick(rows.filter(([, boss]) => !(rec.exclude || []).includes(boss)));
+        const r = rankBosses(meta, rec, filter)[0]?.row;
         return (
           <article key={rec.kind} className="scard big">
-            <span className="slabel">{rec.title}</span>
+            <a className="slabel" href={href('record', rec.kind, filter)}>{rec.title}</a>
             <span className="svalue">{r ? kind.value(r) : '–'}</span>
             {r && <span className="rboss">{r[1]}{r[2] ? ' (H)' : ''} <small>{meta.expansions[r[0]].short}</small></span>}
             <p className="sdesc">{rec.description}</p>
+            <a className="cmore" href={href('record', rec.kind, filter)} aria-label={`View every boss for ${rec.title}`}>View more →</a>
           </article>
         );
       })}
@@ -85,6 +71,22 @@ function TopCard({ data, stat, filter, legend = false }) {
   // Legend cards (pinned stats) feature every player placed 1st to 3rd (ties included), scaled by place.
   const leaders = legend ? top.filter(r => r.pos <= 3) : [];
   const rest = legend ? top.filter(r => r.pos > 3) : top;
+  // A long legend top (pinned_columns: 2, e.g. NightShift's top 10) goes two-column from 720px, stacked on
+  // phones: the first pinned_left rows on the left (leaders stretched to the height of the right column),
+  // the rest on the right.
+  const cols = legend && (data.meta.home.pinned_columns ?? 1) > 1;
+  const split = cols ? Math.max(0, (data.meta.home.pinned_left ?? leaders.length) - leaders.length) : rest.length;
+  const podium = list => list.length > 0 && (
+    <ol className="podium">
+      {list.map(r => (
+        <li key={r.p}>
+          <span className="pos">{r.pos}</span>
+          <PlayerName data={data} p={r.p} filter={filter} />
+          <span className="val"><StatValue stat={stat} row={r} /></span>
+        </li>
+      ))}
+    </ol>
+  );
   return (
     <article className={legend ? 'card legend' : 'card'}>
       <div className="cname">
@@ -93,24 +95,21 @@ function TopCard({ data, stat, filter, legend = false }) {
         <InfoTip stat={stat} meta={data.meta} />
       </div>
       <p className="cdesc">{stat.description}</p>
-      {top.length === 0 ? <p className="empty">Nobody qualifies with these filters.</p> : (<>
-        {leaders.map(r => (
-          <div key={r.p} className={`champion c${r.pos}`}>
-            <span className="pos">{r.pos}</span>
-            <PlayerName data={data} p={r.p} filter={filter} badge={r.pos === 1 ? 34 : 27} />
-            <span className="val"><StatValue stat={stat} row={r} /></span>
-          </div>
-        ))}
-        {rest.length > 0 && <ol className="podium">
-          {rest.map(r => (
-            <li key={r.p}>
-              <span className="pos">{r.pos}</span>
-              <PlayerName data={data} p={r.p} filter={filter} />
-              <span className="val"><StatValue stat={stat} row={r} /></span>
-            </li>
-          ))}
-        </ol>}
-      </>)}
+      {top.length === 0 ? <p className="empty">Nobody qualifies with these filters.</p> : (<div className={cols ? 'lcols' : undefined}>
+        <div className="lleft">
+          {leaders.length > 0 && <div className="champions">
+            {leaders.map(r => (
+              <div key={r.p} className={`champion c${r.pos}`}>
+                <span className="pos">{r.pos}</span>
+                <PlayerName data={data} p={r.p} filter={filter} badge={r.pos === 1 ? 34 : 27} />
+                <span className="val"><StatValue stat={stat} row={r} /></span>
+              </div>
+            ))}
+          </div>}
+          {podium(rest.slice(0, split))}
+        </div>
+        {podium(rest.slice(split))}
+      </div>)}
       {/* The title links too; this explicit link is the clear, tappable way to the full ranking. */}
       <a className="cmore" href={href('stat', stat.id, filter)} aria-label={`View the full ${stat.title} ranking`}>View more →</a>
     </article>

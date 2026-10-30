@@ -1,4 +1,4 @@
-"""Site export: facts table -> site/public/fable/data/{meta,players,stats}.json (docs/site-data.md).
+"""Site export: facts table -> site/public/<guild>/data/{meta,players,stats}.json (docs/site-data.md).
 
 Second and third stages of the compute step: pull dedup across reports, reset weeks,
 reset-week qualification, raid tiers and PvP ranks, then every stat as additive cells
@@ -6,19 +6,20 @@ reset-week qualification, raid tiers and PvP ranks, then every stat as additive 
 empty and listed in meta.pending.
 
 Usage:
-    python -m pipeline.export_site            # from the raw crawl cache
+    python -m pipeline.export_site                     # Fable, from the raw crawl cache
+    python -m pipeline.export_site --guild nightshift  # another guild of config/guilds.json
 """
 
+import argparse
 import bisect
 import json
 import statistics
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
-from zoneinfo import ZoneInfo
 
-from pipeline.facts import CACHE_DIR, CONFIG, ROOT, _detail_counts, _payload, add_scores, load_mapping, norm, pull_rows, pulls_from_cache
+from pipeline.facts import CACHE_DIR, CONFIG, ROOT, _detail_counts, _payload, add_scores, guild_time, load_mapping, norm, pull_rows, pulls_from_cache
 
-OUT_DIR = ROOT / "site" / "public" / "fable" / "data"
+HOST = "classic"  # WCL site of the guild being exported (pipeline/guild.py), set by main()
 WEEK_MS = 7 * 24 * 3600 * 1000
 EXP_INDEX = {"classic": 0, "tbc": 1, "wotlk": 2, "cata": 3, "mop": 4}
 ROLES = ["TANK", "DPS", "HEALER"]
@@ -255,7 +256,7 @@ def trash_damage(nights: list, rate: dict, ref: float) -> list:
     rates (median DPS rate of each pull), times the reference rate."""
     out = []
     for code, srcs, mine in nights:
-        path = CACHE_DIR / "classic" / "reports" / code / "trash.json"
+        path = CACHE_DIR / HOST / "reports" / code / "trash.json"
         night_rates = [rate[s] for s in srcs if s in rate]
         if not path.exists() or not night_rates:
             continue
@@ -276,7 +277,7 @@ def trash_extras(nights: list) -> tuple[list, list, list]:
     when the raid interrupted anything on the trash."""
     ff, taunts, kicks = [], [], []
     for code, _, mine in nights:
-        path = CACHE_DIR / "classic" / "reports" / code / "trash_extra.json"
+        path = CACHE_DIR / HOST / "reports" / code / "trash_extra.json"
         if not path.exists():
             continue
         x = _payload(path)["report"]
@@ -333,7 +334,7 @@ def timekeeper(rows: list, pid: dict, char_class: dict, cells) -> None:
     owner = {r["char"]: r["player"] for r in rows}
     values = []  # (character, expansion, base 100 vs the night)
     for code, chars in by_report.items():
-        path = CACHE_DIR / "classic" / "reports" / code / "trash.json"
+        path = CACHE_DIR / HOST / "reports" / code / "trash.json"
         if not path.exists():
             continue
         entries = _payload(path)["report"]["trash"]["data"].get("entries", [])
@@ -359,10 +360,9 @@ def timekeeper(rows: list, pid: dict, char_class: dict, cells) -> None:
 
 def parse_lord(rows: list, pid: dict, char_class: dict, cells) -> None:
     """Parse Lord: WCL parses (caches from pipeline/crawl_extra.py), the only stat ranked against the world.
-    Per cell and boss, (best + median parse) / 2; one value per boss. The best parse is against today's
-    rankings (rankings.json); the median against the rankings around the date of each fight
-    (rankings_historical.json), so that years of later re-runs do not drag down how he did back then.
-    While the historical parses are not crawled for a report, its today parses stand in for them.
+    Per cell and boss, (best + median parse) / 2; one value per boss. Both against the rankings around the
+    date of each fight (rankings_historical.json), so that years of later re-runs do not drag down how he did
+    back then. Where a kill has no historical parse, its parse against today's rankings (rankings.json) stands in.
     Every role counts: tanks have WCL parses too (on their damage done)."""
     today, historical, loaded = {}, {}, set()
     for r in rows:
@@ -371,28 +371,29 @@ def parse_lord(rows: list, pid: dict, char_class: dict, cells) -> None:
             continue
         loaded.add(code)
         for name, parses in (("rankings", today), ("rankings_historical", historical)):
-            path = CACHE_DIR / "classic" / "reports" / code / f"{name}.json"
+            path = CACHE_DIR / HOST / "reports" / code / f"{name}.json"
             if not path.exists():
                 continue
             for fight in _payload(path)["report"]["rankings"].get("data", []):
                 for role in (fight.get("roles") or {}).values():
                     for ch in role.get("characters", []):
-                        if ch.get("rankPercent") is not None:
+                        if isinstance(ch.get("rankPercent"), (int, float)):  # "-": no ranking for that spec
                             parses[(code, fight["fightID"], ch["name"])] = ch["rankPercent"]
     groups = defaultdict(lambda: ([], []))
     stand_in = 0
     for r in rows:
         key = (r["report"], r["fight"], r["char"])
-        if key not in today or not r["kill"] or r["player"] not in pid or r["char"] not in char_class:
+        x = historical.get(key, today.get(key))
+        if x is None or not r["kill"] or r["player"] not in pid or r["char"] not in char_class:
             continue
         k = (pid[r["player"]], r["e"], CLASSES.index(char_class[r["char"]]), ROLES.index(r["role"]))
         best, mid = groups[(k, r["encounter_id"], r["difficulty"])]
-        best.append(today[key])
-        mid.append(historical.get(key, today[key]))
+        best.append(x)
+        mid.append(x)
         stand_in += key not in historical
     for (k, _, _), (best, mid) in groups.items():
         cells.parse("parse-lord", k, max(best), statistics.median(mid))
-    print(f"parse lord: {len(today)} today parses, {len(historical)} historical, {stand_in} kills without a historical one")
+    print(f"parse lord: {len(today)} today parses, {len(historical)} historical, {stand_in} kills on a today parse")
 
 
 def raid_night(start_ms: int, tz) -> str:
@@ -445,10 +446,21 @@ def suicide_pacts(rs: list) -> list:
 # --- main --------------------------------------------------------------------
 
 def main() -> None:
-    tiers_cfg, stats_cfg, site_cfg = load("tiers"), load("stats")["stats"], load("site")
-    owner = load_mapping()
+    global HOST
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--guild", default="fable", help="guild page to fill (config/guilds.json)")
+    guild = parser.parse_args().guild
+    from pipeline.guild import GUILDS
+    HOST = GUILDS[guild]["host"]
+    out_dir = ROOT / "site" / "public" / guild / "data"
+    tiers_cfg, stats_cfg = load("tiers"), load("stats")["stats"]
+    guild_cfg = load("guilds")[guild]
+    # Per-guild overrides (config/guilds.json): settings of config/site.json, rank rule of config/tiers.json.
+    site_cfg = {**load("site"), **guild_cfg.pop("settings", {})}
+    tiers_cfg["rank"].update(guild_cfg.pop("rank", {}))
+    owner = load_mapping(guild)
     issues = Counter()
-    rows = [row for p in pulls_from_cache() for row in pull_rows(p, owner, issues)]
+    rows = [row for p in pulls_from_cache(guild) for row in pull_rows(p, owner, issues)]
     add_scores(rows)
     pulls = defaultdict(list)
     for r in rows:
@@ -456,8 +468,7 @@ def main() -> None:
     pulls = dedup(pulls)
     rows = [r for rs in pulls.values() for r in rs]
 
-    anchor = datetime.fromisoformat(CONFIG["reset_anchor_utc"]).replace(tzinfo=timezone.utc).timestamp() * 1000
-    tz = ZoneInfo(CONFIG["timezone"])
+    anchor, tz = guild_time(guild)
     exp_ids = [x["id"] for x in tiers_cfg["expansions"]]
     tier_of = {}
     for i, t in enumerate(tiers_cfg["tiers"]):
@@ -503,6 +514,8 @@ def main() -> None:
     qualified = sorted((pl for pl, w in weeks.items() if len(w) >= site_cfg["min_weeks"]), key=norm)
     pid = {pl: i for i, pl in enumerate(qualified)}
     min_w, max_rank = tiers_cfg["rank"]["min_weeks_per_tier"], tiers_cfg["rank"]["max"]
+    # weeks_per_rank (guilds with few logs, NightShift): one rank per that many reset weeks, instead of per tier.
+    per_rank = tiers_cfg["rank"].get("weeks_per_rank")
     players, char_id = [], {}
     for pl in qualified:
         chars = sorted(char_pulls[pl], key=lambda ch: (ch != pl, -char_pulls[pl][ch]))
@@ -512,7 +525,7 @@ def main() -> None:
         tiers = sorted(t for t, w in tier_weeks[pl].items() if len(w) >= tiers_cfg["tiers"][t].get("min_weeks", min_w))
         # [name, class index (null if unknown), reset weeks]: every character, the site hides the class of minor ones.
         players.append({"name": pl, "chars": [[ch, CLASSES.index(char_class[ch]) if ch in char_class else None, len(char_weeks[ch])] for ch in chars],
-                        "tiers": tiers, "rank": min(max_rank, len(tiers)),
+                        "tiers": tiers, "rank": min(max_rank, len(weeks[pl]) // per_rank if per_rank else len(tiers)),
                         "role_weeks": [len(role_weeks[pl][role]) for role in ROLES]})
     print(f"players: {len(weeks)} seen, {len(qualified)} qualified ({site_cfg['min_weeks']}+ reset weeks)")
     # Ghosts of Fable: everyone else seen in eligible pulls, [name, reset weeks, expansion mask, class of
@@ -856,17 +869,23 @@ def main() -> None:
     guild_bosses = [[e, boss, h, k, w, round(f) if f else None, round(s) if s else None] for (e, boss, h), (k, w, f, s) in sorted(bosses.items())]
     guild_raiders = sorted(Counter(exp_mask.values()).items())
 
+    # A guild that has not raided every expansion yet (NightShift: Era and TBC) keeps the first ones only;
+    # they are a prefix of the list, so expansion and tier indices stay the same (as in mock_site_data).
+    played = guild_cfg.pop("expansions", None)
+    expansions = [x for x in tiers_cfg["expansions"] if played is None or x["id"] in played]
+    exp_ids = [x["id"] for x in expansions]
+    assert exp_ids == [x["id"] for x in tiers_cfg["expansions"]][:len(exp_ids)], "guild expansions must be the first ones"
     meta = {
         "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "mock": False,
         "partial": True,
         "pending": sorted(PENDING | set(empty)),
-        "guild": json.loads((ROOT / "config" / "guilds.json").read_text(encoding="utf-8"))["fable"],
-        "expansions": tiers_cfg["expansions"],
-        "tiers": [{k: t[k] for k in ("id", "name", "short", "expansion")} for t in tiers_cfg["tiers"]],
+        "guild": guild_cfg,
+        "expansions": expansions,
+        "tiers": [{k: t[k] for k in ("id", "name", "short", "expansion")} for t in tiers_cfg["tiers"] if t["expansion"] in exp_ids],
         "classes": CLASSES,
         "roles": ROLES,
-        "rank": {"max": max_rank, "names": tiers_cfg["rank"]["names"]},
+        "rank": {"max": max_rank, "names": tiers_cfg["rank"]["names"], **({"weeks_per_rank": per_rank} if per_rank else {})},
         "settings": {k: site_cfg[k] for k in ("title_percentile", "flip_percentile", "min_den", "min_weeks", "min_role_weeks", "min_char_weeks")},
         "home": {k: v for k, v in site_cfg["home"].items() if not k.startswith("_")},
         "player": {k: v for k, v in site_cfg["player"].items() if not k.startswith("_")},
@@ -876,11 +895,15 @@ def main() -> None:
         "guild_raiders": guild_raiders,
         "ghosts": ghosts,
     }
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    if guild != "fable":
+        # Hand-made honours (Most Soundboard) name Fable players, with their portraits: Fable only.
+        meta["home"].update(meta["guild"].pop("home", {}))
+        meta["home"]["pinned"] = [x for x in meta["home"].get("pinned", []) if isinstance(x, str)]
+    out_dir.mkdir(parents=True, exist_ok=True)
     for name, payload in (("meta", meta), ("players", players), ("stats", stats)):
-        (OUT_DIR / f"{name}.json").write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    size = sum(f.stat().st_size for f in OUT_DIR.glob("*.json"))
-    print(f"{len(pulls)} pulls, {len(players)} players -> {OUT_DIR.relative_to(ROOT)} ({size / 1e6:.1f} MB)")
+        (out_dir / f"{name}.json").write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    size = sum(f.stat().st_size for f in out_dir.glob("*.json"))
+    print(f"{len(pulls)} pulls, {len(players)} players -> {out_dir.relative_to(ROOT)} ({size / 1e6:.1f} MB)")
     for k, v in sorted(issues.items()):
         print(f"issue: {k}: {v}")
 

@@ -86,11 +86,14 @@ export function StatValue({ stat, row, parseColors = false }) {
 const ROLE_LABELS = { TANK: 'Tank', DPS: 'DPS', HEALER: 'Healer' };
 export const roleLabel = r => ROLE_LABELS[r] || r;
 
-export function RankBadge({ player, meta, size = 22 }) {
-  if (!player.rank) return null;
+// `blank`: an unranked player keeps an empty slot of the badge's size, so names line up in lists.
+export function RankBadge({ player, meta, size = 22, blank = false }) {
+  if (!player.rank) return blank ? <span className="rank blank" style={{ width: size, height: size }} aria-hidden="true" /> : null;
   const name = meta.rank.names[player.rank - 1];
   const tiers = player.tiers.length;
-  const tip = `Rank ${player.rank} · ${name} · ${tiers} raid tier${tiers > 1 ? 's' : ''}`;
+  // weeks_per_rank (NightShift): one rank per that many reset weeks, not per raid tier.
+  const per = meta.rank.weeks_per_rank;
+  const tip = `Rank ${player.rank} · ${name} · ${per ? `${player.rank * per}+ reset weeks` : `${tiers} raid tier${tiers > 1 ? 's' : ''}`}`;
   return (
     <img className="rank" src={`../ranks/${meta.guild.faction === 'horde' ? 'horde/' : ''}${player.rank}.jpg`} width={size} height={size}
       alt={tip} title={tip} loading="lazy" />
@@ -103,7 +106,7 @@ export function PlayerName({ data, p, filter, badge }) {
   const classes = playedClasses(data, p, filter);
   return (
     <a className="pname" href={href('player', pl.name, filter)}>
-      <RankBadge player={pl} meta={data.meta} size={badge} />
+      <RankBadge player={pl} meta={data.meta} size={badge} blank />
       <span className="pn">{pl.name}</span>
       {classes.length > 0 && (
         <span className="cdots" role="img" title={classes.join(', ')} aria-label={classes.join(', ')}>
@@ -124,7 +127,8 @@ function Chip({ on, onClick, children, dot }) {
 }
 
 // Expansion / role / class chips. `available` (a player's facets) hides values he never played.
-export function FilterBar({ meta, filter, onChange, available, note }) {
+// groups: the filter groups shown (guild record pages: expansion only).
+export function FilterBar({ meta, filter, onChange, available, note, groups = ['exp', 'role', 'cls'] }) {
   const toggle = (k, v) => {
     const next = { ...filter, [k]: new Set(filter[k]) };
     next[k].has(v) ? next[k].delete(v) : next[k].add(v);
@@ -132,7 +136,7 @@ export function FilterBar({ meta, filter, onChange, available, note }) {
   };
   const [open, setOpen] = useState(false);
   const show = (k, i) => (!available || available[k].has(i)) && (!meta.present || meta.present[k].has(i));
-  const any = filter.exp.size + filter.cls.size + filter.role.size;
+  const any = groups.reduce((n, k) => n + filter[k].size, 0);
   return (
     <div className={'filters' + (open ? ' open' : '')}>
       <button type="button" className="ftoggle" aria-expanded={open} onClick={() => setOpen(o => !o)}>
@@ -140,18 +144,18 @@ export function FilterBar({ meta, filter, onChange, available, note }) {
         <span className="chev" aria-hidden="true">▾</span>
       </button>
       <div className="fbody">
-      <div className="grp"><b>Expansion</b>
+      {groups.includes('exp') && <div className="grp"><b>Expansion</b>
         {meta.expansions.map((x, i) => show('exp', i) &&
           <Chip key={x.id} on={filter.exp.has(i)} onClick={() => toggle('exp', i)}>{x.short}</Chip>)}
-      </div>
-      <div className="grp"><b>Role</b>
+      </div>}
+      {groups.includes('role') && <div className="grp"><b>Role</b>
         {meta.roles.map((r, i) => show('role', i) &&
           <Chip key={r} on={filter.role.has(i)} onClick={() => toggle('role', i)}>{roleLabel(r)}</Chip>)}
-      </div>
-      <div className="grp"><b>Class</b>
+      </div>}
+      {groups.includes('cls') && <div className="grp"><b>Class</b>
         {meta.classes.map((c, i) => show('cls', i) &&
           <Chip key={c} on={filter.cls.has(i)} dot={CLASS_COLORS[c]} onClick={() => toggle('cls', i)}>{c}</Chip>)}
-      </div>
+      </div>}
       {any ? <button type="button" className="btn" onClick={() => onChange({ exp: new Set(), cls: new Set(), role: new Set() })}>Reset filters</button> : null}
       {note && <span className="fnote">{note}</span>}
       </div>
@@ -205,7 +209,7 @@ export function Search({ data, filter }) {
             const alts = pl.chars.slice(1).map(c => c[0]);
             return (
               <li key={p} id={`${id}hit${i}`} role="option" aria-selected={i === sel} onMouseDown={() => pick(p)} onMouseEnter={() => setSel(i)}>
-                <RankBadge player={pl} meta={data.meta} />
+                <RankBadge player={pl} meta={data.meta} blank />
                 <span className="hn">{pl.name}</span>
                 {alts.length > 0 && <span className="ha">{alts.join(', ')}</span>}
               </li>

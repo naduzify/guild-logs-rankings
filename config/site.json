@@ -26,6 +26,10 @@
     ],
     "pinned_title": "Guild Legends",
     "pinned_top_n": 5,
+    "_pinned_columns": "Columns of a pinned achievement's top (2: the first pinned_left rows on the left, the leaders stretched to the height of the rest on the right, side by side from 720px). Per guild in config/guilds.json -> home.",
+    "pinned_columns": 1,
+    "_pinned_left": "Rows in the left column when pinned_columns is 2 (at least every player placed 1st to 3rd).",
+    "pinned_left": 4,
     "featured_count": 8,
     "ghosts": {
       "title": "Ghosts of {guild}",

@@ -102,6 +102,10 @@
   "reset_anchor_utc": "2019-08-27T15:00:00",
   "_timezone": "Guild time zone: raid nights (best friend, late arrival, early leaver) and dates shown on the site.",
   "timezone": "Australia/Sydney",
+  "_guild_time": "Other guilds than Fable: their own weekly reset anchor and time zone (same keys as above). NightShift (Thunderstrike, EU): Wednesday 04:00 UTC.",
+  "guild_time": {
+    "nightshift": {"reset_anchor_utc": "2026-01-07T04:00:00", "timezone": "Europe/Paris"}
+  },
   "_engineering_abilities": "Engineer's Pride: damage done by these abilities (bombs, grenades, sappers, dynamite).",
   "engineering_abilities": [
     "Goblin Sapper Charge",
