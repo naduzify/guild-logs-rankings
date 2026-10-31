@@ -350,11 +350,13 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
     for e in t["healing"]["entries"]:
         for x in e.get("targets", []):
             received[x.get("name")] += x.get("total", 0)
-    # "Avoidable" damage: a non-melee enemy ability that hit fewer than half the players of the pull.
+    # "Avoidable" damage: a non-melee enemy ability that hit fewer than half the players of the pull. A player's
+    # own spells that hurt him (Stagger, Cauterize, Shadow Word: Death...) are no boss mechanic: left out.
+    own_harm = set(CONFIG["avoidable_ignore"])
     hit = Counter()
     for name in roles:
         for a in taken.get(name, {}).get("abilities", []):
-            if a.get("name") != "Melee" and a.get("total", 0) > 0:
+            if a.get("name") != "Melee" and a.get("name") not in own_harm and a.get("total", 0) > 0:
                 hit[a["name"]] += 1
     avoidable = {a for a, n in hit.items() if n < len(roles) / 2}
     engineering = set(CONFIG["engineering_abilities"])

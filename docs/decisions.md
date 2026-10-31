@@ -979,3 +979,9 @@ Premier mapping des rerolls dans `nightshift_rerolls.json` (23 joueurs, le premi
 
 - **Décision** : bandeau « Work in progress » retiré de la page NightShift (texte `wip` de `config/guilds.json` supprimé), ruban retiré de sa carte sur la page de choix, description de la page mise à jour. Le mécanisme `wip` reste pour une future guilde.
 - **Raison** : les logs sont crawlés et les rerolls principaux rattachés ; il ne manque que quelques données de trash, anecdotiques (morts sur le trash pour Headhunter et Collateral Damage). `partial` reste à vrai dans `config/guilds.json`, sans effet sur le site.
+
+## 2026-10-31 — Mechanic Magnet : sans les dégâts qu'on s'inflige soi-même
+
+- **Décision** : les sorts du joueur qui le blessent sortent des dégâts « évitables » (`avoidable_ignore` de `config/compute.json`) : Stagger, Cauterize, Shadow Word: Death, Hellfire (et Hellfire Effect), Seal et Judgement of the Martyr, leur version Horde Seal et Judgement of Blood (ajoutée par cohérence : même sort, elle gonflait les paladins de NightShift), les deux orthographes de Judgement, Blood Tap. Ils ne viennent d'aucune mécanique de boss. Touche Mechanic Magnet et Parse Fiend.
+- **Raison** : le tableau des dégâts subis de WCL compte toutes les sources. Un sort qu'on s'inflige ne touche que soi, il passait donc toujours pour « évitable ». Les prêtres (Shadow Word: Death) tenaient le haut du classement : Voliage n°4 → n°154 chez Fable, Onyrex n°1 → n°119 chez NightShift.
+- **Gardé** : le friendly fire reçu d'autres joueurs (sous contrôle mental) et Void Shift restent comptés. Damage Taken (carte Player Contribution) n'est pas touché : Stagger y reste, ce sont de vrais coups de boss étalés.
