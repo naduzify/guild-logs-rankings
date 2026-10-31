@@ -15,7 +15,6 @@
     "home": {"pinned_top_n": 10, "pinned_columns": 2, "pinned_left": 4},
     "settings": {"min_weeks": 5, "min_role_weeks": 5},
     "rank": {"weeks_per_rank": 8},
-    "tagline": "Every pull, every wipe, every questionable decision. For the Horde.",
-    "wip": "NightShift's logs are still being crawled and alts are not matched to their mains yet: names and numbers will move."
+    "tagline": "Every pull, every wipe, every questionable decision. For the Horde."
   }
 }

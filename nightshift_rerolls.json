@@ -3,7 +3,8 @@
  "source": "Warcraft Logs guilds 773182 and 818103",
  "rerolls": {
   "Underratedd": [
-   "Priestittute"
+   "Priestittute",
+   "Phenomm"
   ],
   "Grinie": [
    "Twister",
@@ -12,14 +13,12 @@
   "Archrasha": [
    "Archbased"
   ],
-  "Shieeni": [
-   "Shieen"
-  ],
   "Painwar": [
    "Painnature",
    "Painmagic",
    "Painpriest",
-   "Painform"
+   "Painform",
+   "Painwlock"
   ],
   "Truglina": [
    "Truggles",
@@ -28,7 +27,8 @@
   ],
   "Novaxx": [
    "Unvaxx",
-   "Novaxxadin"
+   "Novaxxadin",
+   "Nãovaxx"
   ],
   "Trollmega": [
    "Orcmega",
@@ -59,7 +59,8 @@
    "Calypsa"
   ],
   "Mainsadin": [
-   "Mainzer"
+   "Mainzer",
+   "Mainsy"
   ],
   "Rïsu": [
    "Rïs",
@@ -85,8 +86,23 @@
   "Oak": [
    "Bloak"
   ],
-  "Wellhung": [
+  "Shieni": [
+   "Shieeni",
+   "Shieen"
+  ],
+  "Wellhuung": [
+   "Wellhung",
    "Hatewell"
+  ],
+  "Troogled": [
+   "Troogold"
+  ],
+  "Omnirogue": [
+   "Omnitank",
+   "Omniage"
+  ],
+  "Rottenfizzle": [
+   "Rottennerve"
   ]
  }
 }
