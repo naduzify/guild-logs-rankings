@@ -956,3 +956,13 @@ Premier mapping des rerolls dans `nightshift_rerolls.json` (23 joueurs, le premi
 - **Raison** : la CI n'a ni le cache brut ni les identifiants WCL. Commiter le résultat final est le plus court chemin vers la mise en ligne.
 - **Écarté pour l'instant** : l'étage Parquet commité, avec un export JSON lancé en CI. Il demanderait de recalculer les stats depuis le Parquet au lieu du cache brut. Il reste possible plus tard.
 - **Attention** : `pipeline.mock_site_data` écrit au même endroit que l'export réel. Ne jamais commiter des données fictives.
+
+---
+
+## 2026-10-31 — Boss sans points All Stars : gardés
+
+**Décision.** Les boss que WCL All Stars ignore (0 point malgré un kill, 34 boss surtout en Cata et MoP) restent dans toutes les stats, Main Character Moment et totaux de carrière compris.
+
+**Raison.** Choix du propriétaire, une fois le crawl des parses terminé. Ces kills ont bien eu lieu pour la guilde ; le site mesure la guilde contre elle-même, pas contre le classement WCL.
+
+**Écarté.** Les retirer des stats de combat et de Main Character Moment (étude plus haut : -25 % sur les totaux, 41 meilleurs pulls sur 144 déplacés).
