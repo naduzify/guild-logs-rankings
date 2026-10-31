@@ -74,6 +74,7 @@ Les deux ne partagent pas leur mémoire. **Ce repo est la source de vérité uni
 - **Seuil d'apparition** dans les classements : **10 semaines de reset distinctes** de présence en raid éligible, tous personnages confondus (`config/site.json` → `min_weeks`). **NightShift** (bien moins de logs) : 5 semaines, et 5 par rôle (`config/guilds.json` → `settings`). Et **10 semaines de reset dans un rôle** (tous personnages) pour être classé sur ce rôle : achievements de rôle, achievements communs sous filtre de rôle, sections de rôle de la fiche (`min_role_weeks`).
 - **Rôle par combat**, tel que donné par WCL (TANK / DPS / HEALER). Les erreurs ponctuelles de catégorisation sont acceptées.
 - **Grain de la table de stats** : `(joueur, personnage, combat, rôle)`.
+- **Raid** : les rapports d'une même soirée forment un seul raid si leurs rosters se recoupent (au moins la moitié du plus petit, `raid_overlap`), sinon plusieurs raids (deux groupes le même soir, fréquent chez Fable en 2020 et chez NightShift). Late Arrival / Early Leaver prennent le premier et le dernier boss par raid ; le trash compte une fois par raid.
 
 ### Normalisation base 100
 - Score = valeur du joueur / **médiane des joueurs du même rôle dans le même pull** × 100.

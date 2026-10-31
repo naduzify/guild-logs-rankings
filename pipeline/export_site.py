@@ -231,17 +231,39 @@ def scaled_totals(rows: list, ref_tier: int) -> tuple[dict, dict, dict]:
     return out, rates, refs_by_stat
 
 
-def trash_nights(pulls: dict, tz) -> list:
-    """[(report code, its kept boss pulls, {character: his boss rows in it})], one report per raid night.
-
-    Trash tables are per report (pipeline/crawl_extra.py). When a night was logged in several reports, only
-    the one holding the most kept boss pulls counts, so the trash is not counted twice. A character's trash
-    goes to his role and expansion of the night (night_row)."""
+def raids(pulls: dict, tz) -> list:
+    """[(night, {report code: its kept boss pulls})], one entry per raid: a night can hold two raids (two
+    groups, as NightShift sometimes ran). The reports of a night are one raid when their rosters overlap
+    (at least raid_overlap of the smaller one's characters in both: the same raid logged twice, or a log
+    restarted mid-raid); else they are separate raids."""
     by_night = defaultdict(lambda: defaultdict(list))
     for src, rs in pulls.items():
         by_night[raid_night(rs[0]["start_ms"], tz)][rs[0]["report"]].append(src)
     out = []
-    for reports in by_night.values():
+    for night, reports in by_night.items():
+        roster = {code: {r["char"] for s in srcs for r in pulls[s]} for code, srcs in reports.items()}
+        group = {code: code for code in reports}
+        find = lambda c: c if group[c] == c else find(group[c])
+        codes = sorted(reports)
+        for i, a in enumerate(codes):
+            for b in codes[i + 1:]:
+                if len(roster[a] & roster[b]) >= CONFIG["raid_overlap"] * min(len(roster[a]), len(roster[b])):
+                    group[find(b)] = find(a)
+        merged = defaultdict(dict)
+        for code in codes:
+            merged[find(code)][code] = reports[code]
+        out += [(night, g) for g in merged.values()]
+    return out
+
+
+def trash_nights(pulls: dict, tz) -> list:
+    """[(report code, its kept boss pulls, {character: his boss rows in it})], one report per raid (raids()).
+
+    Trash tables are per report (pipeline/crawl_extra.py). When a raid was logged in several reports, only
+    the one holding the most kept boss pulls counts, so the trash is not counted twice. A character's trash
+    goes to his role and expansion of the night (night_row)."""
+    out = []
+    for _, reports in raids(pulls, tz):
         code, srcs = max(reports.items(), key=lambda kv: (len(kv[1]), kv[0]))
         mine = defaultdict(list)
         for s in srcs:
@@ -456,18 +478,16 @@ def raid_night(start_ms: int, tz) -> str:
 
 
 def late_and_early(pulls: dict, tz) -> dict:
-    """Late Arrival / Early Leaver: {(night, player): (first row, last row, late, early)}.
+    """Late Arrival / Early Leaver: {(night, raid, player): (first row, last row, late, early)}.
 
-    A night's first and last bosses are the encounters (with difficulty) of its first and last pulls,
-    across every report of the night. A player is late when he is in none of the pulls of the first
-    boss, early when in none of the last boss's. Nights with a single boss are left out."""
-    nights = defaultdict(list)
-    for rs in pulls.values():
-        nights[raid_night(rs[0]["start_ms"], tz)].append(rs)
+    A raid's first and last bosses are the encounters (with difficulty) of its first and last pulls, across
+    every report of the raid (raids(): a night with two groups is two raids). A player is late when he is in
+    none of the pulls of the first boss, early when in none of the last boss's. Raids with a single boss are
+    left out."""
     boss = lambda r: (r["encounter_id"], r["difficulty"])
     out = {}
-    for night, ps in nights.items():
-        ps.sort(key=lambda rs: rs[0]["start_ms"])
+    for n, (night, reports) in enumerate(raids(pulls, tz)):
+        ps = sorted((pulls[s] for srcs in reports.values() for s in srcs), key=lambda rs: rs[0]["start_ms"])
         first, last = boss(ps[0][0]), boss(ps[-1][0])
         if first == last:
             continue
@@ -477,7 +497,7 @@ def late_and_early(pulls: dict, tz) -> dict:
                 mine[r["player"]].append(r)
         for pl, rs in mine.items():
             bosses = {boss(r) for r in rs}
-            out[(night, pl)] = (rs[0], rs[-1], first not in bosses, last not in bosses)
+            out[(night, n, pl)] = (rs[0], rs[-1], first not in bosses, last not in bosses)
     return out
 
 
