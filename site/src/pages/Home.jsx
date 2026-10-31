@@ -204,7 +204,7 @@ export default function Home({ data, filter }) {
       )}
       <div className="sechead">
         <h2>Hall of fame</h2>
-        <a href={href('stats', null, filter)}>All {meta.stats.filter(s => s.category !== 'overview').length} achievements →</a>
+        <a href={href('stats', null, filter)}>All {meta.stats.filter(s => s.category !== 'overview' && !s.variant_of).length} achievements →</a>
       </div>
       <section className="cards">
         {featured.map(s => <TopCard key={s.id} data={data} stat={s} filter={filter} />)}

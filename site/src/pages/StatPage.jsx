@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import { FilterBar, InfoTip, PctBar, PlayerName, StatValue } from '../components.jsx';
 import { BASE100, fold, formatInt, formatNumber, formatPct, formatValue, isBase100 } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
-import { computeStat, explain, hasNumber, hasPercentile, isRankable, playerBreakdown, shareTotal, titlePercentile, valueIsNumber } from '../lib/stats.js';
+import { computeStat, explain, hasNumber, hasPercentile, isListed, isRankable, playerBreakdown, shareTotal, titlePercentile, valueIsNumber } from '../lib/stats.js';
 
 export const CATEGORIES = [
   { id: 'common', label: 'Everyone' },
@@ -31,7 +31,7 @@ export function StatsIndex({ data, filter }) {
         <section key={c.id}>
           <h2 className="cat">{c.label}</h2>
           <ul className="statlist">
-            {data.meta.stats.filter(s => s.category === c.id).map(s => (
+            {data.meta.stats.filter(s => s.category === c.id && isListed(s)).map(s => (
               <li key={s.id} className={found(s) ? 'found' : undefined}>
                 <a href={href('stat', s.id, filter)}>{s.title}</a>
                 {s.flip && <span className="flipname"> / {s.flip}</span>}
@@ -67,6 +67,12 @@ export default function StatPage({ data, id, filter }) {
   const title_percentile = titlePercentile(stat, data.meta.settings);
   const k = fold(find.trim());
   const found = p => k && data.players[p].chars.some(([n]) => fold(n).includes(k));
+  // A toggle (The Terrorist: "Single target only") switches between a stat and its variant, filters kept.
+  const base = stat.variant_of ? data.statById.get(stat.variant_of) : stat;
+  const toggle = base?.toggle && data.statById.get(base.toggle.stat) ? base.toggle : null;
+  // `total` tops (Headhunter): the number opens the player's own list.
+  const total = stat.top_by === 'total';
+  const own = p => href('stat', [stat.id, data.players[p].name], filter);
 
   return (
     <>
@@ -79,6 +85,13 @@ export default function StatPage({ data, id, filter }) {
         </ul>
       </header>
       <FilterBar meta={data.meta} filter={filter} onChange={f => go('stat', stat.id, f)} />
+      {toggle && (
+        <button type="button" role="switch" className="htoggle stoggle" aria-checked={stat.id === toggle.stat}
+          onClick={() => go('stat', stat.id === toggle.stat ? base.id : toggle.stat, filter)}>
+          <span className="track" aria-hidden="true"><span className="thumb" /></span>
+          {toggle.label}
+        </button>
+      )}
       {rows.length === 0 ? <p className="empty">Nobody qualifies with these filters.</p> : (
         <div className="tablebox">
           <table className="board" ref={board}>
@@ -91,7 +104,7 @@ export default function StatPage({ data, id, filter }) {
                       onChange={e => setFind(e.target.value)} onKeyDown={jump} />
                   </span>
                 </th>
-                <th>{stat.agg === 'top' ? stat.title : isBase100(stat) ? 'Score (base 100)' : 'Value'}</th>
+                <th>{total ? (stat.unit ? stat.unit[0].toUpperCase() + stat.unit.slice(1) : 'Total') : stat.agg === 'top' ? stat.title : isBase100(stat) ? 'Score (base 100)' : 'Value'}</th>
                 {showN && <th className="hide-sm">Career</th>}
                 {showKills && <th className="hide-sm">Kills</th>}
                 {showP && <th className="l"><span className="lg">Percentile</span><abbr className="sm" title="Percentile">Pctl</abbr></th>}
@@ -104,7 +117,9 @@ export default function StatPage({ data, id, filter }) {
                   <tr key={r.p} className={[tag, found(r.p) && 'found'].filter(Boolean).join(' ') || undefined}>
                     {isRankable(stat) && <td className="n">{r.pos}</td>}
                     <td className="l"><PlayerName data={data} p={r.p} filter={filter} /></td>
-                    <td className={r.label ? 'v lbl' : 'v'}>{r.label ? <>{stat.breakdown
+                    <td className={r.label ? 'v lbl' : 'v'}>{total
+                      ? <><a href={own(r.p)} title={`All of ${data.players[r.p].name}'s ${stat.title}`}>{formatInt(r.value)}</a> <span className="muted">· most: {r.label}</span></>
+                      : r.label ? <>{stat.breakdown
                       ? <a href={href('stat', [stat.id, data.players[r.p].name], filter)} title={`All of ${data.players[r.p].name}'s ${stat.title}`}>{r.label}</a>
                       : r.label} <span className="muted">{formatValue(stat, r.value)}{isBase100(stat) && ` ${BASE100}`}{shareTotal(stat, r)}</span></> : valueIsNumber(stat) ? fmt(r.value) : <StatValue stat={stat} row={r} parseColors />}</td>
                     {showN && <td className="v muted hide-sm">{formatNumber(stat, r.number)}</td>}
@@ -145,8 +160,10 @@ export function BreakdownPage({ data, id, name, filter }) {
   const total = rows.reduce((t, r) => t + r.n, 0);
   const minDen = stat.min_den ?? data.meta.settings.min_den;
   // A raider of the label column who is ranked links to his own page.
-  const labelCell = label => (stat.breakdown === 'Raider' && data.byName.has(label)
-    ? <PlayerName data={data} p={data.byName.get(label)} filter={filter} /> : label);
+  // A raider who is not ranked (a ghost) gets no link, but the same empty badge slot, so names line up.
+  const labelCell = label => (stat.breakdown !== 'Raider' ? label : data.byName.has(label)
+    ? <PlayerName data={data} p={data.byName.get(label)} filter={filter} />
+    : <span className="pname ghostname"><span className="rank blank" style={{ width: 22, height: 22 }} aria-hidden="true" /><span className="pn">{label}</span></span>);
   // Bosses and abilities show the expansions they were met in; raiders do not.
   const showExp = stat.breakdown !== 'Raider';
   const k = fold(find.trim());

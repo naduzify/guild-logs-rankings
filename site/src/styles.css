@@ -361,6 +361,9 @@ a.hname:hover { color: var(--parchment); }
 .pname { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; font-weight: 600; min-width: 0; }
 .pname .pn { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pname:hover .pn { color: var(--parchment); }
+/* A raider who is not ranked (personal lists): no link, same layout. */
+.ghostname { font-weight: 400; color: var(--tan); }
+.ghostname:hover .pn { color: inherit; }
 /* Class dots after the name: the classes played under the active filters, most played first. */
 .cdots { display: inline-flex; gap: 3px; flex: none; }
 .cdots i { flex: none; width: 8px; height: 8px; border-radius: 50%; }
@@ -502,6 +505,8 @@ a.slabel:hover { text-decoration: underline; }
 .htoggle[aria-checked="true"] .thumb { transform: translateX(16px); background: #fff; }
 .htoggle:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 4px; }
 @media (prefers-reduced-motion: reduce) { .htoggle .track, .htoggle .thumb { transition: none; } }
+/* On a stat page (The Terrorist: Single target only), under the filters. */
+.stoggle { margin: 0 0 12px; }
 /* Player page headings: the Guild Legends ornament, with room above each section. */
 .ptitlesec { margin: 0 0 18px; }
 .bigcards { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 10px; }

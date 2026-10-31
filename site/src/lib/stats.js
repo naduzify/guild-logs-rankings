@@ -52,6 +52,7 @@ function runs(ids) {
 
 // `top` picks the label with the highest count, or the highest mean among labels with enough samples.
 // `share` picks the highest count among labels with enough samples, valued as its share of all labels.
+// `total` is valued as the count of every label (Headhunter: all his victims), with the most frequent label.
 function topOf(acc, stat, minDen) {
   let best = null, total = 0;
   for (const [label, [n, d]] of Object.entries(acc)) {
@@ -60,6 +61,7 @@ function topOf(acc, stat, minDen) {
     if (v != null && (!best || v > best.value)) best = { label, value: v, number: n };
   }
   if (best && stat.top_by === 'share') best.value = total ? best.number / total : 0;
+  if (best && stat.top_by === 'total') best.value = best.number = total;
   return best;
 }
 
@@ -159,6 +161,8 @@ export function playerBreakdown(stat, cells, filter, settings, roleOk, p) {
 }
 
 export const isRankable = stat => stat.display !== 'T';
+// Another version of a stat (The Terrorist, single target): reached through its toggle, listed nowhere else.
+export const isListed = stat => !stat.variant_of;
 export const hasPercentile = stat => stat.display.includes('P');
 // A separate career number column only makes sense for ratios: elsewhere the number is the value itself.
 export const hasNumber = stat => stat.display.includes('N') && stat.agg === 'ratio';

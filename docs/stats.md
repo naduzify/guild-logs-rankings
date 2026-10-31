@@ -16,7 +16,7 @@ Liste des stats affichées sur le site, issue de la session Claude Chat du 2026-
 
 Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. ⚙️ liste en config ; 📋 casts par sort (déjà dans le cache) ; 🔬 niveau 3 ciblé ; 🆕 crawl supplémentaire.
 
-## Common (37)
+## Common (40)
 
 1. **The Gang**: Raid invite? Already in the group. (Distinct reset weeks with at least one eligible pull. The card also shows hours in boss fights, first logged pull and expansions played.) [P+N]
 2. **Identity Crisis** (ex-The Undecided): Asks "what should I play next tier?" every tier. (Distinct characters raided on, with their classes and roles on the card.) [N]
@@ -38,7 +38,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 18. **The Janitor**: Dispel first, ask what it was later. (Dispels per pull.) [P+N]
 19. **The Sweat** (flip: **Snoozer**): Hasn't blinked since Molten Core. (Active time as a share of the pull. The card shows casts per minute compared to his class.) [P]
 20. **Comfort Boss**: Everyone has a boss that's secretly a training dummy. (Boss where his average performance score is highest.) [T]
-21. **The Terrorist**: Mind controlled. Allegedly. (His share of the raid's friendly fire, self-damage excluded: his friendly damage divided by the raid's, over the boss pulls (kills and wipes) and the nights' trash he was in. At least 10 pulls or nights with friendly fire.) [P+N]
+21. **The Terrorist**: Mind controlled. Allegedly. (His share of the raid's friendly fire, self-damage excluded: his friendly damage divided by the raid's, over the boss pulls (kills and wipes) and the nights' trash he was in. At least 10 pulls or nights with friendly fire.) Interrupteur **Single target only** : même calcul sur les seuls sorts à cible unique (variante `the-terrorist-single`, voir `single_target` de `config/compute.json`). ⚙️🆕 [P+N]
 22. **Clutch Player**: Farm nights are practice. First kills are game day. (Average performance score on the guild's first kills of each boss, compared to his score on farm kills.) [P]
 23. **Glow Up**: Started in greens. Ended on top of the meters. (Trend of his performance score over the weeks, as the slope of a regression. Only players with scored kills in at least 3 raid tiers under the filters.) [P]
 
@@ -57,6 +57,9 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 36. **Pioneer**: In the first-kill screenshot. And in every wipe before it. (Guild first kills attended, each boss and difficulty.) [P+N]
 
 37. **Parse Lord**: Purple is a personality. (Warcraft Logs parses on Fable kills: per boss, the average of his best and his median parse (both against the rankings at the time of each kill), then the average over his kills (each boss weighs its number of kills, whichever character played them). Every role, tanks included, at least 50 kills. The only achievement not measured against the guild.) [P]
+38. **Martyr**: Takes one for the team. Several, actually. (His share of the raid's friendly fire received: damage dealt to him by other raid members, divided by the raid's friendly fire, over the boss pulls and the nights' trash he was in. Damage on oneself left out. At least 10 pulls or nights with friendly fire.) [P+N]
+39. **Headhunter**: Collects scalps. Doesn't check the nameplate colour. (Killing blows landed on other raid members with his own abilities, on boss pulls and the nights' trash. Career total; the number opens the list of his victims.) ⚙️🆕 [N]
+40. **Collateral Damage**: Survived the boss. Didn't survive the raid. (Deaths from a killing blow landed by another raid member with his own abilities, on boss pulls and the nights' trash. Career total; the number opens the list of who killed him.) ⚙️🆕 [N]
 
 ## Tank (7)
 
@@ -94,6 +97,8 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 - **Attention Seeker** 📋 : Casts filtré sur les taunts, par pull et sur le trash de chaque rapport (`trash_extra.json`, durée du trash = `totalTime`) (le tableau Casts de niveau 2 ne garde que 5 capacités par joueur). En Era et en WotLK, aussi les consommables (The Junky ; en WotLK, filtrés par ID).
 - **Blamed the Healer** 🔬 : événements de buffs des CD défensifs, sur les pulls où un joueur d'une classe tank meurt.
 - **Timekeeper / The Tourist** 🆕 : DamageDone sur le trash (`killType: Trash`), par rapport.
+- **Headhunter / Collateral Damage** 🆕 : tableau Deaths sur le trash de chaque rapport (`trash_deaths.json`, `killType: Trash`) ; sur les pulls de boss, le tableau Deaths du crawl principal suffit (source du coup fatal dans ses événements).
+- **The Terrorist, cible unique** 🔬 : événements de friendly fire des sorts « premier coup seulement » (`ff_events.json`, toutes les pages), seulement sur les rapports où l'un d'eux a touché un joueur.
 - **Parse Lord** : parses WCL des kills, par rapport, deux fois : `rankings_historical.json` (`timeframe: Historical`, classement à la date du combat, pour le meilleur et le parse médian) et `rankings.json` (classement d'aujourd'hui, en secours pour un kill sans parse historique).
 
 ## Reportées en V2

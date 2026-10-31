@@ -17,7 +17,8 @@ import statistics
 from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 
-from pipeline.facts import CACHE_DIR, CONFIG, ROOT, _detail_counts, _payload, add_scores, guild_time, load_mapping, norm, pull_rows, pulls_from_cache
+from pipeline.facts import (CACHE_DIR, CONFIG, ROOT, _detail_counts, _payload, add_scores, ff_single, first_hit_single, friendly_kill,
+                            guild_time, load_mapping, norm, pull_rows, pulls_from_cache)
 
 HOST = "classic"  # WCL site of the guild being exported (pipeline/guild.py), set by main()
 WEEK_MS = 7 * 24 * 3600 * 1000
@@ -274,33 +275,79 @@ def trash_damage(nights: list, rate: dict, ref: float) -> list:
     return out
 
 
-def trash_extras(nights: list) -> tuple[list, list, list]:
-    """The Terrorist, Attention Seeker and The Nut Crusher on trash, from reports/<code>/trash_extra.json.
+def report_actors(code: str) -> tuple[dict, set]:
+    """{actor id: name} of a report, and the ids of its trash fights (no encounter)."""
+    rep = _payload(CACHE_DIR / HOST / "reports" / code / "report.json")["report"]
+    actors = {a["id"]: a["name"] for a in (rep.get("masterData") or {}).get("actors", [])}
+    return actors, {f["id"] for f in rep["fights"] if not f.get("encounterID")}
 
-    Friendly fire: [(night row, his friendly damage, the raid's)] on the night's trash, for every character of
-    the night, when the raid did any. Taunts: [(night row, taunts, trash minutes)] for the characters who
-    tanked that night. Interrupts: [(night row, interrupts, trash hours)] for every character of the night,
-    when the raid interrupted anything on the trash."""
-    ff, taunts, kicks = [], [], []
+
+def trash_extras(nights: list) -> dict:
+    """The Terrorist (and its single target version), Martyr, Attention Seeker and The Nut Crusher on trash,
+    from reports/<code>/trash_extra.json.
+
+    ff, ff_single, ff_taken: [(night row, his friendly damage dealt (all, single target) or taken, the raid's)]
+    on the night's trash, for every character of the night, when the raid did any (damage on oneself left
+    out). taunts: [(night row, taunts, trash minutes)] for the characters who tanked that night. kicks:
+    [(night row, interrupts, trash hours)] for every character of the night, when the raid interrupted
+    anything on the trash."""
+    out = {k: [] for k in ("ff", "ff_single", "ff_taken", "taunts", "kicks")}
     for code, _, mine in nights:
         path = CACHE_DIR / HOST / "reports" / code / "trash_extra.json"
         if not path.exists():
             continue
         x = _payload(path)["report"]
-        done = {e.get("name"): e.get("total", 0) for e in x["friendlyFire"]["data"].get("entries", [])}
-        total = sum(done.values())
+        entries = x["friendlyFire"]["data"].get("entries", [])
+        exp = next(iter(mine.values()))[0]["expansion"] if mine else None
+        first = Counter()
+        epath = CACHE_DIR / HOST / "reports" / code / "ff_events.json"
+        if epath.exists():
+            actors, trash_fights = report_actors(code)
+            for fid, by in first_hit_single(epath, actors).items():
+                if fid in trash_fights:
+                    first.update(by)
+        done = {e.get("name"): sum(t.get("total", 0) for t in e.get("targets", []) if t.get("name") != e.get("name")) for e in entries}
+        single = {e.get("name"): ff_single(e, exp, first.get(e.get("name"), 0)) for e in entries}
+        taken = Counter()
+        for e in entries:
+            for t in e.get("targets", []):
+                if t.get("name") != e.get("name"):
+                    taken[t.get("name")] += t.get("total", 0)
+        total, total_single = sum(done.values()), sum(single.values())
         cast = {e.get("name"): e.get("total", 0) for e in x["taunts"]["data"].get("entries", [])}
         minutes = x["taunts"]["data"].get("totalTime", 0) / 60000
         kicked = _detail_counts(x["interrupts"]["data"].get("entries", [])) if "interrupts" in x else Counter()
         for ch, rs in mine.items():
             row = night_row(rs)
             if total:
-                ff.append((row, done.get(ch, 0), total))
+                out["ff"].append((row, done.get(ch, 0), total))
+                out["ff_taken"].append((row, taken.get(ch, 0), total))
+            if total_single:
+                out["ff_single"].append((row, single.get(ch, 0), total_single))
             if row["role"] == "TANK" and minutes:
-                taunts.append((row, cast.get(ch, 0), minutes))
+                out["taunts"].append((row, cast.get(ch, 0), minutes))
             if sum(kicked.values()) and minutes:
-                kicks.append((row, kicked.get(ch, 0), minutes / 60))
-    return ff, taunts, kicks
+                out["kicks"].append((row, kicked.get(ch, 0), minutes / 60))
+    return out
+
+
+def trash_kills(nights: list) -> list:
+    """Headhunter / Collateral Damage on trash: [(killer's night row, victim's night row or None, victim name,
+    ability id)] from reports/<code>/trash_deaths.json, for the deaths whose killing blow came from another
+    character of the night."""
+    scripted, out = set(CONFIG["scripted_deaths"]), []
+    for code, _, mine in nights:
+        path = CACHE_DIR / HOST / "reports" / code / "trash_deaths.json"
+        if not path.exists():
+            continue
+        actors, _ = report_actors(code)
+        for d in _payload(path)["report"]["deaths"]["data"].get("entries", []):
+            fk = friendly_kill(d, actors)
+            if not fk or fk[0] not in mine or (d.get("killingBlow") or {}).get("name") in scripted:
+                continue
+            victim = mine.get(d["name"])
+            out.append((night_row(mine[fk[0]]), night_row(victim) if victim else None, d["name"], fk[1]))
+    return out
 
 
 def raid_time(rows: list) -> dict:
@@ -496,7 +543,8 @@ def main() -> None:
         r["tier"] = boss_tier.get((r["e"], r["encounter_id"]))
         if r["tier"] is None:
             unknown_zones[(r["expansion"], r["zone"])] += 1
-        r["heal_targets"] = json.loads(r["heal_targets"]) if isinstance(r["heal_targets"], str) else r["heal_targets"]
+        for field in ("heal_targets", "killed_by_player", "damage_abilities"):
+            r[field] = json.loads(r[field]) if isinstance(r[field], str) else r[field]
     for z, n in unknown_zones.items():
         print(f"WARNING zone without a tier: {z} ({n} rows)")
 
@@ -670,6 +718,14 @@ def main() -> None:
     print("obliterated: instant kills left out:", ", ".join(sorted({a for _, _, a in instakills})) or "none")
     row_of = {(r["source"], r["char"]): r for r in rows}
     ranked = lambda r: r["player"] in pid and r["char"] in char_class
+    # Headhunter / Collateral Damage: a player's own abilities are the ones the guild's players hit enemies with on
+    # min_encounters bosses or more; boss mechanics a player carries to his mates (Unstable Vita) are not.
+    ability_bosses = defaultdict(set)
+    for r in rows:
+        for a in r["damage_abilities"]:
+            ability_bosses[a].add(r["encounter_id"])
+    own_spell = {a for a, b in ability_bosses.items() if len(b) >= CONFIG["friendly_kills"]["min_encounters"]}
+    raid_ff_single = {src: sum(r["friendly_fire_single"] or 0 for r in rs) for src, rs in pulls.items()}
     key_of = lambda r: (pid[r["player"]], r["e"], CLASSES.index(char_class[r["char"]]), ROLES.index(r["role"]))
     nemesis_ignore = set(CONFIG["arch_nemesis_ignore"])
 
@@ -735,6 +791,16 @@ def main() -> None:
             cells.ratio("self-made", k, r["self_healing"] / r["healing_received"])
         if r["friendly_fire"] is not None and raid_ff[r["source"]]:
             cells.ratio("the-terrorist", k, r["friendly_fire"], raid_ff[r["source"]], 1)
+            cells.ratio("martyr", k, r["friendly_fire_taken"], raid_ff[r["source"]], 1)
+        if r["friendly_fire_single"] is not None and raid_ff_single[r["source"]]:
+            cells.ratio("the-terrorist-single", k, r["friendly_fire_single"], raid_ff_single[r["source"]], 1)
+        for killer, ability in r["killed_by_player"]:
+            if ability not in own_spell:
+                continue
+            cells.top("collateral-damage", k, owner.get(norm(killer), killer), 1)
+            mate = row_of.get((r["source"], killer))
+            if mate and ranked(mate):
+                cells.top("headhunter", key_of(mate), r["player"], 1)
         if id(r) in received:
             cells.ratio("healers-love-him", k, received[id(r)])
         if id(r) in magnet:
@@ -823,10 +889,21 @@ def main() -> None:
             cells.ratio("damage-done", key_of(row), sc, actual)
     print(f"damage done: trash of {len({r['report'] for r, _, _ in trash})} reports added")
     # The Terrorist, Attention Seeker and The Nut Crusher: the night's trash too.
-    ff, taunts, kicks = trash_extras(nights)
-    for row, mine, raid in ff:
-        if ranked(row):
-            cells.ratio("the-terrorist", key_of(row), mine, raid, 1)
+    extras = trash_extras(nights)
+    ff, taunts, kicks = extras["ff"], extras["taunts"], extras["kicks"]
+    for sid, items in (("the-terrorist", ff), ("the-terrorist-single", extras["ff_single"]), ("martyr", extras["ff_taken"])):
+        for row, mine, raid in items:
+            if ranked(row):
+                cells.ratio(sid, key_of(row), mine, raid, 1)
+    kills = trash_kills(nights)
+    for killer, victim, name, ability in kills:
+        if ability not in own_spell:
+            continue
+        if ranked(killer):
+            cells.top("headhunter", key_of(killer), owner.get(norm(name), name), 1)
+        if victim and ranked(victim):
+            cells.top("collateral-damage", key_of(victim), killer["player"], 1)
+    print(f"headhunter / collateral damage: {sum(1 for k in kills if k[3] in own_spell)} friendly kills on trash")
     for row, n, minutes in taunts:
         if ranked(row):
             cells.ratio("attention-seeker", key_of(row), n, minutes)

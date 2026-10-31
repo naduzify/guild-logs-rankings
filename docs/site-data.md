@@ -79,7 +79,7 @@ Les valeurs dépendent du mode `agg` de la stat :
 | `streak` | `[ids]` (semaines de raid de la guilde, numérotées à la suite) | plus longue suite d'ids consécutifs (Iron Man) |
 | `gap` | `[ids]` (idem) | plus grand trou entre deux ids présents (Comeback Kid) |
 | `slope` | `n, sx, sy, sxx, sxy, [tiers]` | pente de régression de y (score) sur x (semaine) ; `[tiers]` = tiers de raid des points, pour `min_tiers` |
-| `top` | `{label: [num, den]}`, ou `[num, den, {sous-label: num}]` (Arch-Nemesis : les boss de chaque capacité, pour la page personnelle) | label au plus grand Σnum (`top_by: count`) ou Σnum/Σden (`top_by: mean`) ; `top_by: share` : label au plus grand Σnum parmi ceux qui ont Σden ≥ `min_den`, valeur = sa part de Σnum de tous les labels |
+| `top` | `{label: [num, den]}`, ou `[num, den, {sous-label: num}]` (Arch-Nemesis : les boss de chaque capacité, pour la page personnelle) | label au plus grand Σnum (`top_by: count`) ou Σnum/Σden (`top_by: mean`) ; `top_by: share` : label au plus grand Σnum parmi ceux qui ont Σden ≥ `min_den`, valeur = sa part de Σnum de tous les labels ; `top_by: total` : valeur = Σnum de tous les labels (Headhunter : toutes ses victimes), label = le plus fréquent |
 | `max` | `v, label` | plus grande valeur, avec son label |
 
 Les cellules d'un rôle où le joueur a moins de `min_role_weeks` semaines (`role_weeks`) sont ignorées : toujours pour les achievements tank / healer / DPS, et pour les communs quand le filtre de rôle est actif. Sans `role_weeks` (données fictives), tout passe.
@@ -96,6 +96,7 @@ Un joueur n'a de valeur que si le dénominateur filtré atteint `min_den` (régl
 - `format` : `pct`, `score` (base 100), `rate` (+ `rate_unit`), `int`, `big`, `signed`, `pp` (points de %), `times` (multiple, « ×12 »).
 - `min_tiers` (`slope`) : nombre minimal de tiers de raid distincts dans les points, sous les filtres (Glow Up : 3).
 - `min_den`, `top_by`, `unit` : voir plus haut.
+- `toggle` : `{stat, label}`, interrupteur sur la page de la stat qui bascule vers une variante (The Terrorist → `the-terrorist-single`, « Single target only »). `variant_of` : la stat de base d'une variante ; une variante n'apparaît que par cet interrupteur (ni liste des achievements, ni fiche joueur, ni Hall of fame).
 - `hall_of_fame: false` : achievement jamais tiré dans le Hall of fame de l'accueil.
 - `breakdown` (achievements `top` : Arch-Nemesis, Comfort Boss, Personal Hell, Suicide Pact) : le joueur a une page personnelle `#/stat/<id>/<joueur>` avec toute sa liste (toutes les capacités, tous les boss, tous les raideurs), pas seulement la première ; la valeur est l'en-tête de la colonne (`Ability`, `Boss`, `Raider`). Calcul côté site (`playerBreakdown` dans `site/src/lib/stats.js`) sur les mêmes cellules, sous les mêmes filtres.
 - `title_percentile` : seuil du titre propre à l'achievement, à la place de celui de `config/site.json`.

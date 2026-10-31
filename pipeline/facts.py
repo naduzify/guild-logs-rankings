@@ -76,6 +76,55 @@ def _payload(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))["data"]["reportData"]
 
 
+def first_hit_single(path: Path, actors: dict) -> dict:
+    """The Terrorist, single target: {fight id: Counter(source -> damage)} of the first_hit_only abilities
+    (compute.json single_target), from reports/<code>/ff_events.json (pipeline/crawl_extra.py). Per source and
+    ability, a run of hits with gaps under first_hit_gap_ms is one cast: only its hits on the first target count."""
+    gap = CONFIG["single_target"]["first_hit_gap_ms"]
+    out, runs = defaultdict(Counter), {}
+    events = json.loads(path.read_text(encoding="utf-8"))["data"]["events"]
+    for e in sorted(events, key=lambda e: e["timestamp"]):
+        src, target = e.get("sourceID"), e.get("targetID")
+        if e.get("type") != "damage" or src == target or src not in actors:
+            continue
+        key = (src, e.get("abilityGameID"))
+        last = runs.get(key)
+        primary = target if last is None or e["timestamp"] - last[0] > gap else last[1]
+        runs[key] = (e["timestamp"], primary)
+        if target == primary:
+            out[e.get("fight")][actors[src]] += e.get("amount", 0) + e.get("absorbed", 0)
+    return out
+
+
+def ff_single(entry: dict, expansion: str, first_hit: float = 0) -> float:
+    """Single target friendly fire of one source in a friendly fire table (compute.json single_target): his
+    abilities that are neither AoE, first_hit_only (their first hits come from the events: first_hit) nor
+    self damage, minus what else he dealt to himself (an AoE's self hits are not known apart, left in)."""
+    st = CONFIG["single_target"]
+    left_out = set(st["aoe"]) | set(st["aoe_by_expansion"].get(expansion, [])) | set(st["first_hit_only"])
+    own = set(st["self_damage"])
+    abilities = entry.get("abilities", [])
+    single = sum(a.get("total", 0) for a in abilities if a.get("name") not in left_out | own)
+    on_self = sum(t.get("total", 0) for t in entry.get("targets", []) if t.get("name") == entry.get("name"))
+    on_self -= sum(a.get("total", 0) for a in abilities if a.get("name") in own)
+    return max(0, single - max(0, on_self)) + first_hit
+
+
+def friendly_kill(death: dict, actors: dict) -> tuple | None:
+    """(killer, ability id) when the killing blow of a death came from another player, else None: the latest
+    damage event of the killing blow's ability (the latest damage event when none matches)."""
+    blow = (death.get("killingBlow") or {}).get("guid")
+    hits = [e for e in death.get("events") or [] if e.get("type") == "damage"]
+    if not hits:
+        return None
+    last = max((e for e in hits if (e.get("ability") or {}).get("guid") == blow), key=lambda e: e["timestamp"], default=None) \
+        or max(hits, key=lambda e: e["timestamp"])
+    killer = actors.get(last.get("sourceID"))
+    if not last.get("sourceIsFriendly") or killer in (None, death.get("name")):
+        return None
+    return killer, (last.get("ability") or {}).get("guid")
+
+
 def pulls_from_cache(guild: str = "fable", limit: int | None = None):
     from pipeline.guild import GUILDS, expansion_of  # needs requests/dotenv: only for the cache source
 
@@ -95,6 +144,7 @@ def pulls_from_cache(guild: str = "fable", limit: int | None = None):
             continue  # PTR logs
         fights = {f["id"]: f for f in rep["fights"]}
         exp = expansion_of(listing.get(rep["code"], rep), guild)
+        first_hits = None  # read once per report, at its first pull
         for tpath in sorted(rdir.glob("tables_*.json")):
             fight = fights.get(int(tpath.stem.split("_")[1]))
             if not fight:
@@ -104,9 +154,13 @@ def pulls_from_cache(guild: str = "fable", limit: int | None = None):
             xpath = rdir / f"extra_{fight['id']:03d}.json"
             extra = _payload(xpath)["report"] if xpath.exists() else None
             actors = {a["id"]: a["name"] for a in (rep.get("masterData") or {}).get("actors", [])}
+            if first_hits is None:
+                epath = rdir / "ff_events.json"
+                first_hits = first_hit_single(epath, actors) if epath.exists() else {}
             yield {"source": f"{rep['code']}#{fight['id']}", "expansion": exp, "report": rep["code"],
                    "report_start": rep["startTime"], "zone": (rep.get("zone") or {}).get("name"),
-                   "fight": fight, "tables": tables, "extra": extra, "actors": actors}
+                   "fight": fight, "tables": tables, "extra": extra, "actors": actors,
+                   "first_hits": first_hits.get(fight["id"], {})}
             done += 1
             if limit and done >= limit:
                 return
@@ -275,6 +329,18 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
         deaths[d["name"]].append((d["timestamp"], blow in scripted, blow))
         if blow not in scripted and d.get("overkill", 0) > overkill.get(d["name"], (0, None))[0]:
             overkill[d["name"]] = (d["overkill"], blow)
+    # Headhunter / Collateral Damage: deaths to another player of the pull, [killer, ability id] per victim.
+    killed_by_player = defaultdict(list)
+    for d in t["deaths"]["entries"]:
+        fk = friendly_kill(d, pull.get("actors", {}))
+        if fk and fk[0] in roles and (d.get("killingBlow") or {}).get("name") not in scripted:
+            killed_by_player[d["name"]].append(list(fk))
+    # Friendly fire received from other players (Martyr).
+    ff_received = Counter()
+    for e in (ff or {}).values():
+        for y in e.get("targets", []):
+            if y.get("name") != e.get("name"):
+                ff_received[y.get("name")] += y.get("total", 0)
     real = sorted((ts, n) for n, ds in deaths.items() if n in roles for ts, s, _ in ds if not s)
     first_dead = real[0][1] if real else None
     pull_dead = sum(1 for n in roles if deaths.get(n))  # any death, scripted or battle-rezzed, counts
@@ -350,6 +416,12 @@ def pull_rows(pull: dict, owner: dict, issues: Counter) -> list[dict]:
             # Crawl complements: None when not fetched yet for this pull.
             "friendly_fire": None if ff is None else sum(
                 y.get("total", 0) for y in ff.get(name, {}).get("targets", []) if y.get("name") != name),
+            "friendly_fire_single": None if ff is None else ff_single(ff.get(name, {"name": name}), pull["expansion"],
+                                                                     pull.get("first_hits", {}).get(name, 0)),
+            "friendly_fire_taken": None if ff is None else ff_received.get(name, 0),
+            "killed_by_player": json.dumps(killed_by_player.get(name, []), ensure_ascii=False),
+            # Abilities he damaged enemies with: tells class spells from boss mechanics (Headhunter).
+            "damage_abilities": json.dumps(sorted({a["guid"] for a in d.get("abilities", []) if "guid" in a})),
             "taunts": None if taunts is None else taunts.get(name, {}).get("total", 0),
             "deaths_with_cd": None if cd_deaths is None else cd_deaths.get(name, 0),
             "gear_known": bool(gear), "enchantable_slots": enchantable, "enchanted_slots": enchanted,

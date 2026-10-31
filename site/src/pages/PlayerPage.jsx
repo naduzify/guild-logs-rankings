@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FilterBar, InfoTip, PctBar, RankBadge, StatValue, roleLabel } from '../components.jsx';
 import { BASE100, CLASS_COLORS, formatBig, formatInt, formatNumber, formatPct, formatValue, isBase100, parseBand, rankBand } from '../lib/format.js';
 import { go, href } from '../lib/route.js';
-import { computeStat, earnedTitle, hasNumber, hasPercentile, isRankable, shareTotal, valueIsNumber } from '../lib/stats.js';
+import { computeStat, earnedTitle, hasNumber, hasPercentile, isListed, isRankable, shareTotal, valueIsNumber } from '../lib/stats.js';
 
 const ROLE_CATEGORY = { TANK: 'tank', HEALER: 'healer', DPS: 'dps' };
 
@@ -38,9 +38,10 @@ function cardView(data, stat, row, total) {
     label: flipSide ? stat.flip : stat.title,
     earned: earnedTitle(stat, row, settings),
     flipSide,
-    // `top` shows the winning label (a boss, a spell), `max` the score with its pull underneath.
-    main: stat.agg === 'top' ? row.label : value,
-    sub: stat.agg === 'top' ? formatValue(stat, row.value) + (stat.top_by === 'share' ? shareTotal(stat, row) : isBase100(stat) ? ` ${BASE100}` : stat.unit ? ` ${stat.unit}` : '') : row.label,
+    // `top` shows the winning label (a boss, a spell), `max` the score with its pull underneath; a `total` top
+    // (Headhunter) its count, with the most frequent label underneath.
+    main: stat.top_by === 'total' ? formatNumber(stat, row.value) : stat.agg === 'top' ? row.label : value,
+    sub: stat.top_by === 'total' ? `Most: ${row.label}` : stat.agg === 'top' ? formatValue(stat, row.value) + (stat.top_by === 'share' ? shareTotal(stat, row) : isBase100(stat) ? ` ${BASE100}` : stat.unit ? ` ${stat.unit}` : '') : row.label,
     // The main value is a base 100 score: say so, so it is not read as a raw amount.
     base100: stat.agg !== 'top' && !valueIsNumber(stat) && isBase100(stat),
     number: hasNumber(stat) ? formatNumber(stat, row.number) : null,
@@ -153,7 +154,7 @@ export default function PlayerPage({ data, name, filter }) {
     const row = byPlayer.get(p);
     return { stat, row, total: ranked.length, note: notability(stat, row) };
   };
-  const itemsOf = category => meta.stats.filter(s => s.category === category && !overviewIds.has(s.id)).map(result);
+  const itemsOf = category => meta.stats.filter(s => s.category === category && isListed(s) && !overviewIds.has(s.id)).map(result);
 
   const roleOk = r => !eff.role.size || eff.role.has(meta.roles.indexOf(r));
   const roles = rolesByWeight(data, p, eff).filter(roleOk);
