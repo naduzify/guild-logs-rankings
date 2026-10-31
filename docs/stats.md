@@ -44,7 +44,7 @@ LÃ©gende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. â
 
 24. **Heartbreaker**: Close enough to taste the loot. Not to roll on it. (Wipes with the boss under 5% health, WCL `fightPercentage`, as a share of his wipes.) [P+N]
 25. **Spectator**: Watched the kill in third person. (Kills where he died, scripted deaths excluded, as a share of his kills.) [P+N]
-26. **Iron Man**: Birthdays, weddings, Christmas: raid night anyway. (Longest run of consecutive reset weeks raided; weeks without any guild raid are skipped.) [P+N]
+26. **Iron Man**: Sign ups are overrated, assume he's coming. (Longest run of consecutive reset weeks raided; weeks without any guild raid are skipped.) [P+N]
 27. **Comeback Kid**: "I'm done with this game." Several times. (Longest absence before a comeback, in reset weeks the guild raided without him.) [P+N]
 28. **Late Arrival**: Traffic, dinner, patch download: a new excuse every week. (Share of his raid nights where he missed every pull of the night's first boss; nights with at least two bosses.) [P+N]
 29. **Early Leaver**: "One more pull" never applied to him. (Same, with the night's last boss.) [P+N]
