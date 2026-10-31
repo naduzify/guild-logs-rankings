@@ -11,22 +11,31 @@ export const CATEGORIES = [
   { id: 'dps', label: 'DPS' },
 ];
 
+// Highlight box: Enter, or its arrow button (phones: the keyboard's Enter is easy to miss), brings the first
+// match into view; the button also closes the phone keyboard.
+function FindBox({ value, onChange, onGo, label, placeholder = 'Highlight…', className }) {
+  const input = useRef(null);
+  return (
+    <span className={className ? `findwrap ${className}` : 'findwrap'}>
+      <input ref={input} type="search" placeholder={placeholder} value={value} aria-label={label} enterKeyHint="search"
+        onChange={e => onChange(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); onGo(); } }} />
+      <button type="button" className="findgo" aria-label="Go to the first match" onClick={() => { input.current?.blur(); onGo(); }}>→</button>
+    </span>
+  );
+}
+
 export function StatsIndex({ data, filter }) {
   // Highlights the achievements whose title (or flip title) contains the text, accents ignored; Enter scrolls to the first.
   const [find, setFind] = useState('');
   const list = useRef(null);
   const k = fold(find.trim());
   const found = s => k && [s.title, s.flip].some(t => t && fold(t).includes(k));
-  const jump = e => {
-    if (e.key !== 'Enter') return;
-    e.preventDefault();
-    list.current?.querySelector('li.found')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
+  const jump = () => list.current?.querySelector('li.found')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   return (
     <div ref={list} className="statsindex">
       <h1 className="ptitle">All achievements</h1>
-      <input className="findbox" type="search" placeholder="Highlight an achievement…" value={find} aria-label="Highlight an achievement"
-        onChange={e => setFind(e.target.value)} onKeyDown={jump} />
+      <FindBox className="findbox" placeholder="Highlight an achievement…" value={find} label="Highlight an achievement"
+        onChange={setFind} onGo={jump} />
       {CATEGORIES.map(c => (
         <section key={c.id}>
           <h2 className="cat">{c.label}</h2>
@@ -51,11 +60,7 @@ export default function StatPage({ data, id, filter }) {
   const [find, setFind] = useState('');
   const board = useRef(null);
   // Enter: bring the first highlighted row into view.
-  const jump = e => {
-    if (e.key !== 'Enter') return;
-    e.preventDefault();
-    board.current?.querySelector('tr.found')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
+  const jump = () => board.current?.querySelector('tr.found')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   const stat = data.statById.get(id);
   if (!stat) return <p className="empty">Unknown achievement. <a href={href('stats')}>See all achievements</a>.</p>;
   const { ranked, byPlayer } = computeStat(stat, data.stats[stat.id], filter, data.meta.settings, data.roleOk);
@@ -100,8 +105,7 @@ export default function StatPage({ data, id, filter }) {
                 {isRankable(stat) && <th className="n">#</th>}
                 <th className="l">
                   <span className="thfind">Player
-                    <input type="search" placeholder="Highlight…" value={find} aria-label="Highlight a player"
-                      onChange={e => setFind(e.target.value)} onKeyDown={jump} />
+                    <FindBox value={find} label="Highlight a player" onChange={setFind} onGo={jump} />
                   </span>
                 </th>
                 <th>{total ? (stat.unit ? stat.unit[0].toUpperCase() + stat.unit.slice(1) : 'Total') : stat.agg === 'top' ? stat.title : isBase100(stat) ? 'Score (base 100)' : 'Value'}</th>
@@ -146,11 +150,7 @@ export function BreakdownPage({ data, id, name, filter }) {
   // Highlights rows as the user types, as on the ranking (a raider also by his alts); Enter scrolls to the first.
   const [find, setFind] = useState('');
   const board = useRef(null);
-  const jump = e => {
-    if (e.key !== 'Enter') return;
-    e.preventDefault();
-    board.current?.querySelector('tr.found')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
+  const jump = () => board.current?.querySelector('tr.found')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   const stat = data.statById.get(id);
   const p = data.byName.get(name);
   if (!stat || !stat.breakdown) return <p className="empty">Unknown achievement. <a href={href('stats')}>See all achievements</a>.</p>;
@@ -192,8 +192,7 @@ export function BreakdownPage({ data, id, name, filter }) {
                 <th className="n">#</th>
                 <th className="l">
                   <span className="thfind">{stat.breakdown}
-                    <input type="search" placeholder="Highlight…" value={find} aria-label={`Highlight a ${stat.breakdown.toLowerCase()}`}
-                      onChange={e => setFind(e.target.value)} onKeyDown={jump} />
+                    <FindBox value={find} label={`Highlight a ${stat.breakdown.toLowerCase()}`} onChange={setFind} onGo={jump} />
                   </span>
                 </th>
                 {mean ? <><th>Score ({BASE100})</th><th>Kills</th></> : <><th>{stat.unit ? stat.unit[0].toUpperCase() + stat.unit.slice(1) : 'Count'}</th><th className="hide-sm">Share</th></>}

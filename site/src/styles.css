@@ -416,6 +416,13 @@ a.hname:hover { color: var(--parchment); }
 .thfind { display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
 .thfind input { width: 100%; min-width: 0; font: 400 13px var(--f-body); text-transform: none; letter-spacing: 0; padding: 3px 8px; height: 26px;
   border: 1px solid var(--line-strong); border-radius: 4px; background: var(--navy-glass); color: var(--cream); }
+/* Highlight box with its arrow button (shown on touch screens and phones, where Enter is not at hand). */
+.findwrap { display: flex; align-items: stretch; gap: 4px; min-width: 0; }
+.findwrap input { flex: 1; }
+.findgo { display: none; flex: none; align-items: center; justify-content: center; min-width: 34px; padding: 0 8px;
+  border: 1px solid var(--alliance); border-radius: 4px; background: var(--alliance); color: #fff; font: 600 1rem var(--f-body); cursor: pointer; }
+.findgo:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (hover: none), (max-width: 719px) { .findgo { display: inline-flex; } .thfind .findwrap input { height: 34px; } }
 .thfind input::placeholder { color: var(--tan); }
 .thfind input:focus { border-color: var(--alliance); box-shadow: 0 0 0 3px var(--alliance-glow); outline: none; }
 .board .hide-sm, .board .pctxt { display: none; }
@@ -430,10 +437,11 @@ a.hname:hover { color: var(--parchment); }
 .statlist a:hover { color: var(--cream); }
 /* Achievement matched by the highlight box above the list: same parchment wash as a highlighted player row. */
 .statlist li.found { background: color-mix(in srgb, var(--parchment) 22%, transparent); box-shadow: inset 3px 0 0 var(--parchment); margin-inline: -10px; padding-inline: 10px; }
-.findbox { display: block; width: 100%; max-width: 340px; margin: 14px 0 4px; font: 400 16px var(--f-body); padding: 7px 12px;
+.findbox { max-width: 340px; margin: 14px 0 4px; }
+.findbox input { width: 100%; min-width: 0; font: 400 16px var(--f-body); padding: 7px 12px;
   border: 1px solid var(--line-strong); border-radius: 4px; background: var(--navy-glass); color: var(--cream); }
-.findbox::placeholder { color: var(--tan); }
-.findbox:focus { border-color: var(--alliance); box-shadow: 0 0 0 3px var(--alliance-glow); outline: none; }
+.findbox input::placeholder { color: var(--tan); }
+.findbox input:focus { border-color: var(--alliance); box-shadow: 0 0 0 3px var(--alliance-glow); outline: none; }
 .sdesc { display: block; color: var(--tan); font-size: .85rem; }
 
 /* Player page */
