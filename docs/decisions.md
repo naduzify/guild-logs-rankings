@@ -992,3 +992,11 @@ Premier mapping des rerolls dans `nightshift_rerolls.json` (23 joueurs, le premi
 - **Décision** : une soirée se découpe en raids (`raids()` dans `pipeline/export_site.py`). Deux rapports de la soirée sont le même raid si au moins la moitié des personnages du plus petit roster sont dans les deux (`raid_overlap` 0,5 : même raid loggé deux fois, log relancé), sinon ce sont deux raids. Premier et dernier boss, et trash, se prennent par raid.
 - **Ampleur** : Fable, 47 soirées sur 533 à plusieurs raids (deux ou trois groupes de 40 sans joueur commun en 2020 : MC et BWL en parallèle) ; NightShift, 24 sur 172. Trash compté chez Fable : 508 → 567 rapports.
 - **Écarté** : un raid par rapport (proposé par l'autre session) : un même raid loggé par deux joueurs, ou un log relancé, serait compté deux fois ou coupé en deux.
+
+## 2026-11-01 — Battle res et Every Single Button
+
+**Décision.** Deux achievements communs, The Necromancer (battle res lancés) et Temu Jesus (reçus), en total de carrière avec liste personnelle, sur les pulls de boss seulement. Et une page personnelle Every Single Button, sans classement : toutes les capacités de chaque joueur, avec interrupteur Bosses only.
+
+**Raison.** Reincarnation n'apparaît dans aucun événement WCL : on ne peut que la déduire (un chaman qui agit après sa mort sans résurrection loggée, environ 10 % de ses morts sur 24 rapports testés). Le propriétaire l'exclut : le haut de The Necromancer ne bouge presque pas, mais Temu Jesus est rebattu (NightShift surtout), sur un chiffre seulement estimé. Les résurrections scriptées ne sont pas des événements `resurrect` (Restore Soul du Lich King : un buff de PNJ).
+
+**Écarté.** Battle res sur le trash : on ne distingue pas un rez en combat d'un rez entre deux pulls. Résurrections normales pendant un pull (69 chez Fable, 5 chez NightShift) : lancées une fois le pull perdu. Crawl pull par pull des capacités (environ 20 000 points) : un tableau par rapport suffit (environ 5 points). En contrepartie, une soirée entière compte sous le rôle le plus joué ce soir-là.

@@ -53,6 +53,16 @@ export async function loadData() {
   return { meta, players, stats, facets, played: playedRows, mainClasses, isMain, roleOk, byName, statById };
 }
 
+// Every Single Button: heavy and read by one page only, so fetched when that page opens.
+let buttons = null;
+export function loadButtons() {
+  buttons ??= fetch(url('buttons')).then(r => {
+    if (!r.ok) throw new Error(`buttons.json: HTTP ${r.status}`);
+    return r.json();
+  }).catch(e => { buttons = null; throw e; });
+  return buttons;
+}
+
 // Classes a player played under the active filters, most played first.
 export function playedClasses(data, p, filter) {
   const hours = new Map();

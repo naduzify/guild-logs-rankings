@@ -134,6 +134,8 @@
     "Goblin Dragon Gun",
     "Electrostatic Condenser"
   ],
+  "_battle_res_ids": "The Necromancer and Temu Jesus: spell ids of the resurrections that count, inside a boss pull. Every rank of Rebirth, Raise Ally, Soulstone Resurrection (logged from Cataclysm on), Defibrillate (engineering) and Eternal Guardian (a pet: counts for the raider brought back only). Not Reincarnation: never logged, whatever the id. Not the normal resurrections, cast once the pull is lost. Scripted revivals (The Lich King's Restore Soul) are no resurrection events.",
+  "battle_res_ids": [20484, 20739, 20742, 20747, 20748, 26994, 48477, 113269, 61999, 95750, 8342, 22999, 54732, 126393],
   "_raid_overlap": "Two reports of one night are the same raid (logged twice, or a log restarted) when at least this share of the smaller roster's characters is in both; else two raids (two groups the same night). Late Arrival / Early Leaver take the first and last boss per raid, the trash counts once per raid.",
   "raid_overlap": 0.5,
   "_avoidable_ignore": "Mechanic Magnet and Parse Fiend (avoidable damage taken): a player's own spells that hurt him, left out of the damage taken, as they are no boss mechanic. Stagger (a Brewmaster's boss hits spread over time), Cauterize, Shadow Word: Death (backlash), Hellfire, Seal and Judgement of the Martyr and their Horde version Seal and Judgement of Blood (both spellings of Judgement), Blood Tap.",

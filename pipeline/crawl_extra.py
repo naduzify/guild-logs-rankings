@@ -12,7 +12,12 @@ Runs on reports the main crawl already cached, with the same cache and budget:
   Collateral Damage);
 - per report (reports/<code>/ff_events.json): friendly fire events of the abilities whose first hit is
   single target and the rest AoE (compute.json single_target.first_hit_only), for the single target
-  version of The Terrorist; only reports where one of them hit a raid member.
+  version of The Terrorist; only reports where one of them hit a raid member;
+- per report (reports/<code>/resurrects.json): every resurrection event of the report, with caster, target
+  and spell: battle res stats;
+- per report (reports/<code>/abilities.json): every ability used by every player over the report's kept boss
+  pulls and, apart, its trash when that report stands for its raid (Every Single Button). Trimmed to (ability,
+  actor, count): the raw tables weigh megabytes per report.
 
 Lists: config/crawl.json "extras", compute.json "era_consumable_casts" and "wotlk_consumable_ids". They are applied as WCL
 filters, so after changing one, re-fetch with --refresh.
@@ -123,6 +128,79 @@ def ff_events(client: WCLClient, code: str, end: float) -> None:
     tmp.replace(path)
 
 
+# Battle res stats: resurrection events over the whole report (the spell and the fight are checked at compute time).
+RESURRECTS_QUERY = """
+query($code: String!, $end: Float!) { reportData { report(code: $code) {
+  resurrects: events(dataType: All, startTime: 0, endTime: $end, filterExpression: "type = \\"resurrect\\"", limit: 10000) { data nextPageTimestamp }
+} } }"""
+
+
+# Every Single Button. The Casts table has no white hits: melee and the like come from the damage table, as uses.
+ABILITY_TABLES = {
+    "casts": "%s_casts: table(dataType: Casts, startTime: 0, endTime: $end, %s, viewBy: Ability)",
+    "auto": "%s_auto: table(dataType: DamageDone, startTime: 0, endTime: $end, %s, viewBy: Ability, filterExpression: $auto)",
+}
+
+
+def abilities_plan(guild: str) -> dict:
+    """{report code: (its boss fights to count, whether its trash counts)}: the same pulls and trash as the
+    stats (pipeline/export_site.py), so a pull logged twice or a raid logged in two reports counts once."""
+    from collections import defaultdict
+
+    from pipeline.export_site import dedup, trash_nights
+    from pipeline.facts import guild_time, load_mapping, pull_rows, pulls_from_cache
+
+    owner, pulls = load_mapping(guild), defaultdict(list)
+    for p in pulls_from_cache(guild):
+        for row in pull_rows(p, owner, defaultdict(int)):
+            pulls[row["source"]].append(row)
+    pulls = dedup(pulls)
+    plan = defaultdict(lambda: ([], False))
+    for rs in pulls.values():
+        plan[rs[0]["report"]][0].append(rs[0]["fight"])
+    for code, _, _ in trash_nights(pulls, guild_time(guild)[1]):
+        plan[code] = (plan[code][0], True)
+    return dict(plan)
+
+
+def trim_abilities(table: dict, auto: bool) -> list:
+    """[[ability name, character, count]] of a viewBy: Ability table. An entry either splits into subentries (one
+    per actor, sometimes one level deeper), or has none when a single player used the ability: its only source."""
+    out = []
+
+    def walk(e):
+        if e.get("subentries"):
+            for s in e["subentries"]:
+                walk(s)
+            return
+        who = e.get("actorName") or next((s["name"] for s in e.get("sources", [])), None)
+        # Damage tables: "uses" is not always there.
+        n = (e.get("uses") or e.get("hitCount", 0) + e.get("missCount", 0)) if auto else e.get("total", 0)
+        if who and n:
+            out.append([e["name"], who, n])
+
+    for e in table["data"].get("entries", []):
+        walk(e)
+    return out
+
+
+def abilities(client: WCLClient, code: str, end: float, fights: list, trash: bool) -> None:
+    scopes = {"boss": "fightIDs: $fid"} if fights else {}
+    if trash:
+        scopes["trash"] = "killType: Trash"
+    fields = " ".join(t % (name, scope) for name, scope in scopes.items() for t in ABILITY_TABLES.values())
+    query = "query($code: String!, $end: Float!, $auto: String%s) { reportData { report(code: $code) { %s } } }" % (
+        ", $fid: [Int]" if fights else "", fields)
+    variables = {"code": code, "end": end, "auto": names_in(EXTRAS["auto_attacks"]), **({"fid": sorted(fights)} if fights else {})}
+    report = client.query(query, variables)["reportData"]["report"]
+    data = {k: trim_abilities(v, k.endswith("_auto")) for k, v in report.items()}
+    path = CACHE_DIR / HOST / "reports" / code / "abilities.json"
+    payload = {"query": query, "variables": variables, "fetched_at": time.time(), "data": data}
+    tmp = path.with_suffix(".tmp")
+    tmp.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+    tmp.replace(path)
+
+
 # Parse Lord: WCL parses of the kills. "Historical" (rankings_historical.json) against the rankings around the
 # date of the fight, used for both the best and the median parse; "Today" (WCL's default, rankings.json) against
 # today's rankings, only a stand-in for kills without a historical parse (no longer crawled by default).
@@ -175,6 +253,7 @@ def crawl(guild: str, kinds: set, limit: int | None, cost: bool, refresh: bool) 
     print("guild:", guild, "endpoint:", client.url)
     meter = Meter(client, cost)
     reports = unique_reports(client, guild)
+    plan = abilities_plan(guild) if "abilities" in kinds else {}
     done = 0
     for i, r in enumerate(reports, 1):
         code, exp = r["code"], expansion_of(r, guild)
@@ -241,6 +320,21 @@ def crawl(guild: str, kinds: set, limit: int | None, cost: bool, refresh: bool) 
                 if not path.exists() and first_hit_in_ff(code):
                     meter.run("ff_events", lambda: ff_events(client, code, end))
                     n += 1
+            if "resurrects" in kinds:
+                key = f"reports/{code}/resurrects"
+                path = CACHE_DIR / HOST / f"{key}.json"
+                if refresh and path.exists():
+                    path.unlink()
+                if not path.exists():
+                    meter.run("resurrects", lambda: client.cached_query(key, RESURRECTS_QUERY, {"code": code, "end": end}))
+                    n += 1
+            if "abilities" in kinds and code in plan:
+                path = CACHE_DIR / HOST / "reports" / code / "abilities.json"
+                if refresh and path.exists():
+                    path.unlink()
+                if not path.exists():
+                    meter.run("abilities", lambda: abilities(client, code, end, *plan[code]))
+                    n += 1
             for kind, timeframe in RANKINGS_KINDS.items():
                 if kind not in kinds:
                     continue
@@ -268,8 +362,8 @@ def crawl(guild: str, kinds: set, limit: int | None, cost: bool, refresh: bool) 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--kinds", default="pull,trash,trash_extra,rankings_historical,trash_deaths,ff_events",
-                        help="pull, trash, trash_extra, rankings, rankings_historical, trash_deaths, ff_events (comma separated)")
+    parser.add_argument("--kinds", default="pull,trash,trash_extra,rankings_historical,trash_deaths,ff_events,resurrects,abilities",
+                        help="pull, trash, trash_extra, rankings, rankings_historical, trash_deaths, ff_events, resurrects, abilities (comma separated)")
     parser.add_argument("--guild", choices=sorted(GUILDS), default="fable")
     parser.add_argument("--limit", type=int, help="stop after N reports with eligible pulls (testing)")
     parser.add_argument("--cost", action="store_true", help="measure points spent per query")

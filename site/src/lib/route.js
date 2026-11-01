@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 // Hash routes: #/ , #/stats , #/stat/<id> , #/stat/<id>/<player> (his own breakdown), #/record/<kind> ,
-// #/player/<name>, with filters in the query
+// #/player/<name>, #/buttons/<name>, with filters in the query
 // (?exp=0,2&cls=5&role=0) so a filtered page can be shared as a link.
 
 const SETS = ['exp', 'cls', 'role'];

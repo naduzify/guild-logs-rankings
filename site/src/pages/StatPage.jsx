@@ -13,7 +13,7 @@ export const CATEGORIES = [
 
 // Highlight box: Enter, or its arrow button (phones: the keyboard's Enter is easy to miss), brings the first
 // match into view; the button also closes the phone keyboard.
-function FindBox({ value, onChange, onGo, label, placeholder = 'Highlight…', className }) {
+export function FindBox({ value, onChange, onGo, label, placeholder = 'Highlight…', className }) {
   const input = useRef(null);
   return (
     <span className={className ? `findwrap ${className}` : 'findwrap'}>

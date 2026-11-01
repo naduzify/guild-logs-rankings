@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { reopenIntro, Search } from './components.jsx';
 import { loadData } from './lib/data.js';
+import ButtonsPage from './pages/ButtonsPage.jsx';
 import { go, href, useRoute } from './lib/route.js';
 import Home from './pages/Home.jsx';
 import PlayerPage from './pages/PlayerPage.jsx';
@@ -24,7 +25,7 @@ export default function App() {
     const { meta } = data;
     const stat = route.page === 'stat' && data.statById.get(route.arg);
     const record = route.page === 'record' && (meta.home.records || []).find(r => r.kind === route.arg);
-    const part = route.page === 'player' ? route.arg : stat ? (route.arg2 ? `${route.arg2} · ${stat.title}` : stat.title) : record ? record.title : route.page === 'stats' ? 'Achievements' : null;
+    const part = route.page === 'player' ? route.arg : route.page === 'buttons' && meta.player.buttons?.live ? `${route.arg} · ${meta.player.buttons.title}` : stat ? (route.arg2 ? `${route.arg2} · ${stat.title}` : stat.title) : record ? record.title : route.page === 'stats' ? 'Achievements' : null;
     document.title = (part ? part + ' · ' : '') + `${meta.guild.name} Timewalking`;
     if (firstPage.current) { firstPage.current = false; return; }
     const target = main.current?.querySelector('h1') || main.current;
@@ -37,6 +38,7 @@ export default function App() {
   const { filter } = route;
   let page;
   if (route.page === 'player') page = <PlayerPage key={route.arg} data={data} name={route.arg} filter={filter} />;
+  else if (route.page === 'buttons' && data.meta.player.buttons?.live) page = <ButtonsPage key={route.arg} data={data} name={route.arg} filter={filter} />;
   else if (route.page === 'stat' && route.arg2) page = <BreakdownPage data={data} id={route.arg} name={route.arg2} filter={filter} />;
   else if (route.page === 'stat') page = <StatPage data={data} id={route.arg} filter={filter} />;
   else if (route.page === 'record') page = <RecordPage data={data} kind={route.arg} filter={filter} />;

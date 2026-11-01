@@ -160,6 +160,25 @@ export function playerBreakdown(stat, cells, filter, settings, roleOk, p) {
   return rows;
 }
 
+// Every Single Button: one player's abilities under the filters, most used first, with or without the trash.
+// A cell is [player, expansion, class, role, {ability: [uses on bosses, uses on trash]}].
+export function playerButtons(cells, filter, p, bossesOnly) {
+  const acc = {}, exps = {};
+  for (const cell of cells) {
+    if (cell[0] !== p || !passes(filter, cell)) continue;
+    for (const [label, [boss, trash]] of Object.entries(cell[V])) {
+      const n = bossesOnly ? boss : boss + trash;
+      if (!n) continue;
+      acc[label] = (acc[label] || 0) + n;
+      (exps[label] || (exps[label] = new Set())).add(cell[1]);
+    }
+  }
+  const rows = Object.entries(acc).map(([label, n]) => ({ label, n, exps: [...exps[label]].sort((a, b) => a - b) }));
+  rows.sort((a, b) => b.n - a.n || a.label.localeCompare(b.label));
+  rows.forEach((r, i) => { r.pos = i > 0 && rows[i - 1].n === r.n ? rows[i - 1].pos : i + 1; });
+  return rows;
+}
+
 export const isRankable = stat => stat.display !== 'T';
 // Another version of a stat (The Terrorist, single target): reached through its toggle, listed nowhere else.
 export const isListed = stat => !stat.variant_of;

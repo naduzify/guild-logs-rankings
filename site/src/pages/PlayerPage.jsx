@@ -8,7 +8,7 @@ const ROLE_CATEGORY = { TANK: 'tank', HEALER: 'healer', DPS: 'dps' };
 
 // Drop filter values the player never played, so a filter carried over from
 // another page cannot empty his card.
-function restrict(filter, facets) {
+export function restrict(filter, facets) {
   const out = {};
   for (const k of ['exp', 'cls', 'role']) out[k] = new Set([...filter[k]].filter(v => facets[k].has(v)));
   return out;
@@ -246,6 +246,13 @@ export default function PlayerPage({ data, name, filter }) {
           );
         })}
       </section>
+
+      {meta.player.buttons?.live && (
+        <a className="bestfriend buttonslink" href={href('buttons', pl.name, filter)}>
+          <span className="bflabel">{meta.player.buttons.title}</span>
+          <span className="bfdetail">{meta.player.buttons.description}</span>
+        </a>
+      )}
 
       {sections.map(s => (
         <Section key={s.id} data={data} id={s.id} title={s.title} kicker={s.kicker} items={s.items}

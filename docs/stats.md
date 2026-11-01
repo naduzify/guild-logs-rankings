@@ -16,7 +16,7 @@ Liste des stats affichées sur le site, issue de la session Claude Chat du 2026-
 
 Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. ⚙️ liste en config ; 📋 casts par sort (déjà dans le cache) ; 🔬 niveau 3 ciblé ; 🆕 crawl supplémentaire.
 
-## Common (40)
+## Common (42)
 
 1. **The Gang**: Raid invite? Already in the group. (Distinct reset weeks with at least one eligible pull. The card also shows hours in boss fights, first logged pull and expansions played.) [P+N]
 2. **Identity Crisis** (ex-The Undecided): Asks "what should I play next tier?" every tier. (Distinct characters raided on, with their classes and roles on the card.) [N]
@@ -60,6 +60,8 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 38. **Martyr**: Takes one for the team. Several, actually. (His share of the raid's friendly fire received: damage dealt to him by other raid members, divided by the raid's friendly fire, over the boss pulls and the nights' trash he was in. Damage on oneself left out. At least 10 pulls or nights with friendly fire.) [P+N]
 39. **Headhunter**: Collects scalps. Doesn't check the nameplate colour. (Killing blows landed on other raid members with his own abilities, on boss pulls and the nights' trash. Career total; the number opens the list of his victims.) ⚙️🆕 [N]
 40. **Collateral Damage**: Survived the boss. Didn't survive the raid. (Deaths from a killing blow landed by another raid member with his own abilities, on boss pulls and the nights' trash. Career total; the number opens the list of who killed him.) ⚙️🆕 [N]
+41. **The Necromancer**: Death is more of a suggestion. (Battle res cast during boss pulls, kills and wipes: Rebirth, Raise Ally, Defibrillate, and Soulstone Resurrection from Cataclysm on. No Reincarnation, no scripted revival. Career total; the number opens the list of who he brought back.) ⚙️🆕 [N]
+42. **Temu Jesus**: Rose from the dead more than anyone. Quality not guaranteed. (Battle res received, same rules, plus Eternal Guardian. Career total; the number opens the list of who brought him back.) ⚙️🆕 [N]
 
 ## Tank (7)
 
@@ -100,6 +102,9 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 - **Headhunter / Collateral Damage** 🆕 : tableau Deaths sur le trash de chaque rapport (`trash_deaths.json`, `killType: Trash`) ; sur les pulls de boss, le tableau Deaths du crawl principal suffit (source du coup fatal dans ses événements).
 - **The Terrorist, cible unique** 🔬 : événements de friendly fire des sorts « premier coup seulement » (`ff_events.json`, toutes les pages), seulement sur les rapports où l'un d'eux a touché un joueur.
 - **Parse Lord** : parses WCL des kills, par rapport, deux fois : `rankings_historical.json` (`timeframe: Historical`, classement à la date du combat, pour le meilleur et le parse médian) et `rankings.json` (classement d'aujourd'hui, en secours pour un kill sans parse historique).
+
+- **The Necromancer / Temu Jesus** 🆕 : événements `resurrect` de chaque rapport (`resurrects.json`).
+- **Every Single Button** 🆕 (page personnelle, pas une stat) : tableaux Casts et DamageDone en `viewBy: Ability`, boss et trash à part (`abilities.json`, réduit à capacité, personnage, nombre).
 
 ## Reportées en V2
 

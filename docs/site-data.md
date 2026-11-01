@@ -1,6 +1,6 @@
 # Contrat de données pipeline → site
 
-Le pipeline écrit trois fichiers JSON dans `site/public/<guilde>/data/` (`fable`, `nightshift`) (dossier commité : le déploiement GitHub Pages publie ces fichiers tels quels). Le site les charge au démarrage et ne fait que **filtrer, sommer et classer** : aucune règle de stat n'est codée côté React.
+Le pipeline écrit quatre fichiers JSON dans `site/public/<guilde>/data/` (`fable`, `nightshift`) (dossier commité : le déploiement GitHub Pages publie ces fichiers tels quels). Le site charge `meta`, `players` et `stats` au démarrage, `buttons` à l'ouverture de sa page, et ne fait que **filtrer, sommer et classer** : aucune règle de stat n'est codée côté React.
 
 `python -m pipeline.mock_site_data [--guild nightshift]` écrit des données fictives au même format (`meta.mock = true`, le site affiche alors un bandeau, ou le bandeau Work in progress si la guilde a un `wip`).
 
@@ -58,6 +58,10 @@ Liste des joueurs qualifiés (`settings.min_weeks` semaines de reset, 10). L'ind
 ```
 
 Un tier est validé quand le joueur y a au moins `rank.min_weeks_per_tier` semaines de reset distinctes de présence (config/tiers.json), ou le `min_weeks` propre au tier s'il en a un (Naxx Era : 2). Le rang ne dépend pas des filtres.
+
+## `buttons.json`
+
+Every Single Button (`#/buttons/<joueur>`), page personnelle sans classement : `[[joueur, extension, classe, rôle, {capacité: [usages sur les boss, usages sur le trash]}]]`. Une soirée entière compte sous le rôle le plus joué ce soir-là. Absent des données fictives : la page l'indique.
 
 ## `stats.json`
 

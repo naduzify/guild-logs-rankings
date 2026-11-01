@@ -304,6 +304,52 @@ def report_actors(code: str) -> tuple[dict, set]:
     return actors, {f["id"] for f in rep["fights"] if not f.get("encounterID")}
 
 
+def battle_res(pulls: dict) -> list:
+    """The Necromancer, Temu Jesus: [(pull, caster name, target name)] of the kept boss pulls, from
+    reports/<code>/resurrects.json. Names are None for an actor that is no player (a pet)."""
+    fights = defaultdict(set)
+    for rs in pulls.values():
+        fights[rs[0]["report"]].add(rs[0]["fight"])
+    out = []
+    for code, kept in fights.items():
+        path = CACHE_DIR / HOST / "reports" / code / "resurrects.json"
+        if not path.exists():
+            continue
+        actors, _ = report_actors(code)
+        for e in _payload(path)["report"]["resurrects"]["data"]:
+            if e["abilityGameID"] in CONFIG["battle_res_ids"] and e.get("fight") in kept:
+                out.append((f"{code}#{e['fight']}", actors.get(e["sourceID"]), actors.get(e["targetID"])))
+    return out
+
+
+def button_counts(pulls: dict, nights: list) -> list:
+    """Every Single Button: [(night row of a character, ability, 0 for bosses or 1 for trash, uses)], from
+    reports/<code>/abilities.json, one night row per report (night_row). The casts table misses melee, the damage
+    table has only the white hits: each ability takes its larger count. Ranks of a spell add up, under its name."""
+    trash = {code for code, _, _ in nights}
+    by_report = defaultdict(lambda: defaultdict(list))
+    for rs in pulls.values():
+        for r in rs:
+            by_report[r["report"]][r["char"]].append(r)
+    out = []
+    for code, mine in by_report.items():
+        path = CACHE_DIR / HOST / "reports" / code / "abilities.json"
+        if not path.exists():
+            continue
+        data = json.loads(path.read_text(encoding="utf-8"))["data"]
+        row_of = {ch: night_row(rs) for ch, rs in mine.items()}
+        for i, scope in enumerate(("boss", "trash")):
+            if scope == "trash" and code not in trash:
+                continue
+            casts, auto = Counter(), Counter()
+            for table, name in ((casts, "casts"), (auto, "auto")):
+                for ability, who, n in data.get(f"{scope}_{name}", []):
+                    if who in mine:
+                        table[(who, ability)] += n
+            out += [(row_of[who], ability, i, n) for (who, ability), n in (casts | auto).items()]
+    return out
+
+
 def trash_extras(nights: list) -> dict:
     """The Terrorist (and its single target version), Martyr, Attention Seeker and The Nut Crusher on trash,
     from reports/<code>/trash_extra.json.
@@ -932,6 +978,20 @@ def main() -> None:
             cells.ratio("the-nut-crusher", key_of(row), n, hours, 1)
     print(f"terrorist / attention seeker / nut crusher: trash of {len({r['report'] for r, _, _ in ff + taunts + kicks})} reports added")
 
+    # The Necromancer, Temu Jesus: battle res on boss pulls; a player's list names who he brought back, or who brought him back.
+    for src, caster, target in battle_res(pulls):
+        me, them = row_of.get((src, caster)), row_of.get((src, target))
+        if me and ranked(me) and target:
+            cells.top("the-necromancer", key_of(me), owner.get(norm(target), target), 1)
+        if them and ranked(them):
+            cells.top("temu-jesus", key_of(them), owner.get(norm(caster), caster) if caster else "Eternal Guardian", 1)
+
+    # Every Single Button: every ability of each ranked player, in a file of its own, read only by its page.
+    buttons = defaultdict(dict)
+    for row, ability, i, n in button_counts(pulls, nights):
+        if ranked(row):
+            buttons[key_of(row)].setdefault(ability, [0, 0])[i] += n
+
     timekeeper(rows, pid, char_class, cells)
     parse_lord(rows, pid, char_class, cells)
 
@@ -1004,7 +1064,8 @@ def main() -> None:
         meta["home"].update(meta["guild"].pop("home", {}))
         meta["home"]["pinned"] = [x for x in meta["home"].get("pinned", []) if isinstance(x, str)]
     out_dir.mkdir(parents=True, exist_ok=True)
-    for name, payload in (("meta", meta), ("players", players), ("stats", stats)):
+    button_cells = [[*k, v] for k, v in sorted(buttons.items())]
+    for name, payload in (("meta", meta), ("players", players), ("stats", stats), ("buttons", button_cells)):
         (out_dir / f"{name}.json").write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     size = sum(f.stat().st_size for f in out_dir.glob("*.json"))
     print(f"{len(pulls)} pulls, {len(players)} players -> {out_dir.relative_to(ROOT)} ({size / 1e6:.1f} MB)")
