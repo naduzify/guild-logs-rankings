@@ -23,7 +23,7 @@ rank           {max, names[14]}                ← config/tiers.json
 settings       {title_percentile, flip_percentile, min_den, min_role_weeks, min_char_weeks}  ← config/site.json
 home           {top_n, pinned[], pinned_title, pinned_top_n, featured_count, ghosts, records[], intro}  ← config/site.json
                pinned : id d'achievement, ou distinction faite main {id, title, description, entries: [{name, image, caption}]}
-player         {overview[], highlights[], best_friend{…, none, candidates}, featured_per_category, featured_min_pct, visible_small}  ← config/site.json
+player         {overview[], highlights[], best_friend{…, none, candidates}, featured_per_category, featured_min_pct, visible_small}  ← config/site.json ; une stat peut porter no_big_card_for (rôles principaux pour lesquels elle reste une petite carte)
                highlights : [{stat, label, toggle?: {stat, label, title}}] ; toggle = interrupteur qui bascule la carte vers une autre stat (Damage Done → Bosses only)
 stats          [définitions]                   ← config/stats.json
 guild_totals   [[exp, pulls, kills, wipes, damage, boss_seconds, raid_seconds]]  (une ligne par extension)

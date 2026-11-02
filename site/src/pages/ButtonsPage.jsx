@@ -7,7 +7,7 @@ import { playerButtons } from '../lib/stats.js';
 import { restrict } from './PlayerPage.jsx';
 import { FindBox } from './StatPage.jsx';
 
-// Every Single Button: everything one player used, under the same filters as his page. Not a ranking.
+// Every Single Button: everything one player used, under the same filters as their page. Not a ranking.
 export default function ButtonsPage({ data, name, filter }) {
   const [cells, setCells] = useState(null);
   const [error, setError] = useState(false);

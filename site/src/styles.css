@@ -46,7 +46,8 @@
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
-  margin: 0; min-height: 100vh; color: var(--cream); font: 15px/1.45 var(--f-body);
+  /* svh, not vh alone: on phones 100vh ignores the address bar and makes a page that fits scroll. */
+  margin: 0; min-height: 100vh; min-height: 100svh; color: var(--cream); font: 15px/1.45 var(--f-body);
   background: radial-gradient(120% 60% at 50% 0%, var(--navy) 0%, var(--navy-deep) 70%) fixed, var(--navy-deep);
   -webkit-tap-highlight-color: transparent;
 }
@@ -172,7 +173,7 @@ code { font-family: ui-monospace, Menlo, Consolas, monospace; }
   /* svh: the screen height with the phone's address bar shown, so nothing scrolls when everything fits. */
   min-height: 100svh;
   /* Full width (not .wrap), and clips the split layer, which reaches 100vh above and below the cards. */
-  overflow: clip; padding-inline: max(14px, env(safe-area-inset-left)) max(14px, env(safe-area-inset-right)); }
+  overflow: hidden; overflow: clip; padding-inline: max(14px, env(safe-area-inset-left)) max(14px, env(safe-area-inset-right)); }
 .chooser .hero { padding-block: 24px 0; }
 /* "Pick a guild" sits over both halves: bigger, cream, with a dark halo for contrast on red and blue. */
 .chooser .hero h1 small { font: 600 1.35rem var(--f-subtitle); color: var(--cream); text-transform: uppercase; letter-spacing: .22em; margin-top: 10px;
@@ -407,6 +408,8 @@ a.hname:hover { color: var(--parchment); }
 .board tr.found td { background: color-mix(in srgb, var(--parchment) 22%, transparent); }
 .board tr.found td:first-child { box-shadow: inset 3px 0 0 var(--parchment); }
 /* Breakdown pages: labels under min_den, listed but not ranked; expansions after the boss or ability. */
+/* Label of a player's own list (abilities, bosses): wraps and takes the free width, so the table fits a phone. */
+.board td.bdl { width: 100%; white-space: normal; overflow-wrap: anywhere; }
 .bdexp { margin-left: 8px; font-size: .8rem; white-space: nowrap; }
 /* Arch-Nemesis: the bosses of the ability, on a line under it. */
 .bdsub { display: block; color: var(--tan); font-size: .8rem; margin-top: 2px; }

@@ -86,10 +86,11 @@ function SectionTitle({ text }) {
   return text ? <h2 className="ornament ptitlesec"><span>{text}</span></h2> : null;
 }
 
-function Section({ data, id, title, kicker, items, open, onToggle }) {
+function Section({ data, id, title, kicker, items, mainRole, open, onToggle }) {
   const cfg = data.meta.player;
   const big = items
-    .filter(it => it.note != null && it.note >= cfg.featured_min_pct)
+    // no_big_card_for: a stat that says little of that main role (tanks are the first to get a battle res).
+    .filter(it => it.note != null && it.note >= cfg.featured_min_pct && !it.stat.no_big_card_for?.includes(mainRole))
     .sort((a, b) => b.note - a.note)
     .slice(0, cfg.featured_per_category);
   const bigIds = new Set(big.map(it => it.stat.id));
@@ -255,7 +256,7 @@ export default function PlayerPage({ data, name, filter }) {
       )}
 
       {sections.map(s => (
-        <Section key={s.id} data={data} id={s.id} title={s.title} kicker={s.kicker} items={s.items}
+        <Section key={s.id} data={data} id={s.id} title={s.title} kicker={s.kicker} items={s.items} mainRole={roles[0]}
           open={!!openSections[s.id]} onToggle={() => setOpenSections(o => ({ ...o, [s.id]: !o[s.id] }))} />
       ))}
     </>

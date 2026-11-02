@@ -104,7 +104,7 @@ Légende : [P] percentile, [N] nombre, [P+N] les deux, [T] texte sur la fiche. �
 - **Parse Lord** : parses WCL des kills, par rapport, deux fois : `rankings_historical.json` (`timeframe: Historical`, classement à la date du combat, pour le meilleur et le parse médian) et `rankings.json` (classement d'aujourd'hui, en secours pour un kill sans parse historique).
 
 - **The Necromancer / Temu Jesus** 🆕 : événements `resurrect` de chaque rapport (`resurrects.json`).
-- **Every Single Button** 🆕 (page personnelle, pas une stat) : tableaux Casts et DamageDone en `viewBy: Ability`, boss et trash à part (`abilities.json`, réduit à capacité, personnage, nombre).
+- **Every Single Button** 🆕 (page personnelle, pas une stat) : tableaux Casts et DamageDone en `viewBy: Ability`, boss et trash à part (`abilities.json`, réduit à capacité, personnage, nombre). Melee ne compte que les coups du joueur : les attaques des familiers et invocations, que WCL range sous une entrée au nom du familier et crédite au maître, sont écartées.
 
 ## Reportées en V2
 

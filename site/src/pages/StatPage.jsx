@@ -202,7 +202,7 @@ export function BreakdownPage({ data, id, name, filter }) {
               {rows.map(r => (
                 <tr key={r.label} className={[r.pos === 1 ? 'hi' : r.value == null && 'dim', found(r.label) && 'found'].filter(Boolean).join(' ') || undefined}>
                   <td className="n">{r.pos ?? ''}</td>
-                  <td className="l">{labelCell(r.label)}{showExp && <span className="muted bdexp">{r.exps.map(e => data.meta.expansions[e].short).join(', ')}</span>}
+                  <td className="l bdl">{labelCell(r.label)}{showExp && <span className="muted bdexp">{r.exps.map(e => data.meta.expansions[e].short).join(', ')}</span>}
                     {r.subs.length > 0 && <span className="bdsub">{r.subs.slice(0, 3).map(([b, n]) => (r.subs.length > 1 ? `${b} ×${formatInt(n)}` : b)).join(' · ')}{r.subs.length > 3 && ` · +${r.subs.length - 3} more`}</span>}</td>
                   {mean
                     ? <><td className="v">{r.value == null ? <span className="muted">–</span> : formatValue(stat, r.value)}</td><td className="v muted">{formatInt(r.d)}</td></>

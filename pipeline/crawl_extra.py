@@ -165,22 +165,18 @@ def abilities_plan(guild: str) -> dict:
 
 def trim_abilities(table: dict, auto: bool) -> list:
     """[[ability name, character, count]] of a viewBy: Ability table. An entry either splits into subentries (one
-    per actor, sometimes one level deeper), or has none when a single player used the ability: its only source."""
+    per actor), or has none when a single player used the ability: its only source. In a damage table, pets' melee
+    sits under an entry named after the pet (Pryyghon, Earth Elemental Totem), credited to the owner: left out."""
     out = []
-
-    def walk(e):
-        if e.get("subentries"):
-            for s in e["subentries"]:
-                walk(s)
-            return
-        who = e.get("actorName") or next((s["name"] for s in e.get("sources", [])), None)
-        # Damage tables: "uses" is not always there.
-        n = (e.get("uses") or e.get("hitCount", 0) + e.get("missCount", 0)) if auto else e.get("total", 0)
-        if who and n:
-            out.append([e["name"], who, n])
-
     for e in table["data"].get("entries", []):
-        walk(e)
+        if auto and e["name"] not in EXTRAS["auto_attacks"]:
+            continue
+        for s in e.get("subentries") or [e]:
+            who = s.get("actorName") or next((x["name"] for x in s.get("sources", [])), None)
+            # Damage tables: "uses" is not always there.
+            n = (s.get("uses") or s.get("hitCount", 0) + s.get("missCount", 0)) if auto else s.get("total", 0)
+            if who and n:
+                out.append([s["name"], who, n])
     return out
 
 

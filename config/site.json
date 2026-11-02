@@ -103,7 +103,7 @@
     ],
     "best_friend": {"title": "Your best friend", "title_plural": "Your best friends", "detail": "{nights} raid nights together", "none": "No raid night shared with a ranked player", "candidates": 10},
     "_buttons": "Every Single Button: a personal page (#/buttons/<player>), no ranking, linked from the player page. live: false hides the link and the page (crawl not finished).",
-    "buttons": {"live": false, "title": "Every Single Button", "description": "and more...", "detail": "Everything he used, from the logs: casts, plus melee swings, Auto Shot and wand shots. Boss pulls (kills and wipes) and the trash of his raids. All ranks of a spell count as one. A whole night counts under the role he played most that night.", "toggle": "Bosses only", "column": "Ability", "count": "Uses"},
+    "buttons": {"live": true, "title": "Every Single Button", "description": "and more...", "detail": "Everything he used, from the logs: casts, plus melee swings, Auto Shot and wand shots. Boss pulls (kills and wipes) and the trash of his raids. All ranks of a spell count as one. A whole night counts under the role he played most that night.", "toggle": "Bosses only", "column": "Ability", "count": "Uses"},
     "featured_per_category": 3,
     "featured_min_pct": 75,
     "visible_small": 6
